@@ -3,9 +3,10 @@
 import { useEffect, useState } from "react"
 import { useTheme } from "next-themes"
 import { Moon, Sun } from "lucide-react"
+import { cn } from "@/lib/utils"
 
-/** Paper (light) / blueprint (dark) switch. */
-export default function ThemeToggle() {
+/** Light / dark switch. */
+export default function ThemeToggle({ onBrand = false }: { onBrand?: boolean }) {
   const { resolvedTheme, setTheme } = useTheme()
   const [mounted, setMounted] = useState(false)
 
@@ -17,11 +18,13 @@ export default function ThemeToggle() {
     <button
       type="button"
       onClick={() => setTheme(isDark ? "light" : "dark")}
-      className="inline-flex h-9 w-9 items-center justify-center border border-border text-muted-foreground transition-colors hover:border-foreground hover:text-foreground"
-      aria-label={isDark ? "Switch to paper (light) theme" : "Switch to blueprint (dark) theme"}
-      title={isDark ? "Paper" : "Blueprint"}
+      className={cn(
+        "inline-flex h-10 w-10 items-center justify-center rounded-full border-[1.5px] transition-colors",
+        onBrand ? "border-white/55 text-white hover:border-white hover:bg-white/10" : "border-border text-muted-foreground hover:border-foreground hover:text-foreground",
+      )}
+      aria-label={isDark ? "Switch to light theme" : "Switch to dark theme"}
     >
-      {mounted ? isDark ? <Sun size={15} /> : <Moon size={15} /> : <span className="h-[15px] w-[15px]" />}
+      {mounted ? isDark ? <Sun size={16} /> : <Moon size={16} /> : <span className="h-4 w-4" />}
     </button>
   )
 }

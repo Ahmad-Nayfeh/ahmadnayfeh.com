@@ -1,19 +1,21 @@
-import { ArrowRight, ArrowLeft, Mail, Linkedin, Github, FileDown } from "lucide-react"
+import { ArrowRight, ArrowLeft, ArrowUpRight } from "lucide-react"
 import Hero from "@/components/home/Hero"
-import Flagship from "@/components/home/Flagship"
 import WorkSection from "@/components/home/WorkSection"
-import SectionHeader from "@/components/drawing/SectionHeader"
-import AppCard from "@/components/apps/AppCard"
-import ProjectCard from "@/components/ProjectCard"
+import BiHeading from "@/components/BiHeading"
+import { AppRow, FlagshipRow } from "@/components/apps/AppRow"
+import ProjectRow from "@/components/ProjectRow"
 import BlogCard from "@/components/BlogCard"
 import { getAllProjects, getHomeContent, getRecentPosts, getWorkContent } from "@/lib/content"
-import { otherApps } from "@/content/apps"
+import { flagshipApp, otherApps } from "@/content/apps"
 import { siteConfig, tierOf } from "@/config/site"
-import { localePath, t, type Locale } from "@/i18n"
+import { localePath, otherLocale, t, type Locale } from "@/i18n"
+
+const wrap = "mx-auto w-full max-w-[1240px] px-5 md:px-10"
 
 /** The home page, in either language. */
 export default async function HomeView({ locale }: { locale: Locale }) {
   const d = t(locale)
+  const od = t(otherLocale(locale))
   const Arrow = locale === "ar" ? ArrowLeft : ArrowRight
   const [home, work, projects, posts] = await Promise.all([
     getHomeContent(locale),
@@ -23,101 +25,94 @@ export default async function HomeView({ locale }: { locale: Locale }) {
   ])
 
   // Apps have their own section; Projects shows the engineering and research work only.
-  const selected = projects.filter((p) => tierOf(p.category) !== "products").slice(0, 3)
-  const moreLink = "redline inline-flex items-center gap-2 label !text-foreground"
+  const selected = projects.filter((p) => tierOf(p.category) !== "products").slice(0, 4)
+  const more = "inline-flex items-center gap-2 pb-2 text-[15px] font-semibold"
 
   return (
     <>
       <Hero content={home} locale={locale} />
 
-      <Flagship locale={locale} />
-
-      <section id="apps" className="mx-auto w-full max-w-[1240px] scroll-mt-24 px-5 py-20 md:px-8 md:py-28">
-        <SectionHeader
-          kicker={d.apps.kicker}
-          title={d.apps.title}
-          description={d.apps.description}
+      <section id="apps" className={`${wrap} scroll-mt-24 pt-20 md:pt-24`}>
+        <BiHeading
+          locale={locale}
+          title={d.nav.apps}
+          other={od.nav.apps}
           action={
-            <a href={localePath(locale, "/apps/")} className={moreLink}>
-              {d.apps.all} <Arrow size={13} />
+            <a href={localePath(locale, "/apps/")} className={`${more} text-accent`}>
+              {d.apps.all} <Arrow size={16} />
             </a>
           }
         />
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {otherApps.slice(0, 6).map((app) => (
-            <AppCard key={app.slug} app={app} locale={locale} />
+        <FlagshipRow app={flagshipApp} locale={locale} />
+        <div>
+          {otherApps.map((app) => (
+            <AppRow key={app.slug} app={app} locale={locale} />
           ))}
         </div>
       </section>
 
-      {work && (
-        <div className="border-y border-border bg-card/40">
-          <WorkSection work={work} locale={locale} />
-        </div>
-      )}
+      {work && <WorkSection work={work} locale={locale} />}
 
-      <section id="projects" className="mx-auto w-full max-w-[1240px] scroll-mt-24 px-5 py-20 md:px-8 md:py-28">
-        <SectionHeader
-          kicker={d.projects.kicker}
-          title={d.projects.title}
-          description={d.projects.description}
-          action={
-            <a href={localePath(locale, "/projects/")} className={moreLink}>
-              {d.projects.all} <Arrow size={13} />
-            </a>
-          }
-        />
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {selected.map((p) => (
-            <ProjectCard key={p.slug} project={p} locale={locale} />
-          ))}
+      <section id="projects" className="ink-block mt-20 scroll-mt-24 md:mt-24">
+        <div className={`${wrap} py-16 md:py-20`}>
+          <BiHeading
+            locale={locale}
+            title={d.nav.projects}
+            other={od.nav.projects}
+            tone="onDark"
+            action={
+              <a href={localePath(locale, "/projects/")} className={`${more} text-[#8FA2FF]`}>
+                {d.projects.all} <Arrow size={16} />
+              </a>
+            }
+          />
+          <div>
+            {selected.map((p) => (
+              <ProjectRow key={p.slug} project={p} locale={locale} />
+            ))}
+          </div>
         </div>
       </section>
 
       {posts.length > 0 && (
-        <section id="notebook" className="border-y border-border bg-card/40">
-          <div className="mx-auto w-full max-w-[1240px] px-5 py-20 md:px-8 md:py-28">
-            <SectionHeader
-              kicker={d.notebook.kicker}
-              title={d.notebook.title}
-              description={d.notebook.description}
-              action={
-                <a href={localePath(locale, "/notebook/")} className={moreLink}>
-                  {d.notebook.all} <Arrow size={13} />
-                </a>
-              }
-            />
-            {/* Writings keep their own language and direction. */}
-            <div className="border-t-[1.5px] border-foreground" dir="ltr" lang="en">
-              {posts.map((post, i) => (
-                <BlogCard key={post.slug} post={post} index={i} />
-              ))}
-            </div>
+        <section id="notebook" className={`${wrap} scroll-mt-24 pt-20 md:pt-24`}>
+          <BiHeading
+            locale={locale}
+            title={d.nav.notebook}
+            other={od.nav.notebook}
+            action={
+              <a href={localePath(locale, "/notebook/")} className={`${more} text-accent`}>
+                {d.notebook.all} <Arrow size={16} />
+              </a>
+            }
+          />
+          {/* Writings keep their own language and direction. */}
+          <div dir="ltr" lang="en">
+            {posts.map((post) => (
+              <BlogCard key={post.slug} post={post} />
+            ))}
           </div>
         </section>
       )}
 
-      <section id="contact" className="mx-auto w-full max-w-[1240px] scroll-mt-24 px-5 py-20 md:px-8 md:py-28">
-        <SectionHeader kicker={d.contact.kicker} title={d.contact.title} />
-        <div className="grid grid-cols-1 gap-8 lg:grid-cols-12">
-          <p className="text-[1.15rem] leading-relaxed text-foreground/85 lg:col-span-5">{d.contact.body}</p>
-          <div className="lg:col-span-7">
-            <a
-              href={`mailto:${siteConfig.contact.email}`}
-              className="group flex items-center justify-between gap-4 border-[1.5px] border-foreground bg-card px-5 py-5 transition-colors hover:border-accent md:px-7 md:py-6"
-            >
-              <span className="flex items-center gap-4">
-                <Mail size={20} className="text-accent" />
-                <span dir="ltr" className="text-[15px] font-semibold tracking-tight [overflow-wrap:anywhere] sm:text-lg md:text-2xl">
-                  {siteConfig.contact.email}
-                </span>
-              </span>
-              <Arrow size={20} className="shrink-0" />
-            </a>
-            <div className="mt-3 grid grid-cols-1 gap-3 sm:grid-cols-3">
-              <ContactLink href={siteConfig.links.linkedin} icon={<Linkedin size={15} />} label="LinkedIn" arrow={<Arrow size={14} />} />
-              <ContactLink href={siteConfig.links.github} icon={<Github size={15} />} label="GitHub" arrow={<Arrow size={14} />} />
-              <ContactLink href={siteConfig.resume} icon={<FileDown size={15} />} label={d.cv} arrow={<Arrow size={14} />} />
+      <section id="contact" className="brand-block mt-20 scroll-mt-24 md:mt-28">
+        <div className={`${wrap} py-16 md:py-24`}>
+          <h2 className="font-display text-[clamp(2.75rem,9vw,7rem)] leading-[0.92] rtl:leading-[1.25]">{d.contact.title}</h2>
+          <div className="mt-8 grid grid-cols-1 items-end gap-x-14 gap-y-8 lg:grid-cols-[1.1fr_0.9fr]">
+            <p className="max-w-[35rem] text-[1.1rem] leading-relaxed text-white/85 md:text-[1.2rem]">{d.contact.body}</p>
+            <div className="flex flex-col gap-3 lg:items-end">
+              <a
+                href={`mailto:${siteConfig.contact.email}`}
+                dir="ltr"
+                className="font-display text-[clamp(1.05rem,4.6vw,1.75rem)] tracking-[-0.02em] underline decoration-white/40 decoration-2 underline-offset-[6px] hover:decoration-white whitespace-nowrap"
+              >
+                {siteConfig.contact.email}
+              </a>
+              <div className="flex flex-wrap gap-2.5">
+                <ContactLink href={siteConfig.links.linkedin} label="LinkedIn" />
+                <ContactLink href={siteConfig.links.github} label="GitHub" />
+                <ContactLink href={siteConfig.resume} label={d.cv} />
+              </div>
             </div>
           </div>
         </div>
@@ -126,19 +121,15 @@ export default async function HomeView({ locale }: { locale: Locale }) {
   )
 }
 
-function ContactLink({ href, icon, label, arrow }: { href: string; icon: React.ReactNode; label: string; arrow: React.ReactNode }) {
+function ContactLink({ href, label }: { href: string; label: string }) {
   return (
     <a
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className="flex items-center justify-between border border-border bg-card px-4 py-3 text-[14px] font-medium transition-colors hover:border-foreground"
+      className="inline-flex items-center gap-1.5 rounded-full border-[1.5px] border-white/50 px-4 py-2 text-[14px] font-semibold hover:border-white hover:bg-white/10"
     >
-      <span className="flex items-center gap-2.5 text-muted-foreground">
-        {icon}
-        <span className="text-foreground">{label}</span>
-      </span>
-      <span className="text-muted-foreground">{arrow}</span>
+      {label} <ArrowUpRight size={14} className="rtl:-scale-x-100" />
     </a>
   )
 }

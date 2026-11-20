@@ -1,49 +1,54 @@
-import { ArrowRight, ArrowLeft, FileDown } from "lucide-react"
-import TitleBlock, { type TitleBlockCell } from "@/components/drawing/TitleBlock"
 import type { HomeContent } from "@/types"
-import { siteConfig } from "@/config/site"
-import { localePath, t, type Locale } from "@/i18n"
+import { dirOf, localePath, otherLocale, ownerName, t, type Locale } from "@/i18n"
 
-/** Who I am in one screen: name, plain-language role, one sentence, two buttons, and the key facts. */
+/**
+ * The blue opening block: the name in both scripts (the page's language large and
+ * white, the other one behind it), one sentence, two buttons, and three facts.
+ */
 export default function Hero({ content, locale }: { content: HomeContent; locale: Locale }) {
   const d = t(locale)
-  const Arrow = locale === "ar" ? ArrowLeft : ArrowRight
-  const facts: TitleBlockCell[] = content.now.map((item) => ({ label: item.label, value: item.detail, span: 2 }))
-  facts.push({ label: d.hero.basedIn, value: d.hero.location, span: 2 })
+  const o = otherLocale(locale)
 
   return (
-    <section className="relative mx-auto w-full max-w-[1240px] px-5 pb-16 pt-10 md:px-8 md:pb-24 md:pt-16">
-      <div className="grid grid-cols-1 items-center gap-x-12 gap-y-10 lg:grid-cols-12">
-        <div className="lg:col-span-7">
-          <h1 className="fade-up font-display text-[clamp(2.75rem,6.5vw,4.75rem)] leading-[0.98] rtl:leading-[1.25]" style={{ animationDelay: "60ms" }}>
-            {content.title}
+    <section className="brand-block -mt-[72px] pt-[72px]">
+      <div className="mx-auto w-full max-w-[1240px] px-5 md:px-10">
+        <div className="pt-8 md:pt-12">
+          <div className="flex justify-end" aria-hidden>
+            <span
+              lang={o}
+              dir={dirOf(o)}
+              className="font-display block text-[clamp(2.5rem,11.6vw,9.4rem)] leading-[1.05] text-[#5873EA]"
+            >
+              {ownerName[o]}
+            </span>
+          </div>
+          <h1 className="font-display -mt-[0.06em] text-[clamp(2.9rem,12.5vw,10rem)] leading-[0.9] rtl:mt-0 rtl:leading-[1.2]">
+            {ownerName[locale]}
           </h1>
+        </div>
 
-          <p className="label fade-up mt-5 text-[13px] !text-accent" style={{ animationDelay: "120ms" }}>
-            {content.subtitle}
-          </p>
-
-          <p
-            className="fade-up mt-6 max-w-[36rem] text-[1.125rem] leading-relaxed text-foreground/85 md:text-[1.2rem]"
-            style={{ animationDelay: "180ms" }}
-          >
-            {content.description}
-          </p>
-
-          <div className="fade-up mt-9 flex flex-wrap gap-3" style={{ animationDelay: "240ms" }}>
-            <a href={localePath(locale, "/apps/")} className="btn btn-primary">
-              {d.hero.primary} <Arrow size={14} />
+        <div className="grid grid-cols-1 items-end gap-x-14 gap-y-8 pb-12 pt-9 md:pb-14 md:pt-11 lg:grid-cols-[1.1fr_0.9fr]">
+          <p className="max-w-[35rem] text-[1.15rem] leading-[1.55] md:text-[1.3rem]">{content.description}</p>
+          <div className="flex flex-wrap gap-3 lg:justify-end">
+            <a href={localePath(locale, "/apps/")} className="btn btn-on-brand">
+              {d.hero.primary}
             </a>
-            <a href={siteConfig.resume} target="_blank" rel="noopener noreferrer" className="btn btn-ghost">
-              <FileDown size={14} /> {d.cv}
+            <a href={localePath(locale, "/about/")} className="btn btn-on-brand-ghost">
+              {d.hero.secondary}
             </a>
           </div>
         </div>
+      </div>
 
-        <div className="fade-up lg:col-span-5" style={{ animationDelay: "300ms" }}>
-          <div className="label mb-3">{d.hero.glance}</div>
-          <TitleBlock cols={2} cells={facts} />
-        </div>
+      <div className="bg-brand-deep">
+        <dl className="mx-auto grid w-full max-w-[1240px] grid-cols-1 gap-x-10 px-5 md:grid-cols-3 md:px-10">
+          {content.now.map((item) => (
+            <div key={item.label} className="border-b border-white/15 py-4 last:border-b-0 md:border-b-0 md:py-5">
+              <dt className="text-[13px] text-white/65">{item.label}</dt>
+              <dd className="mt-0.5 text-[14.5px] leading-snug">{item.detail}</dd>
+            </div>
+          ))}
+        </dl>
       </div>
     </section>
   )

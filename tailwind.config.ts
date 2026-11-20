@@ -14,7 +14,7 @@ const config: Config = {
         sans: ["var(--font-sans)", "ui-sans-serif", "system-ui", "sans-serif"],
         serif: ["var(--font-serif)", "Georgia", "Times New Roman", "serif"],
         mono: ["var(--font-mono)", "ui-monospace", "SFMono-Regular", "monospace"],
-        display: ["var(--font-sans)", "ui-sans-serif", "system-ui", "sans-serif"],
+        display: ["var(--font-display)", "var(--font-sans)", "ui-sans-serif", "system-ui", "sans-serif"],
         arabic: ["var(--font-arabic)", "var(--font-sans)", "ui-sans-serif", "sans-serif"],
       },
       fontSize: {
@@ -55,6 +55,12 @@ const config: Config = {
           foreground: "hsl(var(--destructive-foreground))",
         },
         border: "hsl(var(--border))",
+        brand: {
+          DEFAULT: "hsl(var(--brand))",
+          deep: "hsl(var(--brand-deep))",
+          foreground: "hsl(var(--brand-foreground))",
+        },
+        hot: "hsl(var(--hot))",
         "border-strong": "hsl(var(--border-strong))",
         lamp: "hsl(var(--lamp))",
         phase: {

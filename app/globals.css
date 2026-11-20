@@ -16,130 +16,121 @@
 }
 
 /* =========================================================================
- * "Drawing Sheet" — design tokens (October 2026 redesign).
+ * "Two Scripts" — design tokens (November 2026).
  *
- * The site is styled like an electrical drawing set: drafting paper with a
- * fine grid, ink linework, a title block, and a single markup colour used
- * the way a checker uses a red pen. Light ("paper") is the default; dark is
- * a blueprint variant. The three phase colours (brown, black, grey) appear
- * only as small details.
+ * A bold, typographic look built on the fact that the site speaks two
+ * languages: one saturated blue, ink black, white, and very large type in
+ * Latin and Arabic side by side. Lists are ruled rows rather than cards.
+ * Light is the default; dark keeps the same blue and inverts ink and paper.
  * ========================================================================= */
 @layer base {
   :root {
-    /* Paper and ink */
-    --background: 45 22% 95%;          /* #F5F3EE drafting paper */
-    --foreground: 210 16% 11%;         /* #171C21 ink */
-    --card: 45 30% 98%;
-    --card-foreground: 210 16% 11%;
-    --popover: 45 30% 98%;
-    --popover-foreground: 210 16% 11%;
+    --background: 0 0% 100%;
+    --foreground: 227 29% 6%;          /* #0B0D14 ink */
+    --card: 225 25% 97%;               /* soft panel */
+    --card-foreground: 227 29% 6%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 227 29% 6%;
 
-    --primary: 210 16% 11%;
-    --primary-foreground: 45 22% 96%;
+    --primary: 227 29% 6%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 42 16% 90%;
-    --secondary-foreground: 210 16% 11%;
+    --secondary: 225 22% 94%;
+    --secondary-foreground: 227 29% 6%;
 
-    --muted: 42 16% 90%;
-    --muted-foreground: 210 7% 38%;
+    --muted: 225 22% 94%;
+    --muted-foreground: 224 12% 40%;
 
-    /* Markup colour: the checker's red pen */
-    --accent: 14 82% 41%;              /* #BD3F17 */
-    --accent-foreground: 45 30% 98%;
+    /* The blue. --brand never changes; --accent is the readable version for text and links. */
+    --brand: 230 78% 48%;              /* #1B3BDB */
+    --brand-deep: 229 82% 40%;
+    --brand-foreground: 0 0% 100%;
+    --accent: 230 78% 48%;
+    --accent-foreground: 0 0% 100%;
 
-    /* Status lamp */
-    --lamp: 142 64% 36%;
+    /* Small highlight (flagship badge) */
+    --hot: 14 100% 62%;                /* #FF6A3D */
 
-    /* Phase colours (IEC): L1 brown, L2 black, L3 grey */
-    --phase-1: 25 48% 34%;
-    --phase-2: 210 16% 11%;
-    --phase-3: 210 6% 55%;
+    --lamp: 142 64% 40%;
+    --phase-1: 230 78% 48%;
+    --phase-2: 227 29% 6%;
+    --phase-3: 224 10% 58%;
 
     --destructive: 0 70% 45%;
-    --destructive-foreground: 45 30% 98%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 40 10% 80%;
-    --border-strong: 210 12% 24%;
-    --input: 40 10% 80%;
-    --ring: 14 82% 41%;
-    --radius: 2px;
+    --border: 225 16% 88%;
+    --border-strong: 227 29% 6%;
+    --input: 225 16% 88%;
+    --ring: 230 78% 48%;
+    --radius: 16px;
 
-    /* Drafting grid */
-    --grid-minor: 210 20% 40% / 0.06;
-    --grid-major: 210 20% 40% / 0.10;
-
-    /* Kept for components that still read these */
     --section-accent: var(--accent);
     --section-glow: transparent;
 
-    --chart-1: 14 82% 46%;
-    --chart-2: 25 48% 34%;
-    --chart-3: 210 16% 11%;
-    --chart-4: 210 6% 55%;
-    --chart-5: 142 64% 36%;
+    --chart-1: 230 78% 48%;
+    --chart-2: 14 100% 62%;
+    --chart-3: 227 29% 6%;
+    --chart-4: 224 10% 58%;
+    --chart-5: 142 64% 40%;
 
-    --sidebar-background: 45 22% 95%;
-    --sidebar-foreground: 210 7% 38%;
-    --sidebar-primary: 210 16% 11%;
-    --sidebar-primary-foreground: 45 22% 96%;
-    --sidebar-accent: 42 16% 90%;
-    --sidebar-accent-foreground: 210 16% 11%;
-    --sidebar-border: 40 10% 80%;
-    --sidebar-ring: 14 82% 46%;
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 224 12% 40%;
+    --sidebar-primary: 227 29% 6%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 225 22% 94%;
+    --sidebar-accent-foreground: 227 29% 6%;
+    --sidebar-border: 225 16% 88%;
+    --sidebar-ring: 230 78% 48%;
   }
 
   .dark {
-    /* Blueprint */
-    --background: 213 38% 9%;          /* #0E1622 */
-    --foreground: 210 25% 92%;
-    --card: 213 34% 12%;
-    --card-foreground: 210 25% 92%;
-    --popover: 213 34% 12%;
-    --popover-foreground: 210 25% 92%;
+    --background: 227 29% 6%;
+    --foreground: 225 40% 96%;
+    --card: 227 26% 11%;
+    --card-foreground: 225 40% 96%;
+    --popover: 227 26% 11%;
+    --popover-foreground: 225 40% 96%;
 
-    --primary: 210 25% 92%;
-    --primary-foreground: 213 38% 9%;
+    --primary: 225 40% 96%;
+    --primary-foreground: 227 29% 6%;
 
-    --secondary: 213 28% 16%;
-    --secondary-foreground: 210 25% 92%;
+    --secondary: 227 22% 15%;
+    --secondary-foreground: 225 40% 96%;
 
-    --muted: 213 28% 16%;
-    --muted-foreground: 210 14% 64%;
+    --muted: 227 22% 15%;
+    --muted-foreground: 224 16% 68%;
 
-    --accent: 20 92% 60%;              /* #F5813F */
-    --accent-foreground: 213 38% 9%;
+    --accent: 229 100% 78%;            /* #8FA2FF, readable on ink */
+    --accent-foreground: 227 29% 6%;
 
     --lamp: 142 70% 50%;
-
-    --phase-1: 28 55% 55%;
-    --phase-2: 210 25% 92%;
-    --phase-3: 210 10% 60%;
+    --phase-1: 229 100% 78%;
+    --phase-2: 225 40% 96%;
+    --phase-3: 224 12% 62%;
 
     --destructive: 0 75% 60%;
-    --destructive-foreground: 213 38% 9%;
+    --destructive-foreground: 227 29% 6%;
 
-    --border: 213 24% 22%;
-    --border-strong: 210 20% 70%;
-    --input: 213 24% 22%;
-    --ring: 20 92% 60%;
+    --border: 227 18% 22%;
+    --border-strong: 225 40% 96%;
+    --input: 227 18% 22%;
+    --ring: 229 100% 78%;
 
-    --grid-minor: 200 80% 70% / 0.045;
-    --grid-major: 200 80% 70% / 0.08;
-
-    --chart-1: 20 92% 60%;
-    --chart-2: 28 55% 55%;
-    --chart-3: 210 25% 92%;
-    --chart-4: 210 10% 60%;
+    --chart-1: 229 100% 78%;
+    --chart-2: 14 100% 66%;
+    --chart-3: 225 40% 96%;
+    --chart-4: 224 12% 62%;
     --chart-5: 142 70% 50%;
 
-    --sidebar-background: 213 38% 9%;
-    --sidebar-foreground: 210 14% 64%;
-    --sidebar-primary: 210 25% 92%;
-    --sidebar-primary-foreground: 213 38% 9%;
-    --sidebar-accent: 213 28% 16%;
-    --sidebar-accent-foreground: 210 25% 92%;
-    --sidebar-border: 213 24% 22%;
-    --sidebar-ring: 20 92% 60%;
+    --sidebar-background: 227 29% 6%;
+    --sidebar-foreground: 224 16% 68%;
+    --sidebar-primary: 225 40% 96%;
+    --sidebar-primary-foreground: 227 29% 6%;
+    --sidebar-accent: 227 22% 15%;
+    --sidebar-accent-foreground: 225 40% 96%;
+    --sidebar-border: 227 18% 22%;
+    --sidebar-ring: 229 100% 78%;
   }
 }
 
@@ -152,20 +143,12 @@
   }
   body {
     @apply bg-background text-foreground;
-    background-image:
-      linear-gradient(hsl(var(--grid-major)) 1px, transparent 1px),
-      linear-gradient(90deg, hsl(var(--grid-major)) 1px, transparent 1px),
-      linear-gradient(hsl(var(--grid-minor)) 1px, transparent 1px),
-      linear-gradient(90deg, hsl(var(--grid-minor)) 1px, transparent 1px);
-    background-size: 120px 120px, 120px 120px, 24px 24px, 24px 24px;
-    background-position: -1px -1px;
-    font-feature-settings: "ss02", "zero";
   }
 
   .font-display {
-    font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
-    font-weight: 600;
-    letter-spacing: -0.025em;
+    font-family: var(--font-display), var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+    font-weight: 800;
+    letter-spacing: -0.04em;
   }
 
   [lang="ar"],
@@ -174,7 +157,7 @@
   }
 
   ::selection {
-    background-color: hsl(var(--accent) / 0.22);
+    background-color: hsl(var(--brand) / 0.22);
     color: hsl(var(--foreground));
   }
 
@@ -185,59 +168,33 @@
 }
 
 /* =========================================================================
- * Drawing-sheet primitives
+ * Primitives
  * ========================================================================= */
 @layer components {
-  /* Small mono label used for tags, sheet numbers and field names. */
+  /* Small quiet label for field names and kinds. */
   .label {
-    @apply font-mono text-[11px] font-medium uppercase tracking-[0.16em] text-muted-foreground;
+    @apply text-[13px] font-medium text-muted-foreground;
   }
 
-  /* A sheet: paper card with ink border and corner registration marks. */
+  /* A panel: soft rounded surface for boxed content. */
   .sheet {
     position: relative;
+    overflow: hidden;
     background: hsl(var(--card));
     border: 1px solid hsl(var(--border));
-  }
-  .sheet::before,
-  .sheet::after {
-    content: "";
-    position: absolute;
-    width: 10px;
-    height: 10px;
-    border-color: hsl(var(--foreground) / 0.55);
-    pointer-events: none;
-    transition: border-color 200ms ease, width 200ms ease, height 200ms ease;
-  }
-  .sheet::before {
-    top: -1px;
-    left: -1px;
-    border-top: 1.5px solid;
-    border-left: 1.5px solid;
-  }
-  .sheet::after {
-    bottom: -1px;
-    right: -1px;
-    border-bottom: 1.5px solid;
-    border-right: 1.5px solid;
+    border-radius: var(--radius);
   }
   .sheet-hover {
     transition: border-color 200ms ease, transform 200ms ease;
   }
   .sheet-hover:hover {
-    border-color: hsl(var(--foreground) / 0.4);
-  }
-  .sheet-hover:hover::before,
-  .sheet-hover:hover::after {
-    border-color: hsl(var(--accent));
-    width: 18px;
-    height: 18px;
+    border-color: hsl(var(--foreground));
   }
 
-  /* Red-pen underline for links. */
+  /* Accent underline for links. */
   .redline {
     background-image: linear-gradient(hsl(var(--accent)), hsl(var(--accent)));
-    background-size: 0% 1.5px;
+    background-size: 0% 2px;
     background-position: 0 100%;
     background-repeat: no-repeat;
     transition: background-size 260ms cubic-bezier(0.22, 1, 0.36, 1);
@@ -245,10 +202,10 @@
   .redline:hover,
   .group:hover .redline,
   .redline:focus-visible {
-    background-size: 100% 1.5px;
+    background-size: 100% 2px;
   }
 
-  /* Status lamp (indicator light). */
+  /* Status light */
   .lamp {
     display: inline-block;
     width: 8px;
@@ -264,17 +221,17 @@
 
   /* Buttons */
   .btn {
-    @apply inline-flex items-center justify-center gap-2 px-5 py-3 font-mono text-[12px] font-medium uppercase tracking-[0.14em] transition-colors;
-    border: 1px solid hsl(var(--foreground));
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3.5 text-[15px] font-semibold transition-colors;
+    border: 1.5px solid hsl(var(--foreground));
   }
   .btn-primary {
     background: hsl(var(--foreground));
     color: hsl(var(--background));
   }
   .btn-primary:hover {
-    background: hsl(var(--accent));
-    border-color: hsl(var(--accent));
-    color: hsl(var(--accent-foreground));
+    background: hsl(var(--brand));
+    border-color: hsl(var(--brand));
+    color: hsl(var(--brand-foreground));
   }
   .btn-ghost {
     background: transparent;
@@ -284,15 +241,65 @@
     border-color: hsl(var(--accent));
     color: hsl(var(--accent));
   }
+  /* Buttons that sit on the blue. */
+  .btn-on-brand {
+    background: #fff;
+    border-color: #fff;
+    color: hsl(var(--brand));
+  }
+  .btn-on-brand:hover {
+    background: hsl(var(--foreground));
+    border-color: hsl(var(--foreground));
+    color: #fff;
+  }
+  .dark .btn-on-brand:hover {
+    background: hsl(227 29% 6%);
+    border-color: hsl(227 29% 6%);
+  }
+  .btn-on-brand-ghost {
+    background: transparent;
+    border-color: rgb(255 255 255 / 0.55);
+    color: #fff;
+  }
+  .btn-on-brand-ghost:hover {
+    border-color: #fff;
+    background: rgb(255 255 255 / 0.12);
+  }
 
   /* Tag chip */
   .chip {
-    @apply inline-flex items-center px-2 py-0.5 font-mono text-[10.5px] uppercase tracking-[0.12em] text-muted-foreground;
+    @apply inline-flex items-center rounded-full px-2.5 py-0.5 text-[12px] font-medium text-muted-foreground;
     border: 1px solid hsl(var(--border));
-    background: hsl(var(--background) / 0.6);
   }
 
-  /* Phone frame for product screenshots */
+  /* The blue block (home hero, page headers). */
+  .brand-block {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    background: hsl(var(--brand));
+    color: hsl(var(--brand-foreground));
+  }
+  .brand-block::after {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    inset: auto -10% -55% 35%;
+    height: 120%;
+    background: radial-gradient(closest-side, rgb(255 255 255 / 0.14), transparent);
+    pointer-events: none;
+  }
+  [dir="rtl"] .brand-block::after {
+    inset: auto 35% -55% -10%;
+  }
+
+  /* A ruled row in a list of apps, projects or writings. */
+  .rule-row {
+    border-top: 1.5px solid hsl(var(--foreground));
+  }
+  .rule-row:last-child {
+    border-bottom: 1.5px solid hsl(var(--foreground));
+  }
   .phone {
     position: relative;
     border-radius: 22px;
@@ -635,45 +642,45 @@ code[data-theme] span {
 
 /* =========================================================================
  * Arabic (right-to-left) adjustments
- * Arabic letters join, so letter-spacing and uppercase styling are removed,
- * and small labels are set larger to stay readable.
+ * Arabic letters join, so letter-spacing is removed; display type uses
+ * Alexandria, running text uses IBM Plex Sans Arabic.
  * ========================================================================= */
-[lang="ar"] .font-display,
-[lang="ar"] .label,
-[lang="ar"] .btn,
-[lang="ar"] .chip {
-  font-family: var(--font-arabic), var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+[lang="ar"] .font-display {
+  font-family: var(--font-arabic-display), var(--font-arabic), ui-sans-serif, system-ui, sans-serif;
   letter-spacing: 0;
 }
 [lang="ar"] .label {
-  font-size: 13px !important;
-  font-weight: 500;
-}
-[lang="ar"] .btn {
-  font-size: 14.5px;
-  font-weight: 600;
-}
-[lang="ar"] .chip {
-  font-size: 12px;
+  font-size: 14px;
 }
 [dir="rtl"] .redline {
   background-position: 100% 100%;
 }
-/* Text that stays Latin inside an Arabic page keeps the original styling. */
-[lang="ar"] [lang="en"] .label,
-[lang="ar"] [lang="en"] .chip {
-  font-family: var(--font-mono), ui-monospace, monospace;
-  letter-spacing: 0.14em;
-  font-size: 10.5px !important;
-}
+/* Text that stays Latin inside an Arabic page. */
 [lang="ar"] [lang="en"] {
   font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+}
+[lang="ar"] [lang="en"] .font-display,
+[lang="ar"] .font-display[lang="en"] {
+  font-family: var(--font-display), var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+  letter-spacing: -0.04em;
+}
+/* Arabic text inside an English page. */
+[lang="en"] [lang="ar"].font-display,
+.font-display[lang="ar"] {
+  font-family: var(--font-arabic-display), var(--font-arabic), ui-sans-serif, system-ui, sans-serif;
+  letter-spacing: 0;
 }
 
 /* Plain tile behind an app icon when the app has no screenshot. */
 .app-tile {
-  background:
-    linear-gradient(hsl(var(--border) / 0.5) 1px, transparent 1px) 0 0 / 24px 24px,
-    linear-gradient(90deg, hsl(var(--border) / 0.5) 1px, transparent 1px) 0 0 / 24px 24px,
-    hsl(var(--secondary));
+  background: hsl(var(--secondary));
+}
+
+/* Ink block: black band used for the flagship row, the projects band and the footer. */
+.ink-block {
+  background: hsl(227 29% 6%);
+  color: #fff;
+}
+.dark .ink-block {
+  background: hsl(var(--card));
 }

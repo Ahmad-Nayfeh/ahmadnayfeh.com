@@ -1,0 +1,44 @@
+import type { ReactNode } from "react"
+import { cn } from "@/lib/utils"
+import { dirOf, otherLocale, type Locale } from "@/i18n"
+
+/**
+ * Section heading in two scripts: the word in the page's language, large,
+ * followed by the same word in the other language in the accent colour.
+ */
+export default function BiHeading({
+  locale,
+  title,
+  other,
+  action,
+  as: Tag = "h2",
+  className,
+  tone = "default",
+}: {
+  locale: Locale
+  title: string
+  other: string
+  action?: ReactNode
+  as?: "h1" | "h2"
+  className?: string
+  /** "onDark" for headings placed on the ink or blue blocks. */
+  tone?: "default" | "onDark"
+}) {
+  const o = otherLocale(locale)
+  return (
+    <div className={cn("flex flex-wrap items-end justify-between gap-x-8 gap-y-4 pb-7", className)}>
+      <Tag className="font-display flex flex-wrap items-baseline gap-x-4 text-[clamp(2.5rem,7vw,4.75rem)] leading-[0.95] rtl:leading-[1.3]">
+        {title}
+        <span
+          lang={o}
+          dir={dirOf(o)}
+          aria-hidden
+          className={cn("font-display text-[0.56em]", tone === "onDark" ? "text-[#8FA2FF]" : "text-accent")}
+        >
+          {other}
+        </span>
+      </Tag>
+      {action}
+    </div>
+  )
+}

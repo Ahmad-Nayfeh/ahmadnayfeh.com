@@ -2,23 +2,29 @@
 
 import { useState, useEffect } from "react"
 import { usePathname } from "next/navigation"
-import { Menu, ChevronUp, FileDown, Languages } from "lucide-react"
+import { Menu, X, FileDown } from "lucide-react"
 import ThemeToggle from "@/components/ThemeToggle"
 import { siteConfig } from "@/config/site"
 import { cn } from "@/lib/utils"
-import { localePath, otherLocalePath, ownerName, t, type Locale } from "@/i18n"
+import { localePath, otherLocalePath, t, type Locale } from "@/i18n"
 
-function isActivePath(pathname: string, path: string, home: string) {
+function isActivePath(pathname: string, path: string) {
   const p = pathname.endsWith("/") ? pathname : `${pathname}/`
-  return path === home ? p === home : p === path || p.startsWith(path)
+  return p === path || p.startsWith(path)
 }
 
+/**
+ * Site header. On the home page it sits on the blue hero (white text) until
+ * the visitor scrolls; everywhere else it is a plain bar.
+ */
 export default function Navbar({ locale }: { locale: Locale }) {
   const [isOpen, setIsOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const pathname = usePathname()
   const d = t(locale)
   const home = localePath(locale, "/")
+  const here = pathname.endsWith("/") ? pathname : `${pathname}/`
+  const onBrand = here === home && !scrolled && !isOpen
 
   const nav = [
     { name: d.nav.apps, path: localePath(locale, "/apps/") },
@@ -26,10 +32,9 @@ export default function Navbar({ locale }: { locale: Locale }) {
     { name: d.nav.notebook, path: localePath(locale, "/notebook/") },
     { name: d.nav.about, path: localePath(locale, "/about/") },
   ]
-  const switchHref = otherLocalePath(locale, pathname)
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 8)
+    const onScroll = () => setScrolled(window.scrollY > 24)
     onScroll()
     window.addEventListener("scroll", onScroll, { passive: true })
     return () => window.removeEventListener("scroll", onScroll)
@@ -41,13 +46,15 @@ export default function Navbar({ locale }: { locale: Locale }) {
 
   const langSwitch = (
     <a
-      href={switchHref}
+      href={otherLocalePath(locale, pathname)}
       lang={locale === "en" ? "ar" : "en"}
       dir={locale === "en" ? "rtl" : "ltr"}
       aria-label={d.switchAria}
-      className="inline-flex h-9 items-center gap-1.5 border border-border px-2.5 text-[13px] font-medium text-muted-foreground transition-colors hover:border-foreground hover:text-foreground"
+      className={cn(
+        "inline-flex h-10 items-center rounded-full border-[1.5px] px-4 text-[14.5px] font-medium transition-colors",
+        onBrand ? "border-white/55 text-white hover:border-white hover:bg-white/10" : "border-border text-foreground hover:border-foreground",
+      )}
     >
-      <Languages size={14} aria-hidden />
       {d.switchLabel}
     </a>
   )
@@ -55,95 +62,80 @@ export default function Navbar({ locale }: { locale: Locale }) {
   return (
     <header
       className={cn(
-        "sticky top-0 z-40 w-full border-b transition-colors duration-200",
-        scrolled || isOpen ? "border-border bg-background/90 backdrop-blur-md" : "border-transparent bg-transparent",
+        "sticky top-0 z-40 w-full transition-colors duration-200",
+        onBrand ? "bg-transparent text-white" : "border-b border-border bg-background/90 text-foreground backdrop-blur-md",
       )}
     >
-      <div className="mx-auto flex h-16 w-full max-w-[1240px] items-center justify-between px-5 md:px-8">
-        <a href={home} className="group flex items-center gap-3" aria-label={ownerName[locale]}>
-          <span
-            aria-hidden
-            dir="ltr"
-            className="flex h-9 w-9 items-center justify-center border-[1.5px] border-foreground font-mono text-[13px] font-semibold tracking-tight transition-colors group-hover:border-accent group-hover:text-accent"
-          >
-            AN
-          </span>
-          <span className="flex flex-col leading-none">
-            <span className="text-[15px] font-semibold tracking-tight">{ownerName[locale]}</span>
-            <span className="label mt-1 text-[9.5px]">{d.brandRole}</span>
-          </span>
+      <div className="mx-auto flex h-[72px] w-full max-w-[1240px] items-center justify-between gap-4 px-5 md:px-10">
+        <a href={home} dir="ltr" className="text-[15px] font-bold tracking-tight">
+          ahmadnayfeh.com
         </a>
 
-        <nav className="hidden items-center gap-1 lg:flex" aria-label="Main">
+        <nav className="hidden items-center gap-7 lg:flex" aria-label="Main">
           {nav.map((item) => {
-            const active = isActivePath(pathname, item.path, home)
+            const active = isActivePath(pathname, item.path)
             return (
               <a
                 key={item.path}
                 href={item.path}
                 aria-current={active ? "page" : undefined}
                 className={cn(
-                  "group relative flex items-baseline gap-1.5 px-3 py-2 text-[13.5px] font-medium transition-colors",
-                  active ? "text-foreground" : "text-muted-foreground hover:text-foreground",
+                  "text-[15px] font-medium transition-opacity",
+                  onBrand ? "opacity-85 hover:opacity-100" : active ? "text-accent" : "text-muted-foreground hover:text-foreground",
                 )}
               >
                 {item.name}
-                <span
-                  aria-hidden
-                  className={cn(
-                    "absolute inset-x-3 -bottom-[13px] h-[2px] origin-left bg-accent transition-transform duration-300 rtl:origin-right",
-                    active ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100",
-                  )}
-                />
               </a>
             )
           })}
-          <span aria-hidden className="mx-3 h-5 w-px bg-border" />
-          <a href={siteConfig.resume} target="_blank" rel="noopener noreferrer" className="btn btn-primary me-2 px-3.5 py-2">
-            <FileDown size={13} />
+          {langSwitch}
+          <a
+            href={siteConfig.resume}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={cn(
+              "inline-flex h-10 items-center gap-2 rounded-full px-4 text-[14.5px] font-semibold transition-colors",
+              onBrand ? "bg-white text-brand hover:bg-white/90" : "bg-foreground text-background hover:bg-brand hover:text-white",
+            )}
+          >
+            <FileDown size={15} />
             {d.cv}
           </a>
-          <span className="me-2">{langSwitch}</span>
-          <ThemeToggle />
+          <ThemeToggle onBrand={onBrand} />
         </nav>
 
         <div className="flex items-center gap-2 lg:hidden">
           {langSwitch}
-          <ThemeToggle />
+          <ThemeToggle onBrand={onBrand} />
           <button
             type="button"
-            className="inline-flex h-9 w-9 items-center justify-center border border-border"
+            className={cn(
+              "inline-flex h-10 w-10 items-center justify-center rounded-full border-[1.5px]",
+              onBrand ? "border-white/55" : "border-border",
+            )}
             onClick={() => setIsOpen((o) => !o)}
             aria-expanded={isOpen}
             aria-controls="mobile-nav"
             aria-label={isOpen ? d.menuClose : d.menuOpen}
           >
-            {isOpen ? <ChevronUp size={17} /> : <Menu size={17} />}
+            {isOpen ? <X size={18} /> : <Menu size={18} />}
           </button>
         </div>
       </div>
 
       {isOpen && (
         <nav id="mobile-nav" className="border-t border-border lg:hidden" aria-label="Main">
-          <ul className="mx-auto w-full max-w-[1240px] px-5 py-3">
-            {nav.map((item) => {
-              const active = isActivePath(pathname, item.path, home)
-              return (
-                <li key={item.path} className="border-b border-border">
-                  <a href={item.path} aria-current={active ? "page" : undefined} className="flex items-baseline gap-3 py-3.5 text-base font-medium">
-                    <span className={active ? "text-foreground" : "text-muted-foreground"}>{item.name}</span>
-                  </a>
-                </li>
-              )
-            })}
+          <ul className="mx-auto w-full max-w-[1240px] px-5 py-2">
+            {nav.map((item) => (
+              <li key={item.path} className="border-b border-border">
+                <a href={item.path} className="font-display block py-4 text-2xl">
+                  {item.name}
+                </a>
+              </li>
+            ))}
             <li>
-              <a
-                href={siteConfig.resume}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-3 py-3.5 text-base font-medium text-muted-foreground"
-              >
-                <FileDown size={15} className="text-accent" />
+              <a href={siteConfig.resume} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 py-4 text-base font-semibold">
+                <FileDown size={16} className="text-accent" />
                 {d.cv}
               </a>
             </li>

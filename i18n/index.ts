@@ -31,9 +31,9 @@ const en = {
   menuOpen: "Open menu",
   menuClose: "Close menu",
   skip: "Skip to content",
-  hero: { primary: "See the apps", glance: "At a glance", basedIn: "Based in", location: "Riyadh, Saudi Arabia" },
+  hero: { primary: "See the apps", secondary: "About me", glance: "At a glance", basedIn: "Based in", location: "Riyadh, Saudi Arabia" },
   flagship: {
-    kicker: "Flagship",
+    kicker: "Flagship · own site",
     status: "Live",
     where: "Own site · Google Play",
     openSite: "Open shadhra.app",
@@ -52,7 +52,7 @@ const en = {
     all: "All apps",
     details: "Details",
   },
-  experience: { kicker: "Experience", products: "Products" },
+  experience: { kicker: "Work", products: "Products" },
   projects: {
     kicker: "Projects",
     title: "Engineering and research work.",
@@ -68,6 +68,7 @@ const en = {
   contact: {
     kicker: "Contact",
     title: "Let's talk.",
+    rights: "All rights reserved.",
     body: "Open to conversations about switchgear engineering, design automation, and building software products. Email is the fastest way to reach me.",
   },
   footer: {
@@ -93,9 +94,9 @@ const ar: Dict = {
   menuOpen: "افتح القائمة",
   menuClose: "أغلق القائمة",
   skip: "انتقل إلى المحتوى",
-  hero: { primary: "تصفّح التطبيقات", glance: "في لمحة", basedIn: "الإقامة", location: "الرياض، المملكة العربية السعودية" },
+  hero: { primary: "تصفّح التطبيقات", secondary: "نبذة عني", glance: "في لمحة", basedIn: "الإقامة", location: "الرياض، المملكة العربية السعودية" },
   flagship: {
-    kicker: "المشروع الأبرز",
+    kicker: "المشروع الأبرز · موقع مستقل",
     status: "يعمل الآن",
     where: "موقع مستقل · Google Play",
     openSite: "افتح shadhra.app",
@@ -114,7 +115,7 @@ const ar: Dict = {
     all: "كل التطبيقات",
     details: "التفاصيل",
   },
-  experience: { kicker: "الخبرة العملية", products: "المنتجات" },
+  experience: { kicker: "العمل", products: "المنتجات" },
   projects: {
     kicker: "المشاريع",
     title: "أعمال هندسية وبحثية.",
@@ -130,6 +131,7 @@ const ar: Dict = {
   contact: {
     kicker: "تواصل",
     title: "لنتحدّث.",
+    rights: "جميع الحقوق محفوظة.",
     body: "أرحّب بالحديث عن هندسة القواطع الكهربائية، وأتمتة التصميم، وبناء المنتجات البرمجية. البريد الإلكتروني أسرع طريق إليّ.",
   },
   footer: {
@@ -144,6 +146,7 @@ const ar: Dict = {
 }
 
 export const dict: Record<Locale, Dict> = { en, ar }
+export const otherLocale = (locale: Locale): Locale => (locale === "en" ? "ar" : "en")
 export const t = (locale: Locale) => dict[locale]
 
 /** "Ahmad Nayfeh" in each language. */
