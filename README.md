@@ -44,7 +44,7 @@ Each app has its own private repository and a publish script that copies its bui
 
 The script must update from the remote first (`git pull --rebase`), touch only its own folder, and push to `main`. Do not hand-edit built files with hashed names.
 
-The text and pictures of an app's page are not built files. They are in `content/apps/details/<app>.ts` and `public/images/apps/<app>/`. When a release changes a version number or file size shown on the page, update that file in the same push.
+The text and pictures of an app's page are not built files. They are in `content/apps/details/<app>.ts` and `public/images/apps/<app>/`. The version and size on the download buttons are read from `public/apps/<app>/latest.json` when the site builds, so a release does not need to edit the page.
 
 ## Adding a new app
 

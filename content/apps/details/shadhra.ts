@@ -40,8 +40,8 @@ export const detail: AppDetail = {
     {
       title: { en: "One place", ar: "مكان واحد" },
       body: {
-        en: "All your quotes with their books, their authors and your reflections, sorted and grouped by book, author or topic.",
-        ar: "كل اقتباساتك مع كتبها ومؤلفيها وتأمّلاتك، مرتّبة ومجمّعة حسب الكتاب أو المؤلف أو الموضوع.",
+        en: "All your quotes with their books, their authors and your reflections, sorted and grouped by book, author, tag, language or period.",
+        ar: "كل اقتباساتك مع كتبها ومؤلفيها وتأمّلاتك، مرتّبة ومجمّعة حسب الكتاب أو المؤلف أو الوسم أو اللغة أو الفترة.",
       },
     },
     {
@@ -54,22 +54,22 @@ export const detail: AppDetail = {
     {
       title: { en: "Search by meaning", ar: "ابحث بالمعنى" },
       body: {
-        en: "Find a quote even if you have forgotten its wording, and ask your library a question and it answers from your own quotes.",
-        ar: "اعثر على الاقتباس وإن نسيت لفظه، واسأل مكتبتك فتجيبك من اقتباساتك أنت.",
+        en: "Find a quote even if you have forgotten its wording, and ask your library a question: it answers only from your own quotes, reflections and essays, and shows its sources.",
+        ar: "اعثر على الاقتباس وإن نسيت لفظه، واسأل مكتبتك فتجيبك من اقتباساتك وتأمّلاتك ومقالاتك أنت فقط، مع ذكر المصادر.",
       },
     },
     {
       title: { en: "Write from them", ar: "اكتب منها" },
       body: {
-        en: "Build your essay from your quotes and the links between them, then collect your essays into a book.",
-        ar: "ابنِ مقالك من اقتباساتك وصلاتها، ثم اجمع مقالاتك في كتاب.",
+        en: "Build your essay from your quotes, writing it yourself or starting from an AI draft, export it as a PDF, then collect your essays into a print-ready book.",
+        ar: "ابنِ مقالك من اقتباساتك، تكتبه بنفسك أو تبدأ من مسودة يقترحها الذكاء الاصطناعي، وصدّره PDF، ثم اجمع مقالاتك في كتاب جاهز للطباعة.",
       },
     },
     {
       title: { en: "Today's Shadhra", ar: "شذرة اليوم" },
       body: {
-        en: "Every day a quote from your library comes back to you, on the home screen or in the morning notification.",
-        ar: "كل يوم اقتباس من مكتبتك يعود إليك، على الشاشة الرئيسية أو في إشعار الصباح.",
+        en: "Every day a quote from your library comes back to you: on the home page, in the Android home-screen widget, or in a morning notification at the time you choose.",
+        ar: "كل يوم اقتباس من مكتبتك يعود إليك: في الصفحة الرئيسة، أو في أداة الشاشة الرئيسية على أندرويد، أو في إشعار صباحي في الوقت الذي تختاره.",
       },
     },
   ],
@@ -103,35 +103,41 @@ export const detail: AppDetail = {
       shape: "phone",
     },
     {
-      src: "/images/apps/shadhra/stats.webp",
-      caption: { en: "Talk to your library", ar: "حاور مكتبتك" },
+      src: "/images/apps/shadhra/talk-to-library.webp",
+      caption: {
+        en: "Further down the home page: Talk to your library, your counts and On this day",
+        ar: "أسفل الصفحة الرئيسة: حاور مكتبتك، وأعدادك، وفي مثل هذا اليوم",
+      },
       shape: "phone",
     },
   ],
   faq: [
     {
       q: { en: "Is the app free?", ar: "هل التطبيق مجاني؟" },
-      a: { en: "Yes.", ar: "نعم." },
+      a: {
+        en: "Yes. Saving, organising and searching are free, and every account gets a monthly allowance for the AI features such as photo to text and talking to your library. The current plans are shown on shadhra.app.",
+        ar: "نعم. الحفظ والتنظيم والبحث مجانية، ولكل حساب رصيد شهري لمزايا الذكاء الاصطناعي مثل استخراج النص من الصورة ومحاورة المكتبة. والباقات الحالية معروضة في shadhra.app.",
+      },
     },
     {
       q: { en: "Can other people see my quotes?", ar: "هل اقتباساتي ظاهرة للناس؟" },
       a: {
-        en: "Your quotes are private to you, except what you choose to publish.",
-        ar: "اقتباساتك خاصة بك، إلا ما تختار أنت نشره.",
+        en: "You decide. A new account is private until you choose, and every quote and reflection has its own setting: public, anonymous, or only for you. An essay stays private until you publish it.",
+        ar: "القرار لك. الحساب الجديد خاص إلى أن تختار، ولكل اقتباس وتأمّل إعداده: عام، أو بلا اسم، أو لك وحدك. والمقال يبقى خاصًا إلى أن تنشره.",
       },
     },
     {
       q: { en: "Does it work without internet?", ar: "هل يعمل بلا إنترنت؟" },
       a: {
-        en: "Yes, on Android: your whole library is on your device, and what you add is uploaded when the connection comes back.",
-        ar: "نعم على أندرويد: مكتبتك كاملة على جهازك، وما تضيفه يُرفع حين يعود الاتصال.",
+        en: "Yes, on Android: your whole library is on your device to read and search, and the quotes you add, edit or delete are synced when the connection comes back. Features that need the server, such as photo to text and the AI features, need a connection.",
+        ar: "نعم على أندرويد: مكتبتك كاملة على جهازك للقراءة والبحث، وما تضيفه أو تعدّله أو تحذفه من الاقتباسات يُزامَن حين يعود الاتصال. أما ما يحتاج إلى الخادم، كاستخراج النص من الصورة ومزايا الذكاء الاصطناعي، فيلزمه اتصال.",
       },
     },
     {
       q: { en: "Can I export my library?", ar: "هل أستطيع تصدير مكتبتي؟" },
       a: {
-        en: "Yes, for example to an Excel sheet with your quotes and their reflections.",
-        ar: "نعم، مثلًا إلى جدول Excel فيه اقتباساتك وتأمّلاتها.",
+        en: "Yes, at any time: as an Excel sheet of your quotes and their reflections, a full backup in one JSON file, Markdown files, plain text or a PDF.",
+        ar: "نعم، في أي وقت: جدول Excel فيه اقتباساتك وتأمّلاتها، أو نسخة احتياطية كاملة في ملف JSON واحد، أو ملفات Markdown، أو نص عادي، أو PDF.",
       },
     },
   ],
@@ -141,17 +147,21 @@ export const detail: AppDetail = {
       "FastAPI",
       "Python 3.12",
       "PostgreSQL",
+      "pgvector",
       "Alembic",
       "Redis",
+      "arq",
+      "TypeScript",
       "React",
       "Vite",
       "Tailwind",
       "Expo",
       "React Native",
+      "SQLite",
     ],
     body: {
-      en: "One FastAPI backend serves both a React web app and an Expo / React Native Android app. The data is in PostgreSQL with Alembic migrations, and Redis with a background worker runs the OCR and AI jobs. The AI layer is a multi-provider router with fallbacks, per-feature cost tracking and spending limits. An admin console has feature flags, kill switches and usage dashboards.",
-      ar: "خادم واحد مبني بـ FastAPI يخدم تطبيق ويب بـ React وتطبيق أندرويد بـ Expo / React Native. البيانات في PostgreSQL مع ترحيلات Alembic، و Redis مع عامل في الخلفية ينفّذ مهام استخراج النص (OCR) والذكاء الاصطناعي. طبقة الذكاء الاصطناعي موجِّه بين عدة مزوّدين له بدائل عند التعطل، مع تتبّع التكلفة لكل ميزة وحدود للإنفاق. وللإدارة لوحة فيها مفاتيح لتشغيل المزايا وإيقافها فوراً ولوحات للاستخدام.",
+      en: "One FastAPI backend serves both a React web app and an Expo / React Native Android app. The data is in PostgreSQL with Alembic migrations, with pgvector holding the embeddings behind search by meaning and patterns, and an arq worker on Redis runs the OCR and other background jobs. On Android the library is also kept in SQLite on the device, so it works offline and syncs later. The AI layer is one router that every AI feature calls: it walks an ordered chain of providers and falls back when one fails, enforces per-user daily caps, and records every call in a usage ledger. An admin console has feature flags, kill switches and usage dashboards.",
+      ar: "خادم واحد مبني بـ FastAPI يخدم تطبيق ويب بـ React وتطبيق أندرويد بـ Expo / React Native. البيانات في PostgreSQL مع ترحيلات Alembic، وفيها pgvector لتمثيلات المعنى التي يقوم عليها البحث بالمعنى والأنساق، وعامل arq على Redis ينفّذ استخراج النص (OCR) وسائر مهام الخلفية. وعلى أندرويد تُحفظ المكتبة أيضًا في SQLite على الجهاز، فتعمل بلا اتصال ثم تُزامَن. طبقة الذكاء الاصطناعي موجِّه واحد تمرّ به كل المزايا: يجرّب سلسلة مرتّبة من المزوّدين وينتقل إلى التالي عند التعطل، ويطبّق حدًّا يوميًا لكل مستخدم، ويسجّل كل استدعاء في سجل للاستخدام. وللإدارة لوحة فيها مفاتيح لتشغيل المزايا وإيقافها فوراً ولوحات للاستخدام.",
     },
     highlights: [
       {
@@ -167,8 +177,8 @@ export const detail: AppDetail = {
         ar: "خادم FastAPI واحد لتطبيق ويب بـ React وتطبيق أندرويد بـ Expo",
       },
       {
-        en: "CI runs linting, type checks, about 300 backend and web test files, and an OCR accuracy gate that fails the build if the character error rate on a fixed Arabic test set exceeds 5%",
-        ar: "الفحص الآلي (CI) يشغّل فحص الصياغة والأنواع ونحو 300 ملف اختبار للخادم والويب، وبوابة لدقة استخراج النص تُفشل البناء إذا تجاوزت نسبة الخطأ في الأحرف 5% على مجموعة اختبار عربية ثابتة",
+        en: "CI runs linting, type checks, more than 300 backend and web test files, a web build, Docker image builds and a database migration round trip. An OCR accuracy script scores the character error rate against human transcriptions with a 5% ceiling; it runs on a private set of page images, not on every push",
+        ar: "الفحص الآلي (CI) يشغّل فحص الصياغة والأنواع وأكثر من 300 ملف اختبار للخادم والويب، وبناء الويب، وبناء صور Docker، وتجربة ترحيلات قاعدة البيانات ذهابًا وإيابًا. ولدقة استخراج النص سكربت يقيس نسبة الخطأ في الأحرف مقابل نصوص منسوخة يدويًا بحدّ أقصى 5%، ويُشغَّل على مجموعة خاصة من صور الصفحات لا عند كل دفع",
       },
     ],
   },

@@ -55,8 +55,8 @@ export const apps: AppEntry[] = [
     name: { en: "Reading Marathon", ar: "ماراثون القراءة" },
     kind: { en: "Android app", ar: "تطبيق أندرويد" },
     desc: {
-      en: "One shared book per challenge, a daily log, points and badges for reading groups.",
-      ar: "كتاب مشترك لكل تحدٍّ، تسجيل يومي، نقاط وأوسمة لمجموعات القراءة.",
+      en: "Log your reading time in your own books with one tap, and read a shared book with your group, with points and a ranking.",
+      ar: "سجّل وقت قراءتك في كتبك بلمسة، واقرأ كتاباً مشتركاً مع مجموعتك، بنقاط وترتيب.",
     },
     icon: img("icons/marathon.svg"),
     thumb: img("marathon-card.webp"),

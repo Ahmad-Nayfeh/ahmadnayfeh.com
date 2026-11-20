@@ -27,7 +27,7 @@ export const detail: AppDetail = {
       primary: true,
       version: "1.0.0",
       size: "6 MB",
-      note: { en: "Android 8 or newer · build 11", ar: "أندرويد 8 فما فوق · بناء 11" },
+      note: { en: "Android 8 or newer", ar: "أندرويد 8 فما فوق" },
     },
   ],
   features: [
@@ -55,8 +55,8 @@ export const detail: AppDetail = {
     {
       title: { en: "Organised by folders", ar: "مرتّب بالمجلدات" },
       body: {
-        en: "Just two pages: video and audio, each organised by folders. Create a folder, rename it, move files into it, or delete it.",
-        ar: "صفحتان فقط: الفيديو والصوتيات، وكل منهما مرتّب بالمجلدات. أنشئ مجلدًا، غيّر اسمه، انقل إليه الملفات، أو احذفه.",
+        en: "Just two pages: video and audio, each organised by folders. Create a folder, rename it, move files into it, or delete it. Show them as a grid or a list, and pinch with two fingers to resize the tiles.",
+        ar: "صفحتان فقط: الفيديو والصوتيات، وكل منهما مرتّب بالمجلدات. أنشئ مجلدًا، غيّر اسمه، انقل إليه الملفات، أو احذفه. اعرضها كشبكة أو قائمة، وكبّر العناصر أو صغّرها بإصبعين.",
       },
     },
     {
@@ -76,8 +76,8 @@ export const detail: AppDetail = {
     {
       title: { en: "Subtitles and audio tracks", ar: "ترجمة وصوتيات" },
       body: {
-        en: "Choose the audio and subtitle track, or load .srt and .ass files, and control the subtitle size, colour and background.",
-        ar: "اختر مسار الصوت والترجمة، أو حمّل ‎.srt و‎.ass، وتحكم بحجم الترجمة ولونها وخلفيتها.",
+        en: "Choose the audio and subtitle track, or load .srt, .ass and .vtt files, and control the subtitle size, colour and background.",
+        ar: "اختر مسار الصوت والترجمة، أو حمّل ‎.srt و‎.ass و‎.vtt، وتحكم بحجم الترجمة ولونها وخلفيتها.",
       },
     },
     {

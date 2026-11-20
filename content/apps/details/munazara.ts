@@ -16,6 +16,7 @@ export const detail: AppDetail = {
     { en: "Web app", ar: "تطبيق ويب" },
     { en: "Arabic and English", ar: "عربي وإنجليزي" },
     { en: "No accounts, no sign-in", ar: "لا حسابات، ولا تسجيل دخول" },
+    { en: "Works offline after the first visit", ar: "يعمل دون اتصال بعد أول زيارة" },
     { en: "The debate is kept on your device", ar: "المناظرة محفوظة على جهازك" },
   ],
   downloads: [
@@ -61,8 +62,8 @@ export const detail: AppDetail = {
     {
       title: { en: "Moves taken from the classical art of debate", ar: "أزرار من آداب البحث والمناظرة" },
       body: {
-        en: "The buttons are not arbitrary; they come from a long-established discipline in our heritage, the etiquette of inquiry and debate (adab al-bahth wal-munazara). \"What do you mean?\" asks for the meaning to be clarified. \"What is your proof?\" asks for the proof of a claim. \"I object\" comes with the reason for the objection. Refutation (naqd) defeats a proof with a case where its conclusion fails. Counter-argument (mu'arada) sets up an opposing proof. \"Document the quote\" is for when your friend relays someone else's words. Then \"I concede\" if you are convinced, or \"We agree to disagree\" if you end up at two different starting principles.",
-        ar: "الأزرار ليست عشوائية، بل مأخوذة من علمٍ عريق في تراثنا، هو: آداب البحث والمناظرة. «ماذا تقصد؟»: لطلب توضيح المعنى. «ما دليلك؟»: لطلب الدليل على الدعوى. «أعترض»: مع ذكر سبب الاعتراض. «النقض»: أن تُبطل الدليل بمثالٍ يتخلّف فيه الحكم. «المعارضة»: أن تقيم دليلاً مقابلاً. «وثّق النقل»: إذا نقل صاحبك كلاماً عن غيره. ثم «أُسلّم» إذا اقتنعت، أو «نتفق على الاختلاف» إذا انتهيتما إلى أصلين مختلفين.",
+        en: "The buttons are not arbitrary; they come from a long-established discipline in our heritage, the etiquette of inquiry and debate (adab al-bahth wal-munazara). \"What do you mean?\" asks for the meaning to be clarified. \"What is your proof?\" asks for the proof of a claim. \"I object\" comes with the reason for the objection. \"Refute with a witness\" (naqd) defeats a proof with a case where its conclusion fails. \"Counter-argument\" (mu'arada) sets up an opposing claim with its proof. \"Show the source\" is for when your friend relays someone else's words. Then \"I accept this\" if you are convinced, or \"Propose we agree to disagree here\" if you end up at two different starting principles.",
+        ar: "الأزرار ليست عشوائية، بل مأخوذة من علمٍ عريق في تراثنا، هو: آداب البحث والمناظرة. «ماذا تقصد؟»: لطلب توضيح المعنى. «ما دليلك؟»: لطلب الدليل على الدعوى. «أعترض»: مع ذكر سبب الاعتراض. «نقض بشاهد»: أن تُبطل الدليل بمثالٍ يتخلّف فيه الحكم. «معارضة»: أن تقيم دعوى مقابلة بدليلها. «وثّق النقل»: إذا نقل صاحبك كلاماً عن غيره. ثم «أقبل هذا» إذا اقتنعت، أو «أقترح أن نتفق على الاختلاف هنا» إذا انتهيتما إلى أصلين مختلفين.",
       },
     },
     {
@@ -168,6 +169,13 @@ export const detail: AppDetail = {
           body: {
             en: "Every point is signed with its author's key, kept on their device, so a link holder cannot write as an existing participant, but can join under a new name. If you send your \"identity link\", whoever has it can write as you.",
             ar: "كل نقطة موقّعة بمفتاح كاتبها المحفوظ على جهازه، فلا يستطيع حامل الرابط أن يكتب باسم مشارك موجود؛ لكنه يستطيع الانضمام باسم جديد. إن أرسلت «رابط الهوية» فمن يملكه يكتب باسمك.",
+          },
+        },
+        {
+          title: { en: "Who sees your visit?", ar: "من يرى زيارتك للموقع؟" },
+          body: {
+            en: "The site is hosted on GitHub Pages at ahmadnayfeh.com, and GitHub logs visitor IP addresses for security. The part of the link after \"#\" (which holds the key) is never sent to any server.",
+            ar: "الموقع مستضاف على GitHub Pages بالعنوان ahmadnayfeh.com، وGitHub يسجّل عناوين IP للزوار لأغراض أمنية. الجزء الذي بعد «#» في الرابط (وفيه المفتاح) لا يُرسل إلى أي خادم.",
           },
         },
         {
