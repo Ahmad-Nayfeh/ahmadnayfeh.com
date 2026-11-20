@@ -23,18 +23,18 @@ Last updated: 2026-11-20. "Site" means the new repository `Ahmad-Nayfeh/ahmadnay
 
 ## Per app
 
-"Copied" means the app's current files and a new page are on the site. "App session" means the work inside the app, started by pasting its prompt.
+On 2026-11-20 the work inside each app was done from one session, on the branch `claude/epic-feynman-hu09zj` of each app's repository. Every app repository now holds its own record of the move: `docs/site-move.md` (Shadhra: `docs/site-listing.md`), with a pointer in `CLAUDE.md` or the project map. An app's own session can read that file and needs no explanation from you.
 
-| App | On the new site | Waiting for the app's session | Waiting for you |
-|---|---|---|---|
-| **Shadhra** | Listed as the flagship; page links to shadhra.app and Google Play | Check links to the old sites; correct the listing text and screenshots | Paste the prompt. Later: developer website on Google Play |
-| **Reel** | Page and APK copied; release file written | New address inside the app; update check (it may not have one); publish step; add screenshots (the page has none) | Paste the prompt; reinstall |
-| **Khatwa** | Page with 9 screenshots, APK copied; release file written | New address inside the app; update check (it may not have one); publish step | Paste the prompt; reinstall |
-| **Grid Shift** | Page with video; game copied to `/apps/grid-shift/app/` | Fix the "watch the explainer" link; fix or remove the dead source links; publish step | Paste the prompt |
-| **Munazara** | Page with video; app copied to `/apps/munazara/app/` | Privacy text names the old address; publish step; review the page text | Paste the prompt |
-| **Shasha** | Page with 15 screenshots; both apps, kit, guides and release file copied with new addresses | Update address in both apps; publish script; check and regenerate the guides and the kit | Paste the prompt; reinstall on the TV and the phone |
-| **Reading Marathon** | Page; APK, invite page, privacy page, admin page and Android link file copied; invite page points at the new address | Invite-link host in the app; links; update check (it may not have one); publish step; fix two inconsistencies on the pages | Paste the prompt; add the Firebase authorized domain (step 6); reinstall |
-| **Voxa** | Page with video; web app copied to `/apps/voxa/app/`; APK and release file (1.0.17) copied | Three addresses and the update rule in the app; security policy; sign-in origins; publish script; bring the page up to date | Paste the prompt; console steps the session gives you; reinstall |
+| App (repository) | Done | Waiting for you |
+|---|---|---|
+| **Shadhra** (`shadhra`) | No old address existed. Listing text corrected against the app. Record added. | Fresh screenshots. Check the developer website on Google Play. |
+| **Reel** (`video-player`) | No old address existed. The published APK equals a build of the current source, so no release is needed. New publish script. Release file completed (versionCode 11). | Decide on an in-app updater (it has none). Screenshots for its page. |
+| **Khatwa** (`khatwa`) | README links. Release workflow now publishes to the site. Release file completed (versionCode 110). No reinstall needed: the app itself never named the old address. | Add the secret `SITE_REPO_TOKEN`. Decide on an in-app updater (it has none). |
+| **Grid Shift** (`Repo-A`) | Explainer link and in-game document links fixed. New build published to the site. New publish script. | Decide: keep or stop the second copy at `ahmad-nayfeh.github.io/Repo-A/`; whether to make the repository private (that kills the in-game document links); re-render the video's last scene. |
+| **Munazara** (`Repo-B`) | Privacy text corrected. Last scene of the explainer re-rendered with the new address. New build published to the site. Page text corrected to the app's real button names. | Reinstall to the home screen from the new address. Try relay sync between two devices. Decide on adding the etiquette text to its page. |
+| **Shasha** (`shasha`) | Update address moved in both apps; downloads accepted only from the new folder. Publish script rewritten. Guides and kit checked: they never named the old address. | Merge the branch (this makes CI build a signed release; three timing-sensitive tests are flaky and may need a re-run). Run the publish script. Reinstall once on the TV and the phone. |
+| **Reading Marathon** (`reading-marathon`) | Invite-link host and path, invite builder, privacy link. Release workflow now publishes to the site. Site pages corrected (Google sign-in only; no badges). | **Find the signing keystore** (`marathon-release.jks`): the repository has no signing or Firebase secrets, so no release can be built from it yet. Recover the Google account, then the Firebase steps. Then release and reinstall. |
+| **Voxa** (`voxa`) | All addresses, the update rule, the security policy and the Android updater moved. New web build (1.0.18) published to the site. Page text brought up to date. Publish script rewritten. | Add `ahmadnayfeh.com` to the Firebase authorized domains of project `voxa-5e530`. Release a signed Android build and install it by hand once (the installed 1.0.17 looks for updates at the old address). |
 
 ## Known gaps and things to decide
 
@@ -43,4 +43,4 @@ Last updated: 2026-11-20. "Site" means the new repository `Ahmad-Nayfeh/ahmadnay
 - **Reel has no picture or screenshots.** Its row and page show the icon only until its session adds them.
 - **The old Vercel `/privacy` and `/terms` pages** describe an older, Google-Sheets version of Reading Marathon. `/privacy` now forwards to the current privacy page on the new site. `/terms` was not carried over and stays on Vercel. If a sign-in consent screen still links to either, tell Claude.
 - **Installed copies of the apps** still contain the old address until each app's session ships a new build. With no users this only affects your own devices.
-- **Voxa was updated on the old hub while the move was in progress.** The site has the copy from 2026-11-20 (1.0.17). If Voxa publishes to the old hub again before its own session moves it, run `scripts/sync-from-old-hub.sh` again.
+- **One token for the release workflows.** Khatwa and Reading Marathon publish to this site from GitHub Actions with a secret named `SITE_REPO_TOKEN`: a fine-grained token limited to this repository with Contents: Read and write. The same token can be used in both.

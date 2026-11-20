@@ -67,7 +67,7 @@ Do this only after step 5 is confirmed.
 2. **Create pull request**, **Merge pull request**, **Confirm merge**.
 3. From then on, `https://ahmad-nayfeh.github.io/anything` forwards to the matching page on the new site.
 
-Before merging, make sure no app session has published something new to the old hub that is missing from the new site. If one has, tell Claude to run the copy script again (`scripts/sync-from-old-hub.sh`).
+Done on 2026-11-20. Nothing publishes to the old hub any more: each app's publish step now writes to this repository.
 
 **The old portfolio (vercel.app).** A redirect file is prepared on a side branch.
 

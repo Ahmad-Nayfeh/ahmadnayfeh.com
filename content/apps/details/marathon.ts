@@ -61,8 +61,8 @@ export const detail: AppDetail = {
     {
       title: { en: "Points and ranking", ar: "نقاط وترتيب" },
       body: {
-        en: "One point for every 10 minutes, and 50 for finishing the book. The group chooses: all of its members' reading, or the shared book only. Share the ranking on WhatsApp with one tap.",
-        ar: "نقطة لكل 10 دقائق، و50 لإتمام الكتاب. والمجموعة تختار: كل قراءة الأعضاء أو الكتاب المشترك وحده. شارك الترتيب في واتساب بلمسة.",
+        en: "One point for every 10 minutes and 50 for finishing the book, unless the group sets other numbers. The group also chooses what counts: all of its members' reading, or the shared book only. Share the ranking as text, on WhatsApp for example, with one tap.",
+        ar: "نقطة لكل 10 دقائق و50 لإتمام الكتاب، ما لم تختر المجموعة أرقاماً أخرى. والمجموعة تختار أيضاً ما يُحسب: كل قراءة الأعضاء أو الكتاب المشترك وحده. شارك الترتيب نصاً، في واتساب مثلاً، بلمسة.",
       },
     },
     {
@@ -99,6 +99,14 @@ export const detail: AppDetail = {
       shape: "phone",
     },
     {
+      src: "/images/apps/marathon/activity.webp",
+      caption: {
+        en: "Group activity: who read today and who finished the book",
+        ar: "نشاط المجموعة: من قرأ اليوم ومن أتمّ الكتاب",
+      },
+      shape: "phone",
+    },
+    {
       src: "/images/apps/marathon/shelf.webp",
       caption: {
         en: "My shelf: the books I am reading and the ones I finished",
@@ -119,6 +127,14 @@ export const detail: AppDetail = {
       caption: {
         en: "Me: the numbers, the reading map and the goal",
         ar: "أنا: الأرقام وخريطة القراءة والهدف",
+      },
+      shape: "phone",
+    },
+    {
+      src: "/images/apps/marathon/sign-in.webp",
+      caption: {
+        en: "Sign in with a Google account",
+        ar: "الدخول بحساب Google",
       },
       shape: "phone",
     },

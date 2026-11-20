@@ -141,8 +141,8 @@ export const detail: AppDetail = {
         {
           title: { en: "The phone app", ar: "تطبيق الجوال" },
           body: {
-            en: "Android 8 or newer. It works on its own without a TV: search, a full player, and downloading video or audio. Open this page on your phone, press the button, then follow the three steps. The phone app is for watching on the phone; controlling the TV is done from a page you open with the pairing code in Shasha's settings on the TV.",
-            ar: "أندرويد 8 فأحدث. يعمل وحده بلا تلفاز: بحث، ومشغّل كامل، وتنزيل الفيديو أو الصوت. افتح هذه الصفحة على جوالك واضغط الزر، ثم اتبع ثلاث خطوات. تطبيق الجوال للمشاهدة على الجوال؛ أما التحكم في التلفاز فصفحة تفتحها من رمز الاقتران في إعدادات «شاشة» على التلفاز.",
+            en: "Android 8 or newer. It works on its own without a TV: search, a full player, and downloading video or audio. Open this page on your phone, press the button, then follow the three steps. The phone app is for watching on the phone; controlling the TV is done from a page you open by scanning the pairing QR code in Shasha's settings on the TV.",
+            ar: "أندرويد 8 فأحدث. يعمل وحده بلا تلفاز: بحث، ومشغّل كامل، وتنزيل الفيديو أو الصوت. افتح هذه الصفحة على جوالك واضغط الزر، ثم اتبع ثلاث خطوات. تطبيق الجوال للمشاهدة على الجوال؛ أما التحكم في التلفاز فصفحة تفتحها بمسح رمز الاقتران QR في إعدادات «شاشة» على التلفاز.",
           },
         },
         {
@@ -310,8 +310,8 @@ export const detail: AppDetail = {
     {
       title: { en: "Link your phone, optional (on the phone)", ar: "اربط جوالك، اختياري (الجوال)" },
       body: {
-        en: "In Shasha: Settings → Local server → Pairing code, then scan it with the phone's camera.",
-        ar: "في «شاشة»: الإعدادات ← الخادم المحلي ← رمز الاقتران، وامسحه بكاميرا الجوال.",
+        en: "In Shasha: Settings → Phone remote → Pair a phone (QR code), then scan the QR code with the phone's camera. The phone must be on the same network as the TV.",
+        ar: "في «شاشة»: الإعدادات ← التحكم من الجوال ← ربط جوال (رمز QR)، وامسح رمز QR بكاميرا الجوال. الجوال على شبكة التلفاز نفسها.",
       },
     },
   ],
