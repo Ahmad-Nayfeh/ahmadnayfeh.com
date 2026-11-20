@@ -143,6 +143,8 @@
   }
   body {
     @apply bg-background text-foreground;
+    /* The page itself never scrolls sideways; wide tables and code scroll in their own box. */
+    overflow-x: clip;
   }
 
   .font-display {
@@ -693,4 +695,28 @@ code[data-theme] span {
 }
 [lang="ar"] .article-body {
   line-height: 2;
+}
+
+/* Wide content inside writings scrolls inside its own box, never the page. */
+.article-body table,
+.project-prose-container table,
+.about-story table {
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
+}
+.article-body .katex-display,
+.project-prose-container .katex-display {
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+.article-body img,
+.project-prose-container img {
+  max-width: 100%;
+  height: auto;
+}
+.article-body,
+.project-prose-container {
+  overflow-wrap: break-word;
 }

@@ -19,7 +19,7 @@ export default function SiteShell({ locale, children }: { locale: Locale; childr
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
           <a
             href="#main"
-            className="sr-only focus:not-sr-only focus:fixed focus:start-4 focus:top-4 focus:z-50 focus:bg-foreground focus:px-3 focus:py-2 focus:text-background"
+            className="sr-only left-0 top-0 rtl:left-auto rtl:right-0 focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:bg-foreground focus:px-3 focus:py-2 focus:text-background"
           >
             {d.skip}
           </a>
