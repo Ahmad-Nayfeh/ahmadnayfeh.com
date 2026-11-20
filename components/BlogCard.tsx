@@ -36,6 +36,7 @@ export default function BlogCard({ post, headingLevel = 3, locale = "en" }: { po
         <Heading className="font-display text-[1.4rem] leading-tight tracking-[-0.02em] transition-colors group-hover:text-accent md:text-[1.7rem] rtl:leading-[1.45]">
           {post.title}
         </Heading>
+        {post.source && <p className="mt-1 text-[14.5px] font-medium text-accent">{post.source}</p>}
         {post.excerpt && <p className="mt-2 line-clamp-2 max-w-3xl text-[15.5px] leading-relaxed text-foreground/70">{post.excerpt}</p>}
         {post.tags.length > 0 && (
           <div className="mt-3 flex flex-wrap gap-1.5">

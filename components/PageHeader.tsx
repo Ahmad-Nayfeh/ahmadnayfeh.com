@@ -50,7 +50,11 @@ export default function PageHeader({
         >
           {title}
         </h1>
-        {lead && <div className="mt-7 max-w-[44rem] text-[1.1rem] leading-[1.6] text-white/90 md:text-[1.25rem]">{lead}</div>}
+        {lead && (
+          <div dir={contentLang ? dirOf(contentLang) : undefined}>
+            <div className="mt-7 max-w-[44rem] text-[1.1rem] leading-[1.6] text-white/90 md:text-[1.25rem]">{lead}</div>
+          </div>
+        )}
         {children && <div className="mt-8">{children}</div>}
       </div>
     </section>

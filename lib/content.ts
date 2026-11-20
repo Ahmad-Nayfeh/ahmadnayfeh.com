@@ -83,9 +83,10 @@ function readYamlFile(filePath: string): unknown { // Return unknown
 }
 
 // Estimated reading time from the post body (~230 words per minute).
-function readingTime(body: string): string {
+function readingTime(body: string, lang: "en" | "ar" = "en"): string {
   const words = body.replace(/```[\s\S]*?```/g, " ").split(/\s+/).filter(Boolean).length
-  return `${Math.max(1, Math.round(words / 230))} min read`
+  const minutes = Math.max(1, Math.round(words / 230))
+  return lang === "ar" ? `${minutes} د للقراءة` : `${minutes} min read`
 }
 
 // Get home page content
@@ -320,10 +321,11 @@ export async function getAllPosts(): Promise<Post[]> {
                 excerpt: fm.excerpt,
                 coverImage: fm.coverImage || "/placeholder.svg?height=600&width=800",
                 tags: fm.tags,
-                readTime: readingTime(postFile.content ?? ""),
+                readTime: readingTime(postFile.content ?? "", fm.language),
                 featured: fm.featured,
                 lang: fm.language,
                 kind: fm.kind,
+                source: fm.source,
             });
         }
     }
@@ -350,11 +352,12 @@ export async function getAllPostsWithContent(): Promise<FullPost[]> {
                 excerpt: fm.excerpt,
                 coverImage: fm.coverImage || "/placeholder.svg?height=600&width=800",
                 tags: fm.tags,
-                readTime: readingTime(postFile.content ?? ""),
+                readTime: readingTime(postFile.content ?? "", fm.language),
                 content: postFile.content,
                 featured: fm.featured,
                 lang: fm.language,
                 kind: fm.kind,
+                source: fm.source,
             });
         }
     }

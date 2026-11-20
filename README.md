@@ -70,6 +70,8 @@ kind: "essay"    # "article", "essay" or "reading"
 
 The notebook page shows the kind filter once more than one kind exists.
 
+The same can be done from a phone with the private page `/write/`, which saves this file through GitHub using the owner's access key (see `docs/migration/your-steps.md`, step 9).
+
 ## Working on the site
 
 ```bash

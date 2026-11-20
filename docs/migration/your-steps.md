@@ -90,7 +90,30 @@ For each app, in this order: **Shadhra, Reel, Khatwa, Grid Shift, Munazara, Shas
 5. Reinstall the new build on your own devices.
 6. Tick the app in `checklist.md`.
 
-## Step 9. Tidy up (any time later)
+## Step 9. Set up your private writing page (optional, any time after step 5)
+
+The page `https://ahmadnayfeh.com/write/` lets you publish a notebook entry (a reading note, an essay or an article) from your phone. It works only with a key that you create once. Nobody else can publish: without your key the form cannot save anything.
+
+**Create the key (once, on a computer).**
+
+1. Open `https://github.com/settings/personal-access-tokens/new`.
+2. **Token name:** `ahmadnayfeh.com writing page`.
+3. **Expiration:** choose one year (you repeat these steps when it expires).
+4. **Repository access:** choose **Only select repositories**, then pick `ahmadnayfeh.com`. Do not select any other repository.
+5. **Permissions**, then **Repository permissions**, then **Contents:** set to **Read and write**. Leave everything else as it is.
+6. Click **Generate token** and copy the key (it starts with `github_pat_`). GitHub shows it only once.
+
+**Put the key on your phone (once per device).**
+
+1. Open `https://ahmadnayfeh.com/write/` on the phone.
+2. Paste the key and press **Save key on this device**.
+3. Optional: in the browser menu choose **Add to Home screen**, so it opens like an app.
+
+**Publish.** Choose the kind, the language, fill in the text, press **Publish**. The piece is on the site about two minutes later.
+
+If you lose the phone: open `https://github.com/settings/personal-access-tokens`, find the key and click **Revoke**. The key can only change files in this one repository.
+
+## Step 10. Tidy up (any time later)
 
 - Update the link on your CV, LinkedIn and GitHub profile to `https://ahmadnayfeh.com`.
 - Google Play, Shadhra's listing: set the developer website to `https://ahmadnayfeh.com`.

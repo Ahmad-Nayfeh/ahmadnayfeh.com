@@ -48,6 +48,8 @@ export const PostFrontmatter = z.object({
   language: z.enum(["en", "ar"]).default("en"),
   // What kind of writing this is. Shown as a filter on the notebook page once more than one kind exists.
   kind: z.enum(["article", "essay", "reading"]).default("article"),
+  // For a reading note: the book and its author, e.g. "Atomic Habits, James Clear".
+  source: z.string().optional(),
   papers: z.array(PaperRef).optional(),
   generatedBy: z.string().optional(), // e.g. "claude-sonnet-4-6"
 })

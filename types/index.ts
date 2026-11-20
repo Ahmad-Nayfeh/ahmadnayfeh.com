@@ -43,6 +43,8 @@ export interface Post {
   /** The language the piece was written in; writings are never translated. */
   lang: "en" | "ar"
   kind: "article" | "essay" | "reading"
+  /** For a reading note: the book and its author. */
+  source?: string
 }
 
 export interface FullPost extends Post {

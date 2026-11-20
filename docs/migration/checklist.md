@@ -17,7 +17,7 @@ Last updated: 2026-11-20. "Site" means the new repository `Ahmad-Nayfeh/ahmadnay
 | Forwarding page for the old github.io address | Prepared on a side branch. **Waiting for you:** step 7 |
 | Redirects for the old vercel.app address | Prepared on a side branch. **Waiting for you:** step 7 |
 | Article-draft automation secret | **Waiting for you:** step 6 |
-| Private writing page for publishing from the phone | See the status note Claude gave in the chat |
+| Private writing page for publishing from the phone (`/write/`) | Built. **Waiting for you:** create the key (step 9). Not yet tested against the real repository |
 
 ## Per app
 

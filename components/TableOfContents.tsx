@@ -42,19 +42,18 @@ export default function TableOfContents({ headings }: { headings: TocHeading[] }
   if (headings.length < 2) return null
 
   return (
-    <nav aria-label="Table of contents" className="sticky top-24 border-[1.5px] border-foreground bg-card p-4">
-      <div className="label mb-3 text-[10px]">Contents</div>
-      <ul className="space-y-0.5 border-l border-border">
+    <nav aria-label="Table of contents" className="sticky top-24 rounded-[18px] bg-card p-5">
+      <ul className="space-y-0.5 border-s border-border">
         {headings.map(({ id, text, level }) => (
           <li key={id}>
             <a
               href={`#${id}`}
               className={cn(
-                "-ml-px block border-l-2 py-1 text-[12.5px] leading-snug transition-colors",
-                level === 2 ? "pl-3" : "pl-6 text-[12px]",
+                "-ms-px block border-s-2 py-1 text-[13.5px] leading-snug transition-colors",
+                level === 2 ? "ps-3" : "ps-6 text-[13px]",
                 activeId === id
-                  ? "border-l-accent text-foreground"
-                  : "border-l-transparent text-muted-foreground hover:text-foreground",
+                  ? "border-s-accent text-foreground"
+                  : "border-s-transparent text-muted-foreground hover:text-foreground",
               )}
             >
               {text}

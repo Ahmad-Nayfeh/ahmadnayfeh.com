@@ -412,7 +412,7 @@
 }
 .prose figure.editorial-figure figcaption,
 .prose figure.demo-figure figcaption {
-  @apply mt-2 font-mono text-[11px] uppercase tracking-[0.16em] text-muted-foreground;
+  @apply mt-2 text-[14px] text-muted-foreground;
 }
 .prose figure.editorial-figure--inline {
   @apply my-6;
@@ -683,4 +683,14 @@ code[data-theme] span {
 }
 .dark .ink-block {
   background: hsl(var(--card));
+}
+
+/* Writings in Arabic use the Arabic text face, whatever the page language. */
+[lang="ar"].article-body,
+[lang="ar"] .article-body,
+[lang="ar"] .article-body :is(p, li, blockquote, h2, h3, h4, td, th) {
+  font-family: var(--font-arabic), ui-sans-serif, system-ui, sans-serif;
+}
+[lang="ar"] .article-body {
+  line-height: 2;
 }

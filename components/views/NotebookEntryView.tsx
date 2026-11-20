@@ -50,13 +50,14 @@ export default async function NotebookEntryView({ slug, locale }: { slug: string
             <span aria-hidden className="opacity-40">
               /
             </span>
-            <span dir="ltr">{post.readTime}</span>
+            <span lang={post.lang} dir={dir}>{post.readTime}</span>
           </span>
         }
         title={post.title}
         lead={
-          post.excerpt ? (
+          post.excerpt || post.source ? (
             <span lang={post.lang} dir={dir} className="block">
+              {post.source && <span className="mb-2 block font-semibold">{post.source}</span>}
               {post.excerpt}
             </span>
           ) : undefined
