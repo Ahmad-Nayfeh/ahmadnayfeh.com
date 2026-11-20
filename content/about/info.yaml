@@ -1,0 +1,67 @@
+name: "Ahmad Nayfeh"
+tagline: "Electrical Design Engineer | AI Automation"
+skills:
+  - MV Secondary Switchgear Design
+  - Electrical Schematics (SEE Electrical)
+  - SAP BOM & Product Data
+  - Utility Specifications (IEC 62271)
+  - AI-Assisted Engineering Automation
+  - Python
+  - FastAPI & PostgreSQL
+  - React & TypeScript
+  - Kotlin & Jetpack Compose
+  - PyTorch & Computer Vision
+skillGroups:
+  - name: "Engineering"
+    items:
+      - "MV secondary switchgear (RMU, metered RMU, LBS, autorecloser)"
+      - "Electrical schematics in SEE Electrical"
+      - "Bills of materials and product data in SAP"
+      - "Utility specifications and IEC 62271"
+  - name: "Software"
+    items:
+      - "Python, FastAPI, PostgreSQL, Redis"
+      - "React, TypeScript, Next.js, Tailwind"
+      - "Kotlin, Jetpack Compose, Expo"
+      - "GitHub Actions CI/CD, Docker"
+  - name: "AI"
+    items:
+      - "LLM tooling and agents"
+      - "OCR and document processing"
+      - "PyTorch, computer vision, self-supervised learning"
+      - "Signal processing"
+languages:
+  - "Arabic (native)"
+  - "English (professional)"
+experience:
+  - title: "Electrical Design Engineer"
+    company: "Alfanar, Secondary Switchgear Factory"
+    location: "Riyadh, Saudi Arabia"
+    startDate: "2026-01"
+    endDate: "Present"
+    description: "Own the electrical design of medium-voltage secondary switchgear (RMU, metered RMU, load-break switches, autoreclosers) built to utility specifications: from schematics and customer approval to a complete production release (drawings, wiring and ferrule lists, labels, SAP BOMs), then the design point of contact for QC, testing, and production until delivery. Introduced AI-assisted tools that automate routine design checks and documentation for the team, catching errors before they reach production."
+  - title: "Teaching Assistant – Fundamentals of Electric Circuits"
+    company: "KFUPM, Department of Electrical Engineering"
+    location: "Dhahran, Saudi Arabia"
+    startDate: "2024"
+    endDate: "2025"
+    description: "Developed teaching materials and led weekly problem-solving sessions for 50+ undergraduate students."
+  - title: "AI Research Intern – Waste Detection & Classification"
+    company: "SDAIA-KFUPM Joint Research Center"
+    location: "Dhahran, Saudi Arabia"
+    startDate: "2023"
+    endDate: "2023"
+    description: "Developed a two-stage YOLOv8 + classifier pipeline, improving the F1-score by 2%. Managed and augmented a 10,000+ image dataset."
+education:
+  - degree: "MSc in Electrical Engineering (AI Focus)"
+    institution: "King Fahd University of Petroleum and Minerals"
+    location: "Dhahran, Saudi Arabia"
+    startDate: "2024"
+    endDate: "Present"
+    description: "Thesis: synthesizing fluorescein angiography images from color fundus photographs with image-to-image translation models. Coursework in self-supervised learning and computer vision."
+  - degree: "BSc in Electrical Engineering (Second Honor)"
+    institution: "King Fahd University of Petroleum and Minerals"
+    location: "Dhahran, Saudi Arabia"
+    startDate: "2018"
+    endDate: "2024"
+    description: "Graduated with a focus on signal processing, image processing, and AI fundamentals."

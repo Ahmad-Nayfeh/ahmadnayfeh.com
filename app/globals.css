@@ -1,0 +1,634 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Code syntax highlighting is handled by Shiki via rehype-pretty-code at build
+ * time (see components/MdxRenderer.tsx). Shiki injects its own inline `style`
+ * attributes for token colors, so no external highlight.js stylesheet is needed. */
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  .text-pretty {
+    text-wrap: pretty;
+  }
+}
+
+/* =========================================================================
+ * "Drawing Sheet" — design tokens (October 2026 redesign).
+ *
+ * The site is styled like an electrical drawing set: drafting paper with a
+ * fine grid, ink linework, a title block, and a single markup colour used
+ * the way a checker uses a red pen. Light ("paper") is the default; dark is
+ * a blueprint variant. The three phase colours (brown, black, grey) appear
+ * only as small details.
+ * ========================================================================= */
+@layer base {
+  :root {
+    /* Paper and ink */
+    --background: 45 22% 95%;          /* #F5F3EE drafting paper */
+    --foreground: 210 16% 11%;         /* #171C21 ink */
+    --card: 45 30% 98%;
+    --card-foreground: 210 16% 11%;
+    --popover: 45 30% 98%;
+    --popover-foreground: 210 16% 11%;
+
+    --primary: 210 16% 11%;
+    --primary-foreground: 45 22% 96%;
+
+    --secondary: 42 16% 90%;
+    --secondary-foreground: 210 16% 11%;
+
+    --muted: 42 16% 90%;
+    --muted-foreground: 210 7% 38%;
+
+    /* Markup colour: the checker's red pen */
+    --accent: 14 82% 41%;              /* #BD3F17 */
+    --accent-foreground: 45 30% 98%;
+
+    /* Status lamp */
+    --lamp: 142 64% 36%;
+
+    /* Phase colours (IEC): L1 brown, L2 black, L3 grey */
+    --phase-1: 25 48% 34%;
+    --phase-2: 210 16% 11%;
+    --phase-3: 210 6% 55%;
+
+    --destructive: 0 70% 45%;
+    --destructive-foreground: 45 30% 98%;
+
+    --border: 40 10% 80%;
+    --border-strong: 210 12% 24%;
+    --input: 40 10% 80%;
+    --ring: 14 82% 41%;
+    --radius: 2px;
+
+    /* Drafting grid */
+    --grid-minor: 210 20% 40% / 0.06;
+    --grid-major: 210 20% 40% / 0.10;
+
+    /* Kept for components that still read these */
+    --section-accent: var(--accent);
+    --section-glow: transparent;
+
+    --chart-1: 14 82% 46%;
+    --chart-2: 25 48% 34%;
+    --chart-3: 210 16% 11%;
+    --chart-4: 210 6% 55%;
+    --chart-5: 142 64% 36%;
+
+    --sidebar-background: 45 22% 95%;
+    --sidebar-foreground: 210 7% 38%;
+    --sidebar-primary: 210 16% 11%;
+    --sidebar-primary-foreground: 45 22% 96%;
+    --sidebar-accent: 42 16% 90%;
+    --sidebar-accent-foreground: 210 16% 11%;
+    --sidebar-border: 40 10% 80%;
+    --sidebar-ring: 14 82% 46%;
+  }
+
+  .dark {
+    /* Blueprint */
+    --background: 213 38% 9%;          /* #0E1622 */
+    --foreground: 210 25% 92%;
+    --card: 213 34% 12%;
+    --card-foreground: 210 25% 92%;
+    --popover: 213 34% 12%;
+    --popover-foreground: 210 25% 92%;
+
+    --primary: 210 25% 92%;
+    --primary-foreground: 213 38% 9%;
+
+    --secondary: 213 28% 16%;
+    --secondary-foreground: 210 25% 92%;
+
+    --muted: 213 28% 16%;
+    --muted-foreground: 210 14% 64%;
+
+    --accent: 20 92% 60%;              /* #F5813F */
+    --accent-foreground: 213 38% 9%;
+
+    --lamp: 142 70% 50%;
+
+    --phase-1: 28 55% 55%;
+    --phase-2: 210 25% 92%;
+    --phase-3: 210 10% 60%;
+
+    --destructive: 0 75% 60%;
+    --destructive-foreground: 213 38% 9%;
+
+    --border: 213 24% 22%;
+    --border-strong: 210 20% 70%;
+    --input: 213 24% 22%;
+    --ring: 20 92% 60%;
+
+    --grid-minor: 200 80% 70% / 0.045;
+    --grid-major: 200 80% 70% / 0.08;
+
+    --chart-1: 20 92% 60%;
+    --chart-2: 28 55% 55%;
+    --chart-3: 210 25% 92%;
+    --chart-4: 210 10% 60%;
+    --chart-5: 142 70% 50%;
+
+    --sidebar-background: 213 38% 9%;
+    --sidebar-foreground: 210 14% 64%;
+    --sidebar-primary: 210 25% 92%;
+    --sidebar-primary-foreground: 213 38% 9%;
+    --sidebar-accent: 213 28% 16%;
+    --sidebar-accent-foreground: 210 25% 92%;
+    --sidebar-border: 213 24% 22%;
+    --sidebar-ring: 20 92% 60%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-background text-foreground;
+    background-image:
+      linear-gradient(hsl(var(--grid-major)) 1px, transparent 1px),
+      linear-gradient(90deg, hsl(var(--grid-major)) 1px, transparent 1px),
+      linear-gradient(hsl(var(--grid-minor)) 1px, transparent 1px),
+      linear-gradient(90deg, hsl(var(--grid-minor)) 1px, transparent 1px);
+    background-size: 120px 120px, 120px 120px, 24px 24px, 24px 24px;
+    background-position: -1px -1px;
+    font-feature-settings: "ss02", "zero";
+  }
+
+  .font-display {
+    font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+    font-weight: 600;
+    letter-spacing: -0.025em;
+  }
+
+  [lang="ar"],
+  [dir="rtl"] {
+    font-family: var(--font-arabic), var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+  }
+
+  ::selection {
+    background-color: hsl(var(--accent) / 0.22);
+    color: hsl(var(--foreground));
+  }
+
+  :focus-visible {
+    outline: 2px solid hsl(var(--ring));
+    outline-offset: 3px;
+  }
+}
+
+/* =========================================================================
+ * Drawing-sheet primitives
+ * ========================================================================= */
+@layer components {
+  /* Small mono label used for tags, sheet numbers and field names. */
+  .label {
+    @apply font-mono text-[11px] font-medium uppercase tracking-[0.16em] text-muted-foreground;
+  }
+
+  /* A sheet: paper card with ink border and corner registration marks. */
+  .sheet {
+    position: relative;
+    background: hsl(var(--card));
+    border: 1px solid hsl(var(--border));
+  }
+  .sheet::before,
+  .sheet::after {
+    content: "";
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-color: hsl(var(--foreground) / 0.55);
+    pointer-events: none;
+    transition: border-color 200ms ease, width 200ms ease, height 200ms ease;
+  }
+  .sheet::before {
+    top: -1px;
+    left: -1px;
+    border-top: 1.5px solid;
+    border-left: 1.5px solid;
+  }
+  .sheet::after {
+    bottom: -1px;
+    right: -1px;
+    border-bottom: 1.5px solid;
+    border-right: 1.5px solid;
+  }
+  .sheet-hover {
+    transition: border-color 200ms ease, transform 200ms ease;
+  }
+  .sheet-hover:hover {
+    border-color: hsl(var(--foreground) / 0.4);
+  }
+  .sheet-hover:hover::before,
+  .sheet-hover:hover::after {
+    border-color: hsl(var(--accent));
+    width: 18px;
+    height: 18px;
+  }
+
+  /* Red-pen underline for links. */
+  .redline {
+    background-image: linear-gradient(hsl(var(--accent)), hsl(var(--accent)));
+    background-size: 0% 1.5px;
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    transition: background-size 260ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .redline:hover,
+  .group:hover .redline,
+  .redline:focus-visible {
+    background-size: 100% 1.5px;
+  }
+
+  /* Status lamp (indicator light). */
+  .lamp {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 9999px;
+    background: hsl(var(--lamp));
+    box-shadow: 0 0 0 3px hsl(var(--lamp) / 0.18);
+  }
+  .lamp-off {
+    background: hsl(var(--phase-3));
+    box-shadow: 0 0 0 3px hsl(var(--phase-3) / 0.15);
+  }
+
+  /* Buttons */
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 px-5 py-3 font-mono text-[12px] font-medium uppercase tracking-[0.14em] transition-colors;
+    border: 1px solid hsl(var(--foreground));
+  }
+  .btn-primary {
+    background: hsl(var(--foreground));
+    color: hsl(var(--background));
+  }
+  .btn-primary:hover {
+    background: hsl(var(--accent));
+    border-color: hsl(var(--accent));
+    color: hsl(var(--accent-foreground));
+  }
+  .btn-ghost {
+    background: transparent;
+    color: hsl(var(--foreground));
+  }
+  .btn-ghost:hover {
+    border-color: hsl(var(--accent));
+    color: hsl(var(--accent));
+  }
+
+  /* Tag chip */
+  .chip {
+    @apply inline-flex items-center px-2 py-0.5 font-mono text-[10.5px] uppercase tracking-[0.12em] text-muted-foreground;
+    border: 1px solid hsl(var(--border));
+    background: hsl(var(--background) / 0.6);
+  }
+
+  /* Phone frame for product screenshots */
+  .phone {
+    position: relative;
+    border-radius: 22px;
+    padding: 6px;
+    background: hsl(var(--foreground));
+    box-shadow: 0 18px 40px -22px hsl(210 30% 10% / 0.45);
+  }
+  .phone img {
+    border-radius: 16px;
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+}
+
+/* =========================================================================
+ * Single-line diagram (hero) animation
+ * ========================================================================= */
+.sld-draw {
+  stroke-dasharray: var(--len, 1000);
+  stroke-dashoffset: var(--len, 1000);
+  animation: sldDraw 1.1s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+}
+@keyframes sldDraw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+.sld-fade {
+  opacity: 0;
+  animation: sldFade 500ms ease forwards;
+}
+@keyframes sldFade {
+  to {
+    opacity: 1;
+  }
+}
+.sld-blade {
+  transform-box: fill-box;
+  transform-origin: 0% 100%;
+  transform: rotate(-32deg);
+  animation: sldClose 420ms cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+@keyframes sldClose {
+  to {
+    transform: rotate(0deg);
+  }
+}
+.sld-flow {
+  stroke-dasharray: 2 14;
+  animation: sldFlow 1.6s linear infinite;
+}
+@keyframes sldFlow {
+  to {
+    stroke-dashoffset: -32;
+  }
+}
+.sld-feeder {
+  cursor: pointer;
+}
+.sld-feeder .sld-hl {
+  transition: stroke 200ms ease;
+}
+.sld-feeder:hover .sld-hl,
+.sld-feeder:focus-visible .sld-hl {
+  stroke: hsl(var(--accent));
+}
+.sld-feeder:hover .sld-label,
+.sld-feeder:focus-visible .sld-label {
+  fill: hsl(var(--accent));
+}
+.sld-feeder:focus-visible {
+  outline: none;
+}
+
+/* =========================================================================
+ * Prose (blog posts and project write-ups)
+ * ========================================================================= */
+.prose code:not(pre code) {
+  @apply px-[0.35em] py-[0.15em] font-mono text-[0.85em] font-medium text-foreground;
+  background: hsl(var(--muted));
+  border: 1px solid hsl(var(--border));
+}
+
+.prose pre {
+  @apply overflow-x-auto p-4;
+  background: hsl(var(--card));
+  border: 1px solid hsl(var(--border));
+  border-radius: 0;
+}
+
+.prose pre code {
+  @apply block min-w-full border-none bg-transparent p-0 text-sm text-inherit;
+  font-family: var(--font-mono), ui-monospace, monospace;
+}
+
+.prose img {
+  border: 1px solid hsl(var(--border));
+}
+
+.prose table {
+  font-size: 0.92em;
+}
+
+.prose figure.editorial-figure {
+  margin: 2.5rem 0;
+}
+.prose figure.editorial-figure img {
+  @apply w-full object-cover;
+}
+.prose figure.editorial-figure figcaption,
+.prose figure.demo-figure figcaption {
+  @apply mt-2 font-mono text-[11px] uppercase tracking-[0.16em] text-muted-foreground;
+}
+.prose figure.editorial-figure--inline {
+  @apply my-6;
+}
+@media (min-width: 768px) {
+  .prose figure.editorial-figure--inline {
+    float: right;
+    width: 42%;
+    margin-left: 2rem;
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
+  }
+}
+.prose figure.demo-figure {
+  margin: 2.5rem 0;
+  padding: 1.25rem;
+  border: 1px solid hsl(var(--border));
+  background: hsl(var(--card));
+}
+.prose figure.demo-figure img {
+  @apply w-full object-contain;
+  border: none;
+}
+
+.prose a:not([class]) {
+  color: hsl(var(--foreground));
+  text-decoration: none;
+  border-bottom: 1.5px solid hsl(var(--accent) / 0.5);
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+.prose a:not([class]):hover {
+  color: hsl(var(--accent));
+  border-bottom-color: hsl(var(--accent));
+}
+
+/* Arabic / RTL content */
+.prose {
+  text-align: left;
+}
+[dir="rtl"] .prose {
+  text-align: right;
+}
+[dir="rtl"] .prose ul,
+[dir="rtl"] .prose ol {
+  padding-right: 1.625em;
+  padding-left: 0;
+}
+
+/* =========================================================================
+ * Legacy project-page classes (used by raw HTML inside some project .md files)
+ * ========================================================================= */
+.project-prose-container {
+  line-height: 1.75;
+}
+.project-prose-container h2 {
+  font-size: 1.6rem;
+  font-weight: 600;
+  margin-top: 3rem;
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.6rem;
+  border-bottom: 1px solid hsl(var(--border));
+}
+.project-prose-container h3 {
+  font-size: 1.3rem;
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+  font-weight: 600;
+}
+.project-prose-container p {
+  color: hsl(var(--foreground) / 0.82);
+  margin-bottom: 1rem;
+}
+.project-prose-container strong {
+  color: hsl(var(--foreground));
+}
+.project-prose-container ul {
+  list-style: none;
+  padding-left: 0;
+}
+.project-prose-container ul > li {
+  position: relative;
+  padding-left: 1.4rem;
+  margin: 0.55rem 0;
+}
+.project-prose-container ul > li::before {
+  content: "";
+  position: absolute;
+  left: 0.15rem;
+  top: 0.72em;
+  width: 7px;
+  height: 7px;
+  background: hsl(var(--accent));
+}
+[dir="rtl"] .project-prose-container ul > li {
+  padding-left: 0;
+  padding-right: 1.4rem;
+}
+[dir="rtl"] .project-prose-container ul > li::before {
+  left: auto;
+  right: 0.15rem;
+}
+.project-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.25rem;
+  margin: 2rem 0;
+}
+.project-gallery img {
+  width: 100%;
+  border: 1px solid hsl(var(--border));
+}
+.project-cta-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: hsl(var(--foreground));
+  color: hsl(var(--background)) !important;
+  padding: 0.7rem 1.3rem;
+  text-decoration: none;
+  border: none !important;
+  font-weight: 600;
+  transition: background 0.2s ease;
+}
+.project-cta-link:hover {
+  background: hsl(var(--accent));
+}
+.project-two-col-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+  margin-top: 2.5rem;
+}
+@media (min-width: 992px) {
+  .project-two-col-layout {
+    grid-template-columns: 2fr 1fr;
+  }
+}
+.project-feature-box {
+  background: hsl(var(--card));
+  border: 1px solid hsl(var(--border));
+  padding: 1.5rem;
+}
+.project-feature-box h3 {
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin-top: 0;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid hsl(var(--border));
+  padding-bottom: 0.75rem;
+}
+.project-feature-box li {
+  margin-bottom: 0.5rem;
+  color: hsl(var(--muted-foreground));
+}
+
+/* =========================================================================
+ * Motion
+ * ========================================================================= */
+.fade-up {
+  opacity: 0;
+  transform: translateY(8px);
+  animation: fadeUp 420ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-delay: 0ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .fade-up,
+  .sld-fade {
+    opacity: 1;
+    transform: none;
+  }
+  .sld-draw {
+    stroke-dashoffset: 0;
+  }
+  .sld-blade {
+    transform: none;
+  }
+}
+
+/* Long-form reading: serif body text inside blog articles. */
+.article-body .prose :where(p, li, blockquote, td) {
+  font-family: var(--font-serif), Georgia, serif;
+}
+.article-body .prose {
+  font-size: 1.125rem;
+  line-height: 1.8;
+}
+
+.dark .phone {
+  background: hsl(213 45% 4%);
+  box-shadow: 0 0 0 1px hsl(var(--border)), 0 18px 40px -22px rgb(0 0 0 / 0.7);
+}
+
+/* Shiki dual-theme tokens (rehype-pretty-code emits --shiki-light / --shiki-dark). */
+.prose pre code {
+  color: hsl(var(--foreground));
+}
+code[data-theme] span {
+  color: var(--shiki-light, inherit);
+}
+.dark code[data-theme] span {
+  color: var(--shiki-dark, inherit);
+}
+.prose pre[data-theme] {
+  font-size: 0.86rem;
+  line-height: 1.6;
+}
+
+/* Long links (URLs as link text) must wrap on phones instead of widening the page. */
+.prose a {
+  overflow-wrap: anywhere;
+}
