@@ -6,6 +6,7 @@ import { AppRow } from "@/components/apps/AppRow"
 import { apps } from "@/content/apps"
 import { appDetails } from "@/content/apps/details"
 import type { AppDownload, AppTextItem } from "@/content/apps/types"
+import { formatSize, readRelease } from "@/lib/releases"
 import { localePath, otherLocale, t, type Locale } from "@/i18n"
 
 const wrap = "mx-auto w-full max-w-[1240px] px-5 md:px-10"
@@ -18,7 +19,11 @@ function fileHref(slug: string, href: string) {
 function DownloadButton({ d, slug, locale }: { d: AppDownload; slug: string; locale: Locale }) {
   const external = d.kind === "external" || d.kind === "open"
   const Icon = d.kind === "open" ? Play : d.kind === "external" ? ArrowUpRight : Download
-  const meta = [d.version && `${t(locale).appPage.version} ${d.version}`, d.size].filter(Boolean).join(" · ")
+  // Version and size come from the app's latest.json when it has an entry for this file.
+  const release = d.release ? readRelease(slug, d.release) : null
+  const version = release?.versionName ?? d.version
+  const size = release?.size ? formatSize(release.size) : d.size
+  const meta = [version && `${t(locale).appPage.version} ${version}`, size].filter(Boolean).join(" · ")
   return (
     <div className="flex flex-col gap-1.5">
       <a

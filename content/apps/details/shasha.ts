@@ -24,6 +24,7 @@ export const detail: AppDetail = {
     {
       label: { en: "Download the TV app (APK)", ar: "نزّل تطبيق التلفاز (APK)" },
       href: "shasha-tv.apk",
+      release: "tv",
       kind: "apk",
       primary: true,
       version: "1.10.1",
@@ -36,6 +37,7 @@ export const detail: AppDetail = {
     {
       label: { en: "Download the phone app (APK)", ar: "نزّل تطبيق الجوال (APK)" },
       href: "shasha-mobile.apk",
+      release: "mobile",
       kind: "apk",
       version: "1.10.1",
       size: "3.8 MB",
@@ -44,6 +46,7 @@ export const detail: AppDetail = {
     {
       label: { en: "Setup kit (ZIP)", ar: "حقيبة التثبيت (ZIP)" },
       href: "shasha-setup.zip",
+      release: "kit",
       kind: "zip",
       size: "55.2 MB",
       note: {

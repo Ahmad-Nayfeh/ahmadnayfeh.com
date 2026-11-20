@@ -27,6 +27,7 @@ export const detail: AppDetail = {
     {
       kind: "apk",
       href: "voxa.apk",
+      release: ".",
       label: { en: "Download the Android app (APK)", ar: "حمّل تطبيق أندرويد (APK)" },
       version: "1.0.9",
       size: "14.8 MB",

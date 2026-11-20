@@ -19,7 +19,8 @@ export const detail: AppDetail = {
   downloads: [
     {
       label: { en: "Download the app (APK)", ar: "حمّل التطبيق (APK)" },
-      href: "khatwa-0.10.0.apk",
+      href: "khatwa.apk",
+      release: ".",
       kind: "apk",
       primary: true,
       version: "0.10.0",

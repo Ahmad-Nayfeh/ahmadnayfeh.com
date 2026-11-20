@@ -16,6 +16,14 @@ export interface AppDownload {
   kind: "apk" | "zip" | "pdf" | "open" | "external"
   /** The main button is filled; the rest are outlined. Exactly one per app. */
   primary?: boolean
+  /**
+   * Which entry of public/apps/<slug>/latest.json describes this file: "." when the
+   * file describes one release, or a key such as "tv" when it holds several.
+   * When set, the version and size shown on the page come from latest.json at build
+   * time, so a release never needs an edit here.
+   */
+  release?: string
+  /** Fallbacks, used only when latest.json has no entry for this file. */
   version?: string
   /** Human-readable size, e.g. "4.4 MB". */
   size?: string

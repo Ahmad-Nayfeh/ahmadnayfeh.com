@@ -20,7 +20,8 @@ export const detail: AppDetail = {
   downloads: [
     {
       label: { en: "Download the app (APK)", ar: "حمّل التطبيق (APK)" },
-      href: "reading-marathon-0.1.0.apk",
+      href: "reading-marathon.apk",
+      release: ".",
       kind: "apk",
       primary: true,
       version: "0.1.0",
