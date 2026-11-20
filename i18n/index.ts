@@ -150,4 +150,4 @@ export const otherLocale = (locale: Locale): Locale => (locale === "en" ? "ar" :
 export const t = (locale: Locale) => dict[locale]
 
 /** "Ahmad Nayfeh" in each language. */
-export const ownerName: Record<Locale, string> = { en: "Ahmad Nayfeh", ar: "أحمد نايفة" }
+export const ownerName: Record<Locale, string> = { en: "Ahmad Nayfeh", ar: "أحمد نايفه" }
