@@ -46,13 +46,9 @@ Why "DNS only": GitHub issues the security certificate (the padlock) itself, and
 1. Open `https://ahmadnayfeh.com/` and `https://ahmadnayfeh.com/ar/`.
 2. Tell Claude "the site is live". Claude then tests the live site (pages, downloads, the Android link file) and reports.
 
-## Step 6. Two small settings
+## Step 6. One small setting
 
-**The article drafts.** The portfolio repository drafts an article twice a month. That automation moved with the site.
-
-1. Open `https://github.com/Ahmad-Nayfeh/ahmadnayfeh.com/settings/secrets/actions`.
-2. Click **New repository secret**. Name: `GEMINI_API_KEY`. Value: the same key the old repository uses (from `https://aistudio.google.com/apikey`). Click **Add secret**.
-3. In the old repository, open `https://github.com/Ahmad-Nayfeh/portfolio-website/actions`, click **notebook-draft** on the left, then the **...** button, then **Disable workflow**. Otherwise both repositories draft articles.
+**The article drafts.** Done, nothing for you to do: the automation that drafted an article twice a month was switched off in both repositories (your choice, 20 November 2026). Its three unreviewed drafts are still open as pull requests in the old `portfolio-website` repository.
 
 **Sign-in for the Reading Marathon admin page.**
 
