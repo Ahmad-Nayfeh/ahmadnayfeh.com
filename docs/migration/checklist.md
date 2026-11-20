@@ -23,7 +23,7 @@ Last updated: 2026-11-20. "Site" means the new repository `Ahmad-Nayfeh/ahmadnay
 
 ## Per app
 
-On 2026-11-20 the work inside each app was done from one session, on the branch `claude/epic-feynman-hu09zj` of each app's repository. Every app repository now holds its own record of the move: `docs/site-move.md` (Shadhra: `docs/site-listing.md`), with a pointer in `CLAUDE.md` or the project map. An app's own session can read that file and needs no explanation from you.
+On 2026-11-20 the work inside each app was done from one session, on the branch `claude/epic-feynman-hu09zj` of each app's repository. Six of those branches are merged (Khatwa, Reel, Grid Shift, Munazara, Voxa, Reading Marathon). Two pull requests are open and wait for the owner: Shasha (`Ahmad-Nayfeh/shasha` #52, because merging it makes CI publish a signed release) and Shadhra (`Ahmad-Nayfeh/shadhra` #470, documentation only, left open because it is the live product's repository). Every app repository now holds its own record of the move: `docs/site-move.md` (Shadhra: `docs/site-listing.md`), with a pointer in `CLAUDE.md` or the project map. An app's own session can read that file and needs no explanation from you.
 
 | App (repository) | Done | Waiting for you |
 |---|---|---|
@@ -43,4 +43,5 @@ On 2026-11-20 the work inside each app was done from one session, on the branch 
 - **Reel has no picture or screenshots.** Its row and page show the icon only until its session adds them.
 - **The old Vercel `/privacy` and `/terms` pages** describe an older, Google-Sheets version of Reading Marathon. `/privacy` now forwards to the current privacy page on the new site. `/terms` was not carried over and stays on Vercel. If a sign-in consent screen still links to either, tell Claude.
 - **Installed copies of the apps** still contain the old address until each app's session ships a new build. With no users this only affects your own devices.
+- **GitHub Actions artifact storage is full.** Khatwa's CI built everything and then failed at the step that uploads the APKs; Shasha's CI logs the same quota message. Release workflows pass files between jobs as artifacts, so releases can fail until space is freed: open `https://github.com/settings/billing` to see the usage, and delete old artifacts from the Actions tab of the large repositories (Shasha and Khatwa first) or shorten their retention. The figure GitHub shows can take some hours to drop.
 - **One token for the release workflows.** Khatwa and Reading Marathon publish to this site from GitHub Actions with a secret named `SITE_REPO_TOKEN`: a fine-grained token limited to this repository with Contents: Read and write. The same token can be used in both.
