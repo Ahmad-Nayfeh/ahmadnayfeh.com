@@ -23,7 +23,7 @@ function DownloadButton({ d, slug, locale }: { d: AppDownload; slug: string; loc
   const release = d.release ? readRelease(slug, d.release) : null
   const version = release?.versionName ?? d.version
   const size = release?.size ? formatSize(release.size) : d.size
-  const meta = [version && `${t(locale).appPage.version} ${version}`, size].filter(Boolean).join(" · ")
+  const hasMeta = Boolean(version || size)
   return (
     <div className="flex flex-col gap-1.5">
       <a
@@ -35,10 +35,16 @@ function DownloadButton({ d, slug, locale }: { d: AppDownload; slug: string; loc
         <Icon size={16} className={d.kind === "external" ? "rtl:-scale-x-100" : undefined} />
         {d.label[locale]}
       </a>
-      {(meta || d.note) && (
+      {(hasMeta || d.note) && (
         <span className="px-2 text-[13px] text-white/70">
-          {meta && <span dir="ltr">{meta}</span>}
-          {meta && d.note ? " · " : ""}
+          {version && (
+            <>
+              {t(locale).appPage.version} <span dir="ltr">{version}</span>
+            </>
+          )}
+          {version && size ? " · " : ""}
+          {size && <span dir="ltr">{size}</span>}
+          {hasMeta && d.note ? " · " : ""}
           {d.note?.[locale]}
         </span>
       )}
