@@ -38,7 +38,7 @@ const spanClass: Record<number, string> = {
 export default function TitleBlock({ cells, cols = 4, className }: TitleBlockProps) {
   return (
     <div className={cn("border-[1.5px] border-foreground bg-card", className)}>
-      <dl className={cn("grid grid-cols-2 [&>div]:border-b [&>div]:border-r [&>div]:border-border", colClass[cols])}>
+      <dl className={cn("grid grid-cols-2 [&>div]:border-b [&>div]:border-e [&>div]:border-border", colClass[cols])}>
         {cells.map((cell) => (
           <div
             key={cell.label}

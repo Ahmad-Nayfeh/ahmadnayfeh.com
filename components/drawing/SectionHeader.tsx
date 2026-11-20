@@ -24,11 +24,11 @@ export default function SectionHeader({ kicker, title, description, action, clas
         <span aria-hidden className="h-px flex-1 bg-border" />
       </div>
       <div className="mt-6 grid grid-cols-1 items-end gap-x-10 gap-y-4 lg:grid-cols-12">
-        <h2 className="font-display text-[clamp(1.75rem,3.6vw,2.75rem)] leading-[1.08] text-balance lg:col-span-7">
+        <h2 className="font-display text-[clamp(1.75rem,3.6vw,2.75rem)] leading-[1.08] text-balance rtl:leading-[1.35] lg:col-span-7">
           {title}
         </h2>
         {(description || action) && (
-          <div className="flex flex-col gap-4 lg:col-span-5 lg:items-end lg:text-right">
+          <div className="flex flex-col gap-4 lg:col-span-5 lg:items-end lg:text-end">
             {description && <p className="max-w-md text-[15px] leading-relaxed text-muted-foreground">{description}</p>}
             {action}
           </div>

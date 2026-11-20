@@ -46,7 +46,7 @@ export default async function BlogPostPage({ params }: PageProps) {
   return (
     <div className="mx-auto w-full max-w-[1240px] px-5 pb-16 pt-8 md:px-8 md:pt-12">
       <Link
-        href={"/blog" as Route}
+        href={"/notebook" as Route}
         className="group inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.16em] text-muted-foreground transition-colors hover:text-foreground"
       >
         <ArrowLeft size={12} className="transition-transform group-hover:-translate-x-0.5" />

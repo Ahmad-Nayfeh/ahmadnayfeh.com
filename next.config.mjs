@@ -1,5 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // Plain static files in ./out, served by GitHub Pages.
+  output: 'export',
+  trailingSlash: true,
+  images: { unoptimized: true },
   eslint: {
     ignoreDuringBuilds: false, // Keep as false to enforce linting
   },

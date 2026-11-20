@@ -632,3 +632,48 @@ code[data-theme] span {
 .prose a {
   overflow-wrap: anywhere;
 }
+
+/* =========================================================================
+ * Arabic (right-to-left) adjustments
+ * Arabic letters join, so letter-spacing and uppercase styling are removed,
+ * and small labels are set larger to stay readable.
+ * ========================================================================= */
+[lang="ar"] .font-display,
+[lang="ar"] .label,
+[lang="ar"] .btn,
+[lang="ar"] .chip {
+  font-family: var(--font-arabic), var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+  letter-spacing: 0;
+}
+[lang="ar"] .label {
+  font-size: 13px !important;
+  font-weight: 500;
+}
+[lang="ar"] .btn {
+  font-size: 14.5px;
+  font-weight: 600;
+}
+[lang="ar"] .chip {
+  font-size: 12px;
+}
+[dir="rtl"] .redline {
+  background-position: 100% 100%;
+}
+/* Text that stays Latin inside an Arabic page keeps the original styling. */
+[lang="ar"] [lang="en"] .label,
+[lang="ar"] [lang="en"] .chip {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  letter-spacing: 0.14em;
+  font-size: 10.5px !important;
+}
+[lang="ar"] [lang="en"] {
+  font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+}
+
+/* Plain tile behind an app icon when the app has no screenshot. */
+.app-tile {
+  background:
+    linear-gradient(hsl(var(--border) / 0.5) 1px, transparent 1px) 0 0 / 24px 24px,
+    linear-gradient(90deg, hsl(var(--border) / 0.5) 1px, transparent 1px) 0 0 / 24px 24px,
+    hsl(var(--secondary));
+}

@@ -89,8 +89,8 @@ function readingTime(body: string): string {
 }
 
 // Get home page content
-export async function getHomeContent(): Promise<HomeContent> {
-  const homeFile = readMarkdownFile("home/intro.md")
+export async function getHomeContent(locale: "en" | "ar" = "en"): Promise<HomeContent> {
+  const homeFile = readMarkdownFile(locale === "ar" ? "home/intro.ar.md" : "home/intro.md")
 
   const defaultContent: HomeContent = {
     title: "Hi, I'm Your Name",
@@ -112,8 +112,8 @@ export async function getHomeContent(): Promise<HomeContent> {
 }
 
 // Get the home page "At work" section
-export async function getWorkContent(): Promise<WorkContent | null> {
-  const raw = readYamlFile("home/work.yaml")
+export async function getWorkContent(locale: "en" | "ar" = "en"): Promise<WorkContent | null> {
+  const raw = readYamlFile(locale === "ar" ? "home/work.ar.yaml" : "home/work.yaml")
   if (typeof raw !== "object" || raw === null) return null
   const w = raw as Partial<WorkContent>
   return {

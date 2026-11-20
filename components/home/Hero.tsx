@@ -1,30 +1,25 @@
-import type { Route } from "next"
-import Link from "next/link"
-import { ArrowRight, FileDown } from "lucide-react"
+import { ArrowRight, ArrowLeft, FileDown } from "lucide-react"
 import TitleBlock, { type TitleBlockCell } from "@/components/drawing/TitleBlock"
 import type { HomeContent } from "@/types"
 import { siteConfig } from "@/config/site"
+import { localePath, t, type Locale } from "@/i18n"
 
 /** Who I am in one screen: name, plain-language role, one sentence, two buttons, and the key facts. */
-export default function Hero({ content }: { content: HomeContent }) {
+export default function Hero({ content, locale }: { content: HomeContent; locale: Locale }) {
+  const d = t(locale)
+  const Arrow = locale === "ar" ? ArrowLeft : ArrowRight
   const facts: TitleBlockCell[] = content.now.map((item) => ({ label: item.label, value: item.detail, span: 2 }))
-  facts.push({ label: "Based in", value: siteConfig.location, span: 2 })
+  facts.push({ label: d.hero.basedIn, value: d.hero.location, span: 2 })
 
   return (
     <section className="relative mx-auto w-full max-w-[1240px] px-5 pb-16 pt-10 md:px-8 md:pb-24 md:pt-16">
       <div className="grid grid-cols-1 items-center gap-x-12 gap-y-10 lg:grid-cols-12">
         <div className="lg:col-span-7">
-          <h1
-            className="fade-up font-display text-[clamp(2.75rem,6.5vw,4.75rem)] leading-[0.98]"
-            style={{ animationDelay: "60ms" }}
-          >
+          <h1 className="fade-up font-display text-[clamp(2.75rem,6.5vw,4.75rem)] leading-[0.98] rtl:leading-[1.25]" style={{ animationDelay: "60ms" }}>
             {content.title}
           </h1>
 
-          <p
-            className="fade-up mt-5 font-mono text-[13px] font-medium uppercase tracking-[0.16em] text-accent"
-            style={{ animationDelay: "120ms" }}
-          >
+          <p className="label fade-up mt-5 text-[13px] !text-accent" style={{ animationDelay: "120ms" }}>
             {content.subtitle}
           </p>
 
@@ -36,17 +31,17 @@ export default function Hero({ content }: { content: HomeContent }) {
           </p>
 
           <div className="fade-up mt-9 flex flex-wrap gap-3" style={{ animationDelay: "240ms" }}>
-            <Link href={"/projects" as Route} className="btn btn-primary">
-              View projects <ArrowRight size={14} />
-            </Link>
+            <a href={localePath(locale, "/apps/")} className="btn btn-primary">
+              {d.hero.primary} <Arrow size={14} />
+            </a>
             <a href={siteConfig.resume} target="_blank" rel="noopener noreferrer" className="btn btn-ghost">
-              <FileDown size={14} /> Download CV
+              <FileDown size={14} /> {d.cv}
             </a>
           </div>
         </div>
 
         <div className="fade-up lg:col-span-5" style={{ animationDelay: "300ms" }}>
-          <div className="label mb-3">At a glance</div>
+          <div className="label mb-3">{d.hero.glance}</div>
           <TitleBlock cols={2} cells={facts} />
         </div>
       </div>

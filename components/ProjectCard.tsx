@@ -1,11 +1,10 @@
-import type { Route } from "next"
-import Link from "next/link"
 import Image from "next/image"
 import { ArrowUpRight } from "lucide-react"
 import type { Project } from "@/types"
 import { projectYear, splitTitle } from "@/components/projects/projectName"
 import { cn } from "@/lib/utils"
 import { projectTiers, tierOf } from "@/config/site"
+import { localePath, type Locale } from "@/i18n"
 
 interface ProjectCardProps {
   project: Project
@@ -13,16 +12,17 @@ interface ProjectCardProps {
   sheetNo?: string
   /** "wide" lays the image beside the text (used when a card sits alone). */
   layout?: "stacked" | "wide"
+  locale?: Locale
 }
 
 /** Drawing-sheet card used on the projects index, the home page, and related lists. */
-export default function ProjectCard({ project, sheetNo, layout = "stacked" }: ProjectCardProps) {
+export default function ProjectCard({ project, sheetNo, layout = "stacked", locale = "en" }: ProjectCardProps) {
   const { name, tagline } = splitTitle(project.title)
   const isArabic = project.lang === "ar"
 
   return (
-    <Link
-      href={`/projects/${project.slug}` as Route}
+    <a
+      href={localePath(locale, `/projects/${project.slug}/`)}
       className={cn(
         "sheet sheet-hover group h-full",
         layout === "wide" ? "grid grid-cols-1 md:grid-cols-[minmax(0,5fr)_minmax(0,7fr)]" : "flex flex-col",
@@ -76,6 +76,6 @@ export default function ProjectCard({ project, sheetNo, layout = "stacked" }: Pr
           <ArrowUpRight size={17} className="shrink-0 text-muted-foreground transition-colors group-hover:text-accent" />
         </div>
       </div>
-    </Link>
+    </a>
   )
 }

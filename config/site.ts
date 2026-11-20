@@ -4,7 +4,7 @@ export const siteConfig = {
   role: "Electrical Design Engineer",
   description:
     "Electrical design engineer in medium-voltage switchgear who builds AI-assisted tools and ships complete software products.",
-  url: "https://ahmadnayfeh.vercel.app",
+  url: "https://ahmadnayfeh.com",
   location: "Riyadh, Saudi Arabia",
   resume: "/resume.pdf",
   links: {
@@ -18,7 +18,7 @@ export const siteConfig = {
   nav: [
     { name: "Home", path: "/" },
     { name: "Projects", path: "/projects" },
-    { name: "Notebook", path: "/blog" },
+    { name: "Notebook", path: "/notebook" },
     { name: "About", path: "/about" },
   ],
 } as const

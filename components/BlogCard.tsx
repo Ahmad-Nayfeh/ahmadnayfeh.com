@@ -1,5 +1,3 @@
-import type { Route } from "next"
-import Link from "next/link"
 import { ArrowUpRight } from "lucide-react"
 import type { Post } from "@/types"
 
@@ -13,8 +11,8 @@ function shortDate(dateString: string) {
 export default function BlogCard({ post, index, headingLevel = 3 }: { post: Post; index?: number; headingLevel?: 2 | 3 }) {
   const Heading = headingLevel === 2 ? "h2" : "h3"
   return (
-    <Link
-      href={`/blog/${post.slug}` as Route}
+    <a
+      href={`/notebook/${post.slug}/`}
       className="group grid grid-cols-[3.25rem_1fr] gap-x-4 gap-y-1 border-b border-border py-6 transition-colors hover:bg-card/70 md:grid-cols-[5.5rem_8rem_1fr_auto] md:items-baseline md:gap-x-6 md:px-3"
     >
       <span className="font-mono text-[11px] font-semibold text-accent md:pt-1">
@@ -44,6 +42,6 @@ export default function BlogCard({ post, index, headingLevel = 3 }: { post: Post
         <span className="label text-[10px]">{post.readTime}</span>
         <ArrowUpRight size={17} className="text-muted-foreground transition-colors group-hover:text-accent" />
       </span>
-    </Link>
+    </a>
   )
 }

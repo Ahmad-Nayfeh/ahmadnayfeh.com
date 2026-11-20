@@ -1,3 +1,4 @@
+export const dynamic = 'force-static'
 import type { MetadataRoute } from "next"
 import { getAllPosts, getAllProjects } from "@/lib/content"
 import { siteConfig } from "@/config/site"
@@ -18,7 +19,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.7,
     })),
     ...posts.map((p) => ({
-      url: `${base}/blog/${p.slug}`,
+      url: `${base}/notebook/${p.slug}/`,
       lastModified: new Date(p.date),
       changeFrequency: "yearly" as const,
       priority: 0.6,
