@@ -20,7 +20,7 @@ export const detail: AppDetail = {
   ],
   downloads: [
     {
-      label: { en: "Download Reel (APK)", ar: "حمّل Reel ‏1.0.0 (APK)" },
+      label: { en: "Download Reel (APK)", ar: "حمّل Reel (APK)" },
       href: "reel.apk",
       release: ".",
       kind: "apk",
