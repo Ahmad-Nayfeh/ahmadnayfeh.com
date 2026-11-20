@@ -64,6 +64,8 @@ The site reads this file at build time to show the version and size on the app's
 
 ## What has to change in Reading Marathon
 
+**Read this first.** At the time this was written I could not sign in to the Google account that owns the Firebase project `reading-marathon-38b4f` (it asks for a confirmation on a phone I no longer have). Before planning anything, ask me whether I have recovered that account. If I have not, limit the plan to what needs no Firebase console access, and list separately what has to wait.
+
 1. **Invite links (the important one).** The app (package `com.readingmarathon.app`) opens invite links itself.
    - In the Android manifest, the intent filter for invite links must declare host `ahmadnayfeh.com` and the path prefix `/apps/marathon/join`, with `android:autoVerify="true"`. Remove the old host `ahmad-nayfeh.github.io`.
    - Wherever the app builds an invite link to share, it must produce `https://ahmadnayfeh.com/apps/marathon/join/?code=XXXXXX`.

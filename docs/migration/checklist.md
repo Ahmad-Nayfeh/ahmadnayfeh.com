@@ -36,6 +36,8 @@ Last updated: 2026-11-20. "Site" means the new repository `Ahmad-Nayfeh/ahmadnay
 
 ## Known gaps and things to decide
 
+- **Reading Marathon, Firebase access (blocked).** The Google account that owns the Firebase project `reading-marathon-38b4f` asks for a confirmation on an old phone that is no longer available, so `ahmadnayfeh.com` could not be added to the authorized domains. Until that account is recovered, Google sign-in on the admin page at the new address will not work. Everything else about Reading Marathon on the site is unaffected. Recovering the account (Google account recovery) comes before the Reading Marathon prompt, because that app's backend lives in the same project.
+
 - **Reel has no picture or screenshots.** Its row and page show the icon only until its session adds them.
 - **The old Vercel `/privacy` and `/terms` pages** describe an older, Google-Sheets version of Reading Marathon. `/privacy` now forwards to the current privacy page on the new site. `/terms` was not carried over and stays on Vercel. If a sign-in consent screen still links to either, tell Claude.
 - **Installed copies of the apps** still contain the old address until each app's session ships a new build. With no users this only affects your own devices.
