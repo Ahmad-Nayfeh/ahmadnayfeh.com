@@ -17,7 +17,9 @@ Last updated: 2026-11-20. "Site" means the new repository `Ahmad-Nayfeh/ahmadnay
 | Forwarding page for the old github.io address | Done, merged |
 | Redirects for the old vercel.app address | Done, merged and tested on six old addresses |
 | Article-draft automation | Switched off in both repositories, by your choice |
-| Private writing page for publishing from the phone (`/write/`) | Built. **Waiting for you:** create the key (step 9). Not yet tested against the real repository |
+| Private writing page for publishing from the phone (`/write/`) | Set up on the laptop and the phone; the key was accepted. A real publish has not been tried yet |
+| CV (`/resume.pdf`) | Regenerated with the new site address |
+| GitHub profile page | Links and header picture point at the new site |
 
 ## Per app
 
@@ -35,6 +37,8 @@ Last updated: 2026-11-20. "Site" means the new repository `Ahmad-Nayfeh/ahmadnay
 | **Voxa** | Page with video; web app copied to `/apps/voxa/app/`; APK and release file (1.0.17) copied | Three addresses and the update rule in the app; security policy; sign-in origins; publish script; bring the page up to date | Paste the prompt; console steps the session gives you; reinstall |
 
 ## Known gaps and things to decide
+
+- **Reading Marathon, Firebase access (blocked).** The Google account that owns the Firebase project `reading-marathon-38b4f` asks for a confirmation on an old phone that is no longer available, so `ahmadnayfeh.com` could not be added to the authorized domains. Until that account is recovered, Google sign-in on the admin page at the new address will not work. Everything else about Reading Marathon on the site is unaffected. Recovering the account (Google account recovery) comes before the Reading Marathon prompt, because that app's backend lives in the same project.
 
 - **Reel has no picture or screenshots.** Its row and page show the icon only until its session adds them.
 - **The old Vercel `/privacy` and `/terms` pages** describe an older, Google-Sheets version of Reading Marathon. `/privacy` now forwards to the current privacy page on the new site. `/terms` was not carried over and stays on Vercel. If a sign-in consent screen still links to either, tell Claude.
