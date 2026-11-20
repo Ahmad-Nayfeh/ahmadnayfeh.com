@@ -40,6 +40,9 @@ export interface Post {
   tags: string[]
   readTime: string
   featured?: boolean
+  /** The language the piece was written in; writings are never translated. */
+  lang: "en" | "ar"
+  kind: "article" | "essay" | "reading"
 }
 
 export interface FullPost extends Post {

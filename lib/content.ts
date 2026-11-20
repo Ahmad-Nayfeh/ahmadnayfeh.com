@@ -126,9 +126,10 @@ export async function getWorkContent(locale: "en" | "ar" = "en"): Promise<WorkCo
 }
 
 // Get about page content (UPDATED LOGIC)
-export async function getAboutContent(): Promise<AboutContent> {
-  const infoFileRaw = readYamlFile("about/info.yaml") // Use 'unknown' type
-  const storyFile = readMarkdownFile("about/story.md")
+export async function getAboutContent(locale: "en" | "ar" = "en"): Promise<AboutContent> {
+  const ar = locale === "ar"
+  const infoFileRaw = readYamlFile(ar ? "about/info.ar.yaml" : "about/info.yaml") // Use 'unknown' type
+  const storyFile = readMarkdownFile(ar ? "about/story.ar.md" : "about/story.md")
 
   const defaultBio = "<p>I'm a passionate web developer with over 5 years of experience building modern web applications.</p>"
   // Use bio from file if available, otherwise defaultBio
@@ -172,16 +173,32 @@ export async function getAboutContent(): Promise<AboutContent> {
 }
 
 
+type Lang = "en" | "ar"
+
+/**
+ * Project files for a language. Each project is `<name>.md` (English); an optional
+ * `<name>.ar.md` beside it is the Arabic version and is used on the Arabic site.
+ */
+function projectFilesFor(locale: Lang): string[] {
+  const all = readDirectory("projects").filter((f) => f.endsWith(".md"))
+  const base = all.filter((f) => !f.endsWith(".ar.md"))
+  if (locale === "en") return base
+  return base.map((f) => {
+    const ar = f.replace(/\.md$/, ".ar.md")
+    return all.includes(ar) ? ar : f
+  })
+}
+
 // Get all projects
-export async function getAllProjects(): Promise<Project[]> {
-  const projectFiles = readDirectory("projects")
+export async function getAllProjects(locale: Lang = "en"): Promise<Project[]> {
+  const projectFiles = projectFilesFor(locale)
 
   const projects = projectFiles.reduce<Project[]>((acc, file) => {
     if (file.endsWith(".md")) {
       const projectFile = readMarkdownFile(`projects/${file}`);
       if (projectFile?.data) {
         const fm = parseFrontmatter(ProjectFrontmatter, projectFile.data, `content/projects/${file}`);
-        const slug = fm.slug || file.replace(/\.md$/, "");
+        const slug = fm.slug || file.replace(/(\.ar)?\.md$/, "");
         acc.push({
           title: fm.title,
           slug,
@@ -198,7 +215,7 @@ export async function getAllProjects(): Promise<Project[]> {
           technologies: fm.technologies,
           features: fm.features,
           featured: fm.featured,
-          lang: fm.lang,
+          lang: file.endsWith(".ar.md") ? "ar" : "en",
           status: fm.status,
           gallery: fm.gallery,
           highlights: fm.highlights,
@@ -214,15 +231,15 @@ export async function getAllProjects(): Promise<Project[]> {
 }
 
 // Get all projects with content
-export async function getAllProjectsWithContent(): Promise<FullProject[]> {
-  const projectFiles = readDirectory("projects")
+export async function getAllProjectsWithContent(locale: Lang = "en"): Promise<FullProject[]> {
+  const projectFiles = projectFilesFor(locale)
 
   const projects = projectFiles.reduce<FullProject[]>((acc, file) => {
     if (file.endsWith(".md")) {
         const projectFile = readMarkdownFile(`projects/${file}`);
         if (projectFile?.data && projectFile.content !== undefined && projectFile.content !== null) {
             const fm = parseFrontmatter(ProjectFrontmatter, projectFile.data, `content/projects/${file}`);
-            const slug = fm.slug || file.replace(/\.md$/, "");
+            const slug = fm.slug || file.replace(/(\.ar)?\.md$/, "");
             acc.push({
                 title: fm.title,
                 slug,
@@ -239,7 +256,7 @@ export async function getAllProjectsWithContent(): Promise<FullProject[]> {
                 technologies: fm.technologies,
                 features: fm.features,
                 content: projectFile.content,
-                lang: fm.lang,
+                lang: file.endsWith(".ar.md") ? "ar" : "en",
                 featured: fm.featured,
                 status: fm.status,
                 gallery: fm.gallery,
@@ -268,8 +285,8 @@ export async function getFeaturedProjects(count: number): Promise<Project[]> {
 // ===========================================
 
 // Get a single project by slug
-export async function getProjectBySlug(slug: string): Promise<FullProject | null> {
-  const projects = await getAllProjectsWithContent()
+export async function getProjectBySlug(slug: string, locale: Lang = "en"): Promise<FullProject | null> {
+  const projects = await getAllProjectsWithContent(locale)
   return projects.find((project) => project && project.slug === slug) || null
 }
 
@@ -305,6 +322,8 @@ export async function getAllPosts(): Promise<Post[]> {
                 tags: fm.tags,
                 readTime: readingTime(postFile.content ?? ""),
                 featured: fm.featured,
+                lang: fm.language,
+                kind: fm.kind,
             });
         }
     }
@@ -334,6 +353,8 @@ export async function getAllPostsWithContent(): Promise<FullPost[]> {
                 readTime: readingTime(postFile.content ?? ""),
                 content: postFile.content,
                 featured: fm.featured,
+                lang: fm.language,
+                kind: fm.kind,
             });
         }
     }

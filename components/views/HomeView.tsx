@@ -20,12 +20,12 @@ export default async function HomeView({ locale }: { locale: Locale }) {
   const [home, work, projects, posts] = await Promise.all([
     getHomeContent(locale),
     getWorkContent(locale),
-    getAllProjects(),
+    getAllProjects(locale),
     getRecentPosts(3),
   ])
 
-  // Apps have their own section; Projects shows the engineering and research work only.
-  const selected = projects.filter((p) => tierOf(p.category) !== "products").slice(0, 4)
+  // Research work first, then the smaller projects.
+  const selected = [...projects.filter((p) => tierOf(p.category) === "research"), ...projects.filter((p) => tierOf(p.category) !== "research")].slice(0, 4)
   const more = "inline-flex items-center gap-2 pb-2 text-[15px] font-semibold"
 
   return (
@@ -87,9 +87,9 @@ export default async function HomeView({ locale }: { locale: Locale }) {
             }
           />
           {/* Writings keep their own language and direction. */}
-          <div dir="ltr" lang="en">
+          <div>
             {posts.map((post) => (
-              <BlogCard key={post.slug} post={post} />
+              <BlogCard key={post.slug} post={post} locale={locale} />
             ))}
           </div>
         </section>

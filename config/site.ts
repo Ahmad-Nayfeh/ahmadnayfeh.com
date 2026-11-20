@@ -15,12 +15,6 @@ export const siteConfig = {
     email: "ahmadnayfeh2000@gmail.com",
     location: "Riyadh, Saudi Arabia",
   },
-  nav: [
-    { name: "Home", path: "/" },
-    { name: "Projects", path: "/projects" },
-    { name: "Notebook", path: "/notebook" },
-    { name: "About", path: "/about" },
-  ],
 } as const
 
 /**
@@ -29,12 +23,6 @@ export const siteConfig = {
  * falls into the Lab tier.
  */
 export const projectTiers = [
-  {
-    id: "products",
-    name: "Apps",
-    categories: ["Products"],
-    blurb: "Complete apps I designed, built, and released, with real users.",
-  },
   {
     id: "research",
     name: "Research & ML",

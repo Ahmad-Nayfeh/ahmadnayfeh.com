@@ -1,11 +1,12 @@
 import BlogCard from "@/components/BlogCard"
 import type { Post } from "@/types"
+import type { Locale } from "@/i18n"
 
-export default function RelatedPosts({ posts }: { posts: Post[] }) {
+export default function RelatedPosts({ posts, locale = "en" }: { posts: Post[]; locale?: Locale }) {
   return (
-    <div className="border-t-[1.5px] border-foreground">
-      {posts.map((post, i) => (
-        <BlogCard key={post.slug} post={post} index={i} />
+    <div>
+      {posts.map((post) => (
+        <BlogCard key={post.slug} post={post} locale={locale} />
       ))}
     </div>
   )

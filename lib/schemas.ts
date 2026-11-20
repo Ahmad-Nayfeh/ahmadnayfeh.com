@@ -46,6 +46,8 @@ export const PostFrontmatter = z.object({
   // Pipeline-specific (all optional for backward compat with manual posts).
   streamId: z.string().optional(),
   language: z.enum(["en", "ar"]).default("en"),
+  // What kind of writing this is. Shown as a filter on the notebook page once more than one kind exists.
+  kind: z.enum(["article", "essay", "reading"]).default("article"),
   papers: z.array(PaperRef).optional(),
   generatedBy: z.string().optional(), // e.g. "claude-sonnet-4-6"
 })

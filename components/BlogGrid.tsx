@@ -1,126 +1,134 @@
 "use client"
 
-import { useState, useCallback } from "react"
-import { useRouter, useSearchParams, usePathname } from "next/navigation"
+import { useEffect, useState } from "react"
 import { Search } from "lucide-react"
 import BlogCard from "@/components/BlogCard"
 import type { Post } from "@/types"
 import { cn } from "@/lib/utils"
+import { t, type Locale } from "@/i18n"
 
-interface BlogGridProps {
-  posts: Post[]
-}
+type Kind = Post["kind"]
 
-export default function BlogGrid({ posts }: BlogGridProps) {
-  const router = useRouter()
-  const pathname = usePathname()
-  const searchParams = useSearchParams()
-  const [searchQuery, setSearchQuery] = useState("")
+/**
+ * The notebook list with its filters: kind of writing (shown only when more than
+ * one kind exists), topic, and a text search. The chosen topic is kept in the
+ * address (?tag=) so a filtered list can be shared.
+ */
+export default function BlogGrid({ posts, locale }: { posts: Post[]; locale: Locale }) {
+  const d = t(locale).notebookPage
+  const [query, setQuery] = useState("")
+  const [tag, setTagState] = useState<string | null>(null)
+  const [kind, setKind] = useState<Kind | null>(null)
 
-  const selectedTag = searchParams.get("tag") ?? null
+  useEffect(() => {
+    setTagState(new URLSearchParams(window.location.search).get("tag"))
+  }, [])
 
-  const setTag = useCallback(
-    (tag: string | null) => {
-      const params = new URLSearchParams(searchParams.toString())
-      if (tag) params.set("tag", tag)
-      else params.delete("tag")
-      const qs = params.toString()
-      const url = qs ? `${pathname}?${qs}` : pathname
-      // @ts-expect-error -- typed routes don't model query strings
-      router.replace(url, { scroll: false })
-    },
-    [router, pathname, searchParams],
+  const setTag = (next: string | null) => {
+    setTagState(next)
+    const url = new URL(window.location.href)
+    if (next) url.searchParams.set("tag", next)
+    else url.searchParams.delete("tag")
+    window.history.replaceState(null, "", url)
+  }
+
+  const kinds = Array.from(new Set(posts.map((p) => p.kind)))
+  const inKind = posts.filter((p) => (kind ? p.kind === kind : true))
+  const allTags = Array.from(new Set(inKind.flatMap((p) => p.tags))).sort()
+  const q = query.trim().toLowerCase()
+  const filtered = inKind.filter(
+    (p) => (q === "" || p.title.toLowerCase().includes(q) || (p.excerpt ?? "").toLowerCase().includes(q)) && (tag ? p.tags.includes(tag) : true),
   )
-
-  const allTags = Array.from(new Set(posts.flatMap((post) => post.tags))).sort()
-
-  const filtered = posts.filter((post) => {
-    const q = searchQuery.trim().toLowerCase()
-    const matchesSearch =
-      q === "" || post.title.toLowerCase().includes(q) || (post.excerpt ?? "").toLowerCase().includes(q)
-    const matchesTag = selectedTag ? post.tags.includes(selectedTag) : true
-    return matchesSearch && matchesTag
-  })
 
   return (
     <div>
-      <div className="mb-8 grid grid-cols-1 gap-6 border-[1.5px] border-foreground bg-card p-4 md:grid-cols-[minmax(240px,320px)_1fr] md:p-5">
+      {kinds.length > 1 && (
+        <div className="mb-6 flex flex-wrap gap-2">
+          <Pill active={kind === null} onClick={() => setKind(null)} big>
+            {d.all}
+          </Pill>
+          {kinds.map((k) => (
+            <Pill key={k} active={kind === k} onClick={() => setKind(k)} big>
+              {d.kinds[k]}
+            </Pill>
+          ))}
+        </div>
+      )}
+
+      <div className="mb-8 grid grid-cols-1 gap-6 rounded-[18px] bg-card p-5 md:grid-cols-[minmax(240px,320px)_1fr] md:p-6">
         <div>
-          <label htmlFor="search-posts" className="label mb-2 block text-[10px]">
-            Search
+          <label htmlFor="search-posts" className="label mb-2 block">
+            {d.search}
           </label>
           <div className="relative">
-            <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+            <Search className="pointer-events-none absolute start-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
             <input
               id="search-posts"
               type="search"
-              placeholder="Title or summary"
-              className="w-full border border-border bg-background py-2.5 pl-9 pr-3 text-sm outline-none transition-colors placeholder:text-muted-foreground/60 focus:border-foreground"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder={d.searchHint}
+              className="w-full rounded-full border border-border bg-background py-2.5 pe-4 ps-10 text-[15px] outline-none transition-colors placeholder:text-muted-foreground/60 focus:border-foreground"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
             />
           </div>
         </div>
         {allTags.length > 0 && (
           <div>
-            <div className="label mb-2 text-[10px]">Topics</div>
+            <div className="label mb-2">{d.topics}</div>
             <div className="flex flex-wrap gap-1.5">
-              <TagButton active={selectedTag === null} onClick={() => setTag(null)}>
-                All
-              </TagButton>
-              {allTags.map((tag) => (
-                <TagButton key={tag} active={selectedTag === tag} onClick={() => setTag(tag)}>
-                  {tag}
-                </TagButton>
+              <Pill active={tag === null} onClick={() => setTag(null)}>
+                {d.all}
+              </Pill>
+              {allTags.map((x) => (
+                <Pill key={x} active={tag === x} onClick={() => setTag(x)}>
+                  {x}
+                </Pill>
               ))}
             </div>
           </div>
         )}
       </div>
 
-      <div className="mb-2 flex items-center justify-between">
+      <div className="mb-3 flex items-center justify-between">
         <span className="label">
-          {filtered.length} {filtered.length === 1 ? "entry" : "entries"}
-          {selectedTag ? ` · ${selectedTag}` : ""}
+          <span dir="ltr">{filtered.length}</span> {filtered.length === 1 ? d.entry : d.entries}
+          {tag ? ` · ${tag}` : ""}
         </span>
-        {(selectedTag || searchQuery) && (
+        {(tag || query) && (
           <button
             type="button"
             onClick={() => {
               setTag(null)
-              setSearchQuery("")
+              setQuery("")
             }}
-            className="inline-flex items-center gap-1 font-mono text-[11px] uppercase tracking-[0.14em] text-accent"
+            className="text-[14px] font-semibold text-accent"
           >
-            Clear
+            {d.clear}
           </button>
         )}
       </div>
 
-      <div className="border-t-[1.5px] border-foreground">
+      <div>
         {filtered.length > 0 ? (
-          filtered.map((post) => (
-            <BlogCard key={post.slug} post={post} headingLevel={2} index={posts.findIndex((p) => p.slug === post.slug)} />
-          ))
+          filtered.map((post) => <BlogCard key={post.slug} post={post} headingLevel={2} locale={locale} />)
         ) : (
-          <p className="py-16 text-center text-muted-foreground">No entries match that filter.</p>
+          <p className="rule-row py-16 text-center text-muted-foreground">{d.none}</p>
         )}
       </div>
     </div>
   )
 }
 
-function TagButton({ active, onClick, children }: { active: boolean; onClick: () => void; children: React.ReactNode }) {
+function Pill({ active, onClick, children, big }: { active: boolean; onClick: () => void; children: React.ReactNode; big?: boolean }) {
   return (
     <button
       type="button"
       onClick={onClick}
       aria-pressed={active}
       className={cn(
-        "border px-2.5 py-1 font-mono text-[11px] uppercase tracking-[0.12em] transition-colors",
-        active
-          ? "border-foreground bg-foreground text-background"
-          : "border-border text-muted-foreground hover:border-foreground hover:text-foreground",
+        "rounded-full border font-medium transition-colors",
+        big ? "px-4 py-2 text-[14.5px]" : "px-3 py-1 text-[13px]",
+        active ? "border-foreground bg-foreground text-background" : "border-border text-muted-foreground hover:border-foreground hover:text-foreground",
       )}
     >
       {children}

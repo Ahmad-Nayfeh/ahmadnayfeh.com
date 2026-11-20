@@ -14,8 +14,8 @@ function isActivePath(pathname: string, path: string) {
 }
 
 /**
- * Site header. On the home page it sits on the blue hero (white text) until
- * the visitor scrolls; everywhere else it is a plain bar.
+ * Site header. It sits on each page's blue opening block (white text) until
+ * the visitor scrolls, then becomes a plain bar.
  */
 export default function Navbar({ locale }: { locale: Locale }) {
   const [isOpen, setIsOpen] = useState(false)
@@ -23,8 +23,8 @@ export default function Navbar({ locale }: { locale: Locale }) {
   const pathname = usePathname()
   const d = t(locale)
   const home = localePath(locale, "/")
-  const here = pathname.endsWith("/") ? pathname : `${pathname}/`
-  const onBrand = here === home && !scrolled && !isOpen
+  // Every page opens with a blue block, so the header starts transparent on all of them.
+  const onBrand = !scrolled && !isOpen
 
   const nav = [
     { name: d.nav.apps, path: localePath(locale, "/apps/") },
