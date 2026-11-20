@@ -12,11 +12,11 @@ Last updated: 2026-11-20. "Site" means the new repository `Ahmad-Nayfeh/ahmadnay
 | Home, Apps, one page per app, Projects, Notebook, About | Done, in both languages |
 | Project write-ups and About translated to Arabic | Done by Claude. **Waiting for you:** review the Arabic wording |
 | App files copied under `/apps/` with the new addresses | Done (copy of the old hub as of 2026-11-20) |
-| Publishing workflow (GitHub Pages) | Written. **Waiting for you:** steps 1 to 4 in `your-steps.md` |
-| Live test of the site on the real domain | **Waiting for you** (step 5), then Claude tests |
-| Forwarding page for the old github.io address | Prepared on a side branch. **Waiting for you:** step 7 |
-| Redirects for the old vercel.app address | Prepared on a side branch. **Waiting for you:** step 7 |
-| Article-draft automation secret | **Waiting for you:** step 6 |
+| Publishing workflow (GitHub Pages) | Done. The site is live at `https://ahmadnayfeh.com` with HTTPS enforced |
+| Live test of the site on the real domain | Done: pages, downloads, checksum, Android link file, `www` |
+| Forwarding page for the old github.io address | Done, merged |
+| Redirects for the old vercel.app address | Done, merged and tested on six old addresses |
+| Article-draft automation | Switched off in both repositories, by your choice |
 | Private writing page for publishing from the phone (`/write/`) | Built. **Waiting for you:** create the key (step 9). Not yet tested against the real repository |
 
 ## Per app

@@ -88,6 +88,6 @@ pnpm build
 
 `pnpm build` writes the finished site to `out/`.
 
-## Notebook drafts
+## Notebook drafts (switched off)
 
-`.github/workflows/notebook-draft.yml` drafts an article twice a month and opens a pull request for review. It needs the repository secret `GEMINI_API_KEY`. Rules for articles: `content/blog/STYLE.md`. The script: `scripts/notebook/`.
+`scripts/notebook/` holds a script that drafts an article from a recent paper and opens a pull request for review. Its scheduled workflow was removed in November 2026 because the drafts were not being reviewed. To bring it back, restore `.github/workflows/notebook-draft.yml` from the repository history and add the repository secret `GEMINI_API_KEY`. Rules for articles: `content/blog/STYLE.md`.
