@@ -17,7 +17,9 @@ Last updated: 2026-11-20. "Site" means the new repository `Ahmad-Nayfeh/ahmadnay
 | Forwarding page for the old github.io address | Done, merged |
 | Redirects for the old vercel.app address | Done, merged and tested on six old addresses |
 | Article-draft automation | Switched off in both repositories, by your choice |
-| Private writing page for publishing from the phone (`/write/`) | Built. **Waiting for you:** create the key (step 9). Not yet tested against the real repository |
+| Private writing page for publishing from the phone (`/write/`) | Set up on the laptop and the phone; the key was accepted. A real publish has not been tried yet |
+| CV (`/resume.pdf`) | Regenerated with the new site address |
+| GitHub profile page | Links and header picture point at the new site |
 
 ## Per app
 
