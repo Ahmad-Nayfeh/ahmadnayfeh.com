@@ -187,8 +187,8 @@ export const detail: AppDetail = {
   ],
   notes: [
     {
-      en: "Google Play Protect may show a warning because the app is not published on the store. The app contains no ads and sends no data, and the internet permission is used only when you play a link from the internet yourself.",
-      ar: "قد يعرض Google Play Protect تحذيرًا لأن التطبيق غير منشور في المتجر. التطبيق لا يحتوي إعلانات ولا يرسل أي بيانات، ويُستخدم إذن الإنترنت فقط عندما تشغّل رابطًا من الإنترنت بنفسك.",
+      en: "Google Play Protect may show a warning because the app is not published on the store. The app contains no ads and sends no data about you or your phone. It uses the internet for two things only: to play a link you open yourself and, from version 1.1, to check ahmadnayfeh.com for a new version of the app (at most once a day, and when you tap \"Check for updates\"). An update is downloaded and installed only after you agree.",
+      ar: "قد يعرض Google Play Protect تحذيرًا لأن التطبيق غير منشور في المتجر. التطبيق لا يحتوي إعلانات ولا يرسل أي بيانات عنك أو عن هاتفك. يستخدم الإنترنت لأمرين فقط: تشغيل رابط تفتحه أنت، والبحث في ahmadnayfeh.com عن إصدار جديد من التطبيق ابتداءً من الإصدار 1.1 (مرة واحدة في اليوم على الأكثر، وعندما تضغط «البحث عن تحديث»). لا يُنزَّل التحديث ولا يُثبَّت إلا بعد موافقتك.",
     },
   ],
 }
