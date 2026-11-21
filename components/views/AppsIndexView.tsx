@@ -1,5 +1,5 @@
 import PageHeader from "@/components/PageHeader"
-import { AppRow, FlagshipRow } from "@/components/apps/AppRow"
+import { AppGrid, FlagshipRow } from "@/components/apps/AppRow"
 import { flagshipApp, otherApps } from "@/content/apps"
 import { otherLocale, t, type Locale } from "@/i18n"
 
@@ -22,15 +22,11 @@ export default function AppsIndexView({ locale }: { locale: Locale }) {
           const lead = i === 0 ? flagshipApp : undefined
           if (!lead && g.items.length === 0) return null
           return (
-            <section key={g.id} id={g.id} className={`scroll-mt-24 ${i === 0 ? "" : "pt-12 md:pt-16"}`}>
-              <h2 className={`${head} ${g.note ? "pb-3" : "pb-5"}`}>{g.title}</h2>
-              {g.note && <p className="max-w-[40rem] pb-6 text-[1.02rem] leading-relaxed text-muted-foreground">{g.note}</p>}
+            <section key={g.id} id={g.id} className={`${i === 0 ? "" : "pt-14 md:pt-20"}`}>
+              <h2 data-reveal className={`${head} ${g.note ? "pb-3" : "pb-6"}`}>{g.title}</h2>
+              {g.note && <p className="max-w-[40rem] pb-7 text-[1.02rem] leading-relaxed text-muted-foreground">{g.note}</p>}
               {lead && <FlagshipRow app={lead} locale={locale} />}
-              <div>
-                {g.items.map((app) => (
-                  <AppRow key={app.slug} app={app} locale={locale} />
-                ))}
-              </div>
+              <AppGrid apps={g.items} locale={locale} />
             </section>
           )
         })}
