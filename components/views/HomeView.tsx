@@ -8,6 +8,7 @@ import BlogCard from "@/components/BlogCard"
 import { getAllProjects, getHomeContent, getRecentPosts, getWorkContent } from "@/lib/content"
 import { flagshipApp, otherApps } from "@/content/apps"
 import { siteConfig, tierOf } from "@/config/site"
+import { isHidden, settings } from "@/lib/settings"
 import { localePath, otherLocale, t, type Locale } from "@/i18n"
 
 const wrap = "mx-auto w-full max-w-[1240px] px-5 md:px-10"
@@ -21,17 +22,21 @@ export default async function HomeView({ locale }: { locale: Locale }) {
     getHomeContent(locale),
     getWorkContent(locale),
     getAllProjects(locale),
-    getRecentPosts(3),
+    getRecentPosts(settings.home.posts),
   ])
 
   // Research work first, then the smaller projects.
-  const selected = [...projects.filter((p) => tierOf(p.category) === "research"), ...projects.filter((p) => tierOf(p.category) !== "research")].slice(0, 4)
+  const selected = [...projects.filter((p) => tierOf(p.category) === "research"), ...projects.filter((p) => tierOf(p.category) !== "research")].slice(0, settings.home.projects)
+  // The home page shows a selection; /apps/, /projects/ and /notebook/ hold the full lists.
+  const homeApps = settings.home.apps.map((slug) => otherApps.find((a) => a.slug === slug)).filter((a): a is NonNullable<typeof a> => !!a)
+  const show = (section: string) => !isHidden("sections", section)
   const more = "inline-flex items-center gap-2 pb-2 text-[15px] font-semibold"
 
   return (
     <>
       <Hero content={home} locale={locale} />
 
+      {show("apps") && (
       <section id="apps" className={`${wrap} scroll-mt-24 pt-20 md:pt-24`}>
         <BiHeading
           locale={locale}
@@ -43,16 +48,18 @@ export default async function HomeView({ locale }: { locale: Locale }) {
             </a>
           }
         />
-        <FlagshipRow app={flagshipApp} locale={locale} />
+        {flagshipApp && <FlagshipRow app={flagshipApp} locale={locale} />}
         <div>
-          {otherApps.map((app) => (
+          {homeApps.map((app) => (
             <AppRow key={app.slug} app={app} locale={locale} />
           ))}
         </div>
       </section>
+      )}
 
-      {work && <WorkSection work={work} locale={locale} />}
+      {show("work") && work && <WorkSection work={work} locale={locale} />}
 
+      {show("projects") && (
       <section id="projects" className="ink-block mt-20 scroll-mt-24 md:mt-24">
         <div className={`${wrap} py-16 md:py-20`}>
           <BiHeading
@@ -73,8 +80,9 @@ export default async function HomeView({ locale }: { locale: Locale }) {
           </div>
         </div>
       </section>
+      )}
 
-      {posts.length > 0 && (
+      {show("notebook") && posts.length > 0 && (
         <section id="notebook" className={`${wrap} scroll-mt-24 pt-20 md:pt-24`}>
           <BiHeading
             locale={locale}
@@ -95,6 +103,7 @@ export default async function HomeView({ locale }: { locale: Locale }) {
         </section>
       )}
 
+      {show("contact") && (
       <section id="contact" className="brand-block mt-20 scroll-mt-24 md:mt-28">
         <div className={`${wrap} py-16 md:py-24`}>
           <h2 className="font-display text-[clamp(2.75rem,9vw,7rem)] leading-[0.92] rtl:leading-[1.25]">{d.contact.title}</h2>
@@ -117,6 +126,7 @@ export default async function HomeView({ locale }: { locale: Locale }) {
           </div>
         </div>
       </section>
+      )}
     </>
   )
 }

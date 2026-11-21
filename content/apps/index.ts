@@ -3,11 +3,13 @@
  * `thumb` is optional: an app without one shows its icon on a plain tile.
  */
 import type { L10n } from "./types"
+import { isHidden } from "@/lib/settings"
 export type { L10n } from "./types"
 
 export interface AppEntry {
   slug: string
-  group: "android" | "browser"
+  /** "sync": has a web app and a phone app that share one account. */
+  group: "sync" | "android" | "browser"
   name: L10n
   kind: L10n
   desc: L10n
@@ -21,10 +23,10 @@ export interface AppEntry {
 
 const img = (f: string) => `/images/apps/${f}`
 
-export const apps: AppEntry[] = [
+const allApps: AppEntry[] = [
   {
     slug: "shadhra",
-    group: "android",
+    group: "sync",
     flagship: true,
     site: "https://shadhra.app",
     play: "https://play.google.com/store/apps/details?id=app.shadhra",
@@ -75,7 +77,7 @@ export const apps: AppEntry[] = [
   },
   {
     slug: "voxa",
-    group: "browser",
+    group: "sync",
     name: { en: "Voxa", ar: "Voxa" },
     kind: { en: "Web app · Android", ar: "تطبيق ويب · أندرويد" },
     desc: {
@@ -122,5 +124,7 @@ export const apps: AppEntry[] = [
   },
 ]
 
-export const flagshipApp = apps.find((a) => a.flagship)!
+/** Apps the owner has not hidden (content/site-settings.json). A hidden app gets no row and no page. */
+export const apps: AppEntry[] = allApps.filter((a) => !isHidden("apps", a.slug))
+export const flagshipApp: AppEntry | undefined = apps.find((a) => a.flagship)
 export const otherApps = apps.filter((a) => !a.flagship)
