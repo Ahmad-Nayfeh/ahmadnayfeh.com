@@ -23,6 +23,7 @@ export function otherLocalePath(locale: Locale, pathname: string): string {
 
 const en = {
   brandRole: "Electrical Design Engineer",
+  explore: "Explore",
   nav: { home: "Home", apps: "Apps", projects: "Projects", notebook: "Notebook", about: "About" },
   cv: "Download CV",
   cvShort: "CV",
@@ -148,6 +149,7 @@ export type Dict = typeof en
 
 const ar: Dict = {
   brandRole: "مهندس تصميم كهربائي",
+  explore: "تصفّح",
   nav: { home: "الرئيسية", apps: "التطبيقات", projects: "المشاريع", notebook: "الدفتر", about: "نبذة" },
   cv: "السيرة الذاتية",
   cvShort: "السيرة",
