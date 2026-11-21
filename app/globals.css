@@ -379,7 +379,7 @@
       radial-gradient(95% 85% at 0% 100%, var(--bb-corner), transparent 62%),
       var(--bb-base);
     color: hsl(var(--brand-foreground));
-    transition: --bb-base 320ms ease, --bb-corner 320ms ease, --bb-glow 320ms ease, --bb-strip 320ms ease;
+    transition: --bb-base 110ms ease, --bb-corner 110ms ease, --bb-glow 110ms ease, --bb-strip 110ms ease;
   }
   [dir="rtl"] .brand-block {
     background:
@@ -1263,16 +1263,16 @@ html.theme-anim *,
 html.theme-anim *::before,
 html.theme-anim *::after {
   transition:
-    --bb-base 320ms ease,
-    --bb-corner 320ms ease,
-    --bb-glow 320ms ease,
-    --bb-strip 320ms ease,
-    background-color 320ms ease,
-    color 320ms ease,
-    border-color 320ms ease,
-    fill 320ms ease,
-    stroke 320ms ease,
-    box-shadow 320ms ease !important;
+    --bb-base 110ms ease,
+    --bb-corner 110ms ease,
+    --bb-glow 110ms ease,
+    --bb-strip 110ms ease,
+    background-color 110ms ease,
+    color 110ms ease,
+    border-color 110ms ease,
+    fill 110ms ease,
+    stroke 110ms ease,
+    box-shadow 110ms ease !important;
 }
 
 /* The header changes from clear (on the blue block) to a frosted bar. */

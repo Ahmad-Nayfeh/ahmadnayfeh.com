@@ -21,7 +21,7 @@ export default function ThemeToggle({ onBrand = false }: { onBrand?: boolean }) 
         // Colours cross-fade for a moment instead of snapping (see .theme-anim in globals.css).
         const root = document.documentElement
         root.classList.add("theme-anim")
-        window.setTimeout(() => root.classList.remove("theme-anim"), 420)
+        window.setTimeout(() => root.classList.remove("theme-anim"), 160)
         setTheme(isDark ? "light" : "dark")
       }}
       className={cn(
