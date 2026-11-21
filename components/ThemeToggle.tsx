@@ -17,14 +17,26 @@ export default function ThemeToggle({ onBrand = false }: { onBrand?: boolean }) 
   return (
     <button
       type="button"
-      onClick={() => setTheme(isDark ? "light" : "dark")}
+      onClick={() => {
+        // Colours cross-fade for a moment instead of snapping (see .theme-anim in globals.css).
+        const root = document.documentElement
+        root.classList.add("theme-anim")
+        window.setTimeout(() => root.classList.remove("theme-anim"), 420)
+        setTheme(isDark ? "light" : "dark")
+      }}
       className={cn(
-        "inline-flex h-10 w-10 items-center justify-center rounded-full border-[1.5px] transition-colors",
-        onBrand ? "border-white/55 text-white hover:border-white hover:bg-white/10" : "border-border text-muted-foreground hover:border-foreground hover:text-foreground",
+        "press group inline-flex h-10 w-10 items-center justify-center rounded-full border-[1.5px]",
+        onBrand ? "border-white/55 text-white hover:border-white hover:bg-white/10" : "border-foreground/20 text-muted-foreground hover:border-foreground hover:text-foreground",
       )}
       aria-label={isDark ? "Switch to light theme" : "Switch to dark theme"}
     >
-      {mounted ? isDark ? <Sun size={16} /> : <Moon size={16} /> : <span className="h-4 w-4" />}
+      {mounted ? (
+        <span className="inline-flex transition-transform duration-300 group-hover:rotate-[18deg]">
+          {isDark ? <Sun size={16} /> : <Moon size={16} />}
+        </span>
+      ) : (
+        <span className="h-4 w-4" />
+      )}
     </button>
   )
 }

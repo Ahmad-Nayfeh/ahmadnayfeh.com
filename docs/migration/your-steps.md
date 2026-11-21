@@ -88,7 +88,7 @@ For each app, in this order: **Shadhra, Reel, Khatwa, Grid Shift, Munazara, Shas
 
 ## Step 9. Set up your private admin page (optional, any time after step 5)
 
-The page `https://ahmadnayfeh.com/admin/` is your control panel, in Arabic. From it you publish and edit notebook entries (a reading note, an essay or an article), hide or show apps, projects and notebook entries, and choose what the home page shows. It works only with a key that you create once. Nobody else can change anything: without your key the page cannot save. The old address `/write/` now opens this page, and a key you saved there still works.
+The page `https://ahmadnayfeh.com/admin/` is your control panel, in Arabic. From it you publish and edit notebook entries (an essay or a technical article), hide or show apps, projects and notebook entries, and choose what the home page shows. It works only with a key that you create once. Nobody else can change anything: without your key the page cannot save. The old address `/write/` now opens this page, and a key you saved there still works.
 
 **Create the key (once, on a computer).**
 

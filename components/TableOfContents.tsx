@@ -42,7 +42,7 @@ export default function TableOfContents({ headings }: { headings: TocHeading[] }
   if (headings.length < 2) return null
 
   return (
-    <nav aria-label="Table of contents" className="sticky top-24 rounded-[18px] bg-card p-5">
+    <nav aria-label="Table of contents" className="panel sticky top-24 !rounded-[18px] p-5">
       <ul className="space-y-0.5 border-s border-border">
         {headings.map(({ id, text, level }) => (
           <li key={id}>

@@ -2,7 +2,7 @@ import Image from "next/image"
 import { ArrowUpRight, Download, Play, ArrowRight, ArrowLeft } from "lucide-react"
 import PageHeader from "@/components/PageHeader"
 import BiHeading from "@/components/BiHeading"
-import { AppRow } from "@/components/apps/AppRow"
+import { AppGrid } from "@/components/apps/AppRow"
 import { apps } from "@/content/apps"
 import { appDetails } from "@/content/apps/details"
 import type { AppDownload, AppTextItem } from "@/content/apps/types"
@@ -56,7 +56,7 @@ function Rows({ items, locale }: { items: AppTextItem[]; locale: Locale }) {
   return (
     <div>
       {items.map((it) => (
-        <div key={it.title.en} className="rule-row grid grid-cols-1 gap-x-10 gap-y-2 py-5 md:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] md:py-6">
+        <div key={it.title.en} data-reveal className="rule-row grid grid-cols-1 gap-x-10 gap-y-2 py-5 md:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] md:py-6">
           <h3 className="font-display text-[1.35rem] leading-tight tracking-[-0.02em] md:text-[1.6rem] rtl:leading-[1.4]">{it.title[locale]}</h3>
           <p className="text-[16px] leading-relaxed text-foreground/75">{it.body[locale]}</p>
         </div>
@@ -81,13 +81,13 @@ export default function AppView({ slug, locale }: { slug: string; locale: Locale
       <PageHeader
         locale={locale}
         eyebrow={
-          <a href={localePath(locale, "/apps/")} className="inline-flex items-center gap-2 hover:text-white">
+          <a href={localePath(locale, "/apps/")} className="link-grow inline-flex items-center gap-2 pb-0.5 hover:text-white">
             <Arrow size={14} className="-scale-x-100" /> {d.appPage.allApps}
           </a>
         }
         title={
           <span className="flex flex-wrap items-center gap-x-5 gap-y-3">
-            <Image src={app.icon} alt="" width={96} height={96} className="h-[0.86em] w-[0.86em] rounded-[0.2em] bg-white/10" />
+            <Image src={app.icon} alt="" width={96} height={96} className="h-[0.86em] w-[0.86em] rounded-[23%] bg-white/10 shadow-[0_14px_30px_-12px_rgb(4_10_60/0.75)] ring-1 ring-white/20" />
             {app.name[locale]}
           </span>
         }
@@ -104,9 +104,9 @@ export default function AppView({ slug, locale }: { slug: string; locale: Locale
           ))}
         </div>
         <ul className="mt-7 flex flex-wrap gap-2">
-          <li className="rounded-full bg-white/15 px-3 py-1 text-[13.5px] font-medium">{app.kind[locale]}</li>
+          <li className="chip-on-dark !border-transparent !bg-white/20">{app.kind[locale]}</li>
           {detail.facts.map((f) => (
-            <li key={f.en} className="rounded-full border border-white/30 px-3 py-1 text-[13.5px]">
+            <li key={f.en} className="chip-on-dark !font-normal">
               {f[locale]}
             </li>
           ))}
@@ -114,13 +114,14 @@ export default function AppView({ slug, locale }: { slug: string; locale: Locale
       </PageHeader>
 
       {detail.video && (
-        <section id="video" className={`${wrap} scroll-mt-24 pt-14 md:pt-20`}>
+        <section id="video" className={`${wrap} pt-14 md:pt-20`}>
           <BiHeading locale={locale} title={d.appPage.video} other={od.appPage.video} />
           <video
             controls
             preload="none"
             poster={detail.video.poster}
-            className="aspect-video w-full rounded-[22px] border border-border bg-black"
+            data-reveal
+            className="aspect-video w-full rounded-[22px] bg-black shadow-[var(--shadow-lg)] ring-1 ring-black/10"
             aria-label={detail.video.title[locale]}
           >
             <source src={detail.video.src} type="video/mp4" />
@@ -133,22 +134,22 @@ export default function AppView({ slug, locale }: { slug: string; locale: Locale
       )}
 
       {detail.features.length > 0 && (
-        <section id="features" className={`${wrap} scroll-mt-24 pt-16 md:pt-24`}>
+        <section id="features" className={`${wrap} pt-16 md:pt-24`}>
           <BiHeading locale={locale} title={d.appPage.features} other={od.appPage.features} />
           <Rows items={detail.features} locale={locale} />
         </section>
       )}
 
       {detail.screenshots.length > 0 && (
-        <section id="screens" className={`${wrap} scroll-mt-24 pt-16 md:pt-24`}>
+        <section id="screens" className={`${wrap} pt-16 md:pt-24`}>
           <BiHeading locale={locale} title={d.appPage.screens} other={od.appPage.screens} />
           {wides.length > 0 && (
             <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
               {wides.map((s) => (
-                <figure key={s.src}>
+                <figure key={s.src} data-reveal>
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={s.src} alt={s.caption[locale]} loading="lazy" className="w-full rounded-[18px] border border-border" />
-                  <figcaption className="mt-2 text-[14.5px] text-muted-foreground">{s.caption[locale]}</figcaption>
+                  <img src={s.src} alt={s.caption[locale]} loading="lazy" className="shot w-full" />
+                  <figcaption className="mt-3 text-[14.5px] leading-snug text-muted-foreground">{s.caption[locale]}</figcaption>
                 </figure>
               ))}
             </div>
@@ -156,10 +157,10 @@ export default function AppView({ slug, locale }: { slug: string; locale: Locale
           {phones.length > 0 && (
             <div className={`grid grid-cols-2 gap-5 sm:grid-cols-3 lg:grid-cols-4 ${wides.length > 0 ? "mt-8" : ""}`}>
               {phones.map((s) => (
-                <figure key={s.src}>
+                <figure key={s.src} data-reveal>
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={s.src} alt={s.caption[locale]} loading="lazy" className="w-full rounded-[22px] border border-border" />
-                  <figcaption className="mt-2 text-[14.5px] text-muted-foreground">{s.caption[locale]}</figcaption>
+                  <img src={s.src} alt={s.caption[locale]} loading="lazy" className="shot w-full !rounded-[22px]" />
+                  <figcaption className="mt-3 text-[14.5px] leading-snug text-muted-foreground">{s.caption[locale]}</figcaption>
                 </figure>
               ))}
             </div>
@@ -169,18 +170,18 @@ export default function AppView({ slug, locale }: { slug: string; locale: Locale
 
       {detail.sections?.map((sec) => (
         <section key={sec.title.en} className={`${wrap} pt-16 md:pt-24`}>
-          <h2 className="font-display pb-3 text-[clamp(2rem,5vw,3.25rem)] leading-[1] rtl:leading-[1.35]">{sec.title[locale]}</h2>
+          <h2 data-reveal className="font-display pb-3 text-[clamp(2rem,5vw,3.25rem)] leading-[1] rtl:leading-[1.35]">{sec.title[locale]}</h2>
           {sec.intro && <p className="max-w-[46rem] pb-7 text-[1.05rem] leading-relaxed text-foreground/75">{sec.intro[locale]}</p>}
           <Rows items={sec.items} locale={locale} />
         </section>
       ))}
 
       {detail.install && detail.install.length > 0 && (
-        <section id="install" className={`${wrap} scroll-mt-24 pt-16 md:pt-24`}>
+        <section id="install" className={`${wrap} pt-16 md:pt-24`}>
           <BiHeading locale={locale} title={d.appPage.install} other={od.appPage.install} />
           <ol className="grid grid-cols-1 gap-x-8 border-t-[1.5px] border-foreground md:grid-cols-2 lg:grid-cols-4">
             {detail.install.map((step, i) => (
-              <li key={step.title.en} className="border-b border-border py-6">
+              <li key={step.title.en} data-reveal className="border-b border-border py-6">
                 <div className="font-display text-[1.6rem] text-accent" dir="ltr">
                   {String(i + 1).padStart(2, "0")}
                 </div>
@@ -193,18 +194,18 @@ export default function AppView({ slug, locale }: { slug: string; locale: Locale
       )}
 
       {detail.faq && detail.faq.length > 0 && (
-        <section id="faq" className={`${wrap} scroll-mt-24 pt-16 md:pt-24`}>
+        <section id="faq" className={`${wrap} pt-16 md:pt-24`}>
           <BiHeading locale={locale} title={d.appPage.faq} other={od.appPage.faq} />
           <div>
             {detail.faq.map((f) => (
-              <details key={f.q.en} className="rule-row group py-1">
-                <summary className="flex cursor-pointer list-none items-center justify-between gap-6 py-5 text-[1.15rem] font-semibold tracking-tight md:text-[1.3rem] [&::-webkit-details-marker]:hidden">
+              <details key={f.q.en} data-reveal className="rule-row group py-1">
+                <summary className="flex cursor-pointer list-none items-center justify-between gap-6 py-5 text-[1.15rem] font-semibold tracking-tight transition-colors hover:text-accent md:text-[1.3rem] [&::-webkit-details-marker]:hidden">
                   {f.q[locale]}
-                  <span aria-hidden className="font-display text-[1.6rem] leading-none text-accent transition-transform group-open:rotate-45">
+                  <span aria-hidden className="arrow-dot font-display text-[1.5rem] leading-none !text-accent transition-transform duration-300 group-open:rotate-45 group-open:border-accent">
                     +
                   </span>
                 </summary>
-                <p className="max-w-[52rem] pb-6 text-[16px] leading-relaxed text-foreground/75">{f.a[locale]}</p>
+                <p className="details-body max-w-[52rem] pb-6 text-[16px] leading-relaxed text-foreground/75">{f.a[locale]}</p>
               </details>
             ))}
           </div>
@@ -231,7 +232,7 @@ export default function AppView({ slug, locale }: { slug: string; locale: Locale
               </div>
               <ul className="flex flex-wrap content-start gap-2" dir="ltr">
                 {detail.build.stack.map((s) => (
-                  <li key={s} className="rounded-full border border-white/30 px-3 py-1 text-[13.5px] font-medium">
+                  <li key={s} className="chip-on-dark">
                     {s}
                   </li>
                 ))}
@@ -246,8 +247,8 @@ export default function AppView({ slug, locale }: { slug: string; locale: Locale
           {detail.links && detail.links.length > 0 && (
             <div className="flex flex-wrap gap-3">
               {detail.links.map((l) => (
-                <a key={l.href} href={fileHref(slug, l.href)} className="btn btn-ghost !py-2.5 !text-[14.5px]">
-                  {l.label[locale]} <ArrowUpRight size={15} className="rtl:-scale-x-100" />
+                <a key={l.href} href={fileHref(slug, l.href)} className="btn btn-ghost group !py-2.5 !text-[14.5px]">
+                  {l.label[locale]} <ArrowUpRight size={15} className="nudge rtl:-scale-x-100" />
                 </a>
               ))}
             </div>
@@ -268,16 +269,12 @@ export default function AppView({ slug, locale }: { slug: string; locale: Locale
           title={d.appPage.more}
           other={od.appPage.more}
           action={
-            <a href={localePath(locale, "/apps/")} className="inline-flex items-center gap-2 pb-2 text-[15px] font-semibold text-accent">
-              {d.appPage.allApps} <Arrow size={16} />
+            <a href={localePath(locale, "/apps/")} className="group link-grow mb-1 inline-flex items-center gap-2 pb-1.5 text-[15px] font-semibold text-accent">
+              {d.appPage.allApps} <Arrow size={16} className="nudge-x" />
             </a>
           }
         />
-        <div>
-          {others.map((a) => (
-            <AppRow key={a.slug} app={a} locale={locale} />
-          ))}
-        </div>
+        <AppGrid apps={others} locale={locale} />
       </section>
     </>
   )

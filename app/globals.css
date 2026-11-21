@@ -68,6 +68,14 @@
     --section-accent: var(--accent);
     --section-glow: transparent;
 
+    /* Depth and motion (polish pass, November 2026). */
+    --shadow-sm: 0 1px 2px hsl(227 40% 12% / 0.06), 0 3px 8px -3px hsl(227 40% 12% / 0.1);
+    --shadow-md: 0 2px 4px hsl(227 40% 12% / 0.05), 0 14px 30px -14px hsl(227 45% 14% / 0.28);
+    --shadow-lg: 0 4px 10px hsl(227 40% 12% / 0.06), 0 30px 60px -28px hsl(230 60% 20% / 0.4);
+    --tint: 230 78% 48% / 0.055;       /* row hover wash */
+    --hairline: 227 29% 6% / 0.14;     /* light rule between rows */
+    --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+
     --chart-1: 230 78% 48%;
     --chart-2: 14 100% 62%;
     --chart-3: 227 29% 6%;
@@ -112,6 +120,12 @@
     --destructive: 0 75% 60%;
     --destructive-foreground: 227 29% 6%;
 
+    --shadow-sm: 0 1px 2px rgb(0 0 0 / 0.4), 0 3px 8px -3px rgb(0 0 0 / 0.5);
+    --shadow-md: 0 2px 4px rgb(0 0 0 / 0.4), 0 14px 30px -14px rgb(0 0 0 / 0.7);
+    --shadow-lg: 0 4px 10px rgb(0 0 0 / 0.4), 0 30px 60px -28px rgb(0 0 0 / 0.8);
+    --tint: 229 100% 78% / 0.08;
+    --hairline: 225 40% 96% / 0.16;
+
     --border: 227 18% 22%;
     --border-strong: 225 40% 96%;
     --input: 227 18% 22%;
@@ -140,7 +154,10 @@
   }
   html {
     scroll-behavior: smooth;
+    /* In-page links stop below the sticky header. */
+    scroll-padding-top: 88px;
     overflow-x: clip;
+    -webkit-tap-highlight-color: transparent;
   }
   body {
     @apply bg-background text-foreground;
@@ -154,9 +171,17 @@
     letter-spacing: -0.04em;
   }
 
+  /* Running text. --font-text is what the Tailwind class "font-sans" (set on <body>)
+     resolves to, so the language decides the face: Latin text is Inter; Arabic text is
+     IBM Plex Sans Arabic with Inter behind it for Latin letters and digits. */
+  :root,
+  [lang="en"] {
+    --font-text: var(--font-sans);
+  }
   [lang="ar"],
   [dir="rtl"] {
-    font-family: var(--font-arabic), var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+    --font-text: var(--font-arabic), var(--font-sans);
+    font-family: var(--font-text), ui-sans-serif, system-ui, sans-serif;
   }
 
   ::selection {
@@ -167,6 +192,13 @@
   :focus-visible {
     outline: 2px solid hsl(var(--ring));
     outline-offset: 3px;
+    border-radius: 6px;
+  }
+  /* On the blue and ink blocks the ring is white so it stays visible. */
+  .brand-block :focus-visible,
+  .ink-block :focus-visible,
+  .on-brand :focus-visible {
+    outline-color: #fff;
   }
 }
 
@@ -224,8 +256,35 @@
 
   /* Buttons */
   .btn {
-    @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3.5 text-[15px] font-semibold transition-colors;
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3.5 text-[15px] font-semibold;
     border: 1.5px solid hsl(var(--foreground));
+    transition:
+      transform 220ms var(--ease-out),
+      box-shadow 220ms ease,
+      background-color 200ms ease,
+      border-color 200ms ease,
+      color 200ms ease;
+  }
+  @media (hover: hover) {
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+  }
+  .btn:active,
+  .press:active {
+    transform: translateY(0) scale(0.97);
+    box-shadow: none;
+    transition-duration: 90ms;
+  }
+  /* Small pills and round controls: a quick press, no lift. */
+  .press {
+    transition:
+      transform 200ms var(--ease-out),
+      background-color 200ms ease,
+      border-color 200ms ease,
+      color 200ms ease,
+      box-shadow 200ms ease;
   }
   .btn-primary {
     background: hsl(var(--foreground));
@@ -249,15 +308,24 @@
     background: #fff;
     border-color: #fff;
     color: hsl(var(--brand));
+    box-shadow: 0 10px 24px -14px rgb(4 10 60 / 0.7);
   }
   .btn-on-brand:hover {
     background: hsl(var(--foreground));
     border-color: hsl(var(--foreground));
     color: #fff;
   }
+  /* Dark theme: the main button on the navy block is the light periwinkle with ink text. */
+  .dark .btn-on-brand {
+    background: hsl(229 100% 78%);
+    border-color: hsl(229 100% 78%);
+    color: hsl(227 29% 6%);
+    box-shadow: 0 10px 28px -12px hsl(229 100% 70% / 0.55);
+  }
   .dark .btn-on-brand:hover {
-    background: hsl(227 29% 6%);
-    border-color: hsl(227 29% 6%);
+    background: #fff;
+    border-color: #fff;
+    color: hsl(227 29% 6%);
   }
   .btn-on-brand-ghost {
     background: transparent;
@@ -271,17 +339,78 @@
 
   /* Tag chip */
   .chip {
-    @apply inline-flex items-center rounded-full px-2.5 py-0.5 text-[12px] font-medium text-muted-foreground;
+    @apply inline-flex items-center rounded-full px-2.5 py-[3px] text-[12px] font-medium text-muted-foreground;
     border: 1px solid hsl(var(--border));
+    background: hsl(var(--background));
+    transition: border-color 200ms ease, color 200ms ease, background-color 200ms ease;
+  }
+  @media (hover: hover) {
+    .group:hover .chip {
+      border-color: hsl(var(--accent) / 0.35);
+    }
+  }
+  /* Chips that sit on the blue or ink blocks. */
+  .chip-on-dark {
+    @apply inline-flex items-center rounded-full px-3 py-1 text-[13.5px] font-medium;
+    color: rgb(255 255 255 / 0.92);
+    border: 1px solid rgb(255 255 255 / 0.26);
+    background: rgb(255 255 255 / 0.07);
+    transition: border-color 200ms ease, background-color 200ms ease;
+  }
+  a.chip-on-dark:hover {
+    border-color: #fff;
+    background: rgb(255 255 255 / 0.16);
   }
 
-  /* The blue block (home hero, page headers). */
+  /* The blue block (home hero, page headers): the cobalt, with a darker corner,
+     a faint drafting grid, a little grain and one soft glow for depth. */
   .brand-block {
+    /* Light theme: bright cobalt. Dark theme (below): deep navy with a cobalt glow,
+       so the theme switch is visible on the first screen of every page. */
+    --bb-base: hsl(230 78% 48%);
+    --bb-corner: hsl(229 84% 36% / 0.85);
+    --bb-glow: hsl(230 90% 56% / 0);
+    --bb-strip: hsl(229 82% 34% / 0.72);
     position: relative;
     isolation: isolate;
     overflow: hidden;
-    background: hsl(var(--brand));
+    background:
+      radial-gradient(85% 120% at 100% 0%, var(--bb-glow), transparent 64%),
+      radial-gradient(95% 85% at 0% 100%, var(--bb-corner), transparent 62%),
+      var(--bb-base);
     color: hsl(var(--brand-foreground));
+    transition: --bb-base 320ms ease, --bb-corner 320ms ease, --bb-glow 320ms ease, --bb-strip 320ms ease;
+  }
+  [dir="rtl"] .brand-block {
+    background:
+      radial-gradient(85% 120% at 0% 0%, var(--bb-glow), transparent 64%),
+      radial-gradient(95% 85% at 100% 100%, var(--bb-corner), transparent 62%),
+      var(--bb-base);
+  }
+  .dark .brand-block {
+    --bb-base: hsl(231 58% 12%);
+    --bb-corner: hsl(232 62% 6% / 0.9);
+    --bb-glow: hsl(230 88% 54% / 0.62);
+    --bb-strip: hsl(232 62% 5% / 0.55);
+    box-shadow: inset 0 -1px 0 hsl(var(--border));
+  }
+  /* The band of facts under the home hero. */
+  .brand-strip {
+    background: var(--bb-strip);
+  }
+  .brand-block::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    inset: 0;
+    background-image:
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .55 0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='.16'/%3E%3C/svg%3E"),
+      linear-gradient(rgb(255 255 255 / 0.07) 1px, transparent 1px),
+      linear-gradient(90deg, rgb(255 255 255 / 0.07) 1px, transparent 1px);
+    background-size: 160px 160px, 56px 56px, 56px 56px;
+    -webkit-mask-image: linear-gradient(to bottom, #000 0%, rgb(0 0 0 / 0.35) 55%, transparent 100%);
+    mask-image: linear-gradient(to bottom, #000 0%, rgb(0 0 0 / 0.35) 55%, transparent 100%);
+    pointer-events: none;
   }
   .brand-block::after {
     content: "";
@@ -289,7 +418,7 @@
     z-index: -1;
     inset: auto -10% -55% 35%;
     height: 120%;
-    background: radial-gradient(closest-side, rgb(255 255 255 / 0.14), transparent);
+    background: radial-gradient(closest-side, rgb(255 255 255 / 0.17), transparent);
     pointer-events: none;
   }
   [dir="rtl"] .brand-block::after {
@@ -297,11 +426,258 @@
   }
 
   /* A ruled row in a list of apps, projects or writings. */
+  /* The list opens and closes with a strong ink rule; rows inside are divided by hairlines. */
   .rule-row {
+    border-top: 1px solid hsl(var(--hairline));
+  }
+  .rule-row:first-child {
     border-top: 1.5px solid hsl(var(--foreground));
   }
   .rule-row:last-child {
-    border-bottom: 1.5px solid hsl(var(--foreground));
+    border-bottom: 1px solid hsl(var(--hairline));
+  }
+
+  /* An app card: picture on top, text below. Lifts a little on hover. */
+  .app-card,
+  .note-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 24px;
+    background: hsl(var(--card));
+    box-shadow: 0 0 0 1px hsl(var(--hairline)), var(--shadow-sm);
+    transition: transform 320ms var(--ease-out), box-shadow 320ms ease;
+  }
+  @media (hover: hover) {
+    .app-card:hover,
+    .note-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 0 0 1px hsl(var(--accent) / 0.35), var(--shadow-lg);
+    }
+  }
+  .app-card:active,
+  .note-card:active {
+    transform: scale(0.985);
+    transition-duration: 100ms;
+  }
+  .app-media,
+  .note-cover {
+    position: relative;
+    overflow: hidden;
+    background:
+      linear-gradient(140deg, hsl(var(--brand) / 0.16), hsl(var(--brand) / 0.04) 60%),
+      hsl(var(--secondary));
+  }
+  /* Covers of writings are charts on white paper; keep the paper white in both themes. */
+  .note-cover {
+    background: #fff;
+    border-inline-start: 1px solid hsl(var(--hairline));
+  }
+  .app-media img,
+  .note-cover img {
+    transition: transform 560ms var(--ease-out);
+  }
+  @media (hover: hover) {
+    .group:hover .app-media img.zoom,
+    .group:hover .note-cover img.zoom {
+      transform: scale(1.045);
+    }
+  }
+
+  /* An essay card is quieter and more literary than an article card. */
+  .note-card-essay {
+    background: hsl(var(--background));
+    border-inline-start: 3px solid hsl(var(--accent));
+  }
+  .essay-title {
+    font-family: var(--font-serif), Georgia, serif;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+  .essay-summary {
+    font-family: var(--font-serif), Georgia, serif;
+  }
+  /* Arabic essays use the Arabic faces, never the Latin serif. The card carries the
+     language of the piece, so this follows the piece and not the page. */
+  .note-card[lang="ar"] .essay-title {
+    font-family: var(--font-arabic-display), var(--font-display), var(--font-arabic), var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+    font-weight: 700;
+    letter-spacing: 0;
+  }
+  .note-card[lang="ar"] .essay-summary {
+    font-family: var(--font-arabic), var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+  }
+
+  /* A line of the numbered projects index. Hairlines only; the number leads. */
+  .index-row {
+    border-top: 1px solid hsl(var(--hairline));
+  }
+  .index-row:last-child {
+    border-bottom: 1px solid hsl(var(--hairline));
+  }
+  .index-row-dark,
+  .index-row-dark:last-child {
+    border-color: rgb(255 255 255 / 0.16);
+  }
+  .index-num {
+    font-size: 1.5rem;
+    line-height: 1;
+    letter-spacing: -0.03em;
+    opacity: 0.9;
+  }
+  @media (min-width: 768px) {
+    .index-num {
+      font-size: 3.4rem;
+      opacity: 0.55;
+      transition: opacity 240ms ease;
+    }
+    .group:hover .index-num {
+      opacity: 1;
+    }
+  }
+  /* The arrow of an index line shows on hover and keyboard focus; touch screens always show it. */
+  @media (hover: hover) {
+    .reveal-arrow {
+      opacity: 0;
+      translate: calc(-10px * var(--flip, 1)) 0;
+      transition: opacity 240ms ease, translate 280ms var(--ease-out);
+    }
+    .group:hover .reveal-arrow,
+    .group:focus-visible .reveal-arrow {
+      opacity: 1;
+      translate: 0 0;
+    }
+  }
+  /* Rows that are links: a soft wash behind the row on hover and press. */
+  .row-hover {
+    position: relative;
+    isolation: isolate;
+  }
+  .row-hover::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    inset: 0 -14px;
+    border-radius: 18px;
+    background: hsl(var(--tint));
+    opacity: 0;
+    transition: opacity 240ms ease;
+    pointer-events: none;
+  }
+  @media (hover: hover) {
+    .row-hover:hover::before {
+      opacity: 1;
+    }
+  }
+  .row-hover:active::before,
+  .row-hover:focus-visible::before {
+    opacity: 1;
+  }
+  .row-hover-dark::before {
+    background: rgb(255 255 255 / 0.06);
+  }
+
+  /* Round arrow at the end of a row. Fills with the accent when the row is hovered. */
+  .arrow-dot {
+    @apply inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full;
+    border: 1px solid hsl(var(--border));
+    color: hsl(var(--muted-foreground));
+    transition: background-color 220ms ease, border-color 220ms ease, color 220ms ease, transform 220ms var(--ease-out);
+  }
+  .arrow-dot-dark {
+    border-color: rgb(255 255 255 / 0.25);
+    color: rgb(255 255 255 / 0.7);
+  }
+  @media (hover: hover) {
+    .group:hover .arrow-dot {
+      background: hsl(var(--brand));
+      border-color: hsl(var(--brand));
+      color: #fff;
+    }
+    .group:hover .arrow-dot-dark {
+      background: #fff;
+      border-color: #fff;
+      color: hsl(227 29% 6%);
+    }
+    /* Arrows move a little in the direction they point. `translate` is used so the
+       RTL mirror (a transform) is left alone. */
+    .group:hover .nudge {
+      translate: 2px -2px;
+    }
+    [dir="rtl"] .group:hover .nudge {
+      translate: -2px -2px;
+    }
+    .group:hover .nudge-x {
+      translate: 4px 0;
+    }
+    [dir="rtl"] .group:hover .nudge-x {
+      translate: -4px 0;
+    }
+  }
+  .nudge,
+  .nudge-x {
+    transition: translate 240ms var(--ease-out);
+  }
+
+  /* Tinted tile behind a screenshot or picture: soft shadow, hairline edge, zoom on hover. */
+  .media-tile {
+    position: relative;
+    overflow: hidden;
+    border-radius: 16px;
+    background:
+      linear-gradient(140deg, hsl(var(--brand) / 0.12), hsl(var(--brand) / 0.03) 60%),
+      hsl(var(--card));
+    box-shadow: 0 0 0 1px hsl(var(--hairline)), var(--shadow-sm);
+    transition: box-shadow 300ms ease;
+  }
+  .media-tile img {
+    transition: transform 520ms var(--ease-out);
+  }
+  @media (hover: hover) {
+    .group:hover .media-tile {
+      box-shadow: 0 0 0 1px hsl(var(--hairline)), var(--shadow-md);
+    }
+    .group:hover .media-tile img.zoom {
+      transform: scale(1.045);
+    }
+  }
+  /* A lone screenshot (app pages). */
+  .shot {
+    border-radius: 18px;
+    box-shadow: 0 0 0 1px hsl(var(--hairline)), var(--shadow-md);
+    transition: transform 300ms var(--ease-out), box-shadow 300ms ease;
+  }
+  @media (hover: hover) {
+    figure:hover > .shot {
+      transform: translateY(-4px);
+      box-shadow: 0 0 0 1px hsl(var(--hairline)), var(--shadow-lg);
+    }
+  }
+  /* App icon: rounded like a launcher icon, with a soft drop shadow. */
+  .app-icon {
+    border-radius: 23%;
+    box-shadow: 0 0 0 1px hsl(var(--hairline)), 0 8px 18px -9px hsl(227 45% 12% / 0.55);
+  }
+  /* Soft panel with depth (fact boxes, filter box, notes). */
+  .panel {
+    border-radius: 22px;
+    background: hsl(var(--card));
+    box-shadow: 0 0 0 1px hsl(var(--hairline)), var(--shadow-sm);
+  }
+  /* Underline that grows from the reading side, in the text colour. */
+  .link-grow {
+    background-image: linear-gradient(currentColor, currentColor);
+    background-size: 0% 1.5px;
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    transition: background-size 280ms var(--ease-out), color 200ms ease;
+  }
+  [dir="rtl"] .link-grow {
+    background-position: 100% 100%;
+  }
+  .link-grow:hover,
+  .link-grow:focus-visible,
+  .link-grow[aria-current="page"] {
+    background-size: 100% 1.5px;
   }
   .phone {
     position: relative;
@@ -382,7 +758,7 @@
  * Prose (blog posts and project write-ups)
  * ========================================================================= */
 .prose code:not(pre code) {
-  @apply px-[0.35em] py-[0.15em] font-mono text-[0.85em] font-medium text-foreground;
+  @apply rounded-md px-[0.35em] py-[0.15em] font-mono text-[0.85em] font-medium text-foreground;
   background: hsl(var(--muted));
   border: 1px solid hsl(var(--border));
 }
@@ -391,7 +767,7 @@
   @apply overflow-x-auto p-4;
   background: hsl(var(--card));
   border: 1px solid hsl(var(--border));
-  border-radius: 0;
+  border-radius: 14px;
 }
 
 .prose pre code {
@@ -401,6 +777,7 @@
 
 .prose img {
   border: 1px solid hsl(var(--border));
+  border-radius: 12px;
 }
 
 .prose table {
@@ -433,6 +810,7 @@
   margin: 2.5rem 0;
   padding: 1.25rem;
   border: 1px solid hsl(var(--border));
+  border-radius: 18px;
   background: hsl(var(--card));
 }
 .prose figure.demo-figure img {
@@ -507,6 +885,7 @@
   top: 0.72em;
   width: 7px;
   height: 7px;
+  border-radius: 9999px;
   background: hsl(var(--accent));
 }
 [dir="rtl"] .project-prose-container ul > li {
@@ -526,6 +905,7 @@
 .project-gallery img {
   width: 100%;
   border: 1px solid hsl(var(--border));
+  border-radius: 12px;
 }
 .project-cta-link {
   display: inline-flex;
@@ -536,8 +916,12 @@
   padding: 0.7rem 1.3rem;
   text-decoration: none;
   border: none !important;
+  border-radius: 9999px;
   font-weight: 600;
-  transition: background 0.2s ease;
+  transition: background 0.2s ease, transform 0.2s var(--ease-out);
+}
+.project-cta-link:active {
+  transform: scale(0.97);
 }
 .project-cta-link:hover {
   background: hsl(var(--accent));
@@ -556,6 +940,7 @@
 .project-feature-box {
   background: hsl(var(--card));
   border: 1px solid hsl(var(--border));
+  border-radius: 18px;
   padding: 1.5rem;
 }
 .project-feature-box h3 {
@@ -649,7 +1034,7 @@ code[data-theme] span {
  * Alexandria, running text uses IBM Plex Sans Arabic.
  * ========================================================================= */
 [lang="ar"] .font-display {
-  font-family: var(--font-arabic-display), var(--font-arabic), ui-sans-serif, system-ui, sans-serif;
+  font-family: var(--font-arabic-display), var(--font-display), var(--font-arabic), var(--font-sans), ui-sans-serif, system-ui, sans-serif;
   letter-spacing: 0;
 }
 [lang="ar"] .label {
@@ -670,7 +1055,7 @@ code[data-theme] span {
 /* Arabic text inside an English page. */
 [lang="en"] [lang="ar"].font-display,
 .font-display[lang="ar"] {
-  font-family: var(--font-arabic-display), var(--font-arabic), ui-sans-serif, system-ui, sans-serif;
+  font-family: var(--font-arabic-display), var(--font-display), var(--font-arabic), var(--font-sans), ui-sans-serif, system-ui, sans-serif;
   letter-spacing: 0;
 }
 
@@ -680,12 +1065,29 @@ code[data-theme] span {
 }
 
 /* Ink block: black band used for the flagship row, the projects band and the footer. */
+/* A cobalt glow in one corner keeps it from reading as a flat black box. */
 .ink-block {
-  background: hsl(227 29% 6%);
+  background:
+    radial-gradient(70% 110% at 100% 0%, hsl(230 78% 48% / 0.26), transparent 62%),
+    hsl(227 29% 6%);
   color: #fff;
 }
+[dir="rtl"] .ink-block {
+  background:
+    radial-gradient(70% 110% at 0% 0%, hsl(230 78% 48% / 0.26), transparent 62%),
+    hsl(227 29% 6%);
+}
 .dark .ink-block {
-  background: hsl(var(--card));
+  background:
+    radial-gradient(70% 110% at 100% 0%, hsl(230 78% 48% / 0.22), transparent 62%),
+    hsl(var(--card));
+  box-shadow: inset 0 0 0 1px hsl(var(--border));
+}
+[dir="rtl"].dark .ink-block,
+.dark [dir="rtl"] .ink-block {
+  background:
+    radial-gradient(70% 110% at 0% 0%, hsl(230 78% 48% / 0.22), transparent 62%),
+    hsl(var(--card));
 }
 
 /* Writings in Arabic use the Arabic text face, whatever the page language. */
@@ -720,4 +1122,180 @@ code[data-theme] span {
 .article-body,
 .project-prose-container {
   overflow-wrap: break-word;
+}
+
+/* =========================================================================
+ * Motion layer (November 2026). See "Design" in README.md.
+ *
+ * Rules:
+ *  - Nothing is hidden by CSS alone. Entrance animations start visible content
+ *    from a keyframe and always end at the normal state. Scroll reveal hides an
+ *    element only when the helper (components/Motion.tsx) adds .reveal-wait.
+ *  - Everything here is off under prefers-reduced-motion: reduce.
+ *  - Only opacity and transform move, so the layout never shifts.
+ * ========================================================================= */
+html[dir="rtl"] {
+  --flip: -1;
+}
+
+/* Registered so the colours of the blue block can cross-fade on a theme switch
+   (browsers without @property simply switch at once). */
+@property --bb-base {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #1b3bdb;
+}
+@property --bb-corner {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: transparent;
+}
+@property --bb-glow {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: transparent;
+}
+@property --bb-strip {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: transparent;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  /* Entrance of a page's opening block. --enter is the step in the sequence. */
+  .enter {
+    animation: enterUp 560ms var(--ease-out) both;
+    animation-delay: calc(var(--enter, 0) * 80ms);
+  }
+  .enter-side {
+    animation: enterSide 600ms var(--ease-out) both;
+  }
+  @keyframes enterUp {
+    from {
+      opacity: 0;
+      transform: translateY(18px);
+    }
+  }
+  @keyframes enterSide {
+    from {
+      opacity: 0;
+      transform: translateX(calc(36px * var(--flip, 1)));
+    }
+  }
+
+  /* Scroll reveal. The helper adds .reveal-wait to elements below the fold,
+     then swaps it for .reveal-in when they come into view. */
+  .reveal-wait {
+    opacity: 0 !important;
+    transform: translateY(22px);
+  }
+  .reveal-in {
+    transition:
+      opacity 560ms var(--ease-out),
+      transform 560ms var(--ease-out) !important;
+    transition-delay: var(--reveal-delay, 0ms) !important;
+  }
+
+  /* The glow on the blue block drifts very slowly. */
+  .brand-block::after {
+    animation: glowDrift 16s ease-in-out infinite alternate;
+  }
+  @keyframes glowDrift {
+    to {
+      transform: translate3d(calc(-6% * var(--flip, 1)), -5%, 0) scale(1.08);
+    }
+  }
+
+  /* Mobile menu. */
+  .menu-panel {
+    animation: menuIn 260ms var(--ease-out) both;
+    transform-origin: top;
+  }
+  .menu-panel li {
+    animation: enterUp 380ms var(--ease-out) both;
+    animation-delay: calc(60ms + var(--i, 0) * 45ms);
+  }
+  .menu-scrim {
+    animation: scrimIn 240ms ease both;
+  }
+  @keyframes menuIn {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+  }
+  @keyframes scrimIn {
+    from {
+      opacity: 0;
+    }
+  }
+
+  /* Questions on app pages open softly. */
+  details[open] > .details-body {
+    animation: enterUp 320ms var(--ease-out) both;
+  }
+
+  /* Cross-fade between pages where the browser supports it. */
+  @view-transition {
+    navigation: auto;
+  }
+  ::view-transition-old(root) {
+    animation: vtOut 160ms ease both;
+  }
+  ::view-transition-new(root) {
+    animation: vtIn 260ms ease both;
+  }
+  @keyframes vtOut {
+    to {
+      opacity: 0;
+    }
+  }
+  @keyframes vtIn {
+    from {
+      opacity: 0;
+    }
+  }
+}
+
+/* Theme switch: colours cross-fade for a moment (class set by ThemeToggle). */
+html.theme-anim,
+html.theme-anim *,
+html.theme-anim *::before,
+html.theme-anim *::after {
+  transition:
+    --bb-base 320ms ease,
+    --bb-corner 320ms ease,
+    --bb-glow 320ms ease,
+    --bb-strip 320ms ease,
+    background-color 320ms ease,
+    color 320ms ease,
+    border-color 320ms ease,
+    fill 320ms ease,
+    stroke 320ms ease,
+    box-shadow 320ms ease !important;
+}
+
+/* The header changes from clear (on the blue block) to a frosted bar. */
+.site-header {
+  transition:
+    background-color 300ms ease,
+    color 300ms ease,
+    border-color 300ms ease,
+    box-shadow 300ms ease,
+    backdrop-filter 300ms ease;
+  border-bottom: 1px solid transparent;
+}
+.site-header.is-solid {
+  background: hsl(var(--background) / 0.9);
+  border-bottom-color: hsl(var(--border));
+  box-shadow: 0 10px 30px -22px hsl(227 45% 12% / 0.55);
+  -webkit-backdrop-filter: saturate(1.6) blur(14px);
+  backdrop-filter: saturate(1.6) blur(14px);
+}
+
+@media print {
+  .reveal-wait {
+    opacity: 1 !important;
+    transform: none !important;
+  }
 }

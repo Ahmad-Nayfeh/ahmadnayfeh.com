@@ -26,7 +26,7 @@ export default function BiHeading({
 }) {
   const o = otherLocale(locale)
   return (
-    <div className={cn("flex flex-wrap items-end justify-between gap-x-8 gap-y-4 pb-7", className)}>
+    <div data-reveal className={cn("flex flex-wrap items-end justify-between gap-x-8 gap-y-4 pb-7", className)}>
       <Tag className="font-display flex flex-wrap items-baseline gap-x-4 text-[clamp(2.5rem,7vw,4.75rem)] leading-[0.95] rtl:leading-[1.3]">
         {title}
         <span

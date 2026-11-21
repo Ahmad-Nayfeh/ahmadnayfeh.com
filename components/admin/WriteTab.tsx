@@ -7,8 +7,7 @@ import type { Editing } from "./AdminPanel"
 import { field, hint, labelCls, smallBtn, type Status } from "./ui"
 
 const KINDS: { id: Kind; label: string; hint: string }[] = [
-  { id: "reading", label: "التقاطة قراءة", hint: "مقطع من كتاب، مع تعليقك" },
-  { id: "essay", label: "خاطرة أو مقال أدبي", hint: "نص من كتابتك" },
+  { id: "essay", label: "مقال أو خاطرة", hint: "نص من كتابتك" },
   { id: "article", label: "مقال تقني", hint: "شرح أو تجربة هندسية" },
 ]
 
@@ -18,7 +17,8 @@ const DRAFT_NAME = "admin.draft"
 function loadDraft(): Draft {
   try {
     const saved = JSON.parse(localStorage.getItem(DRAFT_NAME) ?? "null")
-    if (saved && typeof saved === "object") return { ...emptyDraft(), ...saved, raw: false }
+    // A draft kept before the "reading" kind was removed opens as an essay.
+    if (saved && typeof saved === "object") return { ...emptyDraft(), ...saved, kind: saved.kind === "article" ? "article" : "essay", raw: false }
   } catch {
     /* nothing kept */
   }
@@ -62,7 +62,7 @@ export default function WriteTab({
   async function save(e: React.FormEvent) {
     e.preventDefault()
     if (!draftHasText(draft)) {
-      setProblem(draft.kind === "reading" && !draft.raw ? "اكتب العنوان والمقطع." : "اكتب العنوان والنص.")
+      setProblem("اكتب العنوان والنص.")
       return
     }
     const title = draft.title.trim()
@@ -104,7 +104,6 @@ export default function WriteTab({
   }
 
   const dir = draft.lang === "ar" ? "rtl" : "ltr"
-  const reading = draft.kind === "reading" && !draft.raw
   return (
     <form onSubmit={save} className="space-y-7">
       {editing && (
@@ -120,7 +119,7 @@ export default function WriteTab({
 
       <fieldset>
         <legend className={labelCls}>النوع</legend>
-        <div className="grid grid-cols-1 gap-2 sm:grid-cols-3">
+        <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
           {KINDS.map((k) => (
             <label
               key={k.id}
@@ -158,33 +157,15 @@ export default function WriteTab({
         <input id="admin-title" dir={dir} lang={draft.lang} value={draft.title} onChange={(e) => set("title", e.target.value)} className={field} />
       </div>
 
-      {draft.kind === "reading" && (
-        <div>
-          <label htmlFor="admin-source" className={labelCls}>
-            الكتاب والمؤلف
-          </label>
-          <input id="admin-source" dir={dir} lang={draft.lang} value={draft.source} onChange={(e) => set("source", e.target.value)} className={field} />
-        </div>
-      )}
-
-      {reading && (
-        <div>
-          <label htmlFor="admin-quote" className={labelCls}>
-            المقطع
-          </label>
-          <textarea id="admin-quote" dir={dir} lang={draft.lang} rows={6} value={draft.quote} onChange={(e) => set("quote", e.target.value)} className={`${field} leading-[1.9]`} />
-        </div>
-      )}
-
       <div>
         <label htmlFor="admin-body" className={labelCls}>
-          {reading ? "تعليقك (اختياري)" : "النص"}
+          النص
         </label>
         <textarea
           id="admin-body"
           dir={draft.raw ? "ltr" : dir}
           lang={draft.lang}
-          rows={reading ? 5 : 16}
+          rows={16}
           value={draft.body}
           onChange={(e) => set("body", e.target.value)}
           className={`${field} leading-[1.9] ${draft.raw ? "font-mono text-[14.5px]" : ""}`}

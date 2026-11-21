@@ -42,9 +42,8 @@ export interface Post {
   featured?: boolean
   /** The language the piece was written in; writings are never translated. */
   lang: "en" | "ar"
-  kind: "article" | "essay" | "reading"
-  /** For a reading note: the book and its author. */
-  source?: string
+  /** A technical article, or one of the owner's own essays. */
+  kind: "article" | "essay"
 }
 
 export interface FullPost extends Post {

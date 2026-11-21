@@ -8,11 +8,14 @@ import { cn } from "@/lib/utils"
 import { t, type Locale } from "@/i18n"
 
 type Kind = Post["kind"]
+const KIND_ORDER: Kind[] = ["article", "essay"]
 
 /**
- * The notebook list with its filters: kind of writing (shown only when more than
- * one kind exists), topic, and a text search. The chosen topic is kept in the
- * address (?tag=) so a filtered list can be shared.
+ * The notebook list. The two kinds of writing, technical articles and essays, are
+ * shown as two groups, each with its own heading and count; a group with nothing
+ * in it is not shown. Filters: kind (shown only when both kinds exist), topic, and
+ * a text search. The chosen topic is kept in the address (?tag=) so a filtered
+ * list can be shared.
  */
 export default function BlogGrid({ posts, locale }: { posts: Post[]; locale: Locale }) {
   const d = t(locale).notebookPage
@@ -32,7 +35,7 @@ export default function BlogGrid({ posts, locale }: { posts: Post[]; locale: Loc
     window.history.replaceState(null, "", url)
   }
 
-  const kinds = Array.from(new Set(posts.map((p) => p.kind)))
+  const kinds = KIND_ORDER.filter((k) => posts.some((p) => p.kind === k))
   const inKind = posts.filter((p) => (kind ? p.kind === kind : true))
   const allTags = Array.from(new Set(inKind.flatMap((p) => p.tags))).sort()
   const q = query.trim().toLowerCase()
@@ -55,7 +58,7 @@ export default function BlogGrid({ posts, locale }: { posts: Post[]; locale: Loc
         </div>
       )}
 
-      <div className="mb-8 grid grid-cols-1 gap-6 rounded-[18px] bg-card p-5 md:grid-cols-[minmax(240px,320px)_1fr] md:p-6">
+      <div className="panel mb-8 grid grid-cols-1 gap-6 p-5 md:grid-cols-[minmax(240px,320px)_1fr] md:p-6">
         <div>
           <label htmlFor="search-posts" className="label mb-2 block">
             {d.search}
@@ -66,7 +69,7 @@ export default function BlogGrid({ posts, locale }: { posts: Post[]; locale: Loc
               id="search-posts"
               type="search"
               placeholder={d.searchHint}
-              className="w-full rounded-full border border-border bg-background py-2.5 pe-4 ps-10 text-[15px] outline-none transition-colors placeholder:text-muted-foreground/60 focus:border-foreground"
+              className="w-full rounded-full border border-border bg-background py-2.5 pe-4 ps-10 text-[15px] outline-none transition-[border-color,box-shadow] placeholder:text-muted-foreground/60 focus:border-accent focus:shadow-[0_0_0_4px_hsl(var(--accent)/0.15)]"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
             />
@@ -89,32 +92,50 @@ export default function BlogGrid({ posts, locale }: { posts: Post[]; locale: Loc
         )}
       </div>
 
-      <div className="mb-3 flex items-center justify-between">
-        <span className="label">
-          <span dir="ltr">{filtered.length}</span> {filtered.length === 1 ? d.entry : d.entries}
-          {tag ? ` · ${tag}` : ""}
-        </span>
-        {(tag || query) && (
+      {(tag || query) && (
+        <div className="mb-2 flex items-center justify-between">
+          <span className="label">
+            <span dir="ltr">{filtered.length}</span> {filtered.length === 1 ? d.entry : d.entries}
+            {tag ? ` · ${tag}` : ""}
+          </span>
           <button
             type="button"
             onClick={() => {
               setTag(null)
               setQuery("")
             }}
-            className="text-[14px] font-semibold text-accent"
+            className="link-grow pb-0.5 text-[14px] font-semibold text-accent"
           >
             {d.clear}
           </button>
-        )}
-      </div>
+        </div>
+      )}
 
-      <div>
-        {filtered.length > 0 ? (
-          filtered.map((post) => <BlogCard key={post.slug} post={post} headingLevel={2} locale={locale} />)
-        ) : (
-          <p className="rule-row py-16 text-center text-muted-foreground">{d.none}</p>
-        )}
-      </div>
+      {filtered.length > 0 ? (
+        KIND_ORDER.map((k) => {
+          const items = filtered.filter((p) => p.kind === k)
+          if (items.length === 0) return null
+          const plain = !tag && !q
+          return (
+            <section key={k} id={k === "article" ? "articles" : "essays"} className="pt-10 first-of-type:pt-4 md:pt-14">
+              <div className="flex items-baseline justify-between gap-6 pb-6">
+                <h2 className="font-display text-[clamp(1.75rem,4vw,2.5rem)] leading-none rtl:leading-[1.4]">{d.kinds[k]}</h2>
+                <span className="label shrink-0">
+                  <span dir="ltr">{items.length}</span> {items.length === 1 ? d.entry : d.entries}
+                </span>
+              </div>
+              <div className="grid grid-cols-1 gap-5 md:grid-cols-2 md:gap-6">
+                {/* The newest entry of a group leads as a large card while the list is not filtered. */}
+                {items.map((post, i) => (
+                  <BlogCard key={post.slug} post={post} headingLevel={3} locale={locale} featured={plain && i === 0 && (k === "article" || items.length % 2 === 1)} />
+                ))}
+              </div>
+            </section>
+          )
+        })
+      ) : (
+        <p className="panel py-16 text-center text-muted-foreground">{d.none}</p>
+      )}
     </div>
   )
 }
@@ -126,9 +147,9 @@ function Pill({ active, onClick, children, big }: { active: boolean; onClick: ()
       onClick={onClick}
       aria-pressed={active}
       className={cn(
-        "rounded-full border font-medium transition-colors",
+        "press rounded-full border font-medium",
         big ? "px-4 py-2 text-[14.5px]" : "px-3 py-1 text-[13px]",
-        active ? "border-foreground bg-foreground text-background" : "border-border text-muted-foreground hover:border-foreground hover:text-foreground",
+        active ? "border-foreground bg-foreground text-background" : "border-border bg-background text-muted-foreground hover:border-foreground hover:text-foreground",
       )}
     >
       {children}

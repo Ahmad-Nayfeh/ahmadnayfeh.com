@@ -46,9 +46,11 @@ export const PostFrontmatter = z.object({
   // Pipeline-specific (all optional for backward compat with manual posts).
   streamId: z.string().optional(),
   language: z.enum(["en", "ar"]).default("en"),
-  // What kind of writing this is. Shown as a filter on the notebook page once more than one kind exists.
-  kind: z.enum(["article", "essay", "reading"]).default("article"),
-  // For a reading note: the book and its author, e.g. "Atomic Habits, James Clear".
+  // What kind of writing this is: a technical article or one of the owner's own essays.
+  // The notebook page shows the two kinds as two groups. The old third kind, "reading"
+  // (a book passage with a comment), was removed; a file that still says so is read as an essay.
+  kind: z.preprocess((v) => (v === "reading" ? "essay" : v), z.enum(["article", "essay"]).default("article")),
+  // Left from the removed "reading" kind. Accepted so old files still build; not shown anywhere.
   source: z.string().optional(),
   papers: z.array(PaperRef).optional(),
   generatedBy: z.string().optional(), // e.g. "claude-sonnet-4-6"

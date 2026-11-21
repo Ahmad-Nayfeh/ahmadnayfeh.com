@@ -54,10 +54,10 @@ export default async function AboutView({ locale }: { locale: Locale }) {
       </PageHeader>
 
       <section className={`${wrap} grid grid-cols-1 gap-x-14 gap-y-10 pt-14 md:pt-20 lg:grid-cols-[1.25fr_0.75fr]`}>
-        <div className="about-story text-[1.12rem] leading-[1.75]">
+        <div className="about-story max-w-[44rem] text-[1.12rem] leading-[1.75]">
           <MarkdownRenderer content={about.bio} />
         </div>
-        <dl className="self-start rounded-[22px] bg-card p-7">
+        <dl data-reveal className="panel self-start p-7 lg:sticky lg:top-28">
           <div className="border-b border-border pb-4">
             <dt className="label">{d.hero.basedIn}</dt>
             <dd className="mt-1 text-[15.5px] font-medium">{d.hero.location}</dd>
@@ -73,10 +73,13 @@ export default async function AboutView({ locale }: { locale: Locale }) {
         <BiHeading locale={locale} title={d.aboutPage.timeline} other={od.aboutPage.timeline} />
         <ol>
           {entries.map((e) => (
-            <li key={`${e.kind}-${e.title}-${e.start}`} className="rule-row grid grid-cols-1 gap-x-10 gap-y-2 py-6 md:grid-cols-[200px_minmax(0,1fr)] md:py-7">
+            <li key={`${e.kind}-${e.title}-${e.start}`} data-reveal className="rule-row grid grid-cols-1 gap-x-10 gap-y-2 py-6 md:grid-cols-[200px_minmax(0,1fr)] md:py-7">
               <div>
                 <div className="font-display text-[1.1rem] tracking-[-0.01em]">{period(e.start, e.end, locale)}</div>
-                <div className={`mt-1 text-[13.5px] font-semibold ${e.kind === "work" ? "text-accent" : "text-muted-foreground"}`}>{e.kind === "work" ? d.aboutPage.work : d.aboutPage.education}</div>
+                <div className={`mt-2 inline-flex items-center gap-2 text-[13.5px] font-semibold ${e.kind === "work" ? "text-accent" : "text-muted-foreground"}`}>
+                  <span aria-hidden className={`h-1.5 w-1.5 rounded-full ${e.kind === "work" ? "bg-accent" : "bg-muted-foreground/60"}`} />
+                  {e.kind === "work" ? d.aboutPage.work : d.aboutPage.education}
+                </div>
               </div>
               <div>
                 <h3 className="font-display text-[1.4rem] leading-tight tracking-[-0.02em] md:text-[1.65rem] rtl:leading-[1.4]">{e.title}</h3>
@@ -96,7 +99,7 @@ export default async function AboutView({ locale }: { locale: Locale }) {
             <BiHeading locale={locale} title={d.aboutPage.skills} other={od.aboutPage.skills} tone="onDark" />
             <div className="grid grid-cols-1 gap-x-12 gap-y-10 border-t border-white/25 pt-8 md:grid-cols-3">
               {about.skillGroups.map((g) => (
-                <div key={g.name}>
+                <div key={g.name} data-reveal>
                   <h3 className="font-display text-[1.4rem] tracking-[-0.02em] text-[#8FA2FF]">{g.name}</h3>
                   <ul className="mt-4">
                     {g.items.map((item) => (

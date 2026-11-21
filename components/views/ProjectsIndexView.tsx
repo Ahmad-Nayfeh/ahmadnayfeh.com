@@ -19,11 +19,11 @@ export default async function ProjectsIndexView({ locale }: { locale: Locale }) 
       <div className="mx-auto w-full max-w-[1240px] px-5 pb-20 md:px-10 md:pb-28">
         {groups.map((g) =>
           g.items.length === 0 ? null : (
-            <section key={g.id} id={g.id} className="scroll-mt-24 pt-12 md:pt-16">
-              <h2 className="font-display pb-5 text-[clamp(1.75rem,4vw,2.5rem)] leading-none rtl:leading-[1.4]">{g.title}</h2>
+            <section key={g.id} id={g.id} className="pt-14 md:pt-20">
+              <h2 data-reveal className="font-display pb-5 text-[clamp(1.75rem,4vw,2.5rem)] leading-none rtl:leading-[1.4]">{g.title}</h2>
               <div>
-                {g.items.map((p) => (
-                  <ProjectRow key={p.slug} project={p} locale={locale} tone="light" showExcerpt />
+                {g.items.map((p, i) => (
+                  <ProjectRow key={p.slug} project={p} locale={locale} tone="light" showExcerpt index={i} />
                 ))}
               </div>
             </section>

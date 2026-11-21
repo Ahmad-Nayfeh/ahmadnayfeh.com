@@ -14,7 +14,7 @@ interface Entry {
   post: PostFile | null
 }
 
-const KIND_LABEL = { reading: "التقاطة قراءة", essay: "خاطرة", article: "مقال" } as const
+const KIND_LABEL = { essay: "مقال أو خاطرة", article: "مقال تقني" } as const
 const CHANGED = "تغيّر ملف الإعدادات على GitHub للتو من جهاز آخر، فقرأته من جديد ولم أغيّر شيئاً. اضغط مرة أخرى."
 
 /** Every file of content/blog/, newest first: edit, hide or show, delete. */

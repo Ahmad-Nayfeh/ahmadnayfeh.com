@@ -135,7 +135,7 @@ export default function VisibilityTab({
   return (
     <div className="space-y-6">
       <p className="rounded-[16px] border border-border px-4 py-3 text-[15px] leading-[1.9] text-foreground/80">
-        <strong className="font-semibold text-foreground">للعلم:</strong> الإخفاء يزيل العنصر من الموقع فقط. ملفه يبقى في مستودع GitHub العام ويستطيع أي أحد أن يراه هناك، فالإخفاء ليس وسيلة لحفظ سرّ.
+        <strong className="font-semibold text-foreground">للعلم:</strong> الإخفاء يزيل العنصر من الموقع فقط. عند إخفاء تطبيق تختفي صفحته ونسخته العاملة في المتصفح، ويبقى ملف التحديث وملف التثبيت حتى لا تنقطع التحديثات عن التطبيق المثبّت. وملفات العنصر تبقى في مستودع GitHub العام ويستطيع أي أحد أن يراها هناك، فالإخفاء ليس وسيلة لحفظ سرّ.
       </p>
 
       <section className={panel} data-group="apps">

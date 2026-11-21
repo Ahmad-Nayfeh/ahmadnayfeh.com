@@ -47,7 +47,7 @@ export default async function ProjectView({ slug, locale }: { slug: string; loca
         size="md"
         contentLang={lang}
         eyebrow={
-          <a href={localePath(locale, "/projects/")} className="inline-flex items-center gap-2 hover:text-white">
+          <a href={localePath(locale, "/projects/")} className="link-grow inline-flex items-center gap-2 pb-0.5 hover:text-white">
             <Back size={14} /> {d.projectsPage.back}
           </a>
         }
@@ -73,7 +73,7 @@ export default async function ProjectView({ slug, locale }: { slug: string; loca
         </div>
         <ul className="mt-7 flex flex-wrap gap-2" dir="ltr">
           {project.tags.map((tag) => (
-            <li key={tag} className="rounded-full border border-white/30 px-3 py-1 text-[13.5px]">
+            <li key={tag} className="chip-on-dark !font-normal">
               {tag}
             </li>
           ))}
@@ -95,7 +95,7 @@ export default async function ProjectView({ slug, locale }: { slug: string; loca
         {project.highlights.length > 0 && (
           <ul className="grid grid-cols-1 gap-x-10 pt-6 md:grid-cols-2" lang={lang} dir={lang === "ar" ? "rtl" : "ltr"}>
             {project.highlights.map((h) => (
-              <li key={h} className="flex gap-3 border-b border-border py-3 text-[15.5px] leading-relaxed">
+              <li key={h} data-reveal className="flex gap-3 border-b border-border py-3 text-[15.5px] leading-relaxed">
                 <span aria-hidden className="mt-[0.6em] h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
                 {h}
               </li>
@@ -104,7 +104,7 @@ export default async function ProjectView({ slug, locale }: { slug: string; loca
         )}
 
         {hasCover && (
-          <div className="relative mt-10 aspect-[16/9] overflow-hidden rounded-[22px] border border-border bg-card">
+          <div className="media-tile relative mt-10 aspect-[16/9] !rounded-[22px]">
             <Image src={project.coverImage} alt="" fill className="object-cover" priority sizes="(max-width: 1240px) 100vw, 1240px" />
           </div>
         )}
@@ -118,11 +118,11 @@ export default async function ProjectView({ slug, locale }: { slug: string; loca
         </article>
 
         {(prev || next) && (
-          <nav aria-label={d.nav.projects} className="mt-20 grid grid-cols-1 gap-4 md:grid-cols-2">
+          <nav data-reveal aria-label={d.nav.projects} className="mt-20 grid grid-cols-1 gap-4 md:grid-cols-2">
             {prev ? (
-              <a href={localePath(locale, `/projects/${prev.slug}/`)} className="group rounded-[18px] bg-card p-6 transition-colors hover:bg-secondary">
+              <a href={localePath(locale, `/projects/${prev.slug}/`)} className="panel press group p-6 hover:shadow-[var(--shadow-md)]">
                 <span className="label">{d.projectsPage.newer}</span>
-                <span className="font-display mt-2 block text-[1.3rem] leading-tight tracking-[-0.02em] group-hover:text-accent" lang={prev.lang === "ar" ? "ar" : "en"}>
+                <span className="font-display mt-2 block text-[1.3rem] leading-tight tracking-[-0.02em] transition-colors group-hover:text-accent" lang={prev.lang === "ar" ? "ar" : "en"}>
                   {splitTitle(prev.title).name}
                 </span>
               </a>
@@ -130,9 +130,9 @@ export default async function ProjectView({ slug, locale }: { slug: string; loca
               <span />
             )}
             {next && (
-              <a href={localePath(locale, `/projects/${next.slug}/`)} className="group rounded-[18px] bg-card p-6 text-end transition-colors hover:bg-secondary">
+              <a href={localePath(locale, `/projects/${next.slug}/`)} className="panel press group p-6 text-end hover:shadow-[var(--shadow-md)]">
                 <span className="label">{d.projectsPage.older}</span>
-                <span className="font-display mt-2 block text-[1.3rem] leading-tight tracking-[-0.02em] group-hover:text-accent" lang={next.lang === "ar" ? "ar" : "en"}>
+                <span className="font-display mt-2 block text-[1.3rem] leading-tight tracking-[-0.02em] transition-colors group-hover:text-accent" lang={next.lang === "ar" ? "ar" : "en"}>
                   {splitTitle(next.title).name}
                 </span>
               </a>
@@ -142,8 +142,8 @@ export default async function ProjectView({ slug, locale }: { slug: string; loca
 
         {related.length > 0 && (
           <section className="mt-16">
-            {related.map((p) => (
-              <ProjectRow key={p.slug} project={p} locale={locale} tone="light" />
+            {related.map((p, i) => (
+              <ProjectRow key={p.slug} project={p} locale={locale} tone="light" index={i} />
             ))}
           </section>
         )}

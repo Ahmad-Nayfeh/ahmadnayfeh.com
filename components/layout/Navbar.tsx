@@ -1,8 +1,8 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, type CSSProperties } from "react"
 import { usePathname } from "next/navigation"
-import { Menu, X, FileDown } from "lucide-react"
+import { Menu, X, FileDown, ArrowUpRight } from "lucide-react"
 import ThemeToggle from "@/components/ThemeToggle"
 import { siteConfig } from "@/config/site"
 import { cn } from "@/lib/utils"
@@ -15,7 +15,8 @@ function isActivePath(pathname: string, path: string) {
 
 /**
  * Site header. It sits on each page's blue opening block (white text) until
- * the visitor scrolls, then becomes a plain bar.
+ * the visitor scrolls, then becomes a frosted bar with a border and a soft shadow.
+ * On phones the menu is a panel that drops below the bar, over a dimmed page.
  */
 export default function Navbar({ locale }: { locale: Locale }) {
   const [isOpen, setIsOpen] = useState(false)
@@ -44,6 +45,24 @@ export default function Navbar({ locale }: { locale: Locale }) {
     setIsOpen(false)
   }, [pathname])
 
+  // While the menu is open: Escape closes it and the page behind does not scroll.
+  useEffect(() => {
+    if (!isOpen) return
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setIsOpen(false)
+    const wide = window.matchMedia("(min-width: 1024px)")
+    const onWide = () => wide.matches && setIsOpen(false)
+    const root = document.documentElement
+    const before = root.style.overflowY
+    root.style.overflowY = "hidden"
+    window.addEventListener("keydown", onKey)
+    wide.addEventListener("change", onWide)
+    return () => {
+      root.style.overflowY = before
+      window.removeEventListener("keydown", onKey)
+      wide.removeEventListener("change", onWide)
+    }
+  }, [isOpen])
+
   const langSwitch = (
     <a
       href={otherLocalePath(locale, pathname)}
@@ -51,8 +70,8 @@ export default function Navbar({ locale }: { locale: Locale }) {
       dir={locale === "en" ? "rtl" : "ltr"}
       aria-label={d.switchAria}
       className={cn(
-        "inline-flex h-10 items-center rounded-full border-[1.5px] px-4 text-[14.5px] font-medium transition-colors",
-        onBrand ? "border-white/55 text-white hover:border-white hover:bg-white/10" : "border-border text-foreground hover:border-foreground",
+        "press inline-flex h-10 items-center rounded-full border-[1.5px] px-4 text-[14.5px] font-medium",
+        onBrand ? "border-white/55 text-white hover:border-white hover:bg-white/10" : "border-foreground/20 text-foreground hover:border-foreground",
       )}
     >
       {d.switchLabel}
@@ -62,13 +81,15 @@ export default function Navbar({ locale }: { locale: Locale }) {
   return (
     <header
       className={cn(
-        "sticky top-0 z-40 w-full transition-colors duration-200",
-        onBrand ? "bg-transparent text-white" : "border-b border-border bg-background/90 text-foreground backdrop-blur-md",
+        "site-header sticky top-0 z-40 w-full",
+        onBrand ? "on-brand bg-transparent text-white" : "is-solid text-foreground",
+        isOpen && "!bg-background",
       )}
     >
       <div className="mx-auto flex h-[72px] w-full max-w-[1240px] items-center justify-between gap-4 px-5 md:px-10">
-        <a href={home} dir="ltr" className="text-[15px] font-bold tracking-tight">
-          ahmadnayfeh.com
+        <a href={home} dir="ltr" className="group text-[15px] font-bold tracking-tight">
+          ahmadnayfeh
+          <span className="opacity-60 transition-opacity group-hover:opacity-100">.com</span>
         </a>
 
         <nav className="hidden items-center gap-7 lg:flex" aria-label="Main">
@@ -80,8 +101,8 @@ export default function Navbar({ locale }: { locale: Locale }) {
                 href={item.path}
                 aria-current={active ? "page" : undefined}
                 className={cn(
-                  "text-[15px] font-medium transition-opacity",
-                  onBrand ? "opacity-85 hover:opacity-100" : active ? "text-accent" : "text-muted-foreground hover:text-foreground",
+                  "link-grow pb-1 text-[15px] font-medium",
+                  onBrand ? (active ? "opacity-100" : "opacity-85 hover:opacity-100") : active ? "text-accent" : "text-muted-foreground hover:text-foreground",
                 )}
               >
                 {item.name}
@@ -94,8 +115,8 @@ export default function Navbar({ locale }: { locale: Locale }) {
             target="_blank"
             rel="noopener noreferrer"
             className={cn(
-              "inline-flex h-10 items-center gap-2 rounded-full px-4 text-[14.5px] font-semibold transition-colors",
-              onBrand ? "bg-white text-brand hover:bg-white/90" : "bg-foreground text-background hover:bg-brand hover:text-white",
+              "press inline-flex h-10 items-center gap-2 rounded-full px-4 text-[14.5px] font-semibold",
+              onBrand ? "bg-white text-brand hover:bg-white/90 dark:bg-[#8FA2FF] dark:text-[#0B0D14] dark:hover:bg-white" : "bg-foreground text-background hover:bg-brand hover:text-white",
             )}
           >
             <FileDown size={15} />
@@ -110,37 +131,59 @@ export default function Navbar({ locale }: { locale: Locale }) {
           <button
             type="button"
             className={cn(
-              "inline-flex h-10 w-10 items-center justify-center rounded-full border-[1.5px]",
-              onBrand ? "border-white/55" : "border-border",
+              "press relative inline-flex h-10 w-10 items-center justify-center rounded-full border-[1.5px]",
+              onBrand ? "border-white/55" : isOpen ? "border-foreground bg-foreground text-background" : "border-foreground/20",
             )}
             onClick={() => setIsOpen((o) => !o)}
             aria-expanded={isOpen}
             aria-controls="mobile-nav"
             aria-label={isOpen ? d.menuClose : d.menuOpen}
           >
-            {isOpen ? <X size={18} /> : <Menu size={18} />}
+            <Menu size={18} className={cn("absolute transition duration-300", isOpen ? "rotate-90 scale-50 opacity-0" : "opacity-100")} />
+            <X size={18} className={cn("absolute transition duration-300", isOpen ? "opacity-100" : "-rotate-90 scale-50 opacity-0")} />
           </button>
         </div>
       </div>
 
       {isOpen && (
-        <nav id="mobile-nav" className="border-t border-border lg:hidden" aria-label="Main">
-          <ul className="mx-auto w-full max-w-[1240px] px-5 py-2">
-            {nav.map((item) => (
-              <li key={item.path} className="border-b border-border">
-                <a href={item.path} className="font-display block py-4 text-2xl">
-                  {item.name}
+        <div className="lg:hidden">
+          <button type="button" tabIndex={-1} aria-hidden onClick={() => setIsOpen(false)} className="menu-scrim absolute inset-x-0 top-full h-screen w-full cursor-default bg-[#0B0D14]/45 backdrop-blur-[2px]" />
+          <nav
+            id="mobile-nav"
+            aria-label="Main"
+            className="menu-panel absolute inset-x-0 top-full max-h-[calc(100dvh-72px)] overflow-y-auto rounded-b-[26px] border-t border-border bg-background shadow-[var(--shadow-lg)]"
+          >
+            <ul className="mx-auto w-full max-w-[1240px] px-5 pb-5 pt-1">
+              {nav.map((item, i) => {
+                const active = isActivePath(pathname, item.path)
+                return (
+                  <li key={item.path} style={{ "--i": i } as CSSProperties} className="border-b border-border">
+                    <a href={item.path} aria-current={active ? "page" : undefined} className="group flex items-center gap-4 py-[15px]">
+                      <span dir="ltr" className={cn("w-6 text-[12.5px] font-semibold tabular-nums", active ? "text-accent" : "text-muted-foreground")}>
+                        {String(i + 1).padStart(2, "0")}
+                      </span>
+                      <span className={cn("font-display flex-1 text-[1.7rem] leading-none rtl:leading-[1.35]", active && "text-accent")}>{item.name}</span>
+                      <span className={cn("arrow-dot", active && "!border-brand !bg-brand !text-white")}>
+                        <ArrowUpRight size={17} className="nudge rtl:-scale-x-100" />
+                      </span>
+                    </a>
+                  </li>
+                )
+              })}
+              <li style={{ "--i": nav.length } as CSSProperties} className="pt-5">
+                <a href={siteConfig.resume} target="_blank" rel="noopener noreferrer" className="btn btn-primary w-full">
+                  <FileDown size={16} />
+                  {d.cv}
                 </a>
               </li>
-            ))}
-            <li>
-              <a href={siteConfig.resume} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 py-4 text-base font-semibold">
-                <FileDown size={16} className="text-accent" />
-                {d.cv}
-              </a>
-            </li>
-          </ul>
-        </nav>
+              <li style={{ "--i": nav.length + 1 } as CSSProperties} className="pt-4 text-center">
+                <a href={`mailto:${siteConfig.contact.email}`} dir="ltr" className="text-[14px] font-medium text-muted-foreground">
+                  {siteConfig.contact.email}
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </div>
       )}
     </header>
   )
