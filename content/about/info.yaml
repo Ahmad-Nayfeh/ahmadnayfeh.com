@@ -4,6 +4,7 @@ skills:
   - MV Secondary Switchgear Design
   - Electrical Schematics (SEE Electrical)
   - SAP BOM & Product Data
+  - FAT Support & Design Change Control
   - Utility Specifications (IEC 62271)
   - AI-Assisted Engineering Automation
   - Python
@@ -18,6 +19,8 @@ skillGroups:
       - "Electrical schematics in SEE Electrical"
       - "Bills of materials and product data in SAP"
       - "Utility specifications and IEC 62271"
+      - "Protection relay, RTU and metering circuits"
+      - "Factory acceptance test support and design change control"
   - name: "Software"
     items:
       - "Python, FastAPI, PostgreSQL, Redis"
@@ -39,7 +42,7 @@ experience:
     location: "Riyadh, Saudi Arabia"
     startDate: "2026-01"
     endDate: "Present"
-    description: "Own the electrical design of medium-voltage secondary switchgear (RMU, metered RMU, load-break switches, autoreclosers) built to utility specifications: from schematics and customer approval to a complete production release (drawings, wiring and ferrule lists, labels, SAP BOMs), then the design point of contact for QC, testing, and production until delivery. Introduced AI-assisted tools that automate routine design checks and documentation for the team, catching errors before they reach production."
+    description: "Own the electrical design of the factory's metered RMU line (air and gas insulated, up to 36 kV) and support the wider range (RMU, load-break switches, autoreclosers), all built to utility specifications. The work runs from schematics and customer approval to a complete production release (drawings, wiring and ferrule lists, labels, product data and BOMs in SAP), then design change control and factory acceptance test support. Keep one reference for the product line's data, and introduced AI-assisted tools that automate routine design checks and documentation for the team."
   - title: "Teaching Assistant – Fundamentals of Electric Circuits"
     company: "KFUPM, Department of Electrical Engineering"
     location: "Dhahran, Saudi Arabia"
