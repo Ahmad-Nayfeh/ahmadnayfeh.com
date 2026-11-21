@@ -29,14 +29,14 @@ The owner delegated the open decisions to the session doing the move. What chang
 |---|---|---|
 | **Voxa** | Firebase domain added and sign-in tested by the owner. Web app and signed Android app **1.0.19** published (same certificate as 1.0.17). | Owner installs 1.0.19 by hand once. The intro video still shows the old address in two scenes (the old address forwards). |
 | **Khatwa** | In-app update built and merged (rules in `core`, 18 new tests, waits while the phone lock is active). Artifact retention 5 days. | First release with the updater (planned as 0.11.0 from the release workflow, once GitHub's storage figure has refreshed). Owner installs it by hand once. Not tested on a phone. |
-| **Reel** | In-app update built and merged (14 new tests). New hand-started release workflow that signs and publishes from GitHub. Page sentence about network use reworded. | Owner adds five secrets (`docs/site-move.md` in `video-player`), runs the workflow, installs the new build by hand once. No screenshots yet. |
+| **Reel** | In-app update built and merged (14 new tests). The owner chose a new signing key stored in the repository, which he made private first (the old key was only on his computer). **1.1.0 (build 23)** published, signed with the new key. Hand-started release workflow added. Page sentence about network use reworded. | Owner uninstalls the old Reel and installs 1.1.0 once. `SITE_REPO_TOKEN` in `video-player` if releases should run from GitHub. No screenshots yet. |
 | **Grid Shift** | The repository's own Pages address now only forwards to the game on this site. Explainer video's last scene shows the new address. Decision: the repository stays public (in-game document links need it). | Nothing required. |
 | **Munazara** | "Fair-play charter" section added to the page. | Owner reinstalls to the home screen from the new address; real two-device sync not tested. |
 | **Shasha** | Old artifacts deleted; mapping retention 30 days (inside `shasha#52`). CI on the pull request: tests and both builds pass, only the upload step failed on storage. | Merge `shasha#52` once uploads work again (this makes the signed release), then the owner reinstalls on TV and phone once. |
 | **Shadhra** | `shadhra#470` (documentation) merged; site and API answered after the merge. | Newer screenshots for the page. |
 | **Reading Marathon** | Old artifacts deleted; retention 5 days. `SITE_REPO_TOKEN` added by the owner (not yet exercised). | Unchanged: recover the Google account, find `marathon-release.jks`, add the signing and Firebase secrets, release, reinstall. |
 
-Also: the three unreviewed article drafts in `portfolio-website` were closed, and `SITE_REPO_TOKEN` was added to
+Also: `video-player`, `reading-marathon` and `Repo-B` were public until 2026-11-21; the owner made them private that day. The three unreviewed article drafts in `portfolio-website` were closed, and `SITE_REPO_TOKEN` was added to
 `khatwa` and `reading-marathon` by the owner (first real use will be Khatwa's next release).
 
 ## Per app
