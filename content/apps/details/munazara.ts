@@ -141,6 +141,43 @@ export const detail: AppDetail = {
       ],
     },
     {
+      title: { en: "Fair-play charter", ar: "ميثاق المناظرة" },
+      intro: {
+        en: "The app shows these seven lines to anyone who joins a debate. Adapted from the classical ādāb al-munāẓara (e.g. al-Shinqīṭī).",
+        ar: "يعرض التطبيق هذه الأسطر السبعة على كل من ينضم إلى مناظرة. مقتبسة بتصرّف من آداب المناظرة عند الشنقيطي وغيره.",
+      },
+      items: [
+        {
+          title: { en: "1", ar: "الأول" },
+          body: { en: "We aim for the truth to appear, even through the other side.", ar: "قصدنا ظهور الحق ولو على يد صاحبي." },
+        },
+        {
+          title: { en: "2", ar: "الثاني" },
+          body: { en: "Don't object before you understand: ask \"what do you mean?\" first.", ar: "لا أعترض على كلامٍ حتى أفهم مراده؛ «ماذا تقصد؟» أولاً." },
+        },
+        {
+          title: { en: "3", ar: "الثالث" },
+          body: { en: "Clear words; neither padding nor cryptic brevity.", ar: "ألفاظ واضحة، بلا إطالة مملة ولا اختصار مُخلّ." },
+        },
+        {
+          title: { en: "4", ar: "الرابع" },
+          body: { en: "Stay on the point; a new topic becomes a new point.", ar: "نبقى في موضوع النقطة؛ والجديد يُطرح نقطةً مستقلة." },
+        },
+        {
+          title: { en: "5", ar: "الخامس" },
+          body: { en: "No mockery or belittling.", ar: "لا سخرية ولا تحقير." },
+        },
+        {
+          title: { en: "6", ar: "السادس" },
+          body: { en: "Whoever claims owes a proof; whoever quotes owes the source.", ar: "على من ادّعى الدليل، ومن نقل فعليه صحة النقل." },
+        },
+        {
+          title: { en: "7", ar: "السابع" },
+          body: { en: "The tool structures the debate; it judges no one.", ar: "الأداة تنظّم الحوار ولا تحكم لأحد." },
+        },
+      ],
+    },
+    {
       title: { en: "Privacy", ar: "الخصوصية" },
       items: [
         {
