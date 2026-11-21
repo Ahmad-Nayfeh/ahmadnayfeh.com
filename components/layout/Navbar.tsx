@@ -87,6 +87,9 @@ export default function Navbar({ locale }: { locale: Locale }) {
       )}
     >
       <div className="mx-auto flex h-[72px] w-full max-w-[1240px] items-center justify-between gap-4 px-5 md:px-10">
+        {/* Start side: the wordmark with the page links right beside it, so the menu sits where
+            reading starts (left in English, right in Arabic). The actions go to the far end. */}
+        <div className="flex items-center gap-10">
         <a href={home} dir="ltr" className="group text-[15px] font-bold tracking-tight">
           ahmadnayfeh
           <span className="opacity-60 transition-opacity group-hover:opacity-100">.com</span>
@@ -109,6 +112,10 @@ export default function Navbar({ locale }: { locale: Locale }) {
               </a>
             )
           })}
+        </nav>
+        </div>
+
+        <div className="hidden items-center gap-3 lg:flex">
           {langSwitch}
           <a
             href={siteConfig.resume}
@@ -123,7 +130,7 @@ export default function Navbar({ locale }: { locale: Locale }) {
             {d.cv}
           </a>
           <ThemeToggle onBrand={onBrand} />
-        </nav>
+        </div>
 
         <div className="flex items-center gap-2 lg:hidden">
           {langSwitch}
