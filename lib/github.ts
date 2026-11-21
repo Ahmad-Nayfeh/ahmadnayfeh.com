@@ -145,7 +145,7 @@ export async function saveSettings(key: string, change: (current: SiteSettings) 
 /** A plain Arabic sentence for a failed call. */
 export function explain(e: unknown): string {
   if (e instanceof GitHubError) {
-    if (e.status === 401) return "لم يقبل GitHub المفتاح. إمّا أنه خطأ أو انتهت مدته. أنشئ مفتاحاً جديداً والصقه."
+    if (e.status === 401) return "لم يقبل GitHub المفتاح. إمّا أنه غير صحيح أو أن مدته انتهت. أنشئ مفتاحاً جديداً والصقه."
     if (e.status === 403 && e.message === "read-only") return "هذا المفتاح يقرأ المستودع ولا يستطيع الكتابة فيه. يجب أن تكون صلاحية Contents هي Read and write."
     if (e.status === 403) return "رفض GitHub الطلب. قد لا يملك المفتاح صلاحية الكتابة، أو كثرت الطلبات فانتظر دقائق ثم أعد المحاولة."
     if (e.status === 404) return "لم يجد GitHub المطلوب. تأكد أن المفتاح أُنشئ للمستودع ahmadnayfeh.com."

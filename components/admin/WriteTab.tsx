@@ -112,7 +112,7 @@ export default function WriteTab({
             تعدّل الآن: <strong dir="auto">{editing.post.title}</strong>
           </p>
           <button type="button" onClick={onStopEditing} className={smallBtn}>
-            اترك التعديل
+            ألغِ التعديل
           </button>
         </div>
       )}
@@ -174,7 +174,7 @@ export default function WriteTab({
           <p className={hint}>هذا النص مكتوب بصيغة MDX (فيه صور أو معادلات أو عناصر خاصة)، فيُعرض هنا ويُحفظ كما هو تماماً. عدّل الكلمات وحدها ولا تغيّر الرموز.</p>
         ) : (
           <p className={hint}>
-            اترك سطراً فارغاً بين الفقرات. تعمل صيغة Markdown: <bdi>**غامق**</bdi>، <bdi>## عنوان</bdi>، <bdi>- قائمة</bdi>.
+            اترك سطراً فارغاً بين الفقرات. يمكنك استخدام صيغة Markdown: <bdi>**غامق**</bdi>، <bdi>## عنوان</bdi>، <bdi>- قائمة</bdi>.
           </p>
         )}
       </div>
