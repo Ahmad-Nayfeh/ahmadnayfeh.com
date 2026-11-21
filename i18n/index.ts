@@ -274,3 +274,18 @@ export const t = (locale: Locale) => dict[locale]
 
 /** "Ahmad Nayfeh" in each language. */
 export const ownerName: Record<Locale, string> = { en: "Ahmad Nayfeh", ar: "أحمد نايفه" }
+
+/**
+ * "3 entries" in the page's language. Arabic counts need their own forms: one (نص واحد), two (نصّان),
+ * three to ten with the plural (5 نصوص), and eleven to ninety-nine with the singular accusative (11 نصًّا), and hundreds with the singular (100 نص).
+ */
+export function entriesLabel(locale: Locale, n: number): string {
+  if (locale !== "ar") return `${n} ${n === 1 ? "entry" : "entries"}`
+  if (n === 0) return "لا نصوص"
+  if (n === 1) return "نص واحد"
+  if (n === 2) return "نصّان"
+  const last = n % 100
+  if (last >= 3 && last <= 10) return `${n} نصوص`
+  if (last >= 11) return `${n} نصًّا`
+  return `${n} نص` // 100, 101, 102, 200 ...
+}

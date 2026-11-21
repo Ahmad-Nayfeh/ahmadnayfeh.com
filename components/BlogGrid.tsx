@@ -5,7 +5,7 @@ import { Search } from "lucide-react"
 import BlogCard from "@/components/BlogCard"
 import type { Post } from "@/types"
 import { cn } from "@/lib/utils"
-import { t, type Locale } from "@/i18n"
+import { entriesLabel, t, type Locale } from "@/i18n"
 
 type Kind = Post["kind"]
 const KIND_ORDER: Kind[] = ["article", "essay"]
@@ -95,7 +95,7 @@ export default function BlogGrid({ posts, locale }: { posts: Post[]; locale: Loc
       {(tag || query) && (
         <div className="mb-2 flex items-center justify-between">
           <span className="label">
-            <span dir="ltr">{filtered.length}</span> {filtered.length === 1 ? d.entry : d.entries}
+            {entriesLabel(locale, filtered.length)}
             {tag ? ` · ${tag}` : ""}
           </span>
           <button
@@ -121,7 +121,7 @@ export default function BlogGrid({ posts, locale }: { posts: Post[]; locale: Loc
               <div className="flex items-baseline justify-between gap-6 pb-6">
                 <h2 className="font-display text-[clamp(1.75rem,4vw,2.5rem)] leading-none rtl:leading-[1.4]">{d.kinds[k]}</h2>
                 <span className="label shrink-0">
-                  <span dir="ltr">{items.length}</span> {items.length === 1 ? d.entry : d.entries}
+                  {entriesLabel(locale, items.length)}
                 </span>
               </div>
               <div className="grid grid-cols-1 gap-5 md:grid-cols-2 md:gap-6">
