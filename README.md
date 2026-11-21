@@ -94,7 +94,7 @@ The settings file is always read from GitHub before it is changed, not taken fro
 
 An entry written by hand as MDX (with pictures, formulas or components) is opened in the editor as it is and saved as it is. Plain writing typed in the form is escaped so that characters such as `{` and `<` are not read as code.
 
-**Hiding is not secrecy.** Hiding removes an item from the built site only. The file stays in this public repository and anyone can read it there, and so does its history after a delete. The files of a running browser app under `public/apps/<app>/` also stay published when the app is hidden. Do not use hiding to keep something secret.
+**Hiding is not secrecy.** Hiding removes an item from the built site only. The file stays in this public repository and anyone can read it there, and so does its history after a delete. When an app is hidden, its page and row disappear and `scripts/prune-hidden.mjs` (run by `pnpm build` after `next build`) also removes its running browser app (`app/`), its media and its guides from the built site, so the direct address stops working too. It keeps `latest.json` and the files it points to, and Reading Marathon's invite and privacy pages, because an installed Android app still needs them.
 
 **Where the code is.**
 
