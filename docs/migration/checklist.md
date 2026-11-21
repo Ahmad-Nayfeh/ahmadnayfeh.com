@@ -21,6 +21,24 @@ Last updated: 2026-11-20. "Site" means the new repository `Ahmad-Nayfeh/ahmadnay
 | CV (`/resume.pdf`) | Regenerated with the new site address |
 | GitHub profile page | Links and header picture point at the new site |
 
+## Update of 2026-11-21 (read this first; it is newer than the table below)
+
+The owner delegated the open decisions to the session doing the move. What changed since the table was written:
+
+| App | Done on 2026-11-21 | Still open |
+|---|---|---|
+| **Voxa** | Firebase domain added and sign-in tested by the owner. Web app and signed Android app **1.0.19** published (same certificate as 1.0.17). | Owner installs 1.0.19 by hand once. The intro video still shows the old address in two scenes (the old address forwards). |
+| **Khatwa** | In-app update built and merged (rules in `core`, 18 new tests, waits while the phone lock is active). Artifact retention 5 days. | First release with the updater (planned as 0.11.0 from the release workflow, once GitHub's storage figure has refreshed). Owner installs it by hand once. Not tested on a phone. |
+| **Reel** | In-app update built and merged (14 new tests). New hand-started release workflow that signs and publishes from GitHub. Page sentence about network use reworded. | Owner adds five secrets (`docs/site-move.md` in `video-player`), runs the workflow, installs the new build by hand once. No screenshots yet. |
+| **Grid Shift** | The repository's own Pages address now only forwards to the game on this site. Explainer video's last scene shows the new address. Decision: the repository stays public (in-game document links need it). | Nothing required. |
+| **Munazara** | "Fair-play charter" section added to the page. | Owner reinstalls to the home screen from the new address; real two-device sync not tested. |
+| **Shasha** | Old artifacts deleted; mapping retention 30 days (inside `shasha#52`). CI on the pull request: tests and both builds pass, only the upload step failed on storage. | Merge `shasha#52` once uploads work again (this makes the signed release), then the owner reinstalls on TV and phone once. |
+| **Shadhra** | `shadhra#470` (documentation) merged; site and API answered after the merge. | Newer screenshots for the page. |
+| **Reading Marathon** | Old artifacts deleted; retention 5 days. `SITE_REPO_TOKEN` added by the owner (not yet exercised). | Unchanged: recover the Google account, find `marathon-release.jks`, add the signing and Firebase secrets, release, reinstall. |
+
+Also: the three unreviewed article drafts in `portfolio-website` were closed, and `SITE_REPO_TOKEN` was added to
+`khatwa` and `reading-marathon` by the owner (first real use will be Khatwa's next release).
+
 ## Per app
 
 On 2026-11-20 the work inside each app was done from one session, on the branch `claude/epic-feynman-hu09zj` of each app's repository. Six of those branches are merged (Khatwa, Reel, Grid Shift, Munazara, Voxa, Reading Marathon). Two pull requests are open and wait for the owner: Shasha (`Ahmad-Nayfeh/shasha` #52, because merging it makes CI publish a signed release) and Shadhra (`Ahmad-Nayfeh/shadhra` #470, documentation only, left open because it is the live product's repository). Every app repository now holds its own record of the move: `docs/site-move.md` (Shadhra: `docs/site-listing.md`), with a pointer in `CLAUDE.md` or the project map. An app's own session can read that file and needs no explanation from you.

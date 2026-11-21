@@ -231,8 +231,8 @@ export const detail: AppDetail = {
   ],
   notes: [
     {
-      en: "Works without internet and without an account. Only the daily challenge and the maps need internet, and the account is optional.",
-      ar: "يعمل بلا إنترنت وبلا حساب. التحدي اليومي والخرائط فقط تحتاج إنترنت، والحساب اختياري.",
+      en: "Works without internet and without an account. Only the daily challenge, the maps and the update check need internet, and the account is optional. From version 0.11 the app asks ahmadnayfeh.com at most once a day whether a newer version exists; it sends nothing about you, and an update installs only after you agree.",
+      ar: "يعمل بلا إنترنت وبلا حساب. التحدي اليومي والخرائط والتحقق من التحديثات فقط تحتاج إنترنت، والحساب اختياري. ابتداءً من الإصدار 0.11 يسأل التطبيق موقع ahmadnayfeh.com مرة في اليوم على الأكثر: هل يوجد إصدار أحدث؟ لا يرسل شيئاً عنك، ولا يُثبَّت التحديث إلا بعد موافقتك.",
     },
     {
       en: "Consult a doctor before starting the workout program, especially if you have high body weight, joint pain, or a heart or blood pressure problem.",
