@@ -70,7 +70,61 @@ kind: "essay"    # "article", "essay" or "reading"
 
 The notebook page shows the kind filter once more than one kind exists.
 
-The same can be done from a phone with the private page `/write/`, which saves this file through GitHub using the owner's access key (see `docs/migration/your-steps.md`, step 9).
+The same can be done from a phone with the admin page `/admin/` (next section).
+
+## The admin page
+
+`/admin/` is the owner's control panel. Its wording is Arabic. It is not linked from any page, it is not in the sitemap, and `robots.txt` asks search engines to skip it. Anyone can open the address, but without the owner's key it shows only the place to paste a key, and nothing can be saved.
+
+**How it works.** The site has no server. The page runs in the browser and changes files in this repository through GitHub's own API. Each save is a normal commit to `main`, so the site rebuilds and the change is public about two minutes later. The line at the bottom of the page shows the result of the last save and links to the Actions page, where the build can be watched.
+
+**The key.** A fine-grained GitHub token for this repository only, with Contents set to Read and write (steps: `docs/migration/your-steps.md`, step 9). It is pasted once per device. The page first asks GitHub whether the key can write to this repository, and only then keeps it, in the browser's localStorage under the name `write.key`. This is the same name the old `/write/` page used, so a key saved there still works. The key is sent only to `https://api.github.com`. It is never shown and never logged. The button "انسَ المفتاح على هذا الجهاز" removes it from the device. The old addresses `/write/` and `/ar/write/` now only send the visitor to `/admin/`.
+
+**What each tab writes.**
+
+| Tab | What it does | File it writes |
+|---|---|---|
+| كتابة (Write) | A new notebook entry: kind, language, title, text, summary, topics, date. Also used to edit an entry opened from the next tab. | `content/blog/<date>-<name>.mdx` |
+| الدفتر (Notebook) | Lists every entry as it is on GitHub now, newest first. Edit saves the same file. Hide and Show change one line of the settings file. Delete removes the file after a confirmation. | the entry's file, or `hidden.posts` in `content/site-settings.json` |
+| الظهور (Visibility) | Shows or hides each app, each project and each home page section. Chooses which apps the home page shows and in what order, and how many projects and notebook entries it shows. One save button. | `content/site-settings.json` |
+
+The settings file is always read from GitHub before it is changed, not taken from the copy inside the built site. If it changed in the meantime (for example from another device), the page does not save. It reads the file again, shows the new values and asks the owner to review and save again. The fields of the file are described at the top of `lib/settings.ts`.
+
+An entry written by hand as MDX (with pictures, formulas or components) is opened in the editor as it is and saved as it is. Plain writing typed in the form is escaped so that characters such as `{` and `<` are not read as code.
+
+**Hiding is not secrecy.** Hiding removes an item from the built site only. The file stays in this public repository and anyone can read it there, and so does its history after a delete. The files of a running browser app under `public/apps/<app>/` also stay published when the app is hidden. Do not use hiding to keep something secret.
+
+**Where the code is.**
+
+| File | Contents |
+|---|---|
+| `app/(en)/admin/page.tsx` | The page. It collects the list of apps and projects when the site is built. |
+| `components/admin/` | The panel and its three tabs |
+| `lib/github.ts` | The GitHub calls |
+| `lib/notebook-file.ts` | How an entry becomes a file and is read back. Must stay compatible with `lib/content.ts` and `lib/schemas.ts`. The slug of an entry is the `slug` field of its header, or the file name without `.mdx` when it has none, the same rule as `lib/content.ts`. |
+| `lib/settings-shape.ts` | The shape and validation of the settings file, shared by the build and the page |
+
+**Testing it without touching GitHub.** Never test with a real key. Build the site, serve `out/` locally, and drive the page with Playwright while every request to `https://api.github.com/**` is answered by the test itself:
+
+```bash
+pnpm build
+```
+
+```bash
+cd out && python3 -m http.server 4173
+```
+
+```js
+await context.route("https://api.github.com/**", (route) => {
+  // Answer as GitHub would: GET /repos/<owner>/<repo> gives { permissions: { push: true } },
+  // GET /contents/<path> gives { sha, encoding: "base64", content },
+  // PUT and DELETE give 200, or 409 to act out "the file changed".
+  // route.request().postDataJSON().content, decoded from base64, is the file the page would save.
+})
+await context.addInitScript(() => localStorage.setItem("write.key", "github_pat_FAKE"))
+```
+
+The cases worth covering: no key, a refused key (401), a good key, the list of entries, a new entry, editing, deleting, saving the settings (compare the decoded JSON exactly), and the 409 case.
 
 ## Working on the site
 
