@@ -16,7 +16,7 @@ export default function Hero({ content, locale }: { content: HomeContent; locale
     <section className="brand-block -mt-[72px] pt-[72px]">
       <div className="mx-auto w-full max-w-[1240px] px-5 md:px-10">
         <div className="pt-8 md:pt-12">
-          <div className="flex justify-end" aria-hidden>
+          <div className="flex justify-start" aria-hidden>
             <span
               lang={o}
               dir={dirOf(o)}

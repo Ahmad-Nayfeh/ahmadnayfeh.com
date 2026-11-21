@@ -37,7 +37,7 @@ export default function PageHeader({
       <div className="mx-auto w-full max-w-[1240px] px-5 pb-12 pt-10 md:px-10 md:pb-16 md:pt-14">
         {eyebrow && <div className="enter mb-5 text-[14.5px] font-medium text-white/75">{eyebrow}</div>}
         {other && (
-          <div className="flex justify-end" aria-hidden>
+          <div className="flex justify-start" aria-hidden>
             <span lang={o} dir={dirOf(o)} className="enter-side font-display block text-[clamp(1.9rem,7vw,5rem)] leading-[1.1] text-[#5873EA]">
               {other}
             </span>
