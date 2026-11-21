@@ -10,6 +10,8 @@ import { localePath, otherLocalePath, t, type Locale } from "@/i18n"
 
 function isActivePath(pathname: string, path: string) {
   const p = pathname.endsWith("/") ? pathname : `${pathname}/`
+  // The home link ("/" or "/ar/") is active only on the home page; the others also on their sub-pages.
+  if (path === "/" || path === "/ar/") return p === path
   return p === path || p.startsWith(path)
 }
 
@@ -28,6 +30,7 @@ export default function Navbar({ locale }: { locale: Locale }) {
   const onBrand = !scrolled && !isOpen
 
   const nav = [
+    { name: d.nav.home, path: localePath(locale, "/") },
     { name: d.nav.apps, path: localePath(locale, "/apps/") },
     { name: d.nav.projects, path: localePath(locale, "/projects/") },
     { name: d.nav.notebook, path: localePath(locale, "/notebook/") },
@@ -89,7 +92,22 @@ export default function Navbar({ locale }: { locale: Locale }) {
       <div className="mx-auto flex h-[72px] w-full max-w-[1240px] items-center justify-between gap-4 px-5 md:px-10">
         {/* Start side: the wordmark with the page links right beside it, so the menu sits where
             reading starts (left in English, right in Arabic). The actions go to the far end. */}
-        <div className="flex items-center gap-10">
+        <div className="flex items-center gap-3 lg:gap-10">
+          {/* Phones: the menu button comes first, on the reading side (left in English, right in Arabic). */}
+          <button
+            type="button"
+            className={cn(
+              "press relative inline-flex h-10 w-10 items-center justify-center rounded-full border-[1.5px] lg:hidden",
+              onBrand ? "border-white/55" : isOpen ? "border-foreground bg-foreground text-background" : "border-foreground/20",
+            )}
+            onClick={() => setIsOpen((o) => !o)}
+            aria-expanded={isOpen}
+            aria-controls="mobile-nav"
+            aria-label={isOpen ? d.menuClose : d.menuOpen}
+          >
+            <Menu size={18} className={cn("absolute transition duration-300", isOpen ? "rotate-90 scale-50 opacity-0" : "opacity-100")} />
+            <X size={18} className={cn("absolute transition duration-300", isOpen ? "opacity-100" : "-rotate-90 scale-50 opacity-0")} />
+          </button>
         <a href={home} dir="ltr" className="group text-[15px] font-bold tracking-tight">
           ahmadnayfeh
           <span className="opacity-60 transition-opacity group-hover:opacity-100">.com</span>
@@ -135,20 +153,6 @@ export default function Navbar({ locale }: { locale: Locale }) {
         <div className="flex items-center gap-2 lg:hidden">
           {langSwitch}
           <ThemeToggle onBrand={onBrand} />
-          <button
-            type="button"
-            className={cn(
-              "press relative inline-flex h-10 w-10 items-center justify-center rounded-full border-[1.5px]",
-              onBrand ? "border-white/55" : isOpen ? "border-foreground bg-foreground text-background" : "border-foreground/20",
-            )}
-            onClick={() => setIsOpen((o) => !o)}
-            aria-expanded={isOpen}
-            aria-controls="mobile-nav"
-            aria-label={isOpen ? d.menuClose : d.menuOpen}
-          >
-            <Menu size={18} className={cn("absolute transition duration-300", isOpen ? "rotate-90 scale-50 opacity-0" : "opacity-100")} />
-            <X size={18} className={cn("absolute transition duration-300", isOpen ? "opacity-100" : "-rotate-90 scale-50 opacity-0")} />
-          </button>
         </div>
       </div>
 
