@@ -7,7 +7,8 @@
  */
 import yaml from "js-yaml"
 
-export type Kind = "article" | "essay" | "reading"
+/** A technical article, or one of the owner's own essays. (The old "reading" kind was removed.) */
+export type Kind = "article" | "essay"
 export type Lang = "ar" | "en"
 
 /** What the writing form holds. */
@@ -15,10 +16,6 @@ export interface Draft {
   kind: Kind
   lang: Lang
   title: string
-  /** Reading notes: the book and its author. */
-  source: string
-  /** Reading notes: the passage. */
-  quote: string
   body: string
   summary: string
   /** Separated by commas. */
@@ -41,7 +38,6 @@ export interface PostFile {
   lang: Lang
   tags: string[]
   excerpt: string
-  source: string
   /** The frontmatter as written, including fields the form does not edit. */
   data: Record<string, unknown>
   /** Everything after the frontmatter. */
@@ -55,7 +51,7 @@ export function today() {
 }
 
 export function emptyDraft(): Draft {
-  return { kind: "reading", lang: "ar", title: "", source: "", quote: "", body: "", summary: "", tags: "", date: today(), raw: false }
+  return { kind: "essay", lang: "ar", title: "", body: "", summary: "", tags: "", date: today(), raw: false }
 }
 
 /** A file name made of Latin letters and digits; Arabic titles get the kind and the time instead. */
@@ -124,17 +120,9 @@ export function unescapeForMdx(text: string): string {
   )
 }
 
-function quoteBlock(text: string) {
-  return text
-    .trim()
-    .split("\n")
-    .map((l) => `> ${l}`)
-    .join("\n")
-}
-
-/** The text of the entry as typed: for a reading note, the passage as a quotation, then the comment. */
+/** The text of the entry as typed. */
 function plainBody(d: Draft): string {
-  return d.kind === "reading" ? [d.quote.trim() && quoteBlock(d.quote), d.body.trim()].filter(Boolean).join("\n\n") : d.body.trim()
+  return d.body.trim()
 }
 
 /** True when the form has enough to save. */
@@ -150,7 +138,7 @@ function tagList(tags: string): string[] {
 }
 
 /** The fields the form writes; any other field of an edited file is kept after them. */
-const FORM_FIELDS = ["title", "slug", "date", "tags", "excerpt", "language", "kind", "source"]
+const FORM_FIELDS = ["title", "slug", "date", "tags", "excerpt", "language", "kind"]
 
 /**
  * The whole file for a draft.
@@ -160,7 +148,7 @@ const FORM_FIELDS = ["title", "slug", "date", "tags", "excerpt", "language", "ki
 export function buildPostFile(d: Draft, opts: { slug?: string; existing?: Record<string, unknown> }): string {
   const existing = opts.existing ?? {}
   const slug = opts.slug ?? (typeof existing.slug === "string" && existing.slug ? existing.slug : undefined)
-  const excerpt = (d.summary.trim() || (d.raw ? "" : (d.kind === "reading" && d.quote.trim() ? d.quote : d.body).trim().replace(/\s+/g, " ").slice(0, 180))).trim()
+  const excerpt = (d.summary.trim() || (d.raw ? "" : d.body.trim().replace(/\s+/g, " ").slice(0, 180))).trim()
   const rest: Record<string, unknown> = {}
   for (const [k, v] of Object.entries(existing)) if (!FORM_FIELDS.includes(k)) rest[k] = v
   const front = [
@@ -172,7 +160,6 @@ export function buildPostFile(d: Draft, opts: { slug?: string; existing?: Record
     `excerpt: ${JSON.stringify(excerpt)}`,
     `language: ${JSON.stringify(d.lang)}`,
     `kind: ${JSON.stringify(d.kind)}`,
-    ...(d.source.trim() ? [`source: ${JSON.stringify(d.source.trim())}`] : []),
     ...(Object.keys(rest).length ? [yaml.dump(rest, { lineWidth: -1 }).trimEnd()] : []),
     "---",
     "",
@@ -204,11 +191,11 @@ export function parsePostFile(fileName: string, text: string): PostFile | null {
     title,
     date,
     // The same defaults as PostFrontmatter in lib/schemas.ts.
-    kind: fm.kind === "essay" || fm.kind === "reading" ? fm.kind : "article",
+    // A file that still carries the removed kind "reading" is an essay, as in the schema.
+    kind: fm.kind === "essay" || fm.kind === "reading" ? "essay" : "article",
     lang: fm.language === "ar" ? "ar" : "en",
     tags: Array.isArray(fm.tags) ? fm.tags.filter((x): x is string => typeof x === "string") : [],
     excerpt: str(fm.excerpt),
-    source: str(fm.source),
     data: fm,
     body: text.slice(m[0].length),
   }
@@ -224,8 +211,6 @@ export function draftFromPost(post: PostFile): Draft {
     kind: post.kind,
     lang: post.lang,
     title: post.title,
-    source: post.source,
-    quote: "",
     body: "",
     summary: post.excerpt,
     tags: post.tags.join(post.lang === "ar" ? "، " : ", "),
@@ -233,13 +218,7 @@ export function draftFromPost(post: PostFile): Draft {
     raw: false,
   }
   const typed = unescapeForMdx(saved)
-  let draft: Draft = { ...base, body: typed }
-  if (post.kind === "reading") {
-    const lines = typed.split("\n")
-    let n = 0
-    while (n < lines.length && lines[n].startsWith(">")) n++
-    draft = { ...base, quote: lines.slice(0, n).map((l) => l.replace(/^> ?/, "")).join("\n"), body: lines.slice(n).join("\n").trim() }
-  }
+  const draft: Draft = { ...base, body: typed }
   if (escapeForMdx(plainBody(draft)) === saved) return draft
   return { ...base, body: post.body, raw: true }
 }

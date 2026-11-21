@@ -3,7 +3,7 @@ import BlogGrid from "@/components/BlogGrid"
 import { getAllPosts } from "@/lib/content"
 import { otherLocale, t, type Locale } from "@/i18n"
 
-/** Everything written: articles, essays and reading notes, each in its own language. */
+/** Everything written, in two groups: technical articles and essays. Each piece keeps its own language. */
 export default async function NotebookIndexView({ locale }: { locale: Locale }) {
   const d = t(locale)
   const od = t(otherLocale(locale))

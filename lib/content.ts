@@ -345,7 +345,6 @@ export async function getAllPosts(): Promise<Post[]> {
                 featured: fm.featured,
                 lang: fm.language,
                 kind: fm.kind,
-                source: fm.source,
             });
         }
     }
@@ -377,7 +376,6 @@ export async function getAllPostsWithContent(): Promise<FullPost[]> {
                 featured: fm.featured,
                 lang: fm.language,
                 kind: fm.kind,
-                source: fm.source,
             });
         }
     }

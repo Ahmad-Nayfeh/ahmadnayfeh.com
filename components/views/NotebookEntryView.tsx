@@ -40,9 +40,13 @@ export default async function NotebookEntryView({ slug, locale }: { slug: string
         contentLang={post.lang}
         eyebrow={
           <span className="flex flex-wrap items-center gap-x-4 gap-y-1">
-            <a href={localePath(locale, "/notebook/")} className="inline-flex items-center gap-2 hover:text-white">
+            <a href={localePath(locale, "/notebook/")} className="link-grow inline-flex items-center gap-2 pb-0.5 hover:text-white">
               <Back size={14} /> {d.notebookPage.back}
             </a>
+            <span aria-hidden className="opacity-40">
+              /
+            </span>
+            <span>{d.notebookPage.kindOne[post.kind]}</span>
             <span aria-hidden className="opacity-40">
               /
             </span>
@@ -55,9 +59,8 @@ export default async function NotebookEntryView({ slug, locale }: { slug: string
         }
         title={post.title}
         lead={
-          post.excerpt || post.source ? (
+          post.excerpt ? (
             <span lang={post.lang} dir={dir} className="block">
-              {post.source && <span className="mb-2 block font-semibold">{post.source}</span>}
               {post.excerpt}
             </span>
           ) : undefined
@@ -69,7 +72,7 @@ export default async function NotebookEntryView({ slug, locale }: { slug: string
               <li key={tag}>
                 <a
                   href={`${localePath(locale, "/notebook/")}?tag=${encodeURIComponent(tag)}`}
-                  className="inline-block rounded-full border border-white/30 px-3 py-1 text-[13.5px] hover:border-white hover:bg-white/10"
+                  className="chip-on-dark !font-normal"
                 >
                   {tag}
                 </a>
@@ -82,7 +85,7 @@ export default async function NotebookEntryView({ slug, locale }: { slug: string
       <div className="mx-auto w-full max-w-[1240px] px-5 pb-20 md:px-10 md:pb-28">
         <article lang={post.lang} dir={dir}>
           {hasCover && (
-            <div className="relative mx-auto mt-10 aspect-[16/9] max-w-[1080px] overflow-hidden rounded-[22px] border border-border bg-card">
+            <div className="media-tile relative mx-auto mt-10 aspect-[16/9] max-w-[1080px] !rounded-[22px]">
               <Image src={post.coverImage} alt="" fill className="object-contain p-2" priority sizes="(max-width: 1080px) 100vw, 1080px" />
             </div>
           )}
@@ -101,7 +104,7 @@ export default async function NotebookEntryView({ slug, locale }: { slug: string
 
         {related.length > 0 && (
           <section className="mx-auto mt-20 max-w-[1080px]">
-            <h2 className="font-display pb-5 text-[clamp(1.75rem,4vw,2.5rem)] leading-none rtl:leading-[1.4]">{d.notebookPage.keep}</h2>
+            <h2 data-reveal className="font-display pb-5 text-[clamp(1.75rem,4vw,2.5rem)] leading-none rtl:leading-[1.4]">{d.notebookPage.keep}</h2>
             <RelatedPosts posts={related} locale={locale} />
           </section>
         )}
