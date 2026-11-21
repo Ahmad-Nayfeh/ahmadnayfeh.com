@@ -1,9 +1,11 @@
 import BiHeading from "@/components/BiHeading"
 import type { WorkContent } from "@/types"
-import { otherLocale, t, type Locale } from "@/i18n"
+import { ArrowLeft, ArrowRight } from "lucide-react"
+import { localePath, otherLocale, t, type Locale } from "@/i18n"
 
 /** Current job in brief: role, products, what the work involves, and the automation side. */
-export default function WorkSection({ work, locale }: { work: WorkContent; locale: Locale }) {
+/** `compact` (home page): the role and the products only, with a link to the About page for the rest. */
+export default function WorkSection({ work, locale, compact = false }: { work: WorkContent; locale: Locale; compact?: boolean }) {
   const d = t(locale)
   return (
     <section id="work" className="mx-auto w-full max-w-[1240px] px-5 pt-20 md:px-10 md:pt-24">
@@ -23,6 +25,7 @@ export default function WorkSection({ work, locale }: { work: WorkContent; local
         </div>
       </div>
 
+      {!compact && (
       <ol className="mt-10 grid grid-cols-1 gap-x-8 sm:grid-cols-2 md:grid-cols-4">
         {work.steps.map((step, i) => (
           <li key={step.title} data-reveal className="group relative border-t border-border py-5 before:absolute before:-top-px before:start-0 before:h-[2px] before:w-10 before:bg-accent before:transition-[width] before:duration-500 before:ease-out hover:before:w-full">
@@ -34,9 +37,15 @@ export default function WorkSection({ work, locale }: { work: WorkContent; local
           </li>
         ))}
       </ol>
+      )}
 
-      {work.automation && (
+      {!compact && work.automation && (
         <p data-reveal className="panel mt-6 max-w-4xl border-s-[3px] border-accent px-6 py-5 text-[1.05rem] leading-relaxed text-foreground/90">{work.automation}</p>
+      )}
+      {compact && (
+        <a href={localePath(locale, "/about/")} data-reveal className="group link-grow mt-7 inline-flex items-center gap-2 pb-1.5 text-[15px] font-semibold text-accent">
+          {d.experience.more} {locale === "ar" ? <ArrowLeft size={16} className="nudge-x" /> : <ArrowRight size={16} className="nudge-x" />}
+        </a>
       )}
     </section>
   )

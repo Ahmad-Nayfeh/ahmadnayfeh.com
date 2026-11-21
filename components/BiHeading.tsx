@@ -24,19 +24,10 @@ export default function BiHeading({
   /** "onDark" for headings placed on the ink or blue blocks. */
   tone?: "default" | "onDark"
 }) {
-  const o = otherLocale(locale)
   return (
     <div data-reveal className={cn("flex flex-wrap items-end justify-between gap-x-8 gap-y-4 pb-7", className)}>
-      <Tag className="font-display flex flex-wrap items-baseline gap-x-4 text-[clamp(2.5rem,7vw,4.75rem)] leading-[0.95] rtl:leading-[1.3]">
+      <Tag className="font-display flex flex-wrap items-baseline gap-x-4 text-[clamp(2rem,5.6vw,3.8rem)] leading-[0.95] rtl:leading-[1.3]">
         {title}
-        <span
-          lang={o}
-          dir={dirOf(o)}
-          aria-hidden
-          className={cn("font-display text-[0.56em]", tone === "onDark" ? "text-[#8FA2FF]" : "text-accent")}
-        >
-          {other}
-        </span>
       </Tag>
       {action}
     </div>

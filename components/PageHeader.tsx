@@ -36,20 +36,12 @@ export default function PageHeader({
     <section className="brand-block -mt-[72px] pt-[72px]">
       <div className="mx-auto w-full max-w-[1240px] px-5 pb-12 pt-10 md:px-10 md:pb-16 md:pt-14">
         {eyebrow && <div className="enter mb-5 text-[14.5px] font-medium text-white/75">{eyebrow}</div>}
-        {other && (
-          <div className="flex justify-start" aria-hidden>
-            <span lang={o} dir={dirOf(o)} className="enter-side font-display block text-[clamp(1.9rem,7vw,5rem)] leading-[1.1] text-[#5873EA]">
-              {other}
-            </span>
-          </div>
-        )}
         <h1
           lang={contentLang}
           dir={contentLang ? dirOf(contentLang) : undefined}
           className={cn(
             "enter font-display text-balance rtl:leading-[1.25]",
-            size === "lg" ? "text-[clamp(2.75rem,10vw,7.5rem)] leading-[0.92]" : "text-[clamp(2rem,5.2vw,3.75rem)] leading-[1.02]",
-            other && "-mt-[0.04em] rtl:mt-0",
+            size === "lg" ? "text-[clamp(2.3rem,8vw,6rem)] leading-[0.92]" : "text-[clamp(2rem,5.2vw,3.75rem)] leading-[1.02]",
           )}
           style={step(1)}
         >

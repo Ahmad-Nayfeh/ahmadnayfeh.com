@@ -115,7 +115,7 @@ const en = {
     present: "Present",
   },
   notFound: { title: "Page not found.", body: "This page doesn't exist. It may have been moved or removed.", home: "Back to home" },
-  experience: { kicker: "Work", products: "Products" },
+  experience: { kicker: "Work", products: "Products", more: "More about my work" },
   projects: {
     kicker: "Projects",
     title: "Engineering and research work.",
@@ -240,7 +240,7 @@ const ar: Dict = {
     present: "حتى الآن",
   },
   notFound: { title: "الصفحة غير موجودة.", body: "هذه الصفحة غير موجودة. ربما نُقلت أو حُذفت.", home: "العودة إلى الرئيسية" },
-  experience: { kicker: "العمل", products: "المنتجات" },
+  experience: { kicker: "العمل", products: "المنتجات", more: "المزيد عن عملي" },
   projects: {
     kicker: "المشاريع",
     title: "أعمال هندسية وبحثية.",
