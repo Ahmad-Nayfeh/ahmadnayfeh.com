@@ -2,7 +2,8 @@ import { FileDown, Mail } from "lucide-react"
 import PageHeader from "@/components/PageHeader"
 import BiHeading from "@/components/BiHeading"
 import MarkdownRenderer from "@/components/MarkdownRenderer"
-import { getAboutContent } from "@/lib/content"
+import WorkSection from "@/components/home/WorkSection"
+import { getAboutContent, getWorkContent } from "@/lib/content"
 import { siteConfig } from "@/config/site"
 import type { EducationItem, ExperienceItem } from "@/types"
 import { otherLocale, ownerName, t, type Locale } from "@/i18n"
@@ -37,7 +38,7 @@ const wrap = "mx-auto w-full max-w-[1240px] px-5 md:px-10"
 export default async function AboutView({ locale }: { locale: Locale }) {
   const d = t(locale)
   const od = t(otherLocale(locale))
-  const about = await getAboutContent(locale)
+  const [about, work] = await Promise.all([getAboutContent(locale), getWorkContent(locale)])
   const entries = toEntries(about.experience, about.education)
 
   return (
@@ -68,6 +69,9 @@ export default async function AboutView({ locale }: { locale: Locale }) {
           </div>
         </dl>
       </section>
+
+      {/* The current job in full: products, the four steps and the automation note (the home page shows a short version). */}
+      {work && <WorkSection work={work} locale={locale} />}
 
       <section className={`${wrap} pt-20 md:pt-24`}>
         <BiHeading locale={locale} title={d.aboutPage.timeline} other={od.aboutPage.timeline} />
