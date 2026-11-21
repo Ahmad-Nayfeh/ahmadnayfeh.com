@@ -1,0 +1,13 @@
+{
+  "hidden": {
+    "apps": [],
+    "projects": [],
+    "posts": [],
+    "sections": []
+  },
+  "home": {
+    "apps": ["voxa", "khatwa", "shasha"],
+    "projects": 3,
+    "posts": 3
+  }
+}

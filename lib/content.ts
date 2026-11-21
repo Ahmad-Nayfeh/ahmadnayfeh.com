@@ -1,4 +1,5 @@
 import fs from "fs"
+import { isHidden } from "@/lib/settings"
 import path from "path"
 import matter from "gray-matter"
 // Ensure all necessary types from your types/index.ts are imported
@@ -228,7 +229,7 @@ export async function getAllProjects(locale: Lang = "en"): Promise<Project[]> {
     return acc;
   }, []);
 
-  return projects.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+  return projects.filter((x) => !isHidden("projects", x.slug)).sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 }
 
 // Get all projects with content
@@ -270,7 +271,7 @@ export async function getAllProjectsWithContent(locale: Lang = "en"): Promise<Fu
     return acc;
   }, []);
 
-  return projects.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+  return projects.filter((x) => !isHidden("projects", x.slug)).sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 }
 
 // New Get featured projects
@@ -332,7 +333,7 @@ export async function getAllPosts(): Promise<Post[]> {
     return acc;
   }, []);
 
-  return posts.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+  return posts.filter((x) => !isHidden("posts", x.slug)).sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 }
 
 // Get all blog posts with content
@@ -364,7 +365,7 @@ export async function getAllPostsWithContent(): Promise<FullPost[]> {
     return acc;
   }, []);
 
-  return posts.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+  return posts.filter((x) => !isHidden("posts", x.slug)).sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 }
 
 // New Get Featured blog posts
