@@ -86,14 +86,14 @@ For each app, in this order: **Shadhra, Reel, Khatwa, Grid Shift, Munazara, Shas
 5. Reinstall the new build on your own devices.
 6. Tick the app in `checklist.md`.
 
-## Step 9. Set up your private writing page (optional, any time after step 5)
+## Step 9. Set up your private admin page (optional, any time after step 5)
 
-The page `https://ahmadnayfeh.com/write/` lets you publish a notebook entry (a reading note, an essay or an article) from your phone. It works only with a key that you create once. Nobody else can publish: without your key the form cannot save anything.
+The page `https://ahmadnayfeh.com/admin/` is your control panel, in Arabic. From it you publish and edit notebook entries (a reading note, an essay or an article), hide or show apps, projects and notebook entries, and choose what the home page shows. It works only with a key that you create once. Nobody else can change anything: without your key the page cannot save. The old address `/write/` now opens this page, and a key you saved there still works.
 
 **Create the key (once, on a computer).**
 
 1. Open `https://github.com/settings/personal-access-tokens/new`.
-2. **Token name:** `ahmadnayfeh.com writing page`.
+2. **Token name:** `ahmadnayfeh.com admin page`.
 3. **Expiration:** choose one year (you repeat these steps when it expires).
 4. **Repository access:** choose **Only select repositories**, then pick `ahmadnayfeh.com`. Do not select any other repository.
 5. **Permissions**, then **Repository permissions**, then **Contents:** set to **Read and write**. Leave everything else as it is.
@@ -101,11 +101,13 @@ The page `https://ahmadnayfeh.com/write/` lets you publish a notebook entry (a r
 
 **Put the key on your phone (once per device).**
 
-1. Open `https://ahmadnayfeh.com/write/` on the phone.
-2. Paste the key and press **Save key on this device**.
+1. Open `https://ahmadnayfeh.com/admin/` on the phone.
+2. Paste the key and press **احفظ المفتاح على هذا الجهاز**.
 3. Optional: in the browser menu choose **Add to Home screen**, so it opens like an app.
 
-**Publish.** Choose the kind, the language, fill in the text, press **Publish**. The piece is on the site about two minutes later.
+**Use it.** The page has three tabs: **كتابة** to write, **الدفتر** to edit, hide or delete what you wrote, **الظهور** to choose what the site shows. Every save is on the site about two minutes later.
+
+Hiding removes an item from the site only. Its file stays in the public GitHub repository, so hiding is not a way to keep something secret.
 
 If you lose the phone: open `https://github.com/settings/personal-access-tokens`, find the key and click **Revoke**. The key can only change files in this one repository.
 

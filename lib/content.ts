@@ -191,6 +191,25 @@ function projectFilesFor(locale: Lang): string[] {
   })
 }
 
+/**
+ * Every project, hidden ones included, with its Arabic title when it has one.
+ * Only the admin page (/admin/) uses this, to list what can be hidden.
+ */
+export function listProjectsForAdmin(): { slug: string; name: string }[] {
+  const all = readDirectory("projects").filter((f) => f.endsWith(".md"))
+  return all
+    .filter((f) => !f.endsWith(".ar.md"))
+    .map((file) => {
+      const en = readMarkdownFile(`projects/${file}`)?.data ?? {}
+      const arFile = file.replace(/\.md$/, ".ar.md")
+      const ar = all.includes(arFile) ? readMarkdownFile(`projects/${arFile}`)?.data ?? {} : {}
+      // The same rule as getAllProjects below.
+      const slug = (typeof en.slug === "string" && en.slug) || file.replace(/\.md$/, "")
+      return { slug, name: String(ar.title || en.title || slug) }
+    })
+    .sort((a, b) => a.slug.localeCompare(b.slug))
+}
+
 // Get all projects
 export async function getAllProjects(locale: Lang = "en"): Promise<Project[]> {
   const projectFiles = projectFilesFor(locale)

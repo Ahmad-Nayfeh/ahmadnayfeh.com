@@ -23,7 +23,8 @@ export interface AppEntry {
 
 const img = (f: string) => `/images/apps/${f}`
 
-const allApps: AppEntry[] = [
+/** Every app, hidden ones included. Only the admin page reads this; the site uses `apps`. */
+export const allApps: AppEntry[] = [
   {
     slug: "shadhra",
     group: "sync",
