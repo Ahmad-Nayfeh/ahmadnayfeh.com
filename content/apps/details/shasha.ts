@@ -363,7 +363,7 @@ export const detail: AppDetail = {
     },
     {
       en: "Made by Ahmad Nayfeh. Sponsored segments are skipped using SponsorBlock data (sponsor.ajay.app).",
-      ar: "صنعه أحمد نايفة. تخطّي المقاطع الدعائية ببيانات SponsorBlock (sponsor.ajay.app).",
+      ar: "صنعه أحمد نايفه. تخطّي المقاطع الدعائية ببيانات SponsorBlock (sponsor.ajay.app).",
     },
   ],
   links: [

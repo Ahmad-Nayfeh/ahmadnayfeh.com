@@ -212,7 +212,7 @@ export const detail: AppDetail = {
           title: { en: "Who sees your visit?", ar: "من يرى زيارتك للموقع؟" },
           body: {
             en: "The site is hosted on GitHub Pages at ahmadnayfeh.com, and GitHub logs visitor IP addresses for security. The part of the link after \"#\" (which holds the key) is never sent to any server.",
-            ar: "الموقع مستضاف على GitHub Pages بالعنوان ahmadnayfeh.com، وGitHub يسجّل عناوين IP للزوار لأغراض أمنية. الجزء الذي بعد «#» في الرابط (وفيه المفتاح) لا يُرسل إلى أي خادم.",
+            ar: "الموقع مستضاف على GitHub Pages بالعنوان ahmadnayfeh.com، و GitHub يسجّل عناوين IP للزوار لأغراض أمنية. الجزء الذي بعد «#» في الرابط (وفيه المفتاح) لا يُرسل إلى أي خادم.",
           },
         },
         {
@@ -244,7 +244,7 @@ export const detail: AppDetail = {
       title: { en: "The \"Status\" page", ar: "صفحة «الحالة»" },
       body: {
         en: "The first thing you see: \"Waiting on you\", meaning points you owe a reply on, and points where it is \"your move\" after your friend answered. The same is shown for your friend.",
-        ar: "أول ما تراه: «بانتظارك» — نقاط عليك الرد عليها، ونقاط «دورك» فيها بعد أن أجاب صاحبك. وكذلك ما ينتظر صاحبك، بالطريقة نفسها.",
+        ar: "أول ما تراه «بانتظارك»: نقاط عليك الرد عليها، ونقاط «دورك» فيها بعد أن أجاب صاحبك. وكذلك ما ينتظر صاحبك، بالطريقة نفسها.",
       },
     },
     {
@@ -290,7 +290,7 @@ export const detail: AppDetail = {
     },
     {
       en: "The explainer is a video with Arabic narration and captions (about 6 minutes): the problem it solves, the idea, and how to use it.",
-      ar: "الشرح فيديو بتعليق صوتي عربي (قرابة ٦ دقائق): المشكلة التي يحلّها التطبيق، وفكرته، وكيف تستخدمه.",
+      ar: "الشرح فيديو بتعليق صوتي عربي (قرابة 6 دقائق): المشكلة التي يحلّها التطبيق، وفكرته، وكيف تستخدمه.",
     },
     {
       en: "The rules of debate etiquette inside the app are adapted from the debate etiquette of al-Shinqiti and others.",

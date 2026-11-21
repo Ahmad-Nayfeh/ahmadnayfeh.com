@@ -15,7 +15,7 @@ export const detail: AppDetail = {
     { en: "Free browser game", ar: "لعبة متصفح مجانية" },
     { en: "Arabic and English", ar: "عربي وإنجليزي" },
     { en: "Phone and computer", ar: "جوال وكمبيوتر" },
-    { en: "No download, no sign-up, no ads", ar: "بلا تحميل، بلا تسجيل، بلا إعلانات" },
+    { en: "No download, no sign-up, no ads", ar: "بلا تنزيل، بلا تسجيل، بلا إعلانات" },
   ],
   downloads: [
     {
@@ -169,7 +169,7 @@ export const detail: AppDetail = {
   notes: [
     {
       en: "The game is built on published standards and references (short-circuit calculations to IEC 60909, protection curves to IEC 60255 and IEEE), and every simplification is written down inside the game under \"Model notes\".",
-      ar: "اللعبة مبنية على مواصفات ومراجع منشورة (حسابات قصر الدائرة IEC 60909، ومنحنيات الحماية IEC 60255 وIEEE)، وكل تبسيط مكتوب داخل اللعبة في «ملاحظات النموذج».",
+      ar: "اللعبة مبنية على مواصفات ومراجع منشورة (حسابات قصر الدائرة IEC 60909، ومنحنيات الحماية IEC 60255 و IEEE)، وكل تبسيط مكتوب داخل اللعبة في «ملاحظات النموذج».",
     },
     {
       en: "The voice-over in the video is machine-generated with a synthetic Arabic voice. The video shows the real game.",

@@ -119,7 +119,7 @@ export const allApps: AppEntry[] = [
     kind: { en: "Android app", ar: "تطبيق أندرويد" },
     desc: {
       en: "Ad-free video and music player that plays AC3 and DTS audio and remembers where you stopped.",
-      ar: "مشغّل فيديو وموسيقى بلا إعلانات، يشغّل صوت AC3 وDTS ويتذكّر أين توقفت.",
+      ar: "مشغّل فيديو وموسيقى بلا إعلانات، يشغّل صوت AC3 و DTS ويتذكّر أين توقفت.",
     },
     icon: img("icons/reel.svg"),
   },

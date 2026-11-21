@@ -19,7 +19,7 @@ export const detail: AppDetail = {
   ],
   downloads: [
     {
-      label: { en: "Download the app (APK)", ar: "حمّل التطبيق (APK)" },
+      label: { en: "Download the app (APK)", ar: "نزّل التطبيق (APK)" },
       href: "reading-marathon.apk",
       release: ".",
       kind: "apk",
@@ -199,10 +199,10 @@ export const detail: AppDetail = {
   ],
   install: [
     {
-      title: { en: "Download the file", ar: "حمّل الملف" },
+      title: { en: "Download the file", ar: "نزّل الملف" },
       body: {
         en: "Tap \"Download the app\" on an Android phone.",
-        ar: "اضغط «حمّل التطبيق» من هاتف أندرويد.",
+        ar: "اضغط «نزّل التطبيق» من هاتف أندرويد.",
       },
     },
     {
@@ -256,7 +256,7 @@ export const detail: AppDetail = {
       q: { en: "How do I update the app?", ar: "كيف أحدّث التطبيق؟" },
       a: {
         en: "Download the new version from this page and install it over the old one.",
-        ar: "حمّل الإصدار الجديد من هذه الصفحة وثبّته فوق القديم.",
+        ar: "نزّل الإصدار الجديد من هذه الصفحة وثبّته فوق القديم.",
       },
     },
   ],
