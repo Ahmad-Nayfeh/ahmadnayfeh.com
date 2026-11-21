@@ -20,18 +20,18 @@ export default function Hero({ content, locale }: { content: HomeContent; locale
             <span
               lang={o}
               dir={dirOf(o)}
-              className="enter-side font-display block text-[clamp(2.5rem,11.6vw,9.4rem)] leading-[1.05] text-[#5873EA]"
+              className="enter-side font-display block text-[clamp(2rem,9.2vw,7.4rem)] leading-[1.05] text-[#5873EA]"
             >
               {ownerName[o]}
             </span>
           </div>
-          <h1 style={step(1)} className="enter font-display -mt-[0.06em] text-[clamp(2.9rem,12.5vw,10rem)] leading-[0.9] rtl:mt-0 rtl:leading-[1.2]">
+          <h1 style={step(1)} className="enter font-display -mt-[0.06em] text-[clamp(2.4rem,10vw,8rem)] leading-[0.9] rtl:mt-0 rtl:leading-[1.2]">
             {ownerName[locale]}
           </h1>
         </div>
 
         <div className="grid grid-cols-1 items-end gap-x-14 gap-y-8 pb-12 pt-9 md:pb-14 md:pt-11 lg:grid-cols-[1.1fr_0.9fr]">
-          <p style={step(3)} className="enter max-w-[35rem] text-[1.15rem] leading-[1.55] md:text-[1.3rem]">{content.description}</p>
+          <p style={step(3)} className="enter max-w-[35rem] text-[1.05rem] leading-[1.6] md:text-[1.2rem]">{content.description}</p>
           <div style={step(4)} className="enter flex flex-wrap gap-3 lg:justify-end">
             <a href={localePath(locale, "/apps/")} className="btn btn-on-brand">
               {d.hero.primary}

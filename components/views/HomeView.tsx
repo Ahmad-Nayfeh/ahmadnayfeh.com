@@ -107,12 +107,12 @@ export default async function HomeView({ locale }: { locale: Locale }) {
       </section>
       )}
 
-      {show("work") && work && <WorkSection work={work} locale={locale} />}
+      {show("work") && work && <WorkSection work={work} locale={locale} compact />}
 
       {show("contact") && (
       <section id="contact" className="brand-block mt-20 md:mt-28">
         <div className={`${wrap} py-16 md:py-24`}>
-          <h2 data-reveal className="font-display text-[clamp(2.75rem,9vw,7rem)] leading-[0.92] rtl:leading-[1.25]">{d.contact.title}</h2>
+          <h2 data-reveal className="font-display text-[clamp(2.3rem,7.2vw,5.6rem)] leading-[0.92] rtl:leading-[1.25]">{d.contact.title}</h2>
           <div data-reveal className="mt-8 grid grid-cols-1 items-end gap-x-14 gap-y-8 lg:grid-cols-[1.1fr_0.9fr]">
             <p className="max-w-[35rem] text-[1.1rem] leading-relaxed text-white/85 md:text-[1.2rem]">{d.contact.body}</p>
             <div className="flex flex-col gap-3 lg:items-end">
