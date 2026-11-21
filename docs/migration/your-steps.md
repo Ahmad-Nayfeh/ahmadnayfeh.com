@@ -48,7 +48,7 @@ Why "DNS only": GitHub issues the security certificate (the padlock) itself, and
 
 ## Step 6. One small setting
 
-**The article drafts.** Done, nothing for you to do: the automation that drafted an article twice a month was switched off in both repositories (your choice, 20 November 2026). Its three unreviewed drafts are still open as pull requests in the old `portfolio-website` repository.
+**The article drafts.** Done, nothing for you to do: the automation that drafted an article twice a month was switched off in both repositories (your choice, 20 November 2026). Its three unreviewed drafts in the old `portfolio-website` repository were closed without merging on 21 November 2026 (pull requests 28, 30 and 31; they can be reopened).
 
 **Sign-in for the Reading Marathon admin page.** Postponed (20 November 2026): the Google account that owns this Firebase project cannot be opened at the moment. Do this once the account is recovered.
 
