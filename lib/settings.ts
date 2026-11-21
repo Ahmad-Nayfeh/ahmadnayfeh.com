@@ -8,30 +8,15 @@
  * home.projects / home.posts: how many the home page shows.
  *
  * Hiding removes an item from the built site only. The file and the item stay in the public repository.
+ *
+ * The shape and the validation rules are in lib/settings-shape.ts, which the admin page also uses in
+ * the browser. A new field must be added there (type, parseSettings) and described here.
  */
 import raw from "@/content/site-settings.json"
+import { parseSettings, type SiteSettings } from "@/lib/settings-shape"
 
-export interface SiteSettings {
-  hidden: { apps: string[]; projects: string[]; posts: string[]; sections: string[] }
-  home: { apps: string[]; projects: number; posts: number }
-}
+export type { SiteSettings } from "@/lib/settings-shape"
 
-const list = (v: unknown): string[] => (Array.isArray(v) ? v.filter((x): x is string => typeof x === "string") : [])
-const count = (v: unknown, fallback: number) => (typeof v === "number" && v >= 0 && v <= 12 ? Math.floor(v) : fallback)
-const r = raw as { hidden?: Record<string, unknown>; home?: Record<string, unknown> }
-
-export const settings: SiteSettings = {
-  hidden: {
-    apps: list(r.hidden?.apps),
-    projects: list(r.hidden?.projects),
-    posts: list(r.hidden?.posts),
-    sections: list(r.hidden?.sections),
-  },
-  home: {
-    apps: list(r.home?.apps),
-    projects: count(r.home?.projects, 3),
-    posts: count(r.home?.posts, 3),
-  },
-}
+export const settings: SiteSettings = parseSettings(raw)
 
 export const isHidden = (kind: "apps" | "projects" | "posts" | "sections", slug: string) => settings.hidden[kind].includes(slug)
