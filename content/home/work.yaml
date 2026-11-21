@@ -1,7 +1,7 @@
 # Home page "At work" section. Plain language only: no internal codes,
 # customer names, prices, or figures from the employer.
 title: "Electrical Design Engineer at Alfanar"
-intro: "Secondary Switchgear Factory, Riyadh · since January 2026. I own the electrical design of each order I'm assigned, from the first schematic until the unit leaves production."
+intro: "Secondary Switchgear Factory, Riyadh · since January 2026. I own the electrical design of the metered RMU line, from the first schematic until the unit passes its factory test, and I support the other products."
 products:
   - "Ring main units (RMU)"
   - "Metered RMU"
@@ -11,9 +11,9 @@ steps:
   - title: "Design"
     detail: "Electrical schematics for each customer order, built to the customer's and the utility's specifications."
   - title: "Approval"
-    detail: "Drawings go to the customer for review; I resolve their comments until sign-off."
+    detail: "Drawings go to the customer and the consultant for review; I answer their comments until sign-off."
   - title: "Release"
-    detail: "The full production package: drawings, wiring and ferrule lists, labels, and the bill of materials in SAP."
+    detail: "The full production package: drawings, wiring and ferrule lists, labels, and the product data and bill of materials in SAP."
   - title: "Support"
-    detail: "Design point of contact for QC, testing, and production until the unit ships."
-automation: "Alongside the design work I build AI-assisted tools that automate routine design checks and documentation for the team, so errors are caught before they reach production."
+    detail: "Design contact for production, QC and testing. I review design changes and close factory acceptance test comments."
+automation: "Alongside the design work I keep one reference for the product line's data, and I build AI-assisted tools that automate routine design checks and documentation for the team, so errors are caught before they reach production."
