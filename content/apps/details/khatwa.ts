@@ -18,7 +18,7 @@ export const detail: AppDetail = {
   ],
   downloads: [
     {
-      label: { en: "Download the app (APK)", ar: "حمّل التطبيق (APK)" },
+      label: { en: "Download the app (APK)", ar: "نزّل التطبيق (APK)" },
       href: "khatwa.apk",
       release: ".",
       kind: "apk",
@@ -160,7 +160,7 @@ export const detail: AppDetail = {
   ],
   install: [
     {
-      title: { en: "Download the file and open it", ar: "حمّل الملف وافتحه" },
+      title: { en: "Download the file and open it", ar: "نزّل الملف وافتحه" },
       body: {
         en: "If you are asked to \"allow installing from this source\", allow it. If Play Protect blocks it, choose \"Install anyway\".",
         ar: "إن طُلب «السماح بالتثبيت من هذا المصدر» فاسمح به. إن حجبه Play Protect اختر «التثبيت على أي حال».",
@@ -254,12 +254,12 @@ export const detail: AppDetail = {
     ],
     body: {
       en: "A native Android app that I designed, built and released on my own. It is written in Kotlin with Jetpack Compose, Room and WorkManager, with the core logic in a pure-Kotlin module that is tested without the Android SDK. Steps come from the phone's hardware step sensor. Firebase (Auth, Firestore with tested security rules, App Check) backs the optional account and groups, and GitHub Actions runs the unit and emulator tests and publishes signed releases.",
-      ar: "تطبيق أندرويد أصلي صمّمته وبنيته وأصدرته بمفردي. مكتوب بلغة Kotlin مع Jetpack Compose وRoom وWorkManager، والمنطق الأساسي في وحدة Kotlin خالصة تُختبر بلا حاجة إلى Android SDK. الخطوات تُقرأ من حسّاس الخطوات في الجوال. Firebase (Auth وFirestore بقواعد أمان مختبرة وApp Check) للحساب الاختياري والمجموعات، وGitHub Actions يشغّل اختبارات الوحدات واختبارات المحاكي وينشر إصدارات موقّعة.",
+      ar: "تطبيق أندرويد أصلي صمّمته وبنيته وأصدرته بمفردي. مكتوب بلغة Kotlin مع Jetpack Compose و Room و WorkManager، والمنطق الأساسي في وحدة Kotlin خالصة تُختبر بلا حاجة إلى Android SDK. الخطوات تُقرأ من حسّاس الخطوات في الجوال. Firebase (Auth و Firestore بقواعد أمان مختبرة و App Check) للحساب الاختياري والمجموعات، و GitHub Actions يشغّل اختبارات الوحدات واختبارات المحاكي وينشر إصدارات موقّعة.",
     },
     highlights: [
       {
         en: "Native Kotlin and Jetpack Compose, bilingual and right-to-left first",
-        ar: "Kotlin وJetpack Compose أصليان، بلغتين ومن اليمين إلى اليسار أولاً",
+        ar: "Kotlin و Jetpack Compose أصليان، بلغتين ومن اليمين إلى اليسار أولاً",
       },
       {
         en: "Optional phone lock until the daily step goal is met",

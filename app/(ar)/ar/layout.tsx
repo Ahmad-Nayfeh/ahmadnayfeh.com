@@ -3,8 +3,8 @@ import type { Metadata, Viewport } from "next"
 import SiteShell from "@/components/layout/SiteShell"
 import { siteConfig } from "@/config/site"
 
-const title = "أحمد نايفه — مهندس تصميم كهربائي وبرمجيات"
-const description = "مهندس تصميم كهربائي في قواطع الجهد المتوسط، يبني أدوات تعمل بالذكاء الاصطناعي ويُصدر تطبيقات كاملة."
+const title = "أحمد نايفه | مهندس تصميم كهربائي وبرمجيات"
+const description = "مهندس تصميم كهربائي في قواطع الجهد المتوسط، يبني أدوات مدعومة بالذكاء الاصطناعي ويُصدر تطبيقات كاملة."
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),

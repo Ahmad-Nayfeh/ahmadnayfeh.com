@@ -9,25 +9,25 @@ export const detail: AppDetail = {
   },
   intro: {
     en: "A lightweight alternative to MX Player: no ads, no tracking, no accounts. It plays the movies that show up without sound in other players (AC3, E-AC3 and DTS) without any extra pack.",
-    ar: "بديل خفيف لـ MX Player: لا إعلانات، لا تتبّع، لا حسابات. يشغّل الأفلام التي تظهر بلا صوت في المشغّلات الأخرى (AC3 وE-AC3 وDTS) دون أي حزمة إضافية.",
+    ar: "بديل خفيف لـ MX Player: لا إعلانات، لا تتبّع، لا حسابات. يشغّل الأفلام التي تظهر بلا صوت في المشغّلات الأخرى (AC3 و E-AC3 و DTS) دون أي حزمة إضافية.",
   },
   facts: [
     { en: "Completely free", ar: "مجاني تمامًا" },
     { en: "No ads", ar: "لا إعلانات" },
     { en: "No tracking", ar: "لا تتبّع" },
     { en: "No accounts", ar: "لا حسابات" },
-    { en: "Android 8 or newer", ar: "أندرويد 8 فما فوق" },
+    { en: "Android 8 or newer", ar: "أندرويد 8 فأحدث" },
   ],
   downloads: [
     {
-      label: { en: "Download Reel (APK)", ar: "حمّل Reel (APK)" },
+      label: { en: "Download Reel (APK)", ar: "نزّل Reel (APK)" },
       href: "reel.apk",
       release: ".",
       kind: "apk",
       primary: true,
       version: "1.0.0",
       size: "6 MB",
-      note: { en: "Android 8 or newer", ar: "أندرويد 8 فما فوق" },
+      note: { en: "Android 8 or newer", ar: "أندرويد 8 فأحدث" },
     },
   ],
   features: [
@@ -35,7 +35,7 @@ export const detail: AppDetail = {
       title: { en: "Sound for every movie", ar: "صوت لكل الأفلام" },
       body: {
         en: "Built-in FFmpeg decoders for Dolby and DTS audio, which kick in automatically when your phone does not support them.",
-        ar: "محلّلات FFmpeg مدمجة لصوت Dolby وDTS، تعمل تلقائيًا عندما لا يدعمها جوالك.",
+        ar: "محلّلات FFmpeg مدمجة لصوت Dolby و DTS، تعمل تلقائيًا عندما لا يدعمها جوالك.",
       },
     },
     {
@@ -164,10 +164,10 @@ export const detail: AppDetail = {
   ],
   install: [
     {
-      title: { en: "Download", ar: "التحميل" },
+      title: { en: "Download", ar: "التنزيل" },
       body: {
         en: "Tap the download button above from your phone.",
-        ar: "اضغط زر التحميل أعلاه من جوالك.",
+        ar: "اضغط زر التنزيل أعلاه من جوالك.",
       },
     },
     {

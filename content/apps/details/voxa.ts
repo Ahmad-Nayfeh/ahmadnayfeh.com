@@ -31,7 +31,7 @@ export const detail: AppDetail = {
       kind: "apk",
       href: "voxa.apk",
       release: ".",
-      label: { en: "Download the Android app (APK)", ar: "حمّل تطبيق أندرويد (APK)" },
+      label: { en: "Download the Android app (APK)", ar: "نزّل تطبيق أندرويد (APK)" },
       version: "1.0.17",
       size: "14.8 MB",
       note: { en: "Android 7 or newer", ar: "أندرويد 7 فأحدث" },
@@ -137,7 +137,7 @@ export const detail: AppDetail = {
       title: { en: "Open Voxa", ar: "افتح Voxa" },
       body: {
         en: "Straight in the browser, or download the APK file and open it on Android. If you are asked to \"allow installing from this source\", allow it.",
-        ar: "في المتصفح مباشرة، أو حمّل ملف APK وافتحه على أندرويد. إن طُلب «السماح بالتثبيت من هذا المصدر» فاسمح به.",
+        ar: "في المتصفح مباشرة، أو نزّل ملف APK وافتحه على أندرويد. إن طُلب «السماح بالتثبيت من هذا المصدر» فاسمح به.",
       },
     },
     {
@@ -216,7 +216,7 @@ export const detail: AppDetail = {
       q: { en: "How do I update the Android app?", ar: "كيف أحدّث تطبيق أندرويد؟" },
       a: {
         en: "The app checks for a newer version when it opens and offers to download and install it; Android asks you to confirm. You can also check from \"Settings\". If that does not work, download the latest APK file from this page and install it over the old one. Your data stays.",
-        ar: "يتحقق التطبيق من وجود نسخة أحدث عند فتحه ويعرض تنزيلها وتثبيتها، ويطلب أندرويد موافقتك. ويمكنك التحقق أيضاً من «الإعدادات». إن لم ينجح ذلك فحمّل ملف APK الأحدث من هذه الصفحة وثبّته فوق القديم، وتبقى بياناتك.",
+        ar: "يتحقق التطبيق من وجود نسخة أحدث عند فتحه ويعرض تنزيلها وتثبيتها، ويطلب أندرويد موافقتك. ويمكنك التحقق أيضاً من «الإعدادات». إن لم ينجح ذلك فنزّل ملف APK الأحدث من هذه الصفحة وثبّته فوق القديم، وتبقى بياناتك.",
       },
     },
   ],

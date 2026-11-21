@@ -24,7 +24,7 @@ export const detail: AppDetail = {
       primary: true,
     },
     {
-      label: { en: "Get it on Google Play", ar: "حمّله من Google Play" },
+      label: { en: "Get it on Google Play", ar: "نزّله من Google Play" },
       href: "https://play.google.com/store/apps/details?id=app.shadhra",
       kind: "external",
     },
@@ -69,7 +69,7 @@ export const detail: AppDetail = {
       title: { en: "Today's Shadhra", ar: "شذرة اليوم" },
       body: {
         en: "Every day a quote from your library comes back to you: on the home page, in the Android home-screen widget, or in a morning notification at the time you choose.",
-        ar: "كل يوم اقتباس من مكتبتك يعود إليك: في الصفحة الرئيسة، أو في أداة الشاشة الرئيسية على أندرويد، أو في إشعار صباحي في الوقت الذي تختاره.",
+        ar: "كل يوم اقتباس من مكتبتك يعود إليك: في الصفحة الرئيسية، أو في أداة الشاشة الرئيسية على أندرويد، أو في إشعار صباحي في الوقت الذي تختاره.",
       },
     },
   ],
@@ -106,7 +106,7 @@ export const detail: AppDetail = {
       src: "/images/apps/shadhra/talk-to-library.webp",
       caption: {
         en: "Further down the home page: Talk to your library, your counts and On this day",
-        ar: "أسفل الصفحة الرئيسة: حاور مكتبتك، وأعدادك، وفي مثل هذا اليوم",
+        ar: "أسفل الصفحة الرئيسية: حاور مكتبتك، وأعدادك، وفي مثل هذا اليوم",
       },
       shape: "phone",
     },
@@ -161,7 +161,7 @@ export const detail: AppDetail = {
     ],
     body: {
       en: "One FastAPI backend serves both a React web app and an Expo / React Native Android app. The data is in PostgreSQL with Alembic migrations, with pgvector holding the embeddings behind search by meaning and patterns, and an arq worker on Redis runs the OCR and other background jobs. On Android the library is also kept in SQLite on the device, so it works offline and syncs later. The AI layer is one router that every AI feature calls: it walks an ordered chain of providers and falls back when one fails, enforces per-user daily caps, and records every call in a usage ledger. An admin console has feature flags, kill switches and usage dashboards.",
-      ar: "خادم واحد مبني بـ FastAPI يخدم تطبيق ويب بـ React وتطبيق أندرويد بـ Expo / React Native. البيانات في PostgreSQL مع ترحيلات Alembic، وفيها pgvector لتمثيلات المعنى التي يقوم عليها البحث بالمعنى والأنساق، وعامل arq على Redis ينفّذ استخراج النص (OCR) وسائر مهام الخلفية. وعلى أندرويد تُحفظ المكتبة أيضًا في SQLite على الجهاز، فتعمل بلا اتصال ثم تُزامَن. طبقة الذكاء الاصطناعي موجِّه واحد تمرّ به كل المزايا: يجرّب سلسلة مرتّبة من المزوّدين وينتقل إلى التالي عند التعطل، ويطبّق حدًّا يوميًا لكل مستخدم، ويسجّل كل استدعاء في سجل للاستخدام. وللإدارة لوحة فيها مفاتيح لتشغيل المزايا وإيقافها فوراً ولوحات للاستخدام.",
+      ar: "خادم واحد مبني بـ FastAPI يخدم تطبيق ويب بـ React وتطبيق أندرويد بـ Expo / React Native. البيانات في PostgreSQL مع ترحيلات Alembic، وفيها pgvector لتمثيلات المعنى التي يقوم عليها البحث بالمعنى والأنساق، وعامل arq على Redis ينفّذ استخراج النص (OCR) وسائر مهام الخلفية. وعلى أندرويد تُحفظ المكتبة أيضًا في SQLite على الجهاز، فتعمل بلا اتصال ثم تُزامَن. طبقة الذكاء الاصطناعي موجِّه واحد تمرّ به كل المزايا: يجرّب سلسلة مرتّبة من المزوّدين وينتقل إلى التالي عند التعطل، ويطبّق حدًّا يوميًا لكل مستخدم، ويسجّل كل استدعاء في سجل للاستخدام. وللإدارة لوحة فيها مفاتيح لتشغيل المزايا وإيقافها فورًا ولوحات للاستخدام.",
     },
     highlights: [
       {
