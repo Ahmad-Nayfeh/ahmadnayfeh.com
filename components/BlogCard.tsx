@@ -51,7 +51,7 @@ export default function BlogCard({
       )}
       <div className={cn("flex flex-1 flex-col p-6 md:p-7", featured && "md:p-10")}>
         <div className="flex flex-wrap items-center gap-x-3 gap-y-2 text-[13px] font-medium text-muted-foreground">
-          <span lang={locale} className="rounded-full bg-accent/10 px-2.5 py-[3px] font-semibold text-accent">
+          <span lang={locale} dir={locale === "ar" ? "rtl" : "ltr"} className="rounded-full bg-accent/10 px-2.5 py-[3px] font-semibold text-accent">
             {d.kindOne[post.kind]}
           </span>
           <time dateTime={post.date}>{shortDate(post.date, post.lang)}</time>
@@ -62,7 +62,7 @@ export default function BlogCard({
             </span>
           )}
           {foreign && (
-            <span lang={locale} className="chip">
+            <span lang={locale} dir={locale === "ar" ? "rtl" : "ltr"} className="chip">
               {d.langName[post.lang]}
             </span>
           )}
