@@ -24,7 +24,7 @@
 </head>
 <body>
 <main>
-<header><a href="../">← Grid Shift</a> · <a href="FIDELITY.html">FIDELITY</a> · <a href="VALIDATION.html">VALIDATION</a> · <a href="DECISIONS.html">DECISIONS</a> · <a href="SOURCES.html">SOURCES</a> · <a href="SYNTHESIS.html">SYNTHESIS</a><br>Project documentation, published with the game (source revision 639cf54). References to other project files are shown as plain text.</header>
+<header><a href="../">← Grid Shift</a> · <a href="FIDELITY.html">FIDELITY</a> · <a href="VALIDATION.html">VALIDATION</a> · <a href="DECISIONS.html">DECISIONS</a> · <a href="SOURCES.html">SOURCES</a> · <a href="SYNTHESIS.html">SYNTHESIS</a><br>Project documentation, published with the game (source revision 32bdecf). References to other project files are shown as plain text.</header>
 <h1>Decision log</h1>
 <p>Format: <strong>D-NNN — title</strong> (date). Context → Decision → Alternatives rejected → Evidence → Reversibility.</p>
 <h2>D-001 — Work on branch <code>claude/new-session-k41b2n</code> (2026-11-13)</h2>
@@ -177,6 +177,16 @@
 <li><code>scripts/build_docs.mjs</code> (marked, MIT) renders those five files into <code>public/docs/*.html</code> at build time; they ship inside the game folder and are served at <code>https://ahmadnayfeh.com/apps/grid-shift/app/docs/</code>. The in-game links use <code>./docs/&lt;NAME&gt;.html</code>. Links from those pages to other project files are shown as plain text. <code>npm run build</code> and <code>scripts/deploy-site.sh</code> both run it; <code>public/docs/</code> is generated, not committed.</li>
 <li>E2E test: every in-game document link answers 200 and no in-game link points to GitHub.</li>
 <li>Consequence once private: the forwarding page at this repository&#39;s own Pages address stops (Pages on private repositories needs a paid plan); nothing links to it.</li>
+</ul>
+<h2>D-023 — Realistic 3D city view (2026-11-27, owner: &quot;REALITY graphics&quot;)</h2>
+<ul>
+<li>New default view when WebGL is available (<code>src/three/city.ts</code>, lazy chunk ~147 KB gzip; the main bundle is unchanged). The 2D mimic stays one tap away (&quot;Diagram&quot;) and is the fallback without WebGL.</li>
+<li>Night district built from the scenario: 50 m street grid; Riyadh-style plastered villas with boundary walls and apartment blocks, glass windows with frames, rooftop water tanks and AC units, palms, parked cars, mosques, gardens, empty lots; street lamps with light pools; RMU + package-substation kiosk on a plinth at each site; walled grid stations with power transformers; crew trucks with beacons.</li>
+<li>Engine link: every building and street lamp belongs to its nearest RMU, so a blackout is the real one — windows and lamps go dark (with a short flicker) where <code>isEnergised</code> is false; the surrounding city (other feeders) stays lit. Cable routes run along the streets: glowing with moving current when live, grey when dead, red pulse on the cable the player&#39;s evidence has located, green when earthed.</li>
+<li>Labels are HTML (Arabic shaping, spotlight, keyboard); a tap on a label or on equipment opens the device card. Seeded scenery RNG; render layer only.</li>
+<li>Assets: CC0 only (ambientCG textures, Poly Haven night sky) — <code>public/assets3d/LICENSES.md</code>. All models are built in code.</li>
+<li>Quality: high (shadows, ambient occlusion, bloom) on large screens; low on phones; <code>gs.q3d</code> overrides.</li>
+<li>Honest limit: this is a realistic <em>aerial night</em> look built from procedural geometry; close-ups are clean but not photographic (no hand-modelled assets).</li>
 </ul>
 
 </main>
