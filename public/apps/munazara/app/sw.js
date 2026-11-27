@@ -1,6 +1,6 @@
 // Service worker generated at build time (vite.config.ts injects the asset list).
-const VERSION = 'mwpen4n9';
-const ASSETS = ["./","./assets/index-9n0hCBTd.js","./assets/nostr-DFXzN_mT.js","./assets/index-CCliDvTr.css","./index.html","./manifest.webmanifest","./icon.svg","./icon-192.png","./icon-512.png","./frame-guard.js","./fonts/plex-arabic-arabic-400.woff2","./fonts/plex-arabic-arabic-600.woff2","./fonts/plex-arabic-latin-400.woff2","./fonts/plex-arabic-latin-600.woff2"];
+const VERSION = 'mwz17zsb';
+const ASSETS = ["./","./assets/index-CWyb5rl6.js","./assets/nostr-BKfZojZD.js","./assets/index-BCmaKYn3.css","./index.html","./manifest.webmanifest","./icon.svg","./icon-192.png","./icon-512.png","./frame-guard.js","./fonts/plex-arabic-arabic-400.woff2","./fonts/plex-arabic-arabic-600.woff2","./fonts/plex-arabic-latin-400.woff2","./fonts/plex-arabic-latin-600.woff2"];
 const CACHE = `munazara-${VERSION}`;
 self.addEventListener('install', (e) => {
   e.waitUntil(caches.open(CACHE).then((c) => c.addAll(ASSETS)).then(() => self.skipWaiting()));
