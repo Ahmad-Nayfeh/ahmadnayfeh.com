@@ -24,7 +24,7 @@
 </head>
 <body>
 <main>
-<header><a href="../">← Grid Shift</a> · <a href="FIDELITY.html">FIDELITY</a> · <a href="VALIDATION.html">VALIDATION</a> · <a href="DECISIONS.html">DECISIONS</a> · <a href="SOURCES.html">SOURCES</a> · <a href="SYNTHESIS.html">SYNTHESIS</a><br>Project documentation, published with the game (source revision c083ebe). References to other project files are shown as plain text.</header>
+<header><a href="../">← Grid Shift</a> · <a href="FIDELITY.html">FIDELITY</a> · <a href="VALIDATION.html">VALIDATION</a> · <a href="DECISIONS.html">DECISIONS</a> · <a href="SOURCES.html">SOURCES</a> · <a href="SYNTHESIS.html">SYNTHESIS</a><br>Project documentation, published with the game (source revision 8c66864). References to other project files are shown as plain text.</header>
 <h1>Decision log</h1>
 <p>Format: <strong>D-NNN — title</strong> (date). Context → Decision → Alternatives rejected → Evidence → Reversibility.</p>
 <h2>D-001 — Work on branch <code>claude/new-session-k41b2n</code> (2026-11-13)</h2>
@@ -198,6 +198,15 @@
 <ul>
 <li>SCADA tab: standing alarms for the network and the RTU point list of the selected automated RMU, with SEC&#39;s IEC object addresses (32-SDMS-12 Rev.1 App. 2), derived from the live simulation; a switch shows the same points from the RMU/RTU side (DI/DO) and from the SCADA side (status/control). Derivation assumptions are listed per point.</li>
 <li>3D: MSAA on the post-processing target (the canvas flag did not apply, R17-21), SMAA on the low tier; equipment to SEC dimensions and colours (unit substation ≈2.4×1.8×2.2 m, RMU 1.5×1.1×1.7 m, RAL 7035, danger plates, yellow/black RAL 1018 bollards with 183 mm stripes); SEC position flags (ON red, OFF green, EARTH yellow) driven by the simulation; LED/sodium street-lamp mix with glare halos; instanced night traffic with head- and tail-lights. AgX tone mapping was tried and rejected (washed-out night); ACES kept.</li>
+</ul>
+<h2>D-027 — One integrated game: control room, work orders, design review, inspection, codex (2026-11-27)</h2>
+<ul>
+<li>Owner: &quot;one game, not separate games — life is integrated&quot;. The RMU Workshop screens were folded into the main game; <code>#/workshop</code> now opens the codex.</li>
+<li>Home = control room: XP, certifications (Operator I, Switching, Inspector, Design reviewer, Protection) and one work-order inbox: incidents, lessons, SLD design reviews, RMU inspections, protection settings (the grading mode), the daily shift (research/16 C patterns: PCBS/CMS inbox, MSFS certificates, KSP persistence).</li>
+<li>Design review (<code>src/career/</code>): IEC-style SLD with clickable units/settings; 10 cases built from research/17 §4 (M1–M8, M11–M16); feedback states rule, consequence in the network and source with label. A wrong approval puts an incident into the inbox (the design carries into operation). Cases are teaching drawings, not utility designs.</li>
+<li>Inspection: the same city (lesson-2 district, before the fault), nameplate to SEC 32-SDMS-01, functional-unit SLD (LBS–CB–LBS), RTU point list, three questions.</li>
+<li>Codex: 26 sourced cards (research/15–17) unlocked by doing, plus the system journey.</li>
+<li>Fix: finishing lesson 1 is now recorded (it ends at restoration, so the shift-complete hook never ran).</li>
 </ul>
 
 </main>
