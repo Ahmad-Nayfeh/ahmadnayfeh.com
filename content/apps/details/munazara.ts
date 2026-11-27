@@ -26,7 +26,7 @@ export const detail: AppDetail = {
       release: ".",
       kind: "apk",
       primary: true,
-      version: "1.0.0",
+      version: "1.0.1",
       size: "0.9 MB",
       note: { en: "Android 7 or newer, with Chrome", ar: "أندرويد 7 فأحدث، مع متصفح Chrome" },
     },
