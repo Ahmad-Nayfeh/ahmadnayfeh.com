@@ -1,8 +1,26 @@
-[{
-  "relation": ["delegate_permission/common.handle_all_urls"],
-  "target": {
-    "namespace": "android_app",
-    "package_name": "com.readingmarathon.app",
-    "sha256_cert_fingerprints": ["54:D1:D9:FC:58:0C:20:AF:E1:4C:DA:D4:F0:11:B6:30:2F:00:23:B0:BF:F8:BA:C6:9D:36:BD:92:3B:42:2F:15"]
+[
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.readingmarathon.app",
+      "sha256_cert_fingerprints": [
+        "54:D1:D9:FC:58:0C:20:AF:E1:4C:DA:D4:F0:11:B6:30:2F:00:23:B0:BF:F8:BA:C6:9D:36:BD:92:3B:42:2F:15"
+      ]
+    }
+  },
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "app.munazara",
+      "sha256_cert_fingerprints": [
+        "9F:1E:8B:DA:85:1F:73:CF:73:E4:14:41:F9:9E:61:D7:30:22:93:21:2D:AE:AD:C5:97:6C:07:79:1A:A0:5D:48"
+      ]
+    }
   }
-}]
+]
