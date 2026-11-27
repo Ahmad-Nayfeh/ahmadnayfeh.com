@@ -13,7 +13,7 @@ export const detail: AppDetail = {
   },
   facts: [
     { en: "Free", ar: "مجاني" },
-    { en: "Web app", ar: "تطبيق ويب" },
+    { en: "Android app and web app", ar: "تطبيق أندرويد وتطبيق ويب" },
     { en: "Arabic and English", ar: "عربي وإنجليزي" },
     { en: "No accounts, no sign-in", ar: "لا حسابات، ولا تسجيل دخول" },
     { en: "Works offline after the first visit", ar: "يعمل دون اتصال بعد أول زيارة" },
@@ -21,10 +21,19 @@ export const detail: AppDetail = {
   ],
   downloads: [
     {
-      label: { en: "Open the app", ar: "افتح التطبيق" },
+      label: { en: "Download the app (APK)", ar: "نزّل التطبيق (APK)" },
+      href: "munazara.apk",
+      release: ".",
+      kind: "apk",
+      primary: true,
+      version: "1.0.0",
+      size: "0.9 MB",
+      note: { en: "Android 7 or newer, with Chrome", ar: "أندرويد 7 فأحدث، مع متصفح Chrome" },
+    },
+    {
+      label: { en: "Open in the browser", ar: "افتحه في المتصفح" },
       href: "app/",
       kind: "open",
-      primary: true,
     },
   ],
   video: {
