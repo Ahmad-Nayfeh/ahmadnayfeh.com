@@ -1,0 +1,412 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SYNTHESIS — what research says, and what it means for the game · Grid Shift</title>
+<meta name="robots" content="index,follow">
+<style>
+  :root { color-scheme: dark light; --bg: #0d1420; --ink: #e6edf7; --muted: #93a3bd; --line: #2a3a55; --accent: #f5b83d; --link: #47c2ff; }
+  @media (prefers-color-scheme: light) { :root { --bg: #f7f8fb; --ink: #142033; --muted: #55657e; --line: #c9d3e3; --accent: #9a4f06; --link: #0b6fb3; } }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.65 system-ui, -apple-system, 'Segoe UI', 'Noto Sans Arabic', sans-serif; }
+  main { max-width: 980px; margin: 0 auto; padding: 16px; }
+  header { border-bottom: 1px solid var(--line); padding-bottom: 10px; margin-bottom: 16px; font-size: .9rem; color: var(--muted); }
+  header a, main a { color: var(--link); }
+  h1, h2, h3 { line-height: 1.3; } h1 { font-size: 1.8rem; }
+  table { border-collapse: collapse; display: block; overflow-x: auto; max-width: 100%; font-size: .9rem; }
+  th, td { border: 1px solid var(--line); padding: 6px 8px; text-align: start; vertical-align: top; }
+  code { font-family: ui-monospace, Menlo, monospace; font-size: .88em; background: color-mix(in srgb, var(--line) 35%, transparent); padding: 1px 4px; border-radius: 4px; }
+  pre { overflow-x: auto; background: color-mix(in srgb, var(--line) 30%, transparent); padding: 12px; border-radius: 8px; }
+  pre code { background: none; padding: 0; }
+  blockquote { border-inline-start: 3px solid var(--accent); margin: 0; padding: 2px 14px; color: var(--muted); }
+  .repo-ref { border-bottom: 1px dotted var(--muted); }
+</style>
+</head>
+<body>
+<main>
+<header><a href="../">← Grid Shift</a> · <a href="FIDELITY.html">FIDELITY</a> · <a href="VALIDATION.html">VALIDATION</a> · <a href="DECISIONS.html">DECISIONS</a> · <a href="SOURCES.html">SOURCES</a> · <a href="SYNTHESIS.html">SYNTHESIS</a><br>Project documentation, published with the game (source revision 639cf54). References to other project files are shown as plain text.</header>
+<h1>SYNTHESIS — what research says, and what it means for the game</h1>
+<p><em>Status: v3 — rounds 1 + 2 + independent review (research/REVIEW-phase1.md, 31 findings) resolved; see §9 for the resolution table.</em>
+<em>Every claim cites topic-note IDs; the notes cite the primary sources. ID prefixes: K2- (09), SP2- (10), AS2- (11), KSA- (01), SC-/N-/F-/Z-/E-/P-/C-/A- (02), PR- (03), PF- (04), TH- (05), PQ- (06), OP- (07), GD- (08).</em>
+<em>Label convention: <strong>[V]</strong> verified by reading the primary source, <strong>[V-sec]</strong> verified in a faithful secondary reproduction (vendor manual, reprint, national copy), <strong>[S]</strong> snippet / secondary only, <strong>[D]</strong> derived by us (arithmetic or inference), <strong>[A]</strong> game assumption (no source; shown as such in-game).</em></p>
+<hr>
+<h2>1. What the real world of electricity contains (the map)</h2>
+<p>The research supports a map with five layers. Each later layer depends on the earlier ones, which is also the order in which an engine must be built.</p>
+<table>
+<thead>
+<tr>
+<th>Layer</th>
+<th>Contents (examples)</th>
+<th>Key references</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>L1 Network &amp; steady state</strong></td>
+<td>Topology (radial / open ring / tee loop), cables, transformers, switches, loads; power flow, voltage drop, losses, loading</td>
+<td>01 §4, 04</td>
+</tr>
+<tr>
+<td><strong>L2 Faults &amp; abnormal states</strong></td>
+<td>Short circuits (3ph, LL, SLG, DLG) with fault impedance; earthing methods change everything about earth faults; high-impedance faults; open conductors; overload; ferroresonance; surges; sags/swells; harmonics; frequency deviation; loss of PEN at LV</td>
+<td>02, 06</td>
+</tr>
+<tr>
+<td><strong>L3 Protection &amp; detection</strong></td>
+<td>IDMT/DT relays (IEC 60255-151, IEEE C37.112), fuses, fuse-switch combinations, reclosers, FPIs (IEC 62689), CT behaviour, RCDs/MCBs at LV; coordination (CTI), maloperation causes</td>
+<td>03, 02 §4, 06 §9</td>
+</tr>
+<tr>
+<td><strong>L4 Operation &amp; safety</strong></td>
+<td>Control-room fault response, FPI-guided sectionalising, backfeed from the normally open point, switching schedules, safety documents and the five safety rules, interlocks, re-energisation delays, crews, SCADA/FLISR</td>
+<td>07</td>
+</tr>
+<tr>
+<td><strong>L5 Planning, assets &amp; economics</strong></td>
+<td>Load growth, ring loading rules, cable/transformer sizing, thermal ageing (IEC 60076-7), condition monitoring (PD, DGA, thermography), maintenance strategy, losses and owning cost, reliability indices (SAIDI/SAIFI/CML), DER/EV/storage integration, system frequency balancing</td>
+<td>01, 05, 06 §7–8, 07 §5</td>
+</tr>
+</tbody></table>
+<p><strong>The Saudi distribution reality is unusually well documented</strong> in public SEC documents (mostly 2004–2008 editions, so dated):</p>
+<ul>
+<li>60 Hz, normal band 59.9–60.1 Hz [V, KSA-03/04].</li>
+<li>MV standard 13.8 kV and 33 kV; Riyadh grid stations 132/13.8 kV [V for voltages; S for Riyadh station detail].</li>
+<li><strong>Open single loop between two grid stations is SEC&#39;s preferred feeder configuration</strong>, operated radially with a normally open point; feeders loaded to <strong>50 %</strong> (single loop) / <strong>65 %</strong> (tee loop); <strong>indicatively ≤ 7.5 km</strong> to the open point at 13.8 kV (&quot;as indication to the planning engineers&quot;) [V, KSA-02, DPS 2004 §2.2.3]. DPS also allocates only <strong>1.5 % voltage drop to the MV primary feeder</strong> (Table 1.3), %VD = kVA·km/K with K = 11,282 for 3×300 Al at pf 0.85 (Table 2.2) [V per reviewer, R1-12]; our estimate: a backfed whole ring (≈ 7.2 MVA over ≤ 15 km, uniformly distributed) ≈ 4.8 % [D] — so voltage drop binds under contingency.</li>
+<li>Package unit substations (RMU + transformer + LV board) 500/1000/1500 kVA, 13.8/0.4 kV; transformers <strong>Dyn11, impedance 4/5/6 % (≤300 / 500 / &gt;500 kVA)</strong>, ONAN, <strong>temperature rises 45 K top-oil / 50 K winding, hot-spot 98 °C at rating (35 °C design temperature), designed for 55 °C ambient</strong> [V, T12-01 SEC 51-SDMS-04 Rev.02, 2019]; RMU = 2 ring load-break switches + 1 tee-off (fuse-switch or breaker), with earth-fault indicator; 17.5 kV, 21 kA 1 s [V, KSA-02/06/07/08].</li>
+<li>Main cable 3×300 mm² Al XLPE: <strong>300 A at 35 °C ground, 2.0 K·m/W, 1.0 m</strong> [V, KSA-02]; DPS Table 1.9 gives <strong>R_DC,20 °C = 0.100 Ω/km</strong> and a column labelled &quot;R_AC 20 °C&quot; = 0.130 Ω/km that matches AC resistance at operating temperature (label inferred to be a typo) [V table; D interpretation, R1-04]; X = 0.108 Ω/km at 60 Hz. Engine uses 0.100 (AC-corrected) for maximum fault level and 0.130 for losses/voltage drop/minimum fault. Cross-check [D]: Saudi Cable Co. 3×300 Al 384 A × 0.95 × 0.82 × 0.98 ≈ 293 A vs DPS 300 A; at 40 °C ground ≈ 278 A (SEC 2020 service conditions say 40 °C — conflict with DPS 35 °C, kept as scenario variant) [AS2, R1-19].</li>
+<li>MV neutral <strong>solidly or low-resistance earthed</strong>: SEC specs allow both [V, KSA-05/06/09]; SEC buys NERs (57-SDMS-01) [V, K2-11] <strong>but</strong> a filled 13.8 kV data-schedule example reads &quot;Solidly&quot; [V, K2-06]. Which one Riyadh uses is <strong>not found</strong>. The game&#39;s low-resistance default is an <strong>assumption [A]</strong>, and every earth-fault mechanic is tested under both settings.</li>
+<li>Design ambient 55 °C outdoors [V, KSA-01; T12-01]; Riyadh July mean daily max 43.4 °C [V-sec, NOAA via Wikipedia, KSA-21].</li>
+<li>Grid Code Issue 3 (Dec 2021, SEC&#39;s own PDF; a SERA May 2024 edition exists and was <strong>not read</strong> [K2-03]): frequency bands, fault clearing 120/100/80 ms, and — <strong>at transmission connection points only</strong> (cl. 2.4.6.2) — unbalance 1 %, flicker Pst 0.8/Plt 0.6, unchanged from 2007. MV/LV limits differ: SERA PQ draft gives MV flicker Pst 0.9/Plt 0.7, unbalance 1 % MV / 2 % LV; DPS 2004 NPS ≤ 2 % [V draft, 09 §2]; new RoCoF withstand (1 Hz/s synchronous, 2.5 Hz/s inverter plants) [V, K2].</li>
+<li><strong>Harmonic limit at 13.8 kV: voltage THD 4.0 % (odd 3.0 %, even 1.75 %)</strong> (DPS 2004 Table 1.1 and SERA PQ draft Annex 1); the Grid Code&#39;s &quot;THD 1.5 %&quot; is the default for plant on the ≥110 kV transmission system only [V, K2].</li>
+<li>SEC SAIDI 112.6 (another SEC report: 111.4) / 78.6 / 68.5 min and SAIFI 2.61 / 1.71 / 1.47 for 2020 / 2023 / 2024; 2025 targets 61 min / 0.70 [V/S mixed, K2 — improvement percentages conflict between SEC documents].</li>
+<li>SEC has an NER specification for 11–34.5 kV primary substations (57-SDMS-01, 2017, 10 s rating), resistor value left to project data [V, K2] — shows NERs are used somewhere; does not establish Riyadh practice (see earthing bullet).</li>
+<li>Scale: 11.3 M customers, ~697 k distribution transformers (2024) [V, KSA-13]; SEC average interruption duration 190.9 → 111.4 min/customer (2017 → 2020) [V, KSA-15].</li>
+</ul>
+<h2>2. Which parts make good gameplay</h2>
+<p>Ranked by (a) decision richness, (b) feedback clarity, (c) fidelity we can actually validate, (d) teaching value, (e) replayability. Opinions are labelled as ours.</p>
+<table>
+<thead>
+<tr>
+<th>Rank</th>
+<th>Candidate core loop</th>
+<th>Why it works (evidence)</th>
+<th>Validated fidelity available?</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td><strong>Fault response on an open-ring network</strong> (seed idea): read FPIs, sectionalise by halving, backfeed via NOP (capacity, voltage drop, cold-load pickup), re-energisation guards as <strong>hard gates</strong>, switchgear duty; score on customer-minutes lost <strong>plus a separate, non-tradeable safety/asset record</strong> (R1-03)</td>
+<td>Real documented procedure with real trade-offs: customer-count halving, delays, duty counts, three-phase vs earth-only FPI trust [V, OP-05/06]; SEC RMUs &quot;equipped with earth fault indicator&quot; (DPS 2004) ⇒ phase-to-phase faults may show <strong>no</strong> indication — a real mechanic (R1-31); scoring by CML/SAIDI is real regulation [V, OP-01/02/03]; no free/consumer game found in a ~20-title survey (paid professional training simulators exist) [GD gaps, R1-20]</td>
+<td>Yes: power flow (33-bus golden), SC (5 golden cases), FPI logic (vendor-verified), reliability arithmetic (Ofgem worked example)</td>
+</tr>
+<tr>
+<td>2</td>
+<td><strong>Protection coordination puzzle</strong>: set pickups/TMS/curves so the nearest device trips first with margin, without tripping on inrush/cold load</td>
+<td>Exact curve equations [V, PR]; CTI practice [V]; ABB published grading examples as golden tests [V]; open-ended with several valid answers (Zachtronics evidence for open puzzles [V, GD-30])</td>
+<td>Yes (curves exact; ABB examples)</td>
+</tr>
+<tr>
+<td>3</td>
+<td><strong>Heatwave operations / thermal</strong>: Riyadh summer afternoon, AC-driven peak, transformer hot-spot and ageing, load transfer between rings</td>
+<td>IEC 60076-7:<strong>2005</strong> difference equations reproduced against Annex C (0.1 K) [V, TH]; SEC transformers are rated with reduced rises (45/50 K, hot-spot 98 °C at 35 °C) for 55 °C ambient [V, T12] — the model must use these, not IEC normal-ambient defaults (R1-10)</td>
+<td>Method yes; Saudi parameters [V] from SEC spec + [D] gradient; cables partial</td>
+</tr>
+<tr>
+<td>4</td>
+<td><strong>Planning / expansion</strong>: new district load → choose routes, cable sizes, substation sizes, ring structure, within SEC rules (50 % loading, indicative 7.5 km, 1.5 % MV voltage-drop allocation, N-1)</td>
+<td>SEC DPS rules give real constraints [V]; SEC transformer loss capitalisation T = P + 11000·C + 4000·W (SAR) [V, T12-02]</td>
+<td>Yes for steady state; equipment prices [A]</td>
+</tr>
+<tr>
+<td>5</td>
+<td><strong>Power-quality detective</strong> cases: sag-type detective, capacitor resonance, ferroresonance, broken PEN</td>
+<td>Strong, real, rarely taught phenomena [V/S, PQ]; best as authored cases on the shared engine. Ferroresonance must be set on an overhead/rural spur with single-pole cutouts or labelled non-Saudi: SEC RMU fuse-switches open all three poles via strikers, removing the classic cause (R1-30)</td>
+<td>Partial (sag propagation &amp; resonance formula yes; ferroresonance only qualitatively — scripted, labelled)</td>
+</tr>
+<tr>
+<td>6</td>
+<td><strong>System frequency event</strong> (GB 9 Aug 2019 replay; inertia/UFLS)</td>
+<td>Official report numbers [V, PQ-29]; swing equation validated against NREL example [V]</td>
+<td>Yes, single-bus aggregate; Saudi UFLS stages not public [NOT FOUND]</td>
+</tr>
+<tr>
+<td>7</td>
+<td><strong>Safety logic</strong> (embedded, not a standalone mode): the game enforces a generic safe sequence (isolate, secure, prove dead, earth) via interlocks and gates</td>
+<td>Five safety rules (EN 50110-1, wording snippet-only), permits, interlocks, phasing [V/S, OP]; UK DNO model, <strong>not SEC rules</strong> (not public). Fixed disclaimer: not SEC rules, not authorisation, not a substitute for training. Free-text switching steps are never scored as &quot;safe to use&quot; (R1-16)</td>
+<td>Logic rules only — embedded in mode 1</td>
+</tr>
+<tr>
+<td>8</td>
+<td><strong>Arc-flash &quot;clearing time is the dial&quot;</strong></td>
+<td>Incident energy ∝ arcing time is the key teaching point [S/V, PQ-24]. IEEE 1584-2018: standard not read; coefficients are IEEE copyright; third-party implementations exist but are unverified (R1-27) → only a labelled relative proxy; <strong>never mapped to NFPA 70E PPE categories</strong> (would read as PPE-selection guidance)</td>
+<td>Proxy only — explanatory screen, not scored</td>
+</tr>
+<tr>
+<td>9</td>
+<td>Maintenance / asset management (thermography, DGA, health index)</td>
+<td>Round 2 verified NETA ΔT bands, Duval zones, CNAIM health-index method, NFPA 70B intervals, EPRI failure medians</td>
+<td>Medium: thresholds &amp; HI method sourced; ageing curves (Weibull) still assumed</td>
+</tr>
+</tbody></table>
+<p><strong>Our recommendation (opinion):</strong> modes 1–4 form the core; 5–6 are authored &quot;case files&quot; on the same engine; 7 and 8 are embedded teaching moments; 9 waits for data.</p>
+<h2>3. What fidelity is achievable in a browser, and how to validate it</h2>
+<table>
+<thead>
+<tr>
+<th>Phenomenon</th>
+<th>Achievable method</th>
+<th>Validation (golden test)</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Steady-state power flow</td>
+<td>Balanced positive-sequence solver on radial (and briefly meshed) islands; per-phase data model ready for later 3-phase</td>
+<td>33-bus (MATPOWER <code>case33bw</code> variant, fetched at test time, not committed): 202.677 kW, Vmin 0.91309 pu @ bus 18 — <strong>[D]</strong> our three solvers agree + <strong>[S]</strong> literature 202.67–202.68 kW; the original 1989 paper was not read and its printed solution is known to be inconsistent with its data [PF-10] (R1-05). Primary committed golden tests: our own authored feeders cross-checked offline with pandapower</td>
+<td>04</td>
+</tr>
+<tr>
+<td>Short circuit</td>
+<td>IEC 60909-style equivalent voltage source, sequence networks, c = 1.10/1.00 (MV), κ formula; earthing method as network parameter with cable C0</td>
+<td>Glover Ex. 9.2–9.5 (all 4 fault types); Schneider CT158 §2.4, §3.5; CT18 §4.1, §4.3 (NER + capacitance) [V, 02]</td>
+<td>02</td>
+</tr>
+<tr>
+<td>Protection timing</td>
+<td>Generic IDMT element <code>t = TMS·(k/(M^α−1)+c)</code> with IEC &amp; IEEE constants; travel-integral for varying current; DT stages; fuses as tabulated curves</td>
+<td>Curve-point checks (IEC SI 10.03 s at 2×, 2.97 s at 10×) [D from V constants]; ABB grading examples [V]</td>
+<td>03</td>
+</tr>
+<tr>
+<td>FPIs</td>
+<td>Threshold on phase and residual current through the sensor, including downstream cable capacitive current on external earth faults; reset rules</td>
+<td>Vendor logic [V vendor, SC-11]; behavioural tests</td>
+<td>02 §4</td>
+</tr>
+<tr>
+<td>Transformer thermal &amp; ageing</td>
+<td>IEC 60076-7:<strong>2005</strong> (superseded by 2018; 2018 values not read, R1-11) difference equations; <strong>SEC parameters</strong>: Δθor 45 K, hot-spot 98 °C at 35 °C ⇒ gradient 18 K [D], R from SEC max losses (6.2–8.2) [V, T12]; kiosk correction; ageing V</td>
+<td>Annex C (0.1 K, 6.15 days) and Annex E (114.2 °C) validate the <em>method</em> [V, TH-02]; SEC emergency-loading table (133 %/150 % from 75 % preload, θh ≤ 140 °C for ≥ 240/155 and 98/65 min) checks the <em>Saudi parameters</em> [V, T12-d]</td>
+<td>05, 12</td>
+</tr>
+<tr>
+<td>Cable thermal</td>
+<td>Steady ampacity × derating factors; adiabatic I²t = k²S² for conductors (k_Cu 143, k_Al 94, IEC 60949 constants [TH-11]) <strong>and for metallic screens</strong> (IEC 60949, 80 °C initial) — NKT 3×240/50: conductor 22.7 kA 1 s vs <strong>screen 7.0 kA 1 s</strong> [V, SP2]; this is the main physical consequence of solid vs resistance earthing (R1-07)</td>
+<td>Saudi Cable Co. catalogue p. 82 (I = 0.143·S kA Cu, 0.0937·S kA Al, 1 s) and derating factors [V, AS2-13]; NKT table [V, SP2]; DPS↔SCC 300 A vs 293 A consistency [D]</td>
+<td>05, 10, 11</td>
+</tr>
+<tr>
+<td>Reliability metrics</td>
+<td>Event log → CI, CML (3 min, Ofgem) and SAIFI/SAIDI/CAIDI/MAIFI (5 min, IEEE) with configurable threshold</td>
+<td>Ofgem 34-min sequence example [V, OP-02]; DOE FLISR arithmetic [V, OP-04]</td>
+<td>07</td>
+</tr>
+<tr>
+<td>Frequency</td>
+<td>Single-bus swing equation + governor ramp + DER RoCoF trips + UFLS table</td>
+<td>NREL worked example (0.26 Hz/s) [V, PQ-34]; GB 2019 timeline [V, PQ-29]</td>
+<td>06</td>
+</tr>
+<tr>
+<td>Harmonic resonance</td>
+<td>Per-order impedance with capacitor; hr ≈ √(Ssc/Qc)</td>
+<td>Formula check [S/V, PQ-12]</td>
+<td>06</td>
+</tr>
+<tr>
+<td>Arc flash</td>
+<td><strong>Not</strong> IEEE 1584 (standard not read; coefficients copyright) → relative proxy E ∝ t, labelled, no PPE mapping</td>
+<td>none (explanatory only)</td>
+<td>06</td>
+</tr>
+<tr>
+<td>Ferroresonance</td>
+<td>Not simulated (needs EMT). Scripted case with honest label</td>
+<td>n/a</td>
+<td>06</td>
+</tr>
+</tbody></table>
+<p><strong>Determinism (shareable seeds):</strong> ECMAScript specifies <code>+ − × ÷</code> and <code>Math.sqrt</code> exactly (IEEE-754 binary64, round-to-nearest-even); <code>Math.exp/sin/pow/**</code> are implementation-approximated [V, PF-27/28]. Models that need non-integer powers or exponentials: IEC SI/VI/EI curves (M^0.02, M^2), IEC 60076-7 (K^0.8·…, ^1.6, 2^((θ−98)/6), exp in exponential form), κ = 1.02 + 0.98·e^(−3R/X), swing/thermal decays. All use our own <code>dmath.exp/log/pow</code> built from exact ops, with accuracy tests (max error vs reference values) (R1-23). <code>Intl</code> formatting is display-only. Seeded PRNG: sfc32 seeded via SplitMix32 [V, PF].</p>
+<p><strong>Performance:</strong> BFS on 513 buses ≈ 0.04 ms in Node [D, own benchmark]. Physics will not be the browser bottleneck; rendering and UX will.</p>
+<p><strong>Data licensing:</strong> IEEE test-feeder files and MATPOWER case files are <strong>not</strong> openly licensed [V, PF-01/09]; pandapower&#39;s bundled <code>case33bw</code> inherits that uncertainty. Decision D-005 (revised after R1-06): committed golden tests use (1) textbook/vendor worked examples (published numbers with citations), (2) our own authored feeders cross-checked offline with pandapower&#39;s <em>code</em> (BSD-3) on <em>our</em> data, and (3) the 33-bus case only via a test-time fetch of the MATPOWER file (never committed).</p>
+<h2>4. Gaps no existing game fills</h2>
+<p>From the survey of ~20 titles [GD §1]:</p>
+<ol>
+<li><strong>Distribution-level realism</strong>: no game found models radial feeders, normally-open points, sectionalising, FPIs, fuse/relay coordination, cold-load pickup or voltage drop as gameplay. Existing titles are transmission balancing (NESO, Statnett BALANCE, STABILITY), city-builder abstraction (Power to the People), or house wiring (Electrician Simulator).</li>
+<li><strong>Protection and power quality as puzzles</strong>: none found.</li>
+<li><strong>Arabic / bilingual technical game</strong>: none found.</li>
+<li><strong>Replayability</strong>: the closest commercial titles are criticised for weak replay value [V, GD-09/10].</li>
+<li><strong>Free, static, no account, mobile-capable</strong>: NESO&#39;s game is not optimised for phones [V, GD-01]; strong titles are paid.</li>
+<li><strong>Credibility with engineers</strong>: technical players punish wrong physics/terminology [S, GD-11]; no competitor publishes validation. <strong>Published validation is the moat.</strong></li>
+</ol>
+<h2>5. Retention design that research supports (and that works without a server)</h2>
+<ul>
+<li>Daily seeded puzzle from the UTC date + spoiler-free share string (Spelunky daily, Wordle) [V/S, GD-33/35/38].</li>
+<li>Several scored metrics and a &quot;par&quot; instead of server histograms (Zachtronics rationale on leaderboards and cheating) [V, GD-30]. Because daily seeds are unbounded, par is computed <strong>in the browser</strong> by a stated reference heuristic (SSEN customer-count halving strategy), labelled &quot;reference strategy&quot;, not &quot;optimal&quot; (R1-14).</li>
+<li><strong>Versioning (R1-15):</strong> every seed, share string and replay URL carries the engine + data version; a model changelog ties each change to source IDs; old links open with a notice if the version differs; saves are migrated.</li>
+<li>Scenario/level sharing encoded in the URL (PuzzleScript precedent) [S, GD-39]; sandbox/editor (Opus Magnum, Nicky Case) [V].</li>
+<li>Procedural generation of networks and faults from seeds, all players getting identical randomness (fixes the fairness complaint about random events) [V, GD-09].</li>
+<li>Learning science: support inside the game (d≈.34, larger for skills) and multiple short sessions [S, GD-40/41]; start simple, unlock complexity (PhET evidence) [V, GD-44]; worked examples for novices, fading with expertise [S, GD-46]; explain after failure.</li>
+</ul>
+<h2>6. Arabic / RTL</h2>
+<ul>
+<li>Mirror UI chrome; do <strong>not</strong> mirror single-line diagrams, phasors, TCC log-log plots or waveforms (Apple &amp; Material v1 rules on real-world objects and charts) [V, GD-60/61]; time axes have no Arabic standard [V, GD-64] → keep diagrams LTR (opinion, revisit).</li>
+<li>Digits: <code>ar-SA</code> defaults to Eastern Arabic digits in ICU, but government/technical sites commonly use Western digits [V/S]; force <code>nu-latn</code> by default with a toggle (decision to log).</li>
+<li>Fonts with OFL licences verified: Noto Sans Arabic, IBM Plex Sans Arabic, Cairo, Tajawal [V, GD-70].</li>
+<li>Terminology: KSGAAL/Ministry of Energy dictionary exists (&gt;1,500 terms) [V, GD-71]; build an in-game bilingual glossary with sources.</li>
+</ul>
+<h2>7. Uncertainties and how the game will handle them</h2>
+<table>
+<thead>
+<tr>
+<th>Unknown</th>
+<th>Handling</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Riyadh MV neutral earthing (solid vs NER, current limit)</td>
+<td>Scenario parameter; default low-resistance earthed <strong>[A]</strong> with a stated assumed NER current; counter-evidence (&quot;Solidly&quot; data schedule) shown in Model notes; both settings tested</td>
+</tr>
+<tr>
+<td>SEC FPI thresholds / types</td>
+<td>Use vendor-range values [V vendor]; labelled</td>
+</tr>
+<tr>
+<td>Crew travel/operate times at night in Riyadh</td>
+<td><strong>[A]</strong> labelled game parameters (no public data found [OP §4])</td>
+</tr>
+<tr>
+<td>Re-energisation delays (UK 5 min night / 20 min day)</td>
+<td>Presented as &quot;UK DNO example rule-set&quot; [OP-06]; time windows are a rule-set parameter; not presented as Saudi practice — in Riyadh much excavation happens at night, so the UK rationale may not transfer (R1-17)</td>
+</tr>
+<tr>
+<td>Cold-load pickup after outages (AC-dominated summer load)</td>
+<td><strong>[A]</strong> decaying multiplier parameter; magnitude NOT FOUND; summer-night load shape only partly sourced (R1-13)</td>
+</tr>
+<tr>
+<td>Transformer edition</td>
+<td>IEC 60076-7:2005 used; 2018 edition not read; stated in Model notes (R1-11)</td>
+</tr>
+<tr>
+<td>Asset lives (CNAIM RMU 55 y, transformer 60 y)</td>
+<td>GB 6.6/11 kV DNO values, not Saudi; hot-climate factors unknown; labelled (R1-24)</td>
+</tr>
+<tr>
+<td>SEC reliability definitions (3 vs 5 min threshold)</td>
+<td>Show both IEEE and Ofgem conventions; configurable</td>
+</tr>
+<tr>
+<td>SEC UFLS stages</td>
+<td>First stage 59.2 Hz; ≤ 0.2 Hz between stages, 5–10 % each, 40–45 % total (GCCIA harmonisation principle, 2012 trade article, secondary) [K2-16]; full table NOT FOUND → labelled illustrative (R1-26)</td>
+</tr>
+<tr>
+<td>IEEE 1584 arc-flash equations</td>
+<td>Proxy only, labelled</td>
+</tr>
+<tr>
+<td>Fault rates per km, fault-type shares</td>
+<td>EPRI medians per 100 conductor-mi·yr: cable 1.3, joints 0.4, terminations 0.2 [V, SP2/AS2]; fault-type shares still snippet-only → scenario weights labelled as assumptions</td>
+</tr>
+<tr>
+<td>Most SEC documents are 2004–2008 editions</td>
+<td>Model notes state the edition year of each rule</td>
+</tr>
+<tr>
+<td>UK practice (SSEN) used for operational procedure</td>
+<td>Model notes say: procedure is documented UK DNO practice; SEC equivalents not public</td>
+</tr>
+<tr>
+<td>Harmonic limit at 13.8 kV</td>
+<td><strong>Resolved in round 2:</strong> THD 4.0 % at 13.8 kV; 1.5 % is transmission-only [K2]</td>
+</tr>
+</tbody></table>
+<p><strong>Round 2 results (now folded in):</strong></p>
+<ul>
+<li>SC/protection [SP2]: NER+Dyn SLG example (low authority, recomputed: 11 kV, 15.9 Ω → 399 A); NKT cable R0/X0 table (fits R0 = R + 3·R_screen, screen-return case); Post Glover charging current ≈2.46 A/km at 13.8 kV; SEL &quot;all faults on underground cables are permanent&quot; (auto-reclose counterproductive) [V]; BAUR fault-location guide [V]; Glover Ex. 10.4 and 13.8 kV recloser/fuse scheme, NPAG-derived 11 kV grading example (via course notes) [V]; FPI thresholds (SEL, Ensto) [V]; ABB/SIBA kVA→fuse tables and ABB transfer-current example [V].</li>
+<li>Assets [AS2]: NETA thermography ΔT bands (MTS-2007, via Fluke) [V]; Duval triangle 1 zone boundaries (Duval 2002) [V]; EPRI failure medians [V]; Ofgem CNAIM v2.1 health-index method and expected lives (RMU 55 y, transformer 60 y) [V]; NFPA 70B-2023 intervals [V]; Saudi Cable Company derating factors (ground 35 °C → 0.95, 40 °C → 0.90; soil to 2.5 K·m/W) [V]; EU F-gas 2024/573 Art. 13 SF6 dates (≤24 kV from 2026) [V via national authorities].</li>
+<li>Still NOT FOUND: authoritative textbook Dyn+NER worked example; IEEE C57.104/IEC 60599 gas tables; Weibull parameters; cable thermal time constants; switchgear derating above 40 °C from ABB/Siemens/SEC; Riyadh NER value; SEC FPI settings; crew times.</li>
+</ul>
+<h2>8. Scope recommendation (input to Phase 2/3)</h2>
+<ol>
+<li><strong>Engine v1:</strong> network model, balanced power flow (incl. backfeed voltage-drop check), sequence-network short circuit with earthing &amp; C0, conductor <strong>and screen</strong> I²t checks, IDMT/DT/fuse protection with travel integral, FPIs (earth-only or 3-phase per RMU), transformer thermal (IEC 60076-7:2005 method, SEC parameters), reliability event log, deterministic math &amp; PRNG, procedural network generator, versioned seeds. Each with golden tests.</li>
+<li><strong>Mode 1 (flagship, fully polished):</strong> &quot;Night Shift&quot; — fault response on procedurally generated Riyadh-style open rings, daily seed, share string, bilingual.</li>
+<li><strong>Next modes on the same engine:</strong> Protection coordination (&quot;Grading&quot;), Heatwave (thermal operations), Planning (expansion). Then case files (PQ, frequency).</li>
+<li><strong>Not in v1:</strong> 3-phase unbalanced solver, EMT phenomena, IEEE 1584 calculator, accounts/servers.</li>
+</ol>
+<h2>9. Resolution of the independent review (research/REVIEW-phase1.md)</h2>
+<p>All 31 findings were evaluated; none was rejected. Summary:</p>
+<table>
+<thead>
+<tr>
+<th>Finding</th>
+<th>Resolution</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>R1-01 (Critical) alfanar values in validation plan</td>
+<td>Cable row now cites Saudi Cable Co. + NKT; 05 §3/§6/§7/golden line marked EXCLUDED; SOURCES k-value cross-check re-pointed to SCC/NKT/IEC 60949</td>
+</tr>
+<tr>
+<td>R1-02 open questions solicit employer/customer-internal data</td>
+<td>D-004 extended: nothing from the owner&#39;s work knowledge, type tests, tenders or customer-internal documents; &quot;ask the owner&quot; items reworded to &quot;public source needed&quot; (banner added to notes)</td>
+</tr>
+<tr>
+<td>R1-03 CML rewards unsafe re-energisation</td>
+<td>Guards are hard gates; separate non-tradeable safety &amp; asset record; risk-assessment step before any re-energisation onto a possibly faulted section (GDD §3.4–3.5)</td>
+</tr>
+<tr>
+<td>R1-04 cable R</td>
+<td>Both columns recorded; 0.100 for max fault, 0.130 for losses/min fault</td>
+</tr>
+<tr>
+<td>R1-05/06 33-bus label &amp; licensing</td>
+<td>Relabelled [D]+[S]; D-005 revised (test-time fetch; authored feeders as primary)</td>
+</tr>
+<tr>
+<td>R1-07 screen withstand</td>
+<td>Screen I²t added to engine v1 and FIDELITY</td>
+</tr>
+<tr>
+<td>R1-08 earthing default</td>
+<td>Labelled [A] with counter-evidence; both settings tested</td>
+</tr>
+<tr>
+<td>R1-09 PQ scope</td>
+<td>Transmission scope stated; MV/LV values listed</td>
+</tr>
+<tr>
+<td>R1-10/11 transformer</td>
+<td>Lead research 12 found SEC 51-SDMS-04 parameters; edition stated</td>
+</tr>
+<tr>
+<td>R1-12 voltage drop</td>
+<td>Added to SEC facts, mode 1 backfeed check, planning constraints</td>
+</tr>
+<tr>
+<td>R1-13 cold-load pickup</td>
+<td>[A] parameter + research item</td>
+</tr>
+<tr>
+<td>R1-14 par</td>
+<td>In-browser reference heuristic, labelled</td>
+</tr>
+<tr>
+<td>R1-15 versioning</td>
+<td>Version in seeds/URLs, changelog, migration</td>
+</tr>
+<tr>
+<td>R1-16 safety framing</td>
+<td>Embedded only, disclaimer, no scoring of free-text steps</td>
+</tr>
+<tr>
+<td>R1-17 UK delays</td>
+<td>UK example rule-set, parameterised, uncertainty row</td>
+</tr>
+<tr>
+<td>R1-18..R1-31 (minor)</td>
+<td>Applied: 07 annotated as superseded by 01/09 on loading &amp; automation; 40 °C cable variant; &quot;no free/consumer game found&quot;; 7.5 km indicative; Dyn11 now from SEC transformer spec [T12-g]; dmath list; CNAIM GB caveat; two SAIDI values noted; UFLS wording; IEEE 1584 wording + no PPE mapping; [V-sec] label introduced; Grid Code 2024 not read; ferroresonance context; earth-only FPI mechanic</td>
+</tr>
+</tbody></table>
+
+</main>
+</body>
+</html>

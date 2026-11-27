@@ -1,0 +1,480 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>VALIDATION — engine results vs published references · Grid Shift</title>
+<meta name="robots" content="index,follow">
+<style>
+  :root { color-scheme: dark light; --bg: #0d1420; --ink: #e6edf7; --muted: #93a3bd; --line: #2a3a55; --accent: #f5b83d; --link: #47c2ff; }
+  @media (prefers-color-scheme: light) { :root { --bg: #f7f8fb; --ink: #142033; --muted: #55657e; --line: #c9d3e3; --accent: #9a4f06; --link: #0b6fb3; } }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.65 system-ui, -apple-system, 'Segoe UI', 'Noto Sans Arabic', sans-serif; }
+  main { max-width: 980px; margin: 0 auto; padding: 16px; }
+  header { border-bottom: 1px solid var(--line); padding-bottom: 10px; margin-bottom: 16px; font-size: .9rem; color: var(--muted); }
+  header a, main a { color: var(--link); }
+  h1, h2, h3 { line-height: 1.3; } h1 { font-size: 1.8rem; }
+  table { border-collapse: collapse; display: block; overflow-x: auto; max-width: 100%; font-size: .9rem; }
+  th, td { border: 1px solid var(--line); padding: 6px 8px; text-align: start; vertical-align: top; }
+  code { font-family: ui-monospace, Menlo, monospace; font-size: .88em; background: color-mix(in srgb, var(--line) 35%, transparent); padding: 1px 4px; border-radius: 4px; }
+  pre { overflow-x: auto; background: color-mix(in srgb, var(--line) 30%, transparent); padding: 12px; border-radius: 8px; }
+  pre code { background: none; padding: 0; }
+  blockquote { border-inline-start: 3px solid var(--accent); margin: 0; padding: 2px 14px; color: var(--muted); }
+  .repo-ref { border-bottom: 1px dotted var(--muted); }
+</style>
+</head>
+<body>
+<main>
+<header><a href="../">← Grid Shift</a> · <a href="FIDELITY.html">FIDELITY</a> · <a href="VALIDATION.html">VALIDATION</a> · <a href="DECISIONS.html">DECISIONS</a> · <a href="SOURCES.html">SOURCES</a> · <a href="SYNTHESIS.html">SYNTHESIS</a><br>Project documentation, published with the game (source revision 639cf54). References to other project files are shown as plain text.</header>
+<h1>VALIDATION — engine results vs published references</h1>
+<p><em>Generated from test output on 2026-11-13 (engine version 1). Re-run with <code>npx vitest run</code> (61 tests) and <code>npx playwright test</code> (5 e2e). Every row is a passing automated test unless marked otherwise.</em></p>
+<p>Label key: <strong>published</strong> = value printed in the source; <strong>our-3-solver</strong> = agreement of three independent solvers (ours, numpy, pandapower) on the same data (research/04 PF-C1).</p>
+<h2>1. Power flow (<code>tests/golden/powerflow-33bus.test.ts</code>)</h2>
+<table>
+<thead>
+<tr>
+<th>Case</th>
+<th>Source</th>
+<th>Reference</th>
+<th>Engine</th>
+<th>Tolerance</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Baran &amp; Wu 33-bus, total losses</td>
+<td>MATPOWER <code>case33bw</code> data (fetched at test time, D-005); literature 202.67–202.68 kW [S]; our-3-solver 202.677 kW [D]</td>
+<td>202.677 kW</td>
+<td>202.6771 kW</td>
+<td>±0.1 %</td>
+<td>pass</td>
+</tr>
+<tr>
+<td>same, minimum voltage</td>
+<td>as above</td>
+<td>0.913090 pu @ bus 18</td>
+<td>0.913090 pu @ B18</td>
+<td>±1e-4 pu, same bus</td>
+<td>pass</td>
+</tr>
+<tr>
+<td>same, power balance</td>
+<td>property</td>
+<td>P_source = ΣP_load + losses</td>
+<td></td>
+<td>error</td>
+<td>&lt; 1e-9 MW</td>
+</tr>
+</tbody></table>
+<p>Note: the 1989 paper itself was not read; its printed solution is reported to be inconsistent with its data [PF-10]. The golden value belongs to the MATPOWER data variant.</p>
+<h2>2. Short circuit (<code>tests/golden/shortcircuit.test.ts</code>)</h2>
+<table>
+<thead>
+<tr>
+<th>Case</th>
+<th>Source</th>
+<th>Published</th>
+<th>Engine</th>
+<th>Tolerance</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>GT-3 3-phase, Glover/Sarma/Overbye 5e Ex 9.2</td>
+<td>[SC-04]</td>
+<td>7.558 pu</td>
+<td>7.5578 pu</td>
+<td>±0.05 %</td>
+<td>pass</td>
+</tr>
+<tr>
+<td>GT-3 SLG Ex 9.3, Ia</td>
+<td>[SC-04]</td>
+<td>5.8928 pu (24.65 kA)</td>
+<td>5.8928 pu</td>
+<td>±0.05 %</td>
+<td>pass</td>
+</tr>
+<tr>
+<td>GT-3 SLG healthy-phase voltages</td>
+<td>[SC-04]</td>
+<td>1.179 pu</td>
+<td>1.179 pu</td>
+<td>±0.1 %</td>
+<td>pass</td>
+</tr>
+<tr>
+<td>GT-3 LL Ex 9.4, Ib</td>
+<td>[SC-04]</td>
+<td>6.391 pu (26.74 kA)</td>
+<td>6.3913 pu</td>
+<td>±0.05 %</td>
+<td>pass</td>
+</tr>
+<tr>
+<td>GT-3 DLG Ex 9.5, Ib / In</td>
+<td>[SC-04]</td>
+<td>6.8983 / 5.0202 pu</td>
+<td>6.8983 / 5.0204 pu</td>
+<td>±0.05 %</td>
+<td>pass</td>
+</tr>
+<tr>
+<td>GT-5 Schneider CT18 §4.1 (36 kV): 3PH / SLG / LL / DLG</td>
+<td>[SC-02]</td>
+<td>17 / 18 / 15 / 17.6 kA (rounded)</td>
+<td>17.04 / 18.18 / 15.06 / 17.62 kA</td>
+<td>±1.5 %</td>
+<td>pass</td>
+</tr>
+<tr>
+<td>GT-1 Schneider CT158 §2.4 (20 kV, 500 MVA + 2 km line), I&#39;&#39;k</td>
+<td>[SC-01]</td>
+<td>6,415 A (published; 6,378 A recomputed without rounding)</td>
+<td>6,373 A</td>
+<td>±1 % of published</td>
+<td>pass (0.65 %)</td>
+</tr>
+<tr>
+<td>GT-1 peak current ip</td>
+<td>[SC-01]</td>
+<td>10,887 A</td>
+<td>10,861 A</td>
+<td>±1 %</td>
+<td>pass</td>
+</tr>
+<tr>
+<td>GT-4 Schneider CT18 §4.3: SLG with 100 Ω NER + 1 µF network capacitance (5.5 kV)</td>
+<td>[SC-02]</td>
+<td>31.75 + j2.99 A (</td>
+<td>I</td>
+<td>31.89 A)</td>
+<td>31.895 A</td>
+</tr>
+<tr>
+<td>GT-4 healthy phases rise to line voltage</td>
+<td>[SC-02]</td>
+<td>5,500 V</td>
+<td>5,500 V</td>
+<td>±1 %</td>
+<td>pass</td>
+</tr>
+<tr>
+<td>GT-R2-A Dyn 33/11 kV, 10 %, solid SLG</td>
+<td>blog example [S2-07] (low authority, recomputed)</td>
+<td>10,497 A</td>
+<td>10,497.3 A</td>
+<td>±0.5 %</td>
+<td>pass</td>
+</tr>
+<tr>
+<td>GT-R2-A same with 15.9 Ω NER</td>
+<td>[S2-07]</td>
+<td>399.1 A</td>
+<td>399.1 A</td>
+<td>±0.5 %</td>
+<td>pass</td>
+</tr>
+</tbody></table>
+<p>Not yet a golden test: CT158 §3.5 (30 kV network with transformer zero-sequence topology), IEC TR 60909-4 network (needs generators and 3-winding transformers — out of v1 scope).</p>
+<h2>3. Protection (<code>tests/golden/protection.test.ts</code>)</h2>
+<table>
+<thead>
+<tr>
+<th>Case</th>
+<th>Source</th>
+<th>Reference</th>
+<th>Engine</th>
+<th>Tolerance</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>IEC SI/VI/EI/LTI and IEEE MI/VI/EI at M = 1.5, 2, 5, 10, 20 (35 points)</td>
+<td>constants verified in 4 docs [PR-01,02,05,07]; table values derived [D]</td>
+<td>e.g. SI 10.029 s @ 2×, 2.971 s @ 10×</td>
+<td>10.029 s, 2.971 s</td>
+<td>max(0.1 %, ±0.0005 s table rounding)</td>
+<td>pass</td>
+</tr>
+<tr>
+<td>ABB DA Handbook IDMT grading: NI relay at 4.0×, TMS 0.201</td>
+<td>[PR-07]</td>
+<td>1.00 s</td>
+<td>1.0009 s</td>
+<td>±0.5 %</td>
+<td>pass</td>
+</tr>
+<tr>
+<td>ABB: relay-2 TMS 0.172 at 2.4× gives ≥ 1.36 s (1.0 s + 0.36 s margin)</td>
+<td>[PR-07]</td>
+<td>≥ 1.355 s</td>
+<td>pass</td>
+<td>—</td>
+<td>pass</td>
+</tr>
+<tr>
+<td>Chakrabarti Ex 3.7.1 / 3.7.2 / 3.7.4 (graph-read)</td>
+<td>[PR-24]</td>
+<td>1.575 / 0.945 / 0.56 s</td>
+<td>1.648 / 0.989 / 0.594 s</td>
+<td>±6 % (book reads a printed curve)</td>
+<td>pass</td>
+</tr>
+<tr>
+<td>Travel integral: constant current operates at t(M); half-travel leaves t/2</td>
+<td>property</td>
+<td>—</td>
+<td>exact to 1e-12</td>
+<td>—</td>
+<td>pass</td>
+</tr>
+</tbody></table>
+<h2>3b. Transformer thermal (<code>tests/golden/thermal.test.ts</code>) — engine ready for the Heatwave mode</h2>
+<table>
+<thead>
+<tr>
+<th>Case</th>
+<th>Source</th>
+<th>Published</th>
+<th>Engine</th>
+<th>Tolerance</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>IEC 60076-7:2005 Annex C, 41-step difference equations, hot-spot every step</td>
+<td>[TH-02]</td>
+<td>90.5 … 176.1 (peak) … 99.3 °C</td>
+<td>worst error 0.050 K</td>
+<td>±0.15 K</td>
+<td>pass</td>
+</tr>
+<tr>
+<td>Annex C cumulative loss of life (thermally upgraded paper)</td>
+<td>[TH-02]</td>
+<td>8,851 min (6.15 days)</td>
+<td>8,851 min</td>
+<td>±1 %</td>
+<td>pass</td>
+</tr>
+<tr>
+<td>Annex E OF unit, 30-min overload 0.8 → 1.4 (exponential method)</td>
+<td>[TH-02]</td>
+<td>θo 76.7 °C, θh 114.2 °C</td>
+<td>76.68 / 114.22 °C</td>
+<td>±0.1 K</td>
+<td>pass</td>
+</tr>
+<tr>
+<td>Annex E after the overload and daily loss of life</td>
+<td>[TH-02]</td>
+<td>θh 92.9 °C one minute later; 0.14 day</td>
+<td>not reproduced by design: 0.150 day</td>
+<td>—</td>
+<td><strong>documented difference</strong>: the 2005 decreasing-step formula (eq. 8) applies the new gradient instantly; our model keeps Annex C winding dynamics</td>
+</tr>
+<tr>
+<td>Ageing points: V(110 °C, Kraft) = 4, V(98 °C) = 1, TUP V(110 °C) = 1</td>
+<td>[TH-02]</td>
+<td>4 / 1 / 1</td>
+<td>exact</td>
+<td>1e-10</td>
+<td>pass</td>
+</tr>
+<tr>
+<td>SEC 51-SDMS-04 emergency table (one-sided): from 75 % load, 133 % for 240/155 min and 150 % for 98/65 min at 30/40 °C keep θh ≤ 140 °C</td>
+<td>[T12-d]</td>
+<td>requirement</td>
+<td>θh 116.4–120.8 °C for 500/1000/1500 kVA with SEC parameters (Δθor 45 K, Δθhr 18 K [D])</td>
+<td>≤ 140 °C</td>
+<td>pass</td>
+</tr>
+</tbody></table>
+<h2>4. Reliability metrics (<code>tests/golden/reliability.test.ts</code>)</h2>
+<table>
+<thead>
+<tr>
+<th>Case</th>
+<th>Source</th>
+<th>Reference</th>
+<th>Engine</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Ofgem interruption sequence: 2 off, 2 on, 30 off ⇒ 34 min</td>
+<td>[OP-02 §2.27]</td>
+<td>34</td>
+<td>34</td>
+<td>pass</td>
+</tr>
+<tr>
+<td>Staged night restoration 300×40 + 200×75 + 100×360</td>
+<td>constructed; formulas [OP-01,03]</td>
+<td>63,000 customer-min, CAIDI 105</td>
+<td>63,000, 105</td>
+<td>pass</td>
+</tr>
+<tr>
+<td>Threshold edge: 4-min interruption</td>
+<td>[OP-01] vs [OP-03]</td>
+<td>Ofgem 1,200; IEEE 0</td>
+<td>1,200; 0</td>
+<td>pass</td>
+</tr>
+</tbody></table>
+<h2>5. Deterministic math and RNG (<code>tests/unit</code>)</h2>
+<table>
+<thead>
+<tr>
+<th>Check</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>dmath.exp vs Math.exp on [−700, 700] (40,002 points)</td>
+<td>max relative error &lt; 4e-16</td>
+</tr>
+<tr>
+<td>dmath.log on 80,000 points incl. subnormal-range and near 1</td>
+<td>max error &lt; 4e-16</td>
+</tr>
+<tr>
+<td>dmath.pow at relay/thermal exponents (0.02, 0.8, 1.6, 1, 2)</td>
+<td>&lt; 1e-15 relative</td>
+</tr>
+<tr>
+<td>Complex LU on a random 30×30 system</td>
+<td>solution error &lt; 1e-12</td>
+</tr>
+<tr>
+<td>sfc32 RNG</td>
+<td>reproducible; known-answer snapshot; uniformity</td>
+</tr>
+</tbody></table>
+<h2>6. Gates on generated scenarios (<code>tests/property/nightshift.test.ts</code>)</h2>
+<table>
+<thead>
+<tr>
+<th>Gate</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Reference bot finishes 40/40 seeds per difficulty (easy, normal, hard) with no star-removing event</td>
+<td>pass (120/120)</td>
+</tr>
+<tr>
+<td>Replay determinism: same seed + recorded actions ⇒ identical state hash</td>
+<td>pass</td>
+</tr>
+<tr>
+<td>Pre-fault networks (60 seeds): power flow converges; every MV bus within the 13.1–14.5 kV service band [KSA-02/04]; cable loading within difficulty target (+5 % generator tolerance)</td>
+<td>pass</td>
+</tr>
+</tbody></table>
+<h2>6b. Physics properties (<code>tests/property/physics.test.ts</code>, added after release review P-03)</h2>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Cases</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Power balance: P_source = ΣP_load + losses (1e-5 MW)</td>
+<td>210 generated networks, random load levels</td>
+<td>pass</td>
+</tr>
+<tr>
+<td>Voltage non-increasing from each grid station to the NOP</td>
+<td>210 networks</td>
+<td>pass</td>
+</tr>
+<tr>
+<td>Fault current non-increasing with fault resistance (SLG, 3PH)</td>
+<td>210 random cable positions × 5 Rf</td>
+<td>pass</td>
+</tr>
+<tr>
+<td>Every fault current ≤ c_max bolted value of the same type; I_SLG ≤ I_3PH where</td>
+<td>Z0</td>
+<td>≥</td>
+</tr>
+<tr>
+<td>Relay operate time non-increasing with current, all 7 curves</td>
+<td>sweep 1.01×–40×</td>
+<td>pass</td>
+</tr>
+<tr>
+<td><strong>FPI indication logic</strong>: only indicators on the source→fault path flag; none flag off-path (incl. cable charging); earth-only types dark on symmetrical faults</td>
+<td>30 generated faults</td>
+<td>pass</td>
+</tr>
+</tbody></table>
+<h2>6c. Grading mode (<code>tests/unit/grading.test.ts</code>, e2e)</h2>
+<table>
+<thead>
+<tr>
+<th>Check</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Fault currents ordered LV &lt; cable &lt; busbar, min &lt; max; busbar 3PH = S″k/(√3·Un) exactly</td>
+<td>pass (30 seeds)</td>
+</tr>
+<tr>
+<td>Reference grading exists and passes all rules (load, inrush 12×In 100 ms, CTI 0.3 s at all fault cases, primary ≤ 2 s)</td>
+<td>pass (60 seeds)</td>
+</tr>
+<tr>
+<td>Rules detect violations (zero margin, pickup below overload, high-set below inrush)</td>
+<td>pass</td>
+</tr>
+<tr>
+<td>e2e: reference settings loaded by link show &quot;All rules pass&quot; and ★★★</td>
+<td>pass</td>
+</tr>
+</tbody></table>
+<h2>7. Browser (<code>tests/e2e/app.spec.ts</code>, Playwright)</h2>
+<table>
+<thead>
+<tr>
+<th>Check</th>
+<th>Local (Chromium)</th>
+<th>CI (Chromium, Firefox, WebKit) — all 15 passed in run 43453723047</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Home EN/AR renders, correct <code>dir</code>, no console errors, axe: 0 serious/critical</td>
+<td>pass</td>
+<td>runs on every push</td>
+</tr>
+<tr>
+<td>Game screen: relay record visible, axe 0 critical, checklist dialog on re-close of the tripped breaker</td>
+<td>pass</td>
+<td>&quot;</td>
+</tr>
+<tr>
+<td><strong>Cross-engine determinism</strong>: bot-run state hash in the browser equals Node&#39;s (easy/normal/hard)</td>
+<td>pass (V8)</td>
+<td><strong>pass on Chromium 153, Firefox 155 (SpiderMonkey), WebKit 26.6 (JavaScriptCore)</strong> — CI run 43453723047: &quot;15 passed&quot; (5 tests × 3 engines)</td>
+</tr>
+<tr>
+<td>Full shift to the shift report with stars and share text</td>
+<td>pass</td>
+<td>&quot;</td>
+</tr>
+</tbody></table>
+<h2>8. Not validated (stated openly)</h2>
+<ul>
+<li>Saudi-specific numbers that are assumptions (crew times, customers per substation, cold-load pickup, NER current, FPI thresholds, switchgear duty counts) — no public data; labelled <code>assumption</code> in the in-game Model notes.</li>
+<li>Phase-unbalanced behaviour, transients, transformer thermal ageing — not modelled in v1 (FIDELITY F9).</li>
+<li>The reference bot (&quot;par&quot;) is a documented heuristic, not an optimum; the &quot;informed reference&quot; is not a strict lower bound (it shares the backfeed heuristic).</li>
+</ul>
+
+</main>
+</body>
+</html>
