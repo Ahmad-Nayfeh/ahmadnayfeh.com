@@ -24,7 +24,7 @@
 </head>
 <body>
 <main>
-<header><a href="../">← Grid Shift</a> · <a href="FIDELITY.html">FIDELITY</a> · <a href="VALIDATION.html">VALIDATION</a> · <a href="DECISIONS.html">DECISIONS</a> · <a href="SOURCES.html">SOURCES</a> · <a href="SYNTHESIS.html">SYNTHESIS</a><br>Project documentation, published with the game (source revision 8c66864). References to other project files are shown as plain text.</header>
+<header><a href="../">← Grid Shift</a> · <a href="FIDELITY.html">FIDELITY</a> · <a href="VALIDATION.html">VALIDATION</a> · <a href="DECISIONS.html">DECISIONS</a> · <a href="SOURCES.html">SOURCES</a> · <a href="SYNTHESIS.html">SYNTHESIS</a><br>Project documentation, published with the game (source revision 825e29c). References to other project files are shown as plain text.</header>
 <h1>Decision log</h1>
 <p>Format: <strong>D-NNN — title</strong> (date). Context → Decision → Alternatives rejected → Evidence → Reversibility.</p>
 <h2>D-001 — Work on branch <code>claude/new-session-k41b2n</code> (2026-11-13)</h2>
@@ -207,6 +207,14 @@
 <li>Inspection: the same city (lesson-2 district, before the fault), nameplate to SEC 32-SDMS-01, functional-unit SLD (LBS–CB–LBS), RTU point list, three questions.</li>
 <li>Codex: 26 sourced cards (research/15–17) unlocked by doing, plus the system journey.</li>
 <li>Fix: finishing lesson 1 is now recorded (it ends at restoration, so the shift-complete hook never ran).</li>
+</ul>
+<h2>D-028 — Owner feedback on the flat diagram and phone inspection (2026-11-27)</h2>
+<ul>
+<li>Owner (phone screenshot): the flat ring diagram was cramped and unclear (&quot;many squares stuck together&quot;), and the inspection page showed it instead of the real equipment.</li>
+<li>Inspection now always opens the 3D city when WebGL works and flies to an inspection distance (the RMU, kiosk, SEC flags, plates and bollards fill the view). Phone overflow fixed.</li>
+<li>Flat diagram v3: one clear card per RMU with both ring switches inside it as large indicators (filled = closed, hollow orange = open, green ring = earthed), one house + count per RMU, no squares on the cable, no cable labels.</li>
+<li>Everyone who had switched to the diagram is moved back to the 3D city once (<code>gs.viewV3</code>); the diagram stays one tap away.</li>
+<li>Cable overlay in 3D made thinner and lower (it read as a large glowing pipe up close).</li>
 </ul>
 
 </main>
