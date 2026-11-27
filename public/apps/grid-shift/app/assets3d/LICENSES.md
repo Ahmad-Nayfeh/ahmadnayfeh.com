@@ -13,3 +13,8 @@ All files here are CC0 1.0 (public domain dedication): free for any use, no attr
 
 Textures were resized to 512 px and converted to WebP. Buildings, equipment, vehicles and street furniture are
 modelled in code (src/three/), no third-party models.
+
+Procedural (drawn in code at start-up, no files, no licence needed): window atlas (frames, sills, stone surrounds,
+mashrabiya screens, lit rooms with curtains and blinds), interlock paving, painted kerbs, Najdi stepped parapets,
+facade up-light, lamp halo and light-pool sprites, shop-sign atlas, danger plates, RMU panel mimic, bollard stripes,
+palm leaf and trunk, and the night sky (moon, stars, skyglow: `src/three/sky.ts`).
