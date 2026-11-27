@@ -1,4 +1,4 @@
-// Grid Shift: page data for /apps/grid-shift/, carried over from the game's original Arabic information page.
+// Tayyar (تيّار, formerly Grid Shift; the URL keeps the old slug): page data for /apps/grid-shift/, carried over from the game's original Arabic information page.
 import type { AppDetail } from "../types"
 
 export const detail: AppDetail = {
@@ -14,8 +14,8 @@ export const detail: AppDetail = {
   facts: [
     { en: "Free browser game", ar: "لعبة متصفح مجانية" },
     { en: "Arabic and English", ar: "عربي وإنجليزي" },
-    { en: "Phone and computer", ar: "جوال وكمبيوتر" },
-    { en: "No download, no sign-up, no ads", ar: "بلا تنزيل، بلا تسجيل، بلا إعلانات" },
+    { en: "In the browser, or as an Android app that works offline", ar: "في المتصفح، أو تطبيق أندرويد يعمل بلا إنترنت" },
+    { en: "No sign-up, no ads", ar: "بلا تسجيل، بلا إعلانات" },
   ],
   downloads: [
     {
@@ -24,6 +24,14 @@ export const detail: AppDetail = {
       href: "app/",
       label: { en: "Play now", ar: "العب الآن" },
       note: { en: "The first lesson takes 3 minutes.", ar: "الدرس الأول يأخذ 3 دقائق." },
+    },
+    {
+      label: { en: "Download the app (APK)", ar: "نزّل التطبيق (APK)" },
+      href: "tayyar.apk",
+      release: ".",
+      kind: "apk",
+      version: "1.0.0",
+      note: { en: "Android 8 or newer. Works offline; your progress moves between phone and site with a transfer code in Settings.", ar: "أندرويد 8 فأحدث. يعمل بلا إنترنت، وتنقل تقدّمك بين الجوال والموقع برمز نقل من الإعدادات." },
     },
   ],
   video: {

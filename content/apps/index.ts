@@ -103,8 +103,8 @@ export const allApps: AppEntry[] = [
   {
     slug: "grid-shift",
     group: "browser",
-    name: { en: "Grid Shift", ar: "مناوبة الشبكة" },
-    kind: { en: "Browser game", ar: "لعبة متصفح" },
+    name: { en: "Tayyar", ar: "تيّار" },
+    kind: { en: "Browser game · Android", ar: "لعبة متصفح · أندرويد" },
     desc: {
       en: "Be the duty control engineer: locate the cable fault and restore power to customers safely.",
       ar: "كن مهندس التحكم المناوب: حدّد عطل الكابل، وأعِد الكهرباء للمشتركين بأمان.",
