@@ -1,5 +1,6 @@
 // Voxa: page data for /apps/voxa/. First carried over from the app's original Arabic information
-// page; revised on 2026-11-20 against the app's source (sign-in, sync, cloud allowances, in-app updates).
+// page; revised on 2026-11-20 against the app's source (sign-in, sync, cloud allowances, in-app updates),
+// and on 2026-11-27 for the new design and the features added since (pictures retaken).
 import type { AppDetail } from "../types"
 
 export const detail: AppDetail = {
@@ -48,8 +49,8 @@ export const detail: AppDetail = {
     {
       title: { en: "Any audio or video", ar: "أي صوت أو فيديو" },
       body: {
-        en: "A file in any common format, several files at once, a microphone recording, a YouTube link, or a direct share from WhatsApp on Android.",
-        ar: "ملف بأي صيغة شائعة، عدة ملفات معاً، تسجيل بالميكروفون، رابط يوتيوب، أو مشاركة مباشرة من واتساب على أندرويد.",
+        en: "A file in any common format, several files at once, a microphone recording, a YouTube link or playlist, a podcast, an exported WhatsApp chat with its voice notes, or a direct share from WhatsApp on Android.",
+        ar: "ملف بأي صيغة شائعة، عدة ملفات معاً، تسجيل بالميكروفون، رابط يوتيوب أو قائمة تشغيل، بودكاست، محادثة واتساب مُصدَّرة بملاحظاتها الصوتية، أو مشاركة مباشرة من واتساب على أندرويد.",
       },
     },
     {
@@ -74,17 +75,31 @@ export const detail: AppDetail = {
       },
     },
     {
+      title: { en: "Keeps working with the screen off", ar: "يكمل العمل والشاشة مطفأة" },
+      body: {
+        en: "On Android, long transcriptions and recordings continue while the phone is locked. If the free daily quota runs out or the internet drops, the work waits and resumes by itself; on mobile data it asks before uploading audio.",
+        ar: "على أندرويد يستمر التفريغ الطويل والتسجيل والهاتف مقفل. وإذا نفدت الحصة اليومية المجانية أو انقطع الإنترنت ينتظر العمل ثم يستأنف وحده، وعلى بيانات الجوال يسألك قبل رفع الصوت.",
+      },
+    },
+    {
+      title: { en: "A careful editor", ar: "محرّر دقيق" },
+      body: {
+        en: "Follow the audio word by word, split and merge lines, replace across the text, mark lines and add notes. Polish and add diacritics without changing your words, keep a glossary of names and terms, and detect Quran verses to place them in their exact text with the surah and verse number.",
+        ar: "تابع الصوت كلمة بكلمة، قسّم الأسطر وادمجها، استبدل في النص كله، ظلّل الأسطر وأضف ملاحظات. نقّح النص وشكّله دون تغيير كلماتك، واحتفظ بقاموس للأسماء والمصطلحات، واكتشف الآيات القرآنية لتُكتب بنصها المضبوط مع اسم السورة ورقم الآية.",
+      },
+    },
+    {
       title: { en: "Export", ar: "تصدير" },
       body: {
-        en: "Word, PDF and TXT, plus SRT and VTT video subtitle files, with or without timestamps and speaker names.",
-        ar: "Word و PDF و TXT، وملفات ترجمة الفيديو SRT و VTT، مع التوقيت وأسماء المتحدثين أو بدونهما.",
+        en: "Word, PDF and TXT, SRT and VTT subtitle files, or the original video with Arabic subtitles printed on it, with or without timestamps and speaker names. A whole series can become one book.",
+        ar: "Word و PDF و TXT، وملفات الترجمة SRT و VTT، أو الفيديو الأصلي بترجمة عربية مطبوعة عليه، مع التوقيت وأسماء المتحدثين أو بدونهما. ويمكن أن تصير سلسلة كاملة كتاباً واحداً.",
       },
     },
     {
       title: { en: "Other tools", ar: "أدوات أخرى" },
       body: {
-        en: "Extract text from images and PDF files, turn text into speech, and convert audio and video with a converter that runs on your device.",
-        ar: "استخراج النص من الصور وملفات PDF، تحويل النص إلى كلام، ومحوّل للصوت والفيديو يعمل على جهازك.",
+        en: "Live transcription while you speak, ask questions across your whole library, study cards and quizzes from a lecture, an Arabic proofreader, questions about a PDF, text from images, text to speech (including long audiobooks), and an audio and video converter that runs on your device.",
+        ar: "تفريغ مباشر وأنت تتكلم، أسئلة على مكتبتك كلها، بطاقات مراجعة واختبارات من المحاضرة، مدقّق عربي، أسئلة على ملف PDF، استخراج النص من الصور، تحويل النص إلى كلام (حتى الكتب الصوتية الطويلة)، ومحوّل للصوت والفيديو يعمل على جهازك.",
       },
     },
     {
@@ -98,12 +113,12 @@ export const detail: AppDetail = {
   screenshots: [
     {
       src: "/images/apps/voxa/transcript.webp",
-      caption: { en: "The transcript: each line with its speaker and its time, and the line being played highlighted", ar: "النص: كل سطر باسم متحدثه وتوقيته، والسطر الجاري تشغيله مظلَّل" },
+      caption: { en: "The transcript: each line with its speaker and its time, and above it the recording drawn as a speech map coloured by speaker", ar: "النص: كل سطر باسم متحدثه وتوقيته، وفوقه التسجيل مرسوماً خريطةً للكلام ملوّنة بحسب المتحدث" },
       shape: "phone",
     },
     {
       src: "/images/apps/voxa/summary.webp",
-      caption: { en: "The summary tab: a short summary, then the key points", ar: "تبويب الملخص: خلاصة قصيرة ثم أهم النقاط" },
+      caption: { en: "The summary tab: a short summary, the key points and chapters that jump to the audio", ar: "تبويب الملخص: خلاصة قصيرة وأهم النقاط وفصول تنقلك إلى الصوت" },
       shape: "phone",
     },
     {
@@ -123,12 +138,12 @@ export const detail: AppDetail = {
     },
     {
       src: "/images/apps/voxa/export.webp",
-      caption: { en: "Export: Word, PDF, TXT, SRT or VTT, with or without timestamps and speaker names", ar: "التصدير: Word أو PDF أو TXT أو SRT أو VTT، مع التوقيت وأسماء المتحدثين أو بدونهما" },
+      caption: { en: "Export: Word, PDF, TXT, SRT, VTT or a video with printed subtitles", ar: "التصدير: Word أو PDF أو TXT أو SRT أو VTT أو فيديو بترجمة مطبوعة" },
       shape: "phone",
     },
     {
       src: "/images/apps/voxa/card.webp",
-      caption: { en: "The same transcript on a computer screen, with the tools in the side menu", ar: "النص نفسه على شاشة الحاسوب، والأدوات في القائمة الجانبية" },
+      caption: { en: "The same transcript on a computer screen: the word being heard is highlighted, and the tools are grouped in the side menu", ar: "النص نفسه على شاشة الحاسوب: الكلمة المسموعة الآن مظلَّلة، والأدوات مجمّعة في القائمة الجانبية" },
       shape: "wide",
     },
   ],
@@ -150,8 +165,8 @@ export const detail: AppDetail = {
     {
       title: { en: "Upload your first recording", ar: "ارفع أول تسجيل" },
       body: {
-        en: "In \"Transcription\", choose a file or record, and keep the app open until it finishes. On Android: in WhatsApp, press and hold the voice note, then Share, then Voxa.",
-        ar: "من «تفريغ صوتي» اختر ملفاً أو سجّل، وأبقِ التطبيق مفتوحاً حتى يكتمل. على أندرويد: من واتساب اضغط مطولاً على الملاحظة الصوتية ← مشاركة ← Voxa.",
+        en: "In \"Transcription\", choose a file or record. In the browser, keep the tab open until it finishes; the Android app carries on with the screen off. On Android: in WhatsApp, press and hold the voice note, then Share, then Voxa.",
+        ar: "من «تفريغ صوتي» اختر ملفاً أو سجّل. في المتصفح أبقِ الصفحة مفتوحة حتى يكتمل، أما تطبيق أندرويد فيكمل والشاشة مطفأة. على أندرويد: من واتساب اضغط مطولاً على الملاحظة الصوتية ← مشاركة ← Voxa.",
       },
     },
     {
@@ -226,8 +241,8 @@ export const detail: AppDetail = {
       ar: "كل شيء يعمل داخل المتصفح أو التطبيق، ومكتبتك محفوظة على جهازك حتى بلا حساب.",
     },
     {
-      en: "The pictures and video on this page show the real app with sample content for illustration.",
-      ar: "الصور والفيديو في هذه الصفحة تعرض التطبيق الحقيقي مع محتوى تجريبي للتوضيح.",
+      en: "The pictures and video on this page show the real app with sample content for illustration. The video was recorded before the app's new design.",
+      ar: "الصور والفيديو في هذه الصفحة تعرض التطبيق الحقيقي مع محتوى تجريبي للتوضيح. سُجّل الفيديو قبل التصميم الجديد للتطبيق.",
     },
   ],
   links: [
