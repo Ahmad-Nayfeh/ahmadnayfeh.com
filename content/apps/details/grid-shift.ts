@@ -3,6 +3,7 @@ import type { AppDetail } from "../types"
 
 export const detail: AppDetail = {
   slug: "grid-shift",
+  theme: "app-theme-tayyar",
   tagline: {
     en: "Be the control engineer on shift",
     ar: "كن مهندس التحكم المناوب",
@@ -12,26 +13,27 @@ export const detail: AppDetail = {
     ar: "عطل في كابل تحت الشارع قطع الكهرباء عن حيّ كامل. حدّد الكابل المعطوب، واعزله من طرفيه، وأعِد الكهرباء إلى المنازل بأسرع وقت وبأمان، كما تفعل غرف التحكم في شبكات التوزيع.",
   },
   facts: [
-    { en: "Free browser game", ar: "لعبة متصفح مجانية" },
+    { en: "Free game", ar: "لعبة مجانية" },
     { en: "Arabic and English", ar: "عربي وإنجليزي" },
     { en: "In the browser, or as an Android app that works offline", ar: "في المتصفح، أو تطبيق أندرويد يعمل بلا إنترنت" },
     { en: "No sign-up, no ads", ar: "بلا تسجيل، بلا إعلانات" },
   ],
   downloads: [
     {
-      kind: "open",
-      primary: true,
-      href: "app/",
-      label: { en: "Play now", ar: "العب الآن" },
-      note: { en: "The first lesson takes 3 minutes.", ar: "الدرس الأول يأخذ 3 دقائق." },
-    },
-    {
       label: { en: "Download the app (APK)", ar: "نزّل التطبيق (APK)" },
       href: "tayyar.apk",
       release: ".",
       kind: "apk",
+      primary: true,
       version: "1.0.0",
-      note: { en: "Android 8 or newer. Works offline; your progress moves between phone and site with a transfer code in Settings.", ar: "أندرويد 8 فأحدث. يعمل بلا إنترنت، وتنقل تقدّمك بين الجوال والموقع برمز نقل من الإعدادات." },
+      size: "9.0 MB",
+      note: { en: "Android 8 or newer. Works offline.", ar: "أندرويد 8 فأحدث. يعمل بلا إنترنت." },
+    },
+    {
+      label: { en: "Play in the browser", ar: "العب في المتصفح" },
+      href: "app/",
+      kind: "open",
+      note: { en: "Your progress moves between the site and the app with a transfer code in Settings.", ar: "تنقل تقدّمك بين الموقع والتطبيق برمز نقل من الإعدادات." },
     },
   ],
   video: {
@@ -117,11 +119,11 @@ export const detail: AppDetail = {
     },
   ],
   screenshots: [
-    { src: "/images/apps/grid-shift/city3d.webp", caption: { en: "The 3D city at night: live cables glow, homes are lit", ar: "المدينة ليلًا: الكابلات المكهربة تضيء والمنازل مضاءة" }, shape: "wide" },
-    { src: "/images/apps/grid-shift/overview3d.webp", caption: { en: "The whole district: red numbers are RMUs without power", ar: "الحي كاملًا: الأرقام الحمراء وحدات بلا كهرباء" }, shape: "wide" },
-    { src: "/images/apps/grid-shift/review.webp", caption: { en: "Design review: find the mistake in the customer SLD", ar: "مراجعة التصميم: اكتشف الخطأ في مخطط العميل" }, shape: "wide" },
+    { src: "/images/apps/grid-shift/city3d.webp", caption: { en: "The 3D city at night: every RMU, kiosk and street", ar: "المدينة ليلًا: كل وحدة RMU وكشك وشارع" }, shape: "wide" },
+    { src: "/images/apps/grid-shift/phone-home.webp", caption: { en: "The app: the control room and your work orders", ar: "التطبيق: غرفة التحكم وأوامر العمل" }, shape: "phone" },
     { src: "/images/apps/grid-shift/inspect.webp", caption: { en: "Inspection: the RMU up close, its flags and nameplate", ar: "التفتيش: الـRMU من قريب بأعلامها ولوحتها" }, shape: "phone" },
-    { src: "/images/apps/grid-shift/hints.webp", caption: { en: "The hint: where to look, then why, then the exact step", ar: "التلميح: أين تنظر، ثم لماذا، ثم الخطوة بالضبط" }, shape: "wide" },
+    { src: "/images/apps/grid-shift/review.webp", caption: { en: "Design review: find the mistake in the customer SLD", ar: "مراجعة التصميم: اكتشف الخطأ في مخطط العميل" }, shape: "wide" },
+    { src: "/images/apps/grid-shift/phone-settings.webp", caption: { en: "Settings: language, sound, 3D quality and the progress transfer code", ar: "الإعدادات: اللغة والصوت وجودة الصورة ورمز نقل التقدّم" }, shape: "phone" },
   ],
   install: [
     {

@@ -56,7 +56,7 @@ const en = {
   appPage: {
     lead: "Free apps I designed, built and released: apps that sync between web and phone, Android apps, and apps that run in the browser.",
     sync: "Web and phone, in sync",
-    syncNote: "A web app and a phone app that share one account, so your work follows you between devices.",
+    syncNote: "A web app and a phone app, so your work follows you between devices.",
     android: "Android",
     browser: "In the browser",
     version: "Version",
@@ -182,7 +182,7 @@ const ar: Dict = {
   appPage: {
     lead: "تطبيقات مجانية صمّمتها وبنيتها وأصدرتها: تطبيقات تتزامن بين الويب والجوال، وتطبيقات أندرويد، وتطبيقات تعمل في المتصفح.",
     sync: "ويب وجوال متزامنان",
-    syncNote: "تطبيق ويب وتطبيق جوال بحساب واحد، فينتقل عملك معك من جهاز إلى آخر.",
+    syncNote: "تطبيق ويب وتطبيق جوال، فينتقل عملك معك من جهاز إلى آخر.",
     android: "أندرويد",
     browser: "في المتصفح",
     version: "الإصدار",
