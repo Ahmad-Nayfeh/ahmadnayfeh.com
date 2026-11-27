@@ -39,17 +39,17 @@ export const detail: AppDetail = {
   },
   features: [
     {
-      title: { en: "Every reply under the point it answers", ar: "كل ردّ تحت النقطة التي يرد عليها" },
+      title: { en: "As easy as a chat, organised underneath", ar: "سهل كالمحادثة، ومنظّم من الداخل" },
       body: {
-        en: "Every reply is tied to the exact point it answers, so the discussion becomes a tree: the claim at the top, under it its proofs and the objections to it, and under each objection the answer to it.",
-        ar: "كل ردّ يُربط بالنقطة التي يرد عليها بالضبط. فيصبح النقاش شجرة: في أعلاها الدعوى، وتحتها أدلتها، والاعتراضات عليها، وتحت كل اعتراض، الجواب عنه.",
+        en: "You write as you would on WhatsApp: tap \"Reply\" under a message and type. Every reply is tied to the exact point it answers, so the discussion is also a tree, which you can open from the menu: the claim at the top, under it its proofs and the objections to it, and under each objection the answer to it.",
+        ar: "تكتب كما تكتب في واتساب: تضغط «ردّ» تحت الرسالة وتكتب. وكل ردّ يُربط بالنقطة التي يرد عليها بالضبط، فيكون النقاش أيضاً شجرة تفتحها من القائمة: في أعلاها الدعوى، وتحتها أدلتها، والاعتراضات عليها، وتحت كل اعتراض، الجواب عنه.",
       },
     },
     {
       title: { en: "It always knows whose turn it is", ar: "يعرف دائماً على مَن الدور" },
       body: {
-        en: "If your friend asks for the proof of your claim, you see \"You owe a reply\". Once you answer, the turn passes to them and they see \"Your move\". They then choose: accept your answer, object to it, or propose that you agree to disagree.",
-        ar: "إذا سألك صاحبك عن دليل دعواك، تظهر لك عبارة: «عليك الرد». فإذا أجبت، انتقل الدور إليه، فتظهر له عبارة: «دورك». وعندها يختار: أن يقبل جوابك، أو يعترض عليه، أو يقترح أن تتفقا على الاختلاف.",
+        en: "One line at the top says what is waiting for your reply and what is waiting for your friend. Each point waiting on you gets a card that quotes exactly what to answer. When your friend answers your question, you decide with one tap: \"Convinced\", \"Not convinced\" or \"Question\".",
+        ar: "سطر واحد في الأعلى يقول: ما الذي بانتظار ردّك، وما الذي بانتظار صاحبك. ولكل نقطة تنتظرك بطاقة تقتبس بالضبط ما تردّ عليه. وإذا أجاب صاحبك عن سؤالك، تختار بضغطة: «اقتنعتُ»، أو «لم أقتنع»، أو «سؤال».",
       },
     },
     {
@@ -62,8 +62,8 @@ export const detail: AppDetail = {
     {
       title: { en: "Moves taken from the classical art of debate", ar: "أزرار من آداب البحث والمناظرة" },
       body: {
-        en: "The buttons are not arbitrary; they come from a long-established discipline in our heritage, the etiquette of inquiry and debate (adab al-bahth wal-munazara). \"What do you mean?\" asks for the meaning to be clarified. \"What is your proof?\" asks for the proof of a claim. \"I object\" comes with the reason for the objection. \"Refute with a witness\" (naqd) defeats a proof with a case where its conclusion fails. \"Counter-argument\" (mu'arada) sets up an opposing claim with its proof. \"Show the source\" is for when your friend relays someone else's words. Then \"I accept this\" if you are convinced, or \"Propose we agree to disagree here\" if you end up at two different starting principles.",
-        ar: "الأزرار ليست عشوائية، بل مأخوذة من علمٍ عريق في تراثنا، هو: آداب البحث والمناظرة. «ماذا تقصد؟»: لطلب توضيح المعنى. «ما دليلك؟»: لطلب الدليل على الدعوى. «أعترض»: مع ذكر سبب الاعتراض. «نقض بشاهد»: أن تُبطل الدليل بمثالٍ يتخلّف فيه الحكم. «معارضة»: أن تقيم دعوى مقابلة بدليلها. «وثّق النقل»: إذا نقل صاحبك كلاماً عن غيره. ثم «أقبل هذا» إذا اقتنعت، أو «أقترح أن نتفق على الاختلاف هنا» إذا انتهيتما إلى أصلين مختلفين.",
+        en: "Choosing a reply type is optional. The types are not arbitrary; they come from a long-established discipline in our heritage, the etiquette of inquiry and debate (adab al-bahth wal-munazara). \"What do you mean?\" asks for the meaning to be clarified. \"What is your proof?\" asks for the proof of a claim. \"I object\" comes with the reason for the objection. \"Refute with a witness\" (naqd) defeats a proof with a case where its conclusion fails. \"Counter-argument\" (mu'arada) sets up an opposing claim with its proof. \"Show the source\" is for when your friend relays someone else's words. Then \"I accept this\" if you are convinced, or \"Propose we agree to disagree here\" if you end up at two different starting principles.",
+        ar: "اختيار نوع الردّ اختياري، والأنواع ليست عشوائية، بل مأخوذة من علمٍ عريق في تراثنا، هو: آداب البحث والمناظرة. «ماذا تقصد؟»: لطلب توضيح المعنى. «ما دليلك؟»: لطلب الدليل على الدعوى. «أعترض»: مع ذكر سبب الاعتراض. «نقض بشاهد»: أن تُبطل الدليل بمثالٍ يتخلّف فيه الحكم. «معارضة»: أن تقيم دعوى مقابلة بدليلها. «وثّق النقل»: إذا نقل صاحبك كلاماً عن غيره. ثم «أقبل هذا» إذا اقتنعت، أو «أقترح أن نتفق على الاختلاف هنا» إذا انتهيتما إلى أصلين مختلفين.",
       },
     },
     {
@@ -93,8 +93,8 @@ export const detail: AppDetail = {
       src: "/images/apps/munazara-shot.webp",
       shape: "wide",
       caption: {
-        en: "Three screens of a debate: the tree of claims and objections, the Status page with what is waiting on you, and the reply sheet",
-        ar: "ثلاث شاشات من مناظرة: شجرة الدعاوى والاعتراضات، وصفحة «الحالة» وفيها ما ينتظرك، ونافذة الرد",
+        en: "Three screens: opening an invite (one field, then reply), the conversation with what is waiting for your reply, and the reply box",
+        ar: "ثلاث شاشات: فتح دعوة (خانة واحدة ثم الردّ)، والمحادثة وفيها ما بانتظار ردّك، ونافذة الردّ",
       },
     },
   ],
@@ -190,8 +190,8 @@ export const detail: AppDetail = {
         {
           title: { en: "What leaves your device?", ar: "ماذا يخرج من جهازك؟" },
           body: {
-            en: "\"Manual\" mode: nothing except what you send yourself (an update link or file). \"Sync via public servers\": encrypted copies of your points are sent to public Nostr relays run by others. They cannot read the content, but they see timing, size and IP address, and can link one debate's activity together. They do not promise to keep data long; that is why every device keeps the whole debate.",
-            ar: "في الوضع «اليدوي»: لا شيء إلا ما ترسله بنفسك (رابط تحديث أو ملف). في وضع «المزامنة عبر خوادم عامة»: نسخ مشفّرة من نقاطك تُرسَل إلى خوادم «نوستر» عامة يديرها آخرون. لا يستطيعون قراءة المحتوى، لكنهم يرون توقيت الإرسال وحجمه وعنوان IP، ويمكنهم ربط نشاط المناظرة الواحدة ببعضه. ولا تضمن هذه الخوادم الاحتفاظ بالبيانات مدة طويلة؛ لذلك يحتفظ كل جهاز بالمناظرة كاملة.",
+            en: "\"Manual\" mode: nothing except what you send yourself (an update link or file). \"Sync via public servers\" (the default): encrypted copies of your points are sent to public Nostr relays run by others. They cannot read the content, but they see timing, size and IP address, and can link one debate's activity together. They do not promise to keep data long; that is why every device keeps the whole debate.",
+            ar: "في الوضع «اليدوي»: لا شيء إلا ما ترسله بنفسك (رابط تحديث أو ملف). في وضع «المزامنة عبر خوادم عامة» (وهو الافتراضي): نسخ مشفّرة من نقاطك تُرسَل إلى خوادم «نوستر» عامة يديرها آخرون. لا يستطيعون قراءة المحتوى، لكنهم يرون توقيت الإرسال وحجمه وعنوان IP، ويمكنهم ربط نشاط المناظرة الواحدة ببعضه. ولا تضمن هذه الخوادم الاحتفاظ بالبيانات مدة طويلة؛ لذلك يحتفظ كل جهاز بالمناظرة كاملة.",
           },
         },
         {
