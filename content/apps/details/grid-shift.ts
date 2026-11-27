@@ -38,6 +38,34 @@ export const detail: AppDetail = {
   },
   features: [
     {
+      title: { en: "A realistic 3D city at night", ar: "مدينة ثلاثية الأبعاد واقعية ليلًا" },
+      body: {
+        en: "Riyadh-style streets, villas and apartment blocks, mosques, traffic and street lights. When a cable fails, the windows and lamps of the affected homes really go dark, and come back when you restore supply.",
+        ar: "شوارع وفلل وعمائر ومساجد بطابع الرياض، وسيارات وإنارة. عند تعطل كابل تنطفئ فعلًا نوافذ وأعمدة إنارة المنازل المتأثرة، وتعود عندما تعيد التغذية.",
+      },
+    },
+    {
+      title: { en: "One career, one control room", ar: "مسيرة واحدة وغرفة تحكم واحدة" },
+      body: {
+        en: "A work-order inbox in the same city: lessons, fault shifts, customer SLD reviews, RMU inspections and protection settings. Certifications and a codex of sourced cards unlock as you work.",
+        ar: "صندوق أوامر عمل في نفس المدينة: دروس، ومناوبات أعطال، ومراجعة مخططات العملاء، وتفتيش وحدات RMU، وإعدادات الحماية. الشهادات وموسوعة البطاقات الموثّقة تُفتح كلما عملت.",
+      },
+    },
+    {
+      title: { en: "Review the customer SLD", ar: "راجع مخطط العميل (SLD)" },
+      body: {
+        en: "Spot a relay drawn on a load-break switch, a fuse where a breaker is required, a breaker in the wrong position or settings below inrush. Each mistake shows its rule, its source and what it would do to the network; a wrong approval comes back later as an incident.",
+        ar: "اكتشف مرحّلًا مرسومًا على مفتاح فصل حمل، أو فيوزًا حيث يلزم قاطع، أو قاطعًا في غير مكانه، أو إعدادات أقل من تيار الاندفاع. لكل خطأ قاعدته ومصدره وأثره على الشبكة، والموافقة الخاطئة تعود لاحقًا حادثة.",
+      },
+    },
+    {
+      title: { en: "Inside the RMU, RTU and SCADA", ar: "داخل الـRMU والـRTU وسكادا" },
+      body: {
+        en: "Inspect a ring main unit up close (SEC dimensions, position flags, plates), read its RTU point list with the real object addresses, see the same points from the RMU side (digital input/output) and the SCADA side, and operate with select-before-execute.",
+        ar: "افحص وحدة الحلقة من قريب (أبعاد SEC، أعلام الوضع، اللوحات)، واقرأ نقاط الـRTU بعناوينها الحقيقية، وشاهد نفس النقاط من جهة الـRMU (دخل/خرج رقمي) ومن جهة سكادا، وشغّل الأوامر بأسلوب «اختر ثم نفّذ».",
+      },
+    },
+    {
       title: { en: "Ring networks", ar: "الشبكات الحلقية" },
       body: {
         en: "A ring between two grid stations, split by a normally open point (NOP), so each half is fed from one station.",
@@ -81,34 +109,15 @@ export const detail: AppDetail = {
     },
   ],
   screenshots: [
-    {
-      src: "/images/apps/grid-shift/lesson.webp",
-      caption: {
-        en: "Lesson one: one step at a time, and what you need lights up",
-        ar: "الدرس الأول: خطوة واحدة في كل مرة، والمطلوب يضيء",
-      },
-      shape: "wide",
-    },
-    {
-      src: "/images/apps/grid-shift/hints.webp",
-      caption: {
-        en: "The hint: where to look, then why, then the exact step",
-        ar: "التلميح: أين تنظر، ثم لماذا، ثم الخطوة بالضبط",
-      },
-      shape: "wide",
-    },
-    {
-      src: "/images/apps/grid-shift/solution.webp",
-      caption: {
-        en: "Watch the solution like a video, and take over from any step",
-        ar: "شاهد الحل كفيديو، وأكمل أنت من أي خطوة",
-      },
-      shape: "wide",
-    },
+    { src: "/images/apps/grid-shift/city3d.webp", caption: { en: "The 3D city at night: live cables glow, homes are lit", ar: "المدينة ليلًا: الكابلات المكهربة تضيء والمنازل مضاءة" }, shape: "wide" },
+    { src: "/images/apps/grid-shift/overview3d.webp", caption: { en: "The whole district: red numbers are RMUs without power", ar: "الحي كاملًا: الأرقام الحمراء وحدات بلا كهرباء" }, shape: "wide" },
+    { src: "/images/apps/grid-shift/review.webp", caption: { en: "Design review: find the mistake in the customer SLD", ar: "مراجعة التصميم: اكتشف الخطأ في مخطط العميل" }, shape: "wide" },
+    { src: "/images/apps/grid-shift/inspect.webp", caption: { en: "Inspection: the RMU up close, its flags and nameplate", ar: "التفتيش: الـRMU من قريب بأعلامها ولوحتها" }, shape: "phone" },
+    { src: "/images/apps/grid-shift/hints.webp", caption: { en: "The hint: where to look, then why, then the exact step", ar: "التلميح: أين تنظر، ثم لماذا، ثم الخطوة بالضبط" }, shape: "wide" },
   ],
   install: [
     {
-      title: { en: "Start lesson one", ar: "ابدأ الدرس الأول" },
+      title: { en: "Open the control room and start lesson one", ar: "افتح غرفة التحكم وابدأ الدرس الأول" },
       body: {
         en: "Press \"Play now\", then \"Start: Lesson 1\". In three minutes you bring power back to 265 homes.",
         ar: "اضغط «العب الآن» ثم «ابدأ: الدرس 1». ثلاث دقائق تعيد فيها الكهرباء إلى 265 منزلًا.",
@@ -172,8 +181,8 @@ export const detail: AppDetail = {
       ar: "اللعبة مبنية على مواصفات ومراجع منشورة (حسابات قصر الدائرة IEC 60909، ومنحنيات الحماية IEC 60255 و IEEE)، وكل تبسيط مكتوب داخل اللعبة في «ملاحظات النموذج».",
     },
     {
-      en: "The voice-over in the video is machine-generated with a synthetic Arabic voice. The video shows the real game.",
-      ar: "التعليق الصوتي في الفيديو مولّد آليًا بصوت عربي اصطناعي. الفيديو يعرض اللعبة الحقيقية.",
+      en: "The voice-over in the video is machine-generated with a synthetic Arabic voice. The video shows the real game in an earlier version (before the 3D city and the control room).",
+      ar: "التعليق الصوتي في الفيديو مولّد آليًا بصوت عربي اصطناعي. الفيديو يعرض اللعبة الحقيقية في إصدار سابق (قبل المدينة ثلاثية الأبعاد وغرفة التحكم).",
     },
   ],
 }
