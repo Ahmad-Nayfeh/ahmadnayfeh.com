@@ -24,7 +24,7 @@
 </head>
 <body>
 <main>
-<header><a href="../">← Grid Shift</a> · <a href="FIDELITY.html">FIDELITY</a> · <a href="VALIDATION.html">VALIDATION</a> · <a href="DECISIONS.html">DECISIONS</a> · <a href="SOURCES.html">SOURCES</a> · <a href="SYNTHESIS.html">SYNTHESIS</a><br>Project documentation, published with the game (source revision 32bdecf). References to other project files are shown as plain text.</header>
+<header><a href="../">← Grid Shift</a> · <a href="FIDELITY.html">FIDELITY</a> · <a href="VALIDATION.html">VALIDATION</a> · <a href="DECISIONS.html">DECISIONS</a> · <a href="SOURCES.html">SOURCES</a> · <a href="SYNTHESIS.html">SYNTHESIS</a><br>Project documentation, published with the game (source revision 385b539). References to other project files are shown as plain text.</header>
 <h1>Decision log</h1>
 <p>Format: <strong>D-NNN — title</strong> (date). Context → Decision → Alternatives rejected → Evidence → Reversibility.</p>
 <h2>D-001 — Work on branch <code>claude/new-session-k41b2n</code> (2026-11-13)</h2>
@@ -187,6 +187,12 @@
 <li>Assets: CC0 only (ambientCG textures, Poly Haven night sky) — <code>public/assets3d/LICENSES.md</code>. All models are built in code.</li>
 <li>Quality: high (shadows, ambient occlusion, bloom) on large screens; low on phones; <code>gs.q3d</code> overrides.</li>
 <li>Honest limit: this is a realistic <em>aerial night</em> look built from procedural geometry; close-ups are clean but not photographic (no hand-modelled assets).</li>
+</ul>
+<h2>D-024 — Lesson voice, sound design, moving crew trucks (2026-11-27)</h2>
+<ul>
+<li>Lesson 1 is narrated in Arabic: one short clip per step (<code>public/voice/ar/l1_*.mp3</code>, script <code>video/lesson1-voice.json</code>, same voice and caveat as D-020), played when the step starts; a speaker button in the lesson card turns it off (<code>gs.voice</code>). Off-step taps get a short spoken &quot;not yet&quot;.</li>
+<li>Synthesized sound effects (no files): breaker trip, switch clunk, indicator read, power restored, blocked action. All respect the mute setting.</li>
+<li>3D: one truck per crew drives along the street grid to its destination and back to base (animation only; the engine&#39;s travel times are unchanged).</li>
 </ul>
 
 </main>
