@@ -24,7 +24,7 @@
 </head>
 <body>
 <main>
-<header><a href="../">← Grid Shift</a> · <a href="FIDELITY.html">FIDELITY</a> · <a href="VALIDATION.html">VALIDATION</a> · <a href="DECISIONS.html">DECISIONS</a> · <a href="SOURCES.html">SOURCES</a> · <a href="SYNTHESIS.html">SYNTHESIS</a><br>Project documentation, published with the game (source revision a033fbd). References to other project files are shown as plain text.</header>
+<header><a href="../">← Grid Shift</a> · <a href="FIDELITY.html">FIDELITY</a> · <a href="VALIDATION.html">VALIDATION</a> · <a href="DECISIONS.html">DECISIONS</a> · <a href="SOURCES.html">SOURCES</a> · <a href="SYNTHESIS.html">SYNTHESIS</a><br>Project documentation, published with the game (source revision 22999ae). References to other project files are shown as plain text.</header>
 <h1>Decision log</h1>
 <p>Format: <strong>D-NNN — title</strong> (date). Context → Decision → Alternatives rejected → Evidence → Reversibility.</p>
 <h2>D-001 — Work on branch <code>claude/new-session-k41b2n</code> (2026-11-13)</h2>
@@ -223,6 +223,22 @@
 <li>City: apartment balconies; ground-floor shops with lit Arabic signs that go dark with their feeder; faint lamp haze cones shown only near the camera; frame-time probe drops AO/shadows/DPR on slow devices.</li>
 <li>3D labels level of detail: far away only the RMU number shows (red = no supply), so labels never pile up.</li>
 <li>Site page (ahmadnayfeh.com/apps/grid-shift/): new features and screenshots; the explainer video is labelled as showing an earlier version.</li>
+</ul>
+<h2>D-030 — Full review and polish (2026-11-27)</h2>
+<ul>
+<li>Owner: review every part and improve graphics and texts &quot;dramatically, everywhere&quot;.</li>
+<li>Texts: every Arabic and English string reviewed (natural Arabic, shorter, consistent terms); codex inrush card states 10× (SEC utility practice) vs 12× (vendor) with sources; lesson-1 voice clip <code>l1_read</code> re-recorded.</li>
+<li>Interface: styles rewritten (&quot;control room&quot;: graphite base, amber accent); IBM Plex Sans Arabic + Plex Mono are bundled (OFL, no Google Fonts requests).</li>
+<li>3D city rebuilt (<code>src/three/</code> split into kit, textures, sky, world, equipment): one shared light map for lamps, shops and gates (pools fall on facades, no white blobs), recessed windows with frames and mashrabiya, villa walls and gates, lane markings, crossings, medians with palms, LED arm lamps, moon, stars and ground haze, detailed RMU and kiosk with state-driven flags, grid-station transformers and gantries, new vehicles. All procedural; no new asset files (CC0 only, see public/assets3d/LICENSES.md).</li>
+</ul>
+<h2>D-031 — Android app «تيّار · Tayyar» (2026-11-27)</h2>
+<ul>
+<li>Owner: a professional Android app (APK) of the game, published on the site, with a better name than Grid Shift. Name chosen by the owner from proposals: «تيّار · Tayyar». The displayed name changes everywhere; URLs (<code>/apps/grid-shift/</code>), routes and saved progress keys (<code>gs.*</code>) stay, so no link and no progress breaks.</li>
+<li>Build: Capacitor 7 (MIT), the web build bundled inside the APK, so the app works offline. Package <code>com.ahmadnayfeh.tayyar</code>, minSdk 26 (Android 8), target 35. Native layer <code>src/native.ts</code>: back button walks back through the screens and leaves the app on the home screen, dark status bar, splash hides on first draw.</li>
+<li>&quot;Sync with the site&quot; (owner&#39;s choice): (1) content — the app reads <code>https://ahmadnayfeh.com/apps/grid-shift/latest.json</code> (the site&#39;s existing APK convention) and offers the newer APK when one is published; (2) progress — a manual transfer code in Settings (no accounts, no server, no personal data).</li>
+<li>Signing: release key generated for the owner, kept OUTSIDE the repository (NEEDS-AHMAD §8). <code>scripts/build-apk.sh</code> builds and verifies the signed APK; <code>scripts/deploy-site.sh</code> also publishes <code>tayyar.apk</code> + <code>latest.json</code> when <code>TAYYAR_KEYSTORE_PROPS</code> is set.</li>
+<li>Icon and splash: an open ring (a ring main with its open point) around a current bolt, amber on graphite; drawn in SVG (<code>branding/</code>), rendered to PNG with Chromium.</li>
+<li>Not verified: running on a real phone or emulator (no KVM in the build container). Verified: apksigner (v2 signature), aapt2 badging (name, package, version, permissions = INTERNET only).</li>
 </ul>
 
 </main>
