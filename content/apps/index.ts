@@ -90,9 +90,9 @@ export const allApps: AppEntry[] = [
   },
   {
     slug: "munazara",
-    group: "browser",
+    group: "sync",
     name: { en: "Munazara", ar: "مناظرة" },
-    kind: { en: "Web app", ar: "تطبيق ويب" },
+    kind: { en: "Web app · Android", ar: "تطبيق ويب · أندرويد" },
     desc: {
       en: "A structured debate between friends: every reply sits under the point it answers, and you see what is waiting on you and on your friend.",
       ar: "مناظرة منظّمة بين الأصدقاء: كل ردّ تحت النقطة التي يرد عليها، ويظهر ما ينتظر ردّك وردّ صاحبك.",
