@@ -94,8 +94,8 @@ export const allApps: AppEntry[] = [
     name: { en: "Munazara", ar: "مناظرة" },
     kind: { en: "Web app · Android", ar: "تطبيق ويب · أندرويد" },
     desc: {
-      en: "A structured debate between friends: every reply sits under the point it answers, and you see what is waiting on you and on your friend.",
-      ar: "مناظرة منظّمة بين الأصدقاء: كل ردّ تحت النقطة التي يرد عليها، ويظهر ما ينتظر ردّك وردّ صاحبك.",
+      en: "A debate between two people: every argument is premises and a conclusion, replies follow the classical rules, and every point gets decided.",
+      ar: "مناظرة بين اثنين: كل حجة مقدماتٌ ونتيجة، والردود بآداب المناظرة، وكل نقطة تُحسم: إلزام أو إفحام.",
     },
     icon: img("icons/munazara.svg"),
     thumb: img("munazara-shot.webp"),
