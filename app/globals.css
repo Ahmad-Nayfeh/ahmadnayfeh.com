@@ -1299,3 +1299,68 @@ html.theme-anim *::after {
     transform: none !important;
   }
 }
+
+/* ------------------------------------------------------------------
+   Voxa's page in the app's own look ("ink and paper"): deep teal, amber,
+   a warm paper ground and a waveform in the header. Set by `theme` in
+   content/apps/details/voxa.ts; no other page uses these rules.
+   ------------------------------------------------------------------ */
+.app-theme-voxa {
+  --brand: 178 72% 21%;               /* #0F5C5A */
+  --brand-deep: 186 55% 17%;
+  --accent: 178 72% 24%;
+  --section-accent: var(--accent);
+  background:
+    radial-gradient(900px 420px at 100% 0%, hsl(35 83% 42% / 0.05), transparent 60%),
+    hsl(42 38% 94%);                  /* #F6F3EC */
+}
+.dark .app-theme-voxa {
+  --brand: 171 47% 55%;
+  --brand-deep: 178 50% 30%;
+  --accent: 171 47% 58%;              /* #55C2B1 */
+  background: hsl(190 19% 6%);
+}
+.app-theme-voxa .brand-block {
+  --bb-base: hsl(182 62% 20%);
+  --bb-corner: hsl(192 58% 13% / 0.9);
+  --bb-glow: hsl(35 85% 55% / 0.32);
+  --bb-strip: hsl(190 55% 12% / 0.7);
+}
+.dark .app-theme-voxa .brand-block {
+  --bb-base: hsl(186 38% 9%);
+  --bb-corner: hsl(192 45% 5% / 0.9);
+  --bb-glow: hsl(174 50% 32% / 0.55);
+  --bb-strip: hsl(192 45% 5% / 0.55);
+}
+/* the waveform: rounded bars along the bottom of the header, amber in the middle */
+.app-theme-voxa .brand-block::after {
+  inset: auto 0 0 0;
+  height: 46%;
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='432' height='120' viewBox='0 0 432 120'%3E%3Cg stroke='white' stroke-opacity='.09' stroke-width='8' stroke-linecap='round'%3E%3Cpath d='M6 70v20M24 52v56M42 34v86M60 60v36M78 22v98M96 46v62M114 66v26M132 30v90M150 54v50M168 12v108M186 40v74M204 62v34M222 26v94M240 48v60M258 70v20M276 36v84M294 18v102M312 58v40M330 42v70M348 64v30M366 28v92M384 50v54M402 68v22M420 40v76'/%3E%3C/g%3E%3C/svg%3E") bottom center / 432px 120px repeat-x;
+}
+[dir="rtl"] .app-theme-voxa .brand-block::after {
+  inset: auto 0 0 0;
+}
+.app-theme-voxa .btn-on-brand {
+  color: hsl(178 72% 21%);
+}
+.app-theme-voxa .btn-on-brand:hover {
+  background: hsl(38 84% 65%);       /* amber */
+  border-color: hsl(38 84% 65%);
+  color: hsl(30 60% 10%);
+}
+.dark .app-theme-voxa .btn-on-brand {
+  background: hsl(38 84% 65%);       /* #F0B45A */
+  border-color: hsl(38 84% 65%);
+  color: hsl(30 60% 10%);
+  box-shadow: 0 10px 28px -12px hsl(38 84% 60% / 0.5);
+}
+.dark .app-theme-voxa .btn-on-brand:hover {
+  background: #fff;
+  border-color: #fff;
+}
+/* screenshots sit on the paper like printed cards */
+.app-theme-voxa .shot {
+  box-shadow: 0 1px 2px rgb(40 32 12 / 0.06), 0 18px 40px -22px rgb(40 32 12 / 0.35);
+}

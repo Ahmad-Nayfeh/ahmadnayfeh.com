@@ -5,6 +5,8 @@ import type { AppDetail } from "../types"
 
 export const detail: AppDetail = {
   slug: "voxa",
+  // the app's own "ink and paper" look: teal, amber and a waveform (app/globals.css)
+  theme: "app-theme-voxa",
   tagline: {
     en: "Turn audio into text",
     ar: "حوّل الصوت إلى نص",

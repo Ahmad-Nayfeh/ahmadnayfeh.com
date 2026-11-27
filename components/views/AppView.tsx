@@ -76,7 +76,7 @@ export default function AppView({ slug, locale }: { slug: string; locale: Locale
   const wides = detail.screenshots.filter((s) => s.shape === "wide")
   const others = apps.filter((a) => a.slug !== slug && !a.flagship).slice(0, 3)
 
-  return (
+  const page = (
     <>
       <PageHeader
         locale={locale}
@@ -278,4 +278,6 @@ export default function AppView({ slug, locale }: { slug: string; locale: Locale
       </section>
     </>
   )
+  // an app with its own colours gets them through a wrapping class; the others are unchanged
+  return detail.theme ? <div className={detail.theme}>{page}</div> : page
 }

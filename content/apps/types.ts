@@ -65,6 +65,12 @@ export interface AppDetail {
   notes?: L10n[]
   /** Other pages or files of this app: privacy policy, guides. href as in AppDownload. */
   links?: { label: L10n; href: string }[]
+  /**
+   * Optional look of this app's page: a class from app/globals.css (app-theme-<slug>) that
+   * recolours the header block, buttons and accents in the app's own colours. Without it the
+   * page uses the site's blue.
+   */
+  theme?: string
   /** How it was built, for readers evaluating the work. */
   build?: { stack: string[]; body: L10n; highlights?: L10n[] }
 }
